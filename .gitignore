@@ -1,0 +1,61 @@
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### react ignore ###
+# dependencies
+/src/main/webapp/node_modules
+/src/main/webapp/.pnp
+/src/main/webapp/.pnp.js
+
+# testing
+/src/main/webapp/coverage
+
+# production
+/src/main/webapp/build
+
+# misc
+/src/main/webapp/.DS_Store
+/src/main/webapp/.env.local
+/src/main/webapp/.env.development.local
+/src/main/webapp/.env.test.local
+/src/main/webapp/.env.production.local
+
+/src/main/webapp/npm-debug.log*
+/src/main/webapp/yarn-debug.log*
+/src/main/webapp/yarn-error.log*
+
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
