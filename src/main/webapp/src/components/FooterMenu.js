@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { FaRegHeart, FaRegUserCircle, FaHome } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { red } from "@mui/material/colors";
 
 const footerMenu = [
   { id: 1, text: "홈", icon: <FaHome size={18} />, path: "/" },
@@ -24,6 +25,7 @@ const footerMenu = [
 
 const FooterMenu = () => {
   const [pressed, setPressed] = useState(null); // 눌린 버튼의 id를 저장하는 상태
+  const [selected, setSelected] = useState('');
   return (
     <Box sx={{ display: "flex", justifyContent: "center", flexGrow: 1 }}>
       <Stack>
@@ -33,6 +35,7 @@ const FooterMenu = () => {
               key={item.id}
               component={Link}
               to={item.path}
+              onClick={() => setSelected(item.id)}
               onTouchStart={() => setPressed(item.id)} // 모바일 터치 시작 시
               onTouchEnd={() => setPressed(null)} // 모바일 터치 끝날 때
               onMouseDown={() => setPressed(item.id)} // 마우스 클릭 시
@@ -44,8 +47,11 @@ const FooterMenu = () => {
                   justifyContent: "center",
                   alignItems: "center",
                   margin: 1, // 버튼 간격 조정
-                  borderBottom:
-                    pressed === item.id ? "2px solid black" : "none", // 밑줄 효과
+                  color: selected === item.id ? "red" : "black",
+                  textShadow:
+                    pressed === item.id
+                      ? "2px 2px 5px rgba(0, 0, 0, 0.3)"
+                      : "none", // 조건부 textShadow 적용
                 }}
                 direction="column"
                 spacing={1}
