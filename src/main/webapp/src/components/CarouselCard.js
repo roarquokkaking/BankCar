@@ -1,18 +1,18 @@
-import React from 'react';
-import Box from '@mui/material/Box';
-import MobileStepper from '@mui/material/MobileStepper';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import React from "react";
+import Box from "@mui/material/Box";
+import MobileStepper from "@mui/material/MobileStepper";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 
 // mui icons
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 // 3rd party
-import SwipeableViews from 'react-swipeable-views';
+import SwipeableViews from "react-swipeable-views-react-18-fix";
 
 // react icons
-import { AiFillStar } from 'react-icons/ai';
-import { FaRegHeart } from 'react-icons/fa';
+import { AiFillStar } from "react-icons/ai";
+import { FaRegHeart } from "react-icons/fa";
 import {
   flexBetween,
   dFlex,
@@ -20,8 +20,8 @@ import {
   fixedIcon,
   carouselImage,
   fixedBottom,
-} from '../themes/commonStyles';
-import './CarouselCard.css';
+} from "../themes/commonStyles";
+import "./CarouselCard.css";
 
 const CarouselCard = ({ location }) => {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -44,7 +44,7 @@ const CarouselCard = ({ location }) => {
       className="carouselCard"
       sx={{
         flexGrow: 1,
-        position: 'relative',
+        position: "relative",
       }}
     >
       <Box sx={fixedIcon}>
@@ -53,7 +53,7 @@ const CarouselCard = ({ location }) => {
 
       {location.locationImages.length && (
         <SwipeableViews
-          axis={'x'}
+          axis={"x"}
           index={activeStep}
           onChangeIndex={handleStepChange}
           enableMouseEvents
@@ -75,7 +75,7 @@ const CarouselCard = ({ location }) => {
 
       <Box sx={fixedBottom}>
         <MobileStepper
-          sx={{ backgroundColor: 'transparent' }}
+          sx={{ backgroundColor: "transparent" }}
           steps={maxSteps}
           position="static"
           activeStep={activeStep}
