@@ -13,4 +13,5 @@ npm install react-icons --save
 
 # 아이콘 참고
 https://react-icons.github.io/react-icons/icons/
+npm install react-responsive --legacy-peer-deps
 ```

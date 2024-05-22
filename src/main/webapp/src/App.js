@@ -10,11 +10,14 @@ import Footer from './components/Footer';
 import FooterMenu from './components/FooterMenu';
 import { displayOnDesktop } from './themes/commonStyles';
 import MobileFooter from './components/MobileFooter';
+import Login from './components/login/Login';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import GoogleLogin from './components/login/GoogleLogin';
 
 function App() {
   return (
     <React.Fragment>
-      <CssBaseline />
+      {/* <CssBaseline />
       <Box
         sx={{
           display: 'flex',
@@ -52,7 +55,14 @@ function App() {
         <Box sx={displayOnDesktop}>
           <Footer />
         </Box>
-      </Box>
+      </Box> */}
+      <BrowserRouter>
+        <Routes>
+      
+          <Route path='/' element={<Login/>}/>
+          <Route path='/login/Google' element={<GoogleLogin/>}/>
+        </Routes>
+      </BrowserRouter>
     </React.Fragment>
   );
 }

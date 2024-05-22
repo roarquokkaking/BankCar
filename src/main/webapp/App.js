@@ -10,11 +10,12 @@ import Footer from 'components/Footer';
 import FooterMenu from 'components/FooterMenu';
 import { displayOnDesktop } from 'themes/commonStyles';
 import MobileFooter from 'components/MobileFooter';
+import Login from './src/components/login/Login';
 
 function App() {
   return (
     <React.Fragment>
-      <CssBaseline />
+      {/* <CssBaseline />
       <Box
         sx={{
           display: 'flex',
@@ -52,7 +53,8 @@ function App() {
         <Box sx={displayOnDesktop}>
           <Footer />
         </Box>
-      </Box>
+      </Box> */}
+      <Login/>
     </React.Fragment>
   );
 }
