@@ -2,7 +2,7 @@ import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { IoHomeOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
-const Login = () => {
+const Login_main = () => {
 
     const navigate = useNavigate();
     
@@ -69,4 +69,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Login_main;

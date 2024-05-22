@@ -7,6 +7,7 @@ import FooterMenu from './components/FooterMenu';
 import Home from './components/Home';
 import Login from './components/Login';
 import WishList from './components/WishList';
+import Login_main from './components/login/Login_main';
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/wishList" element={<WishList />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login_main />} />
           </Routes>
           <Box sx={{ display: { xs: "flex", md: "none" }, marginTop: "auto" }}>
             <FooterMenu />
