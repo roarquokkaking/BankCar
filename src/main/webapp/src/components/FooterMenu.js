@@ -25,7 +25,7 @@ const footerMenu = [
 
 const FooterMenu = () => {
   const [pressed, setPressed] = useState(null); // 눌린 버튼의 id를 저장하는 상태
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState(1);
   return (
     <Box sx={{ display: "flex", justifyContent: "center", flexGrow: 1 }}>
       <Stack>
