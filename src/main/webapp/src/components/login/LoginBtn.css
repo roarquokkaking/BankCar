@@ -1,0 +1,89 @@
+.kakao-login-button {
+    display: flex;
+    width: 326.4px;
+    height: 47.6px;
+    background-position: center;
+    background-color:  #ffffff;
+    align-items: center;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid #888888;
+    margin-top: 20px;
+    margin-left: 33px;
+    padding: 13px;
+  }
+  .kakao-login-button img {
+    width: 20px; /* 이미지의 크기를 적절히 조정하세요 */
+    height: 20px;
+    margin-right: 20%; /* 텍스트와 이미지 사이의 간격을 설정하세요 */
+}
+
+  .naver-login-button {
+    display: flex;
+    width: 326.4px;
+    height: 47.6px;
+    background-position: center;
+    background-color:  #ffffff;
+    align-items: center;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid #888888;
+    margin-top: 20px;
+    margin-left: 33px;
+  }
+  .naver-login-button img {
+    width: 15px; /* 이미지의 크기를 적절히 조정하세요 */
+    height: 15px;
+    margin-right: 20%; /* 텍스트와 이미지 사이의 간격을 설정하세요 */
+    margin-left: 3.6%;
+}
+  .google-login-button {
+    display: flex;
+    width: 326.4px;
+    height: 47.6px;
+    background-position: center;
+    background-color:  #ffffff;
+    align-items: center;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid #888888;
+    margin-top: 20px;
+    margin-left: 33px;
+  }
+  .google-login-button img {
+    width: 30px; /* 이미지의 크기를 적절히 조정하세요 */
+    height: 30px;
+    margin-right: 20%; /* 텍스트와 이미지 사이의 간격을 설정하세요 */
+    margin-left: 1.7%;
+}
+  .github-login-button {
+    display: flex;
+    width: 326.4px;
+    height: 47.6px;
+    background-position: center;
+    background-color:  #ffffff;
+    align-items: center;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid #888888;
+    margin-top: 20px;
+    margin-left: 33px;
+  }
+  .github-login-button img {
+    width: 20px; /* 이미지의 크기를 적절히 조정하세요 */
+    height: 20px;
+    margin-right: 18%; /* 텍스트와 이미지 사이의 간격을 설정하세요 */
+    margin-left: 3.1%;
+}
