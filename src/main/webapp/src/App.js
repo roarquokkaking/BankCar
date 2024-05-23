@@ -5,11 +5,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 import FooterMenu from './components/FooterMenu';
 import Home from './components/Home';
-import Login from './components/Login';
 import WishList from './components/WishList';
 import Reserve from "./components/Reserve";
 import Search from "./components/Search";
 import Login_main from './components/login/Login_main';
+import Login_demo from './components/login/Login_demo';
 import GoogleLogin from './components/login/GoogleLogin';
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/wishList" element={<WishList />} />
             <Route path="/login"  >
-              <Route index element={<Login_main />}/>
+              <Route index element={<Login_demo />}/>
               <Route path="/login/Google" element={<GoogleLogin/>}/>
             </Route>
 
