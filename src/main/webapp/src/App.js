@@ -7,10 +7,10 @@ import FooterMenu from './components/FooterMenu';
 import Home from './components/Home';
 import Login from './components/Login';
 import WishList from './components/WishList';
-import Reserve from "./components/Reserve";
 import Search from "./components/Search";
 import Login_main from './components/login/Login_main';
 import GoogleLogin from './components/login/GoogleLogin';
+import Choice from './components/Choice';
 
 function App() {
   return (
@@ -32,8 +32,8 @@ function App() {
               <Route path="/login/Google" element={<GoogleLogin/>}/>
             </Route>
 
-            <Route path="/reserve" element={<Reserve />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/choice" element={<Choice />} />
 
           </Routes>
           <Box sx={{ display: { xs: "flex", md: "none" }, marginTop: "auto" }}>
