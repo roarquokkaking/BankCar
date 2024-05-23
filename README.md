@@ -11,12 +11,13 @@ npm install react-swipeable-views-react-18-fix
 
 npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
 
+yarn add react-swipeable-views    
+
 npm install react-icons --save
 
 npm install react-router-dom
 
 # 아이콘 참고
 https://react-icons.github.io/react-icons/icons/
-
-
+npm install react-responsive --legacy-peer-deps
 ```
