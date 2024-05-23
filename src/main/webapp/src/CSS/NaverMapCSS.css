@@ -1,0 +1,47 @@
+/* * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+} */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+.mapContainer {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.map {
+    width: 100%;
+    height: 400px;
+    background-image: url('https://via.placeholder.com/800x400');
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #ccc;
+}
+/* .map-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    font-size: 12px;
+    color: #333;
+}
+.map-overlay ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.map-overlay li {
+    margin-bottom: 10px;
+} */
+.map-overlay li span {
+    font-weight: bold;
+    margin-right: 10px;
+}
