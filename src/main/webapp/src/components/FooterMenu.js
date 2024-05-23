@@ -21,6 +21,12 @@ const footerMenu = [
     icon: <FaRegUserCircle size={18} />,
     path: "/login",
   },
+  {
+    id: 4,
+    text: "프로필",
+    icon: <FaRegUserCircle size={18} />,
+    path: "/profile",
+  },
 ];
 
 const FooterMenu = () => {
@@ -46,7 +52,6 @@ const FooterMenu = () => {
                 sx={{
                   justifyContent: "center",
                   alignItems: "center",
-                  margin: 1, // 버튼 간격 조정
                   color: selected === item.id ? "red" : "black",
                   textShadow:
                     pressed === item.id
