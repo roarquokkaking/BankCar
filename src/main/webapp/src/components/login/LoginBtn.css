@@ -87,3 +87,13 @@
     margin-right: 18%; /* 텍스트와 이미지 사이의 간격을 설정하세요 */
     margin-left: 3.1%;
 }
+.headernav{
+    width: 390.4px;
+    height: 48px;
+    margin-bottom: 40%;
+}
+.Logo img{
+    width: 190px;
+    height: 90px;
+    margin-left: 27%;
+}
