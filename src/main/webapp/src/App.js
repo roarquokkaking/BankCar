@@ -9,6 +9,7 @@ import WishList from './components/WishList';
 import Reserve from "./components/Reserve";
 import Search from "./components/Search";
 import Login_main from './components/login/Login_main';
+import Login_demo from './components/login/Login_demo';
 import GoogleLogin from './components/login/GoogleLogin';
 import ProfileMain from './components/profile/ProfileMain';
 
@@ -29,7 +30,7 @@ function App() {
             <Route path="/wishList" element={<WishList />} />
             <Route path='/profile' element={<ProfileMain /> }/>
             <Route path="/login"  >
-              <Route index element={<Login_main />}/>
+              <Route index element={<Login_demo />}/>
               <Route path="/login/Google" element={<GoogleLogin/>}/>
             </Route>
 
