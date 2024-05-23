@@ -8,7 +8,6 @@ import Home from './components/Home';
 import WishList from './components/WishList';
 import Search from "./components/Search";
 import Login_main from './components/login/Login_main';
-import Login_demo from './components/login/Login_demo';
 import GoogleLogin from './components/login/GoogleLogin';
 import Choice from './components/Choice';
 import ProfileMain from './components/profile/ProfileMain';
@@ -30,7 +29,7 @@ function App() {
             <Route path="/wishList" element={<WishList />} />
             <Route path='/profile' element={<ProfileMain /> }/>
             <Route path="/login"  >
-              <Route index element={<Login_demo />}/>
+              <Route index element={<Login_main />}/>
               <Route path="/login/Google" element={<GoogleLogin/>}/>
             </Route>
 
