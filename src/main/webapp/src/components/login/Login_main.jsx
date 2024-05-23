@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { IoHomeOutline } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
-const Login_main = () => {
+import { useNavigate } from "react-router-dom";
+import { GoArrowLeft } from "react-icons/go";
 
+import './LoginBtn.css'
+
+const Login_main = () => {
+    
+
+
+  
     const navigate = useNavigate();
     
+    // const cliend_google_id="601610993000-u4u34s3r1op37juvet6fmr0hee3e3u1d.apps.googleusercontent.com";
+    // const redirect_google_uri="http://localhost:8080/login/google";
+    // const cliend_kakao_id=""
+    // const redirect_kakao_uri="http://localhost:8080/login/kakao";
+    // onClick={()=>window.location.href=`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${cliend_kakao_id}&redirect_uri=${redirect_kakao_uri}`}
     const cliend_id="601610993000-u4u34s3r1op37juvet6fmr0hee3e3u1d.apps.googleusercontent.com";
     const redirect_uri="http://localhost:8080/login/google";
     
@@ -20,52 +31,67 @@ const Login_main = () => {
         query: '(max-width: 1224px)'
       });
       
-    
+      const [pressed, setPressed] = useState(null); // 눌린 버튼의 id를 저장하는 상태
+      const [selected, setSelected] = useState(1);
     return (
         <div>
             {isDesktopOrLaptop && <p>모바일 환경으로 접속 바랍니당 ~~__~~ ^^!!</p>}
             {isBigScreen && <p>You have a huge screen</p>}
             {isTabletOrMobile && 
             <div>
-                <div style={{backgroundImage:'url(./file3.jpg)',width:'100%',height:'100vh',boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2)',borderRadius:'10px',backgroundSize:'cover'}}>
-                    <h1 style={{color:'white',textAlign:'center',paddingTop:'30%',marginTop:0}}>Let's share</h1>
-                    <h3 style={{color:'white',textAlign:'center'}}>Safety first</h3>
-                    <div style={{display:'flex',alignItems:'center',justifyContent:'center',marginTop:'100px',opacity:0.8}}>
-                        {/* <input type='button' style={{backgroundImage:'url(./btnG_official.png)',width:'80%',height:'50px',backgroundSize:'cover',backgroundPosition:'center',border:0,borderRadius:'10px',cursor:'pointer'}}/> */}
-                        <button type='button' style={{display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center', 
-                border: 0, 
-                borderRadius: '10px', 
-                cursor: 'pointer', 
-                width: '299px', 
-                height: '50px', 
-                padding: 0, 
-                background: 'white'}}>
-                            <img src='./btnW_아이콘사각.png' alt='naver_logo' style={{width:'50px',height:'50px'}}/><span style={{textAlign:'center',flexGrow:1}}>네이버 로그인</span>  
-                        </button>
-                    </div>
-                    <div style={{display:'flex',alignItems:'center',justifyContent:'center',marginTop:'10px',opacity:0.8}}>
-                        <input type='button' style={{backgroundImage:'url(./google.png)',width:'80%',height:'50px',backgroundSize:'cover',backgroundPosition:'center',border:0,borderRadius:'10px',cursor:'pointer'}} onClick={()=>window.location.href=`https://accounts.google.com/o/oauth2/auth?client_id=${cliend_id}&redirect_uri=${redirect_uri}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`}/>
-                    </div>
-                    <div style={{display:'flex',alignItems:'center',justifyContent:'center',marginTop:'10px',opacity:0.8}}>
-                        <input type='button' style={{backgroundImage:'url(./kakao.png)',width:'80%',height:'50px',backgroundSize:'cover',backgroundPosition:'center',border:0,borderRadius:'10px',cursor:'pointer'}}/>
-                    </div>
-                    <div style={{display:'flex',alignItems:'center',justifyContent:'center',marginTop:'10px',opacity:0.8}}>
-                        <input type='button' style={{backgroundImage:'url(./git.png)',width:'80%',height:'50px',backgroundSize:'cover',backgroundPosition:'center',border:0,borderRadius:'10px',cursor:'pointer'}}/>
-                    </div>
-                    
-                    <div style={{ position: 'fixed', bottom: '10px', left: '50%', transform: 'translateX(-50%)' }}>
-
-                    <IoHomeOutline size='50'/>
-                    </div>
-                    
+                <header>
+                <div className="headernav">
+                <GoArrowLeft style={{width:'30px', height:'30px',
+                    marginTop:'4%', marginLeft:'20px'
+                }}navigate={(-1)}
+                />
+                    <h1 style={{textAlign:'center', 
+                                font:'apple SD Gothic Neo',
+                                fontSize:'18px',
+                                marginTop:'-9%'
+                               }}>로그인
+                    </h1>
                 </div>
+                </header>
+                <div className="Logo">
+                    <img src="./Logo.png" alt='로고'/>
+                </div>
+                <button 
+                    className="kakao-login-button"
+                    > 
+                    <img src="./kakao.png" alt="카카오 아이콘" />
+                        카카오로 로그인하기
+                </button>
+               
+                <button 
+                    className="naver-login-button"
+                    type="button">
+                        <img src="./naverBtn.png" alt="네이버 아이콘" />
+                        네이버로 로그인하기 
+                </button>
+
+                <button 
+                    className="google-login-button"
+                    onClick={()=>window.location.href=`https://accounts.google.com/o/oauth2/auth?client_id=${cliend_id}&redirect_uri=${redirect_uri}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`}>
+                    <img src="./google01.png" alt="구글 아이콘" />
+                        구글로 로그인하기        
+                </button>
+
+                <button
+                    className="github-login-button"
+                    type="button" 
+                    value="깃허브로 로그인하기">  
+                    <img src="./gitBtn.png" alt="깃허브 아이콘" />
+                        깃허브로 로그인하기
+                </button>
+                
             </div>
             
             }
 
+
         </div>
+        
     );
 };
 
