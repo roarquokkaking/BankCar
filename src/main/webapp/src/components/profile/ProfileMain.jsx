@@ -1,7 +1,6 @@
 import React from 'react';
 import "./ProfilePage.css";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { Link } from 'react-router-dom';
 import Button from "@mui/material/Button";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
