@@ -11,6 +11,9 @@ import Login_main from './components/login/Login_main';
 import GoogleLogin from './components/login/GoogleLogin';
 import Choice from './components/Choice';
 import ProfileMain from './components/profile/ProfileMain';
+import ReservedCars from './components/profile/ReservedCars';
+import UsedCarReviews from './components/profile/UsedCarReviews';
+import CheckMyCar from './components/profile/CheckMyCar';
 
 function App() {
   return (
@@ -27,12 +30,16 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/wishList" element={<WishList />} />
-            <Route path='/profile' element={<ProfileMain /> }/>
-            <Route path="/login"  >
+            <Route path="login"  >
               <Route index element={<Login_main />}/>
               <Route path="/login/Google" element={<GoogleLogin/>}/>
             </Route>
-
+            <Route path="/profile">
+              <Route index element={<ProfileMain />} />
+              <Route path="reservedCars" element={<ReservedCars />} />
+              <Route path="usedCarReviews" element={<UsedCarReviews />} />
+              <Route path="checkMyCar" element={<CheckMyCar />} />
+            </Route>
             <Route path="/search" element={<Search />} />
             <Route path="/choice" element={<Choice />} />
 
