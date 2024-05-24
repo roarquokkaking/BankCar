@@ -115,7 +115,6 @@ body {
 
 .input-group .input-box {
     flex: 1;
-    display: flex;
     align-items: center;
     padding: 16px;
     border: 1px solid #ccc;
@@ -155,15 +154,13 @@ body {
     font-size: 16px;
 }
 
-.date-picker {
+/* .date-picker {
     color: #a8a8a8 !important;
     pointer-events: none;
-}
+} */
 .react-datepicker__input-container input {
-    width: 250px; /* 원하는 너비 설정 */
-    /* height: 40px; 원하는 높이 설정 */
+    width: 250px;
     padding: 8px;
-    /* font-size: 16px; */
     border: 1px solid #ccc;
     border-radius: 4px;
 }

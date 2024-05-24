@@ -1,0 +1,91 @@
+.profile-container {
+  font-family: 'Arial', sans-serif;
+}
+
+header h1 {
+  text-align: left;
+  margin: 30px;
+}
+
+.user-img-name{
+  display: flex;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin: 30px;
+  justify-content: space-between;
+}
+
+.user-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.text-info h3, .text-info p {
+  margin: 0;
+
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 10px;
+}
+
+.action-buttons button {
+  margin: 5px 0;
+}
+
+.profile-actions {
+  list-style: none;
+  padding: 0;
+}
+
+.profile-actions li a{
+  text-decoration: none;
+  color: inherit; /* 기존 텍스트 색상 사용 */
+  padding: 15px;
+  margin: 0 20px;
+  border-radius: 10px;
+  justify-content: space-between;
+  display: flex; /* Flexbox 사용 */
+}
+
+.profile-actions li a:hover {
+  text-decoration: underline; /* 링크에 호버 효과 추가 */
+}
+
+.profile-actions li a:active {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* x축 y축 흐림 반경 확산 반경 색상 */
+}
+
+
+
+.register-button {
+  background-color: white; /* 배경색 */
+  border: none; /* 테두리 없앰 */
+  padding: 30px 10px; /* 상하 10px, 좌우 20px 패딩 */
+  border-radius: 10px; /* 라운드 속성 */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+  font-size: 16px; /* 글자 크기 */
+  cursor: pointer; /* 커서 모양 변경 */
+  display: flex; /* Flexbox 사용 */
+  align-items: center; /* 아이템들 중앙 정렬 */
+  /* justify-content: center; 내용물 가운데 정렬 */
+  margin: 20px 30px; /* 상하 0, 좌우 5px 마진 */
+  text-align: left;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.register-button img{
+    width: 70px;
+    border-radius: 10px;
+}
+
+

@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 import FooterMenu from './components/FooterMenu';
 import Home from './components/Home';
@@ -10,12 +10,11 @@ import Search from "./components/Search";
 import Login_main from './components/login/Login_main';
 import GoogleLogin from './components/login/GoogleLogin';
 import Choice from './components/Choice';
-import Payment_main from './components/payment/Payment_main';
 
 function App() {
   return (
     <React.Fragment>
-      <Router>
+      <BrowserRouter>
         <CssBaseline />
         <Box
           sx={{
@@ -24,24 +23,34 @@ function App() {
             height: "100vh",
           }}
         >
+          <Provider store={store}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/wishList" element={<WishList />} />
-            <Route path="/login"  >
+            <Route path="login"  >
               <Route index element={<Login_main />}/>
               <Route path="/login/Google" element={<GoogleLogin/>}/>
             </Route>
+            <Route path="/profile">
+              <Route index element={<ProfileMain />} />
+              <Route path="reservedCars" element={<ReservedCars />} />
+              <Route path="usedCarReviews" element={<UsedCarReviews />} />
+              <Route path="checkMyCar" element={<CheckMyCar />} />
+            </Route>
             <Route path="/search" element={<Search />} />
             <Route path="/choice" element={<Choice />} />
-            <Route path="/payment" element={<Payment_main />} />
+
           </Routes>
           <Box sx={{ display: { xs: "flex", md: "none" }, marginTop: "auto" }}>
-          <FooterMenu />
+            <FooterMenu />
           </Box>
+          </Provider>
+          {/* <Box sx={displayOnDesktop}>
+            <Footer />
+          </Box> */}
         </Box>
-      </Router>
+      </BrowserRouter>
     </React.Fragment>
-    
   );
 }
 
