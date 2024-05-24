@@ -10,12 +10,6 @@ import Search from "./components/Search";
 import Login_main from './components/login/Login_main';
 import GoogleLogin from './components/login/GoogleLogin';
 import Choice from './components/Choice';
-import ProfileMain from './components/profile/ProfileMain';
-import ReservedCars from './components/profile/ReservedCars';
-import UsedCarReviews from './components/profile/UsedCarReviews';
-import CheckMyCar from './components/profile/CheckMyCar';
-import {Provider} from 'react-redux';
-import store from './store/store';
 
 function App() {
   return (
