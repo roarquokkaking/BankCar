@@ -1,0 +1,35 @@
+/* UserReviewItem.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.review-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.review {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.review:last-child {
+    border-bottom: none;
+}
+
+.rating {
+    font-size: 18px;
+    font-weight: bold;
+    color: #666;
+}
+
+.review-text {
+    font-size: 16px;
+    color: #333;
+}
