@@ -1,6 +1,8 @@
 import React from 'react';
 import "./ProfilePage.css";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { Link } from 'react-router-dom';
+import Button from "@mui/material/Button";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setId,setEmail,setName } from '../../store/loginSlice';
@@ -27,14 +29,14 @@ const ProfileMain = () => {
           <h1>프로필</h1>
         </header>
         <section className="user-info">
-          <div className='user-img-name'>
+          <div className="user-img-name">
             <img
               src="https://wrtn-image-user-output.s3.ap-northeast-2.amazonaws.com/6631b6db962f730c6207b3c2/fd53f817-13a7-482c-9492-26a270549528.png"
               alt="유저 이미지"
               className="user-image"
             />
             <div className="text-info">
-              <h3>사용자 이름</h3>
+              <h4>사용자 이름</h4>
               <p>user@example.com</p>
             </div>
           </div>
@@ -43,7 +45,12 @@ const ProfileMain = () => {
           </div>
         </section>
         <Divider />
-        <button className="register-button">
+        <Button
+          className="register-button"
+          margin={20}
+          component={Link}
+          to={"/car/new"}
+        >
           <span>
             BankCar에 <br />
             &emsp;당신의 자동차를 등록해 보세요.
@@ -53,7 +60,7 @@ const ProfileMain = () => {
             </small>
           </span>
           <img src="./image/car.png" alt="귀여운 자동차" />
-        </button>
+        </Button>
         <ul className="profile-actions">
           <li>
             <Link to="reservedCars">
@@ -85,7 +92,7 @@ const ProfileMain = () => {
               dispatch(setName(''));
 
               navigate('/');
-              
+
           }} > 로그아웃 </div>
 
         </ul>
