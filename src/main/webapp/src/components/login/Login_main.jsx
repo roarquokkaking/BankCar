@@ -43,7 +43,7 @@ const Login_main = () => {
                 <div className="headernav">
                 <GoArrowLeft style={{width:'30px', height:'30px',
                     marginTop:'4%', marginLeft:'20px'
-                }}navigate={(-1)}
+                }}onClick={()=>{navigate(-1)}}
                 />
                     <h1 style={{textAlign:'center', 
                                 font:'apple SD Gothic Neo',
@@ -80,7 +80,7 @@ const Login_main = () => {
                 <button
                     className="github-login-button"
                     type="button" 
-                    value="깃허브로 로그인하기">  
+                >  
                     <img src="./gitBtn.png" alt="깃허브 아이콘" />
                         깃허브로 로그인하기
                 </button>

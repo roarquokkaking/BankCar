@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import React from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation} from "react-router-dom";
 import './App.css';
 import FooterMenu from './components/FooterMenu';
 import Home from './components/Home';
@@ -10,11 +10,12 @@ import Search from "./components/Search";
 import Login_main from './components/login/Login_main';
 import GoogleLogin from './components/login/GoogleLogin';
 import Choice from './components/Choice';
+import Payment_main from './components/payment/Payment_main';
 
 function App() {
   return (
     <React.Fragment>
-      <BrowserRouter>
+      <Router>
         <CssBaseline />
         <Box
           sx={{
@@ -30,20 +31,17 @@ function App() {
               <Route index element={<Login_main />}/>
               <Route path="/login/Google" element={<GoogleLogin/>}/>
             </Route>
-
             <Route path="/search" element={<Search />} />
             <Route path="/choice" element={<Choice />} />
-
+            <Route path="/payment" element={<Payment_main />} />
           </Routes>
           <Box sx={{ display: { xs: "flex", md: "none" }, marginTop: "auto" }}>
-            <FooterMenu />
+          <FooterMenu />
           </Box>
-          {/* <Box sx={displayOnDesktop}>
-            <Footer />
-          </Box> */}
         </Box>
-      </BrowserRouter>
+      </Router>
     </React.Fragment>
+    
   );
 }
 
