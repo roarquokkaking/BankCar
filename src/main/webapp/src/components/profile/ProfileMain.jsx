@@ -1,7 +1,9 @@
 import React from 'react';
 import "./ProfilePage.css";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setId,setEmail,setName } from '../../store/loginSlice';
 
 // 구분선 컴포넌트
 const Divider = () => {
@@ -17,6 +19,8 @@ const Divider = () => {
 };
 
 const ProfileMain = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
     return (
       <div className="profile-container">
         <header>
@@ -75,6 +79,15 @@ const ProfileMain = () => {
               </div>
             </Link>
           </li>
+          <div style={{marginLeft:'80%',cursor:'pointer',color:'blue'}} onClick={()=>{
+              dispatch(setId(''));
+              dispatch(setEmail(''));
+              dispatch(setName(''));
+
+              navigate('/');
+              
+          }} > 로그아웃 </div>
+
         </ul>
       </div>
     );
