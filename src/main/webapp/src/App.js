@@ -14,6 +14,8 @@ import ProfileMain from './components/profile/ProfileMain';
 import ReservedCars from './components/profile/ReservedCars';
 import UsedCarReviews from './components/profile/UsedCarReviews';
 import CheckMyCar from './components/profile/CheckMyCar';
+import {Provider} from 'react-redux';
+import store from './store/store';
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
             height: "100vh",
           }}
         >
+          <Provider store={store}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/wishList" element={<WishList />} />
@@ -47,6 +50,7 @@ function App() {
           <Box sx={{ display: { xs: "flex", md: "none" }, marginTop: "auto" }}>
             <FooterMenu />
           </Box>
+          </Provider>
           {/* <Box sx={displayOnDesktop}>
             <Footer />
           </Box> */}
