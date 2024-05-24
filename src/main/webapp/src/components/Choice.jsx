@@ -1,8 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../CSS/ChoiceCSS.css';
+import { Box, Container } from '@mui/material';
+import LocationCardsChoice from './LocationCardsChoice';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import Review from './review/Review';
 // import '../CSS/NaverMapCSS.css'
 
 const Choice = () => {
+    const [startTime, setStartTime] = useState(null);
+    const [endTime, setEndTime] = useState(null);
+
     useEffect(() => {
         const script = document.createElement('script');
         script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=13hvi289g6`;
@@ -51,11 +59,15 @@ const Choice = () => {
     return (
         <div>
             <div className="description">
-                <div className="rating">
-                    <img src="star_icon.png" alt="Star" width="16" height="16" />
-                    <span>4.6 korea, Anyang</span>
-                </div>
-                <h1>속도와 스타일의 결정체, 스포츠카의 세계</h1>
+                <h1>예약 및 결제</h1>
+                <Container maxWidth="xl" sx={{ mb: 3 }}>
+                    <LocationCardsChoice />
+                    <Box
+                    sx={{
+                        display: { xs: "flex", md: "none" },
+                    }}
+                    ></Box>
+                </Container>
                 <p>자동차 소개 글, 자동차 소개 글자동차 소개 글</p>
             </div>
             <div className="owner-description">
@@ -64,8 +76,39 @@ const Choice = () => {
             </div>
             <div className="border-line"></div>
             <div className="usage-time">사용 시간, 이용 시간 설정</div>
-            <div className="grey-box small"></div>
-            <div className="additional-info">후기 버튼, 위치 정보 지도, 태그,</div>
+            <div className='input-group'>
+                <div className='input-box'>
+                    <DatePicker
+                    selected={startTime}
+                    onChange={(date) => setStartTime(date)}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={60}
+                    timeCaption="Time"
+                    dateFormat="h:mm aa"
+                    withPortal
+                    />
+                </div>
+            </div>
+
+            <div className='input-group'>
+                <div className='input-box'>
+                    <DatePicker
+                    selected={endTime}
+                    onChange={(date) => setEndTime(date)}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={60}
+                    timeCaption="Time"
+                    dateFormat="h:mm aa"
+                    withPortal
+                    />
+                </div>
+            </div>
+            <div className="additional-info">후기 버튼, 위치 정보 지도, 태그</div>
+            <div>
+                <Review />
+            </div>
             <div className="mapContainer">
                 <div>
                     <div id="map" className='map'></div>

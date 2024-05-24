@@ -1,7 +1,6 @@
 import React, { forwardRef, useCallback, useEffect, useRef, useState } from 'react'; 
 import { FaSearchLocation, FaRegCalendarAlt } from 'react-icons/fa';
 import axios from 'axios';
-import debounce from 'lodash.debounce';
 import DatePicker from 'react-datepicker';
 // import { ko } from 'date-fns/esm/locale';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -13,6 +12,9 @@ const Search = () => {
     // const [selectedDate, setSelectedDate] = useState(new Date());
     const [dateRange, setDateRange] = useState([null, null]);
     const [startDate, endDate] = dateRange;
+
+    const [startTime, setStartTime] = useState(null);
+    const [endTime, setEndTime] = useState(null);
 
     const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
         <button className="example-custom-input" onClick={onClick} ref={ref}>
@@ -67,13 +69,14 @@ const Search = () => {
 
     // const debouncedFetchResults = useCallback(debounce(fetchResults, 300), []);
 
-    const onInput = (e) => {
-        e.preventDefault();
-        const { name, value } = e.target;
-        if (name === 'text') {
-            setText(value);
-        }
-    };
+    // const onInput = (e) => {
+    //     e.preventDefault();
+    //     const { name, value } = e.target;
+    //     if (name === 'text') {
+    //         setText(value);
+    //     }
+    // };
+
     const mapRef = useRef(null);
 
 
@@ -86,7 +89,6 @@ const Search = () => {
             const map = new window.naver.maps.Map(mapRef.current, {
                 center: new window.naver.maps.LatLng(37.3595316, 127.1052133),
                 zoom: 15,
-                mapTypeControl: true
             });
             const marker = new window.naver.maps.Marker({
                 position: map.center,
@@ -141,7 +143,7 @@ const Search = () => {
                     query: address
                 }, function(status, response) {
                     if (status === window.naver.maps.Service.Status.ERROR) {
-                        return alert('Something Wrong!');
+                        return alert('잘못된 검색입니다');
                     }
 
                     if (response.v2.meta.totalCount === 0) {
@@ -178,9 +180,9 @@ const Search = () => {
             }
 
             function initGeocoder() {
-                window.naver.maps.Event.addListener(map, 'click', function(e) {
-                    searchCoordinateToAddress(e.coord);
-                });
+                // window.naver.maps.Event.addListener(map, 'click', function(e) {
+                //     searchCoordinateToAddress(e.coord);
+                // });
 
                 document.getElementById('address').addEventListener('keydown', function(e) {
                     const keyCode = e.which;
@@ -199,91 +201,96 @@ const Search = () => {
                 searchAddressToCoordinate('정자동 178-1');
             }
 
-            function makeAddress(item) {
-                if (!item) {
-                    return;
-                }
+            // function makeAddress(item) {
+            //     if (!item) {
+            //         return;
+            //     }
 
-                const name = item.name;
-                const region = item.region;
-                const land = item.land;
-                const isRoadAddress = name === 'roadaddr';
+            //     const name = item.name;
+            //     const region = item.region;
+            //     const land = item.land;
+            //     const isRoadAddress = name === 'roadaddr';
 
-                let sido = '', sigugun = '', dongmyun = '', ri = '', rest = '';
+            //     let sido = '', sigugun = '', dongmyun = '', ri = '', rest = '';
 
-                if (hasArea(region.area1)) {
-                    sido = region.area1.name;
-                }
+            //     if (hasArea(region.area1)) {
+            //         sido = region.area1.name;
+            //     }
 
-                if (hasArea(region.area2)) {
-                    sigugun = region.area2.name;
-                }
+            //     if (hasArea(region.area2)) {
+            //         sigugun = region.area2.name;
+            //     }
 
-                if (hasArea(region.area3)) {
-                    dongmyun = region.area3.name;
-                }
+            //     if (hasArea(region.area3)) {
+            //         dongmyun = region.area3.name;
+            //     }
 
-                if (hasArea(region.area4)) {
-                    ri = region.area4.name;
-                }
+            //     if (hasArea(region.area4)) {
+            //         ri = region.area4.name;
+            //     }
 
-                if (land) {
-                    if (hasData(land.number1)) {
-                        if (hasData(land.type) && land.type === '2') {
-                            rest += '산';
-                        }
+            //     if (land) {
+            //         if (hasData(land.number1)) {
+            //             if (hasData(land.type) && land.type === '2') {
+            //                 rest += '산';
+            //             }
 
-                        rest += land.number1;
+            //             rest += land.number1;
 
-                        if (hasData(land.number2)) {
-                            rest += ('-' + land.number2);
-                        }
-                    }
+            //             if (hasData(land.number2)) {
+            //                 rest += ('-' + land.number2);
+            //             }
+            //         }
 
-                    if (isRoadAddress === true) {
-                        if (checkLastString(dongmyun, '면')) {
-                            ri = land.name;
-                        } else {
-                            dongmyun = land.name;
-                            ri = '';
-                        }
+            //         if (isRoadAddress === true) {
+            //             if (checkLastString(dongmyun, '면')) {
+            //                 ri = land.name;
+            //             } else {
+            //                 dongmyun = land.name;
+            //                 ri = '';
+            //             }
 
-                        if (hasAddition(land.addition0)) {
-                            rest += ' ' + land.addition0.value;
-                        }
-                    }
-                }
+            //             if (hasAddition(land.addition0)) {
+            //                 rest += ' ' + land.addition0.value;
+            //             }
+            //         }
+            //     }
 
-                return [sido, sigugun, dongmyun, ri, rest].join(' ');
-            }
+            //     return [sido, sigugun, dongmyun, ri, rest].join(' ');
+            // }
 
-            function hasArea(area) {
-                return !!(area && area.name && area.name !== '');
-            }
+            // function hasArea(area) {
+            //     return !!(area && area.name && area.name !== '');
+            // }
 
-            function hasData(data) {
-                return !!(data && data !== '');
-            }
+            // function hasData(data) {
+            //     return !!(data && data !== '');
+            // }
 
-            function checkLastString(word, lastString) {
-                return new RegExp(lastString + '$').test(word);
-            }
+            // function checkLastString(word, lastString) {
+            //     return new RegExp(lastString + '$').test(word);
+            // }
 
-            function hasAddition(addition) {
-                return !!(addition && addition.value);
-            }
+            // function hasAddition(addition) {
+            //     return !!(addition && addition.value);
+            // }
 
             window.naver.maps.onJSContentLoaded = initGeocoder;
         };
     }, []);
 
+    const [reset, setReset] = useState(false)
 
+    const onReset = (e)=>{
+        e.preventDefault()
+        setReset( !reset)
+    }
 
     return (
         <div>
             <div className="header">
-                <div className={`tab ${activeTab === 'Stays' ? 'active' : ''}`} onClick={() => setActiveTab('Stays')}>
-                    Stays
+                <div className={`tab ${activeTab === 'Rent' ? 'active' : ''}`} onClick={() => setActiveTab('Rent')}>
+                    Rent
                 </div>
                 <div className={`tab ${activeTab === 'Experiences' ? 'active' : ''}`} onClick={() => setActiveTab('Experiences')}>
                     Experiences
@@ -316,6 +323,8 @@ const Search = () => {
                             onChange={(date) => setSelectedDate(date)}
                         /> */}
                         <DatePicker
+                            placeholderText="대여 기간"
+                            // showIcon
                             dateFormat="yyyy년 MM월 dd일"
                             minDate={new Date()}
                             selectsRange={true}
@@ -324,20 +333,39 @@ const Search = () => {
                             onChange={(update) => {
                                 setDateRange(update);
                             }}
+                            withPortal
                             // locale={ko}
-                        /><FaRegCalendarAlt />
-                        <span>Choose</span>
-                    </div>
-                </div>
-                <div className="input-group">
-                    <div className="input-box">
-                        <input type="text" placeholder="Type" readOnly />
-                        <span>Choose</span>
+                        />
+                        <br/>
+                        <DatePicker
+                        placeholderText="대여 가능 시간"
+                        selected={startTime}
+                        onChange={(date) => setStartTime(date)}
+                        showTimeSelect
+                        showTimeSelectOnly
+                        timeIntervals={60}
+                        timeCaption="Time"
+                        dateFormat="h:mm aa"
+                        withPortal
+                        />
+                        <br/>
+                        <DatePicker
+                        placeholderText="반납 가능 시간"
+                        selected={endTime}
+                        onChange={(date) => setEndTime(date)}
+                        showTimeSelect
+                        showTimeSelectOnly
+                        timeIntervals={60}
+                        timeCaption="Time"
+                        dateFormat="h:mm aa"
+                        withPortal
+                        />
+                        
                     </div>
                 </div>
             </div>
             <div className="footer">
-                <div className="clear-button">Clear all</div>
+                <div className="clear-button" type="reset" onClick={onReset}>Clear all</div>
                 <div className="search-button">Search</div>
             </div>
         </div>
