@@ -6,6 +6,9 @@ import Typography from "@mui/material/Typography";
 import { FaRegHeart, FaRegUserCircle, FaHome } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { red } from "@mui/material/colors";
+import { useSelector } from "react-redux";
+
+
 
 const footerMenu = [
   { id: 1, text: "홈", icon: <FaHome size={18} />, path: "/" },
@@ -32,10 +35,14 @@ const footerMenu = [
 const FooterMenu = () => {
   const [pressed, setPressed] = useState(null); // 눌린 버튼의 id를 저장하는 상태
   const [selected, setSelected] = useState(1);
+  const id = useSelector((state)=> state.Login.id);
+  
+  const footerMenuFilter = id?footerMenu.filter(item=>item.id!==3):footerMenu.filter(item=>item.id!==4);
+  
   return (
     <Box sx={{ display: "flex", justifyContent: "center", flexGrow: 1 }}>
       <Stack>
-        {footerMenu.map((item) => {
+        {footerMenuFilter.map((item) => {
           return (
             <Button
               key={item.id}
