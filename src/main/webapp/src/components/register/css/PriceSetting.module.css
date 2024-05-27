@@ -1,0 +1,33 @@
+.container {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+.price-setting {
+  background-color: #f0f0f0; /* 연한 회색 */
+  padding: 20px;
+  border-radius: 8px;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.price-setting input {
+  margin-top: 10px;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.price-setting .price {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+

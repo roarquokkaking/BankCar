@@ -1,0 +1,16 @@
+/* styles.css */
+
+.container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+input[type="file"] {
+  margin: 20px 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 20px;
+}
