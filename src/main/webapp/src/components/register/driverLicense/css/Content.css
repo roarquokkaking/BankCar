@@ -1,0 +1,19 @@
+.Content {
+    margin: 20px;
+  }
+  
+  .description, .instruction {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+  }
+  
+  .license-image {
+    margin: 20px 0;
+  }
+  
+  .license-image img {
+    max-width: 100%;
+    height: auto;
+  }
+  

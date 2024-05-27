@@ -60,6 +60,22 @@ const ProfileMain = () => {
           </span>
           <img src="./image/car.png" alt="귀여운 자동차" />
         </Button>
+        <Button
+          className="register-button"
+          margin={20}
+          component={Link}
+          to={"/car/driver"}
+        >
+          <span>
+            BankCar에 <br />
+            &emsp;당신의 면허증을 등록해 주세요.
+            <small style={{ color: "gray" }}>
+              <br />
+              <br /> 지금 바로 등록하러가기
+            </small>
+          </span>
+          <img src="./image/ID_certi.png" alt="면허 인증" />
+        </Button>
         <ul className="profile-actions">
           <li>
             <Link to="reservedCars">
