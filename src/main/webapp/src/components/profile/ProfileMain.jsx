@@ -1,7 +1,6 @@
 import React from 'react';
 import "./ProfilePage.css";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import Button from "@mui/material/Button";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setId,setEmail,setName } from '../../store/loginSlice';
@@ -22,6 +21,10 @@ const Divider = () => {
 const ProfileMain = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const onToCarNew = () => {
+    navigate('/car/new');
+  }
     return (
       <div className="profile-container">
         <header>
@@ -44,11 +47,10 @@ const ProfileMain = () => {
           </div>
         </section>
         <Divider />
-        <Button
+        <button
           className="register-button"
           margin={20}
-          component={Link}
-          to={"/car/new"}
+          onClick={onToCarNew}
         >
           <span>
             BankCar에 <br />
@@ -59,8 +61,8 @@ const ProfileMain = () => {
             </small>
           </span>
           <img src="./image/car.png" alt="귀여운 자동차" />
-        </Button>
-        <Button
+        </button>
+        <button
           className="register-button"
           margin={20}
           component={Link}
@@ -75,7 +77,7 @@ const ProfileMain = () => {
             </small>
           </span>
           <img src="./image/ID_certi.png" alt="면허 인증" />
-        </Button>
+        </button>
         <ul className="profile-actions">
           <li>
             <Link to="reservedCars">

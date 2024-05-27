@@ -7,24 +7,14 @@ import {
   MdOutlineDateRange,
   MdBusinessCenter,
 } from 'react-icons/md';
-import { BsSnow } from 'react-icons/bs';
-import { BiHomeAlt } from 'react-icons/bi';
 import {
-  GiKidSlide,
-  GiSpaceNeedle,
   GiCampingTent,
-  GiLightningDome,
-  GiEvilTree,
-  GiWaveSurfer,
-  GiMountainCave,
-  GiCaveEntrance,
-  GiGolfFlag,
 } from 'react-icons/gi';
-import { AiOutlineCoffee } from 'react-icons/ai';
-import { FaCampground, FaUmbrellaBeach, FaSwimmingPool, FaCar, FaMotorcycle, FaTruck } from 'react-icons/fa';
-import { RiEarthquakeFill } from 'react-icons/ri';
+import { FaCar, FaMotorcycle, FaTruck } from 'react-icons/fa';
+import { MdOutlineElectricalServices } from "react-icons/md";
 
-export const locationsTab = [
+
+export const categoryTab = [
   { id: 1, label: "캠핑", icon: <GiCampingTent size={24} /> },
   { id: 2, label: "비지니스", icon: <MdBusinessCenter size={24} /> },
   { id: 3, label: "데이트", icon: <MdOutlineDateRange size={24} /> },
@@ -32,6 +22,7 @@ export const locationsTab = [
   { id: 5, label: "스포츠카", icon: <FaCar size={24} /> },
   { id: 6, label: "오토바이", icon: <FaMotorcycle size={24} /> },
   { id: 7, label: "트럭", icon: <FaTruck size={24} /> },
+  { id: 8, label: "전기차", icon: <MdOutlineElectricalServices size={24} /> },
 ];
 
 export const locations = [
