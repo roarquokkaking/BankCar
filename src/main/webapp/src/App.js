@@ -14,6 +14,9 @@ import ProfileMain from './components/profile/ProfileMain';
 import ReservedCars from './components/profile/ReservedCars';
 import UsedCarReviews from './components/profile/UsedCarReviews';
 import CheckMyCar from './components/profile/CheckMyCar';
+import MyWishList from "./components/MyWishList";
+import MyProfile from "./components/profile/MyProfile";
+import UseBefore from "./components/profile/UseBefore";
 
 function App() {
   return (
@@ -30,6 +33,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/wishList" element={<WishList />} />
+            <Route path="/myWishList" element={<MyWishList />} />
             <Route path="login"  >
               <Route index element={<Login_main />}/>
               <Route path="/login/Google" element={<GoogleLogin/>}/>
@@ -38,7 +42,9 @@ function App() {
               <Route index element={<ProfileMain />} />
               <Route path="reservedCars" element={<ReservedCars />} />
               <Route path="usedCarReviews" element={<UsedCarReviews />} />
-              <Route path="checkMyCar" element={<CheckMyCar />} />
+              <Route path="checkMyCar" element={<CheckMyCar/>} />
+              <Route path="MyProfile" element={<MyProfile/>} />
+              <Route path="UseBefore" element={<UseBefore/>} />
             </Route>
             <Route path="/search" element={<Search />} />
             <Route path="/choice" element={<Choice />} />
