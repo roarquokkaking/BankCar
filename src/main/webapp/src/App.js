@@ -18,6 +18,8 @@ import RegisterMain from './components/register/RegisterMain';
 import {Provider} from 'react-redux';
 import store from './store/store';
 import Payment_main from './components/payment/Payment_main';
+import DriverLicense from './components/register/driverLicense/DriverLicense';
+import DriverCheck from './components/register/driverLicense/DriverCheck';
 import MyWishList from "./components/MyWishList";
 import MyProfile from "./components/profile/MyProfile";
 import UseBefore from "./components/profile/UseBefore";
@@ -52,6 +54,8 @@ function App() {
               <Route path="UseBefore" element={<UseBefore/>} />
             </Route>
             <Route path='/car/new' element={<RegisterMain />} />
+            <Route path='/car/driver' element={<DriverLicense />} />
+            <Route path='/car/driverCheck/:imageName' element={<DriverCheck />} />
             <Route path="/search" element={<Search />} />
             <Route path="/choice" element={<Choice />} />
             <Route path='/payment' element={<Payment_main />} />

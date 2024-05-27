@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"login.*"})
+@ComponentScan(basePackages = {"login.*","driverLicense.*"})
 @EntityScan("login.dto")
 @EnableJpaRepositories("login.dao")
 public class BankCarApplication {
