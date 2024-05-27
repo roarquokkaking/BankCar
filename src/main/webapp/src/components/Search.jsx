@@ -1,7 +1,6 @@
 import React, { forwardRef, useCallback, useEffect, useRef, useState } from 'react'; 
 import { FaSearchLocation, FaRegCalendarAlt } from 'react-icons/fa';
 import axios from 'axios';
-import debounce from 'lodash.debounce';
 import DatePicker from 'react-datepicker';
 // import { ko } from 'date-fns/esm/locale';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -14,6 +13,9 @@ const Search = () => {
     const [dateRange, setDateRange] = useState([null, null]);
     const [startDate, endDate] = dateRange;
 
+    const [startTime, setStartTime] = useState(null);
+    const [endTime, setEndTime] = useState(null);
+
     const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
         <button className="example-custom-input" onClick={onClick} ref={ref}>
           {value}
@@ -23,35 +25,35 @@ const Search = () => {
     const [activeTab, setActiveTab] = useState('Stays');
 
     //맵 검색
-    const [text, setText] = useState('')
-    const [result, setResult] = useState(null);
+    // const [text, setText] = useState('')
+    // const [result, setResult] = useState(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            if (text.trim() === '') return; 
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         if (text.trim() === '') return; 
 
-            try {
-                const response = await axios.get(`http://localhost:8080/search/detail`, {params: { text }});
-                // 여기서 응답 데이터를 처리할 수 있습니다.
-                const jsonData = response.data;
-                // 필요한 정보 추출
-                const items = jsonData.items;
+    //         try {
+    //             const response = await axios.get(`http://localhost:8080/search/detail`, {params: { text }});
+    //             // 여기서 응답 데이터를 처리할 수 있습니다.
+    //             const jsonData = response.data;
+    //             // 필요한 정보 추출
+    //             const items = jsonData.items;
                 
-                // 주소와 도로명 주소만을 리스트로 추출
-                const addresses = items.map(item => ({
-                    address: item.address,
-                    roadAddress: item.roadAddress
-                }));
+    //             // 주소와 도로명 주소만을 리스트로 추출
+    //             const addresses = items.map(item => ({
+    //                 address: item.address,
+    //                 roadAddress: item.roadAddress
+    //             }));
                 
-                console.log(addresses);
-                setResult(addresses);
-            } catch (error) {
-                console.error('Error fetching the search results:', error);
-            }
-        };
+    //             console.log(addresses);
+    //             setResult(addresses);
+    //         } catch (error) {
+    //             console.error('Error fetching the search results:', error);
+    //         }
+    //     };
 
-        fetchData();
-    }, [text]);
+    //     fetchData();
+    // }, [text]);
     // const fetchResults = async (query) => {
     //     try {
     //         const response = await fetch(`http://localhost:8080/search/detail?text=${encodeURIComponent(query)}`);
@@ -67,14 +69,21 @@ const Search = () => {
 
     // const debouncedFetchResults = useCallback(debounce(fetchResults, 300), []);
 
-    const onInput = (e) => {
-        e.preventDefault();
-        const { name, value } = e.target;
-        if (name === 'text') {
-            setText(value);
-        }
-    };
+    // const onInput = (e) => {
+    //     e.preventDefault();
+    //     const { name, value } = e.target;
+    //     if (name === 'text') {
+    //         setText(value);
+    //     }
+    // };
+
     const mapRef = useRef(null);
+    const [addr,setAddr] = useState({
+        jibun:'',
+        road:'',
+        x:'',
+        y:''
+    })
 
 
     useEffect(() =>{
@@ -82,16 +91,34 @@ const Search = () => {
         script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=13hvi289g6&submodules=geocoder`;
         script.async = true;
         document.body.appendChild(script);
+        
         script.onload = () => {
             const map = new window.naver.maps.Map(mapRef.current, {
-                center: new window.naver.maps.LatLng(37.3595316, 127.1052133),
+                center: new window.naver.maps.LatLng(null, null),
                 zoom: 15,
-                mapTypeControl: true
             });
             const marker = new window.naver.maps.Marker({
                 position: map.center,
                 map: map,
             });
+
+            const success = (location) => {
+                const currentPosition = new window.naver.maps.LatLng(
+                    location.coords.latitude,
+                    location.coords.longitude
+                );
+                console.log(currentPosition);
+                map.setCenter(currentPosition);
+                marker.setPosition(currentPosition);
+            };
+
+            const error = () => {
+                console.log('Unable to retrieve your location.');
+            };
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(success, error);
+            }
 
             const infoWindow = new window.naver.maps.InfoWindow({
                 anchorSkew: true
@@ -112,36 +139,38 @@ const Search = () => {
                     if (status === window.naver.maps.Service.Status.ERROR) {
                         return alert('Something Wrong!');
                     }
-
+                    console.log("response" + response);
+                    
                     const items = response.v2.results;
                     let address = '';
                     const htmlAddresses = [];
 
-                    // for (let i = 0, ii = items.length; i < ii; i++) {
-                    //     const item = items[i];
-                    //     address = makeAddress(item) || '';
-                    //     const addrType = item.name === 'roadaddr' ? '[도로명 주소]' : '[지번 주소]';
+                    for (let i = 0, ii = items.length; i < ii; i++) {
+                        const item = items[i];
+                        address = makeAddress(item) || '';
+                        const addrType = item.name === 'roadaddr' ? '[도로명 주소]' : '[지번 주소]';
 
-                    //     htmlAddresses.push((i + 1) + '. ' + addrType + ' ' + address);
-                    // }
+                        htmlAddresses.push((i + 1) + '. ' + addrType + ' ' + address);
+                    }
 
-                    // infoWindow.setContent([
-                    //     '<div style="padding:10px;min-width:200px;line-height:150%;">',
-                    //     '<h4 style="margin-top:5px;">검색 좌표</h4><br />',
-                    //     htmlAddresses.join('<br />'),
-                    //     '</div>'
-                    // ].join('\n'));
+                    infoWindow.setContent([
+                        '<div style="padding:10px;min-width:200px;line-height:150%;">',
+                        '<h4 style="margin-top:5px;">검색 좌표</h4><br />',
+                        htmlAddresses.join('<br />'),
+                        '</div>'
+                    ].join('\n'));
 
                     infoWindow.open(map, latlng);
                 });
             }
 
             function searchAddressToCoordinate(address) {
+
                 window.naver.maps.Service.geocode({
                     query: address
                 }, function(status, response) {
                     if (status === window.naver.maps.Service.Status.ERROR) {
-                        return alert('Something Wrong!');
+                        return alert('잘못된 검색입니다');
                     }
 
                     if (response.v2.meta.totalCount === 0) {
@@ -152,35 +181,33 @@ const Search = () => {
                     const item = response.v2.addresses[0];
                     const point = new window.naver.maps.Point(item.x, item.y);
 
-                    // if (item.roadAddress) {
-                    //     htmlAddresses.push('[도로명 주소] ' + item.roadAddress);
-                    // }
+                    if (item.roadAddress) {
+                        htmlAddresses.push('[도로명 주소] ' + item.roadAddress);
+                    }
 
-                    // if (item.jibunAddress) {
-                    //     htmlAddresses.push('[지번 주소] ' + item.jibunAddress);
-                    // }
+                    if (item.jibunAddress) {
+                        htmlAddresses.push('[지번 주소] ' + item.jibunAddress);
+                    }
 
-                    // if (item.englishAddress) {
-                    //     htmlAddresses.push('[영문명 주소] ' + item.englishAddress);
-                    // }
+                    if (item.englishAddress) {
+                        htmlAddresses.push('[영문명 주소] ' + item.englishAddress);
+                    }
+                    
+                    console.log(item)
 
-                    // infoWindow.setContent([
-                    //     '<div style="padding:10px;min-width:200px;line-height:150%;">',
-                    //     '<h4 style="margin-top:5px;">검색 주소 : ' + address + '</h4><br />',
-                    //     htmlAddresses.join('<br />'),
-                    //     '</div>'
-                    // ].join('\n'));
+                    infoWindow.setContent([
+                        '<div style="padding:10px;min-width:200px;line-height:150%;">',
+                        '<h4 style="margin-top:5px;">검색 주소 : ' + address + '</h4><br />',
+                        htmlAddresses.join('<br />'),
+                        '</div>'
+                    ].join('\n'));
 
                     map.setCenter(point);
                     marker.setPosition(point);
-                    // infoWindow.open(map, point);
                 });
             }
 
             function initGeocoder() {
-                window.naver.maps.Event.addListener(map, 'click', function(e) {
-                    searchCoordinateToAddress(e.coord);
-                });
 
                 document.getElementById('address').addEventListener('keydown', function(e) {
                     const keyCode = e.which;
@@ -196,7 +223,6 @@ const Search = () => {
                     searchAddressToCoordinate(document.getElementById('address').value);
                 });
 
-                searchAddressToCoordinate('정자동 178-1');
             }
 
             function makeAddress(item) {
@@ -277,13 +303,33 @@ const Search = () => {
         };
     }, []);
 
+    const [reset, setReset] = useState(false)
+    const [startTimeDiv, setStartTimeDiv] = useState('')
+    const [endTimeDiv, setEndTimeDiv] = useState('')
 
+    const onReset = (e)=>{
+        e.preventDefault()
+        setReset( !reset)
+    }
+
+    const onSearch = (e) =>{
+        e.preventDefault()
+        setStartTimeDiv('')
+        setEndTimeDiv('')
+
+        if(startTime === null){
+            setStartTimeDiv('시간을 입력하세요')
+        }
+        else if(endTime === null){
+            setEndTimeDiv('시간을 입력하세요')
+        }
+    }
 
     return (
         <div>
             <div className="header">
-                <div className={`tab ${activeTab === 'Stays' ? 'active' : ''}`} onClick={() => setActiveTab('Stays')}>
-                    Stays
+                <div className={`tab ${activeTab === 'Rent' ? 'active' : ''}`} onClick={() => setActiveTab('Rent')}>
+                    Rent
                 </div>
                 <div className={`tab ${activeTab === 'Experiences' ? 'active' : ''}`} onClick={() => setActiveTab('Experiences')}>
                     Experiences
@@ -293,7 +339,7 @@ const Search = () => {
                 <h2>오데가노?</h2>
                 <div className="search-bar">
                     <FaSearchLocation className='FaSearchLocation' size='25' />
-                    <input type="text" id="address" placeholder="Search by address" />
+                    <input type="text" id="address" placeholder="위치 찾기" />
                     <button id="submit">Search</button>
                     {/* <input type="text" name="text" value={text} onChange={onInput} placeholder="Search destinations" />
                     {result && (
@@ -316,6 +362,8 @@ const Search = () => {
                             onChange={(date) => setSelectedDate(date)}
                         /> */}
                         <DatePicker
+                            placeholderText="대여 기간"
+                            // showIcon
                             dateFormat="yyyy년 MM월 dd일"
                             minDate={new Date()}
                             selectsRange={true}
@@ -324,21 +372,41 @@ const Search = () => {
                             onChange={(update) => {
                                 setDateRange(update);
                             }}
+                            withPortal
                             // locale={ko}
-                        /><FaRegCalendarAlt />
-                        <span>Choose</span>
-                    </div>
-                </div>
-                <div className="input-group">
-                    <div className="input-box">
-                        <input type="text" placeholder="Type" readOnly />
-                        <span>Choose</span>
+                        />
+                        <br/>
+                        <DatePicker
+                        placeholderText="대여 가능 시간"
+                        selected={startTime}
+                        onChange={(date) => setStartTime(date)}
+                        showTimeSelect
+                        showTimeSelectOnly
+                        timeIntervals={60}
+                        timeCaption="Time"
+                        dateFormat="h:mm aa"
+                        withPortal
+                        />
+                        <div>{startTimeDiv}</div>
+                        <br/>
+                        <DatePicker
+                        placeholderText="반납 가능 시간"
+                        selected={endTime}
+                        onChange={(date) => setEndTime(date)}
+                        showTimeSelect
+                        showTimeSelectOnly
+                        timeIntervals={60}
+                        timeCaption="Time"
+                        dateFormat="h:mm aa"
+                        withPortal
+                        />
+                        <div>{endTimeDiv}</div>
                     </div>
                 </div>
             </div>
             <div className="footer">
-                <div className="clear-button">Clear all</div>
-                <div className="search-button">Search</div>
+                <div className="clear-button" type="reset" onClick={onReset}>Clear all</div>
+                <div className="search-button" type="button" onClick={onSearch}>Search</div>
             </div>
         </div>
     );

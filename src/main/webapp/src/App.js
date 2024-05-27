@@ -14,6 +14,10 @@ import ProfileMain from './components/profile/ProfileMain';
 import ReservedCars from './components/profile/ReservedCars';
 import UsedCarReviews from './components/profile/UsedCarReviews';
 import CheckMyCar from './components/profile/CheckMyCar';
+import RegisterMain from './components/register/RegisterMain';
+import {Provider} from 'react-redux';
+import store from './store/store';
+import Payment_main from './components/payment/Payment_main';
 import MyWishList from "./components/MyWishList";
 import MyProfile from "./components/profile/MyProfile";
 import UseBefore from "./components/profile/UseBefore";
@@ -30,6 +34,7 @@ function App() {
             height: "100vh",
           }}
         >
+          <Provider store={store}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/wishList" element={<WishList />} />
@@ -46,17 +51,20 @@ function App() {
               <Route path="MyProfile" element={<MyProfile/>} />
               <Route path="UseBefore" element={<UseBefore/>} />
             </Route>
+            <Route path='/car/new' element={<RegisterMain />} />
             <Route path="/search" element={<Search />} />
             <Route path="/choice" element={<Choice />} />
-
+            <Route path='/payment' element={<Payment_main />} />
           </Routes>
           <Box sx={{ display: { xs: "flex", md: "none" }, marginTop: "auto" }}>
             <FooterMenu />
           </Box>
+          </Provider>
           {/* <Box sx={displayOnDesktop}>
             <Footer />
           </Box> */}
         </Box>
+
       </BrowserRouter>
     </React.Fragment>
   );

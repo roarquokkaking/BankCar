@@ -26,8 +26,9 @@ header h1 {
   margin-right: 10px;
 }
 
-.text-info h3, .text-info p {
+.text-info h4, .text-info p {
   margin: 0;
+
 
 }
 
@@ -70,7 +71,7 @@ header h1 {
 .register-button {
   background-color: white; /* 배경색 */
   border: none; /* 테두리 없앰 */
-  padding: 30px 10px; /* 상하 10px, 좌우 20px 패딩 */
+  padding: 10px 10px; /* 상하 10px, 좌우 20px 패딩 */
   border-radius: 10px; /* 라운드 속성 */
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
   font-size: 16px; /* 글자 크기 */
@@ -78,7 +79,7 @@ header h1 {
   display: flex; /* Flexbox 사용 */
   align-items: center; /* 아이템들 중앙 정렬 */
   /* justify-content: center; 내용물 가운데 정렬 */
-  margin: 20px 30px; /* 상하 0, 좌우 5px 마진 */
+  margin:20px; /* 상하 0, 좌우 5px 마진 */
   text-align: left;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }
