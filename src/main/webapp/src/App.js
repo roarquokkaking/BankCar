@@ -18,9 +18,17 @@ import RegisterMain from './components/register/RegisterMain';
 import {Provider} from 'react-redux';
 import store from './store/store';
 import Payment_main from './components/payment/Payment_main';
-import MyWishList from "./components/MyWishList";
+
 import MyProfile from "./components/profile/MyProfile";
 import UseBefore from "./components/profile/UseBefore";
+import MyWishList from "./components/MyWishList";
+import BookingDetails from "./components/profile/BookingDetails";
+import MyRating from "./components/profile/MyRating";
+import {Details} from "@mui/icons-material";
+
+function Detail() {
+  return null;
+}
 
 function App() {
   return (
@@ -48,8 +56,11 @@ function App() {
               <Route path="reservedCars" element={<ReservedCars />} />
               <Route path="usedCarReviews" element={<UsedCarReviews />} />
               <Route path="checkMyCar" element={<CheckMyCar/>} />
-              <Route path="MyProfile" element={<MyProfile/>} />
-              <Route path="UseBefore" element={<UseBefore/>} />
+              <Route path="myProfile" element={<MyProfile/>} />
+              <Route path="useBefore" element={<UseBefore/>} />
+              <Route path="myRating" element={<MyRating/>}/>
+              <Route path="bookingDetails" element={<BookingDetails/>} />
+              <Route path="Details" element={<Details/>} />
             </Route>
             <Route path='/car/new' element={<RegisterMain />} />
             <Route path="/search" element={<Search />} />
