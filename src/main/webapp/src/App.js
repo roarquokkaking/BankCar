@@ -26,6 +26,7 @@ import UseBefore from "./components/profile/UseBefore";
 import BookingDetails from "./components/profile/BookingDetails";
 import MyRating from "./components/profile/MyRating";
 import {Details} from "@mui/icons-material";
+import KakaoLogin from './components/login/KakaoLogin';
 
 function Detail() {
   return null;
@@ -50,6 +51,7 @@ function App() {
             <Route path="/myWishList" element={<MyWishList />} />
             <Route path="login"  >
               <Route index element={<Login_main />}/>
+              <Route path="kakao" element={<KakaoLogin/>}/>
               <Route path="/login/Google" element={<GoogleLogin/>}/>
             </Route>
             <Route path="/profile">
