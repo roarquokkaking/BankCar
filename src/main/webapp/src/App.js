@@ -78,7 +78,6 @@ function App() {
             <Footer />
           </Box> */}
         </Box>
-
       </BrowserRouter>
     </React.Fragment>
   );

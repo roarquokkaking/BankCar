@@ -3,47 +3,48 @@ import { MdOutlineDriveFileRenameOutline } from "react-icons/md";
 import { LuSmartphone } from "react-icons/lu";
 import { MdEmail } from "react-icons/md";
 import { FaAddressCard } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
+import { GoArrowLeft } from 'react-icons/go';
+import { useNavigate } from 'react-router-dom';
 
 const MyProfile = () => {
+    const navigate = useNavigate();
     const styles = {
-        container: {
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            marginLeft: '30px',
-            position: 'relative',
-        },
         header: {
-            display: 'flex',
-            alignItems: 'center',
-            marginBottom: '20px',
+            marginTop: '2%',
+            marginBottom: '10px',
+            width: '390.4px',
+            height: '40px',    
         },
         button: {
-            width: 70,
-            height: 70,
+            textAlign: 'center',
+            width: 140,
+            height: 140,
             padding: '10px 15px',
             border: 'none',
-            borderRadius: '5px',
-            backgroundColor: '#007BFF',
-            color: '#fff',
+            color: '#007BFF',
             cursor: 'pointer',
-            position: 'absolute',
+            borderRadius: '50%',
             right: 50,
-            top: 50,
+            marginTop:15,
+        },
+        icon: {
+            fontSize: '90px', 
+            color: 'gray', 
         },
         formGroup: {
-            marginBottom: '35px',
+            marginTop: '12%',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-start',
         },
         label: {
             display: 'block',
-            marginBottom: '5px',
+            marginBottom: '-5px',
             fontWeight: 'bold',
         },
         input: {
-            width: '400px',
+            width: '330px',
             padding: '8px',
             border: 'none',
             borderBottom: '1px solid #ccc',
@@ -53,12 +54,20 @@ const MyProfile = () => {
         },
         title: {
             color: '#333',
-            marginBottom: '20px',
+            font: "apple SD Gothic Neo",
+            fontSize: "20px",
+            marginTop: "4%",
         },
         formContainer: {
-            paddingTop: '30px',
+            paddingTop: '9px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            marginLeft: '30px', 
+            position: 'relative',
         },
         submitButtonContainer: {
+            marginTop: '10px',
             display: 'flex',
             justifyContent: 'center',
             width: '100%',
@@ -67,20 +76,36 @@ const MyProfile = () => {
             left: -10,
         },
         submitButton: {
-            padding: '10px 20px',
-            backgroundColor: '#007BFF',
-            color: 'white',
-            border: 'none',
+            backgroundColor: '#3399d9',
+            color: '#fff',
             borderRadius: '5px',
-            cursor: 'pointer',
+            width: '150px',
+            height: '40px',
+            fontSize: '16px',
+            border: 'none',
+            fontWeight: 'bold',
+        },  
+        buttonDiv: {
+            textAlign: 'center',
         },
     };
-
     return (
-        <div style={styles.container}>
+        <div>
             <div style={styles.header}>
-                <h1 style={styles.title}>프로필</h1>
-                <button style={styles.button}>사진 등록</button>
+              <GoArrowLeft
+                style={{
+                  width: "30px",
+                  height: "30px",
+                  marginTop: "2%",
+                  marginLeft: "3%",
+                }}
+                onClick={() => navigate(-1)}
+              />
+              </div>
+            <h1 style={styles.title}></h1>
+            <div style={styles.buttonDiv}>
+                <button style={styles.button}
+                ><CgProfile style={styles.icon}/></button>
             </div>
             <div style={styles.formContainer}>
                 <div style={styles.formGroup}>
@@ -107,15 +132,16 @@ const MyProfile = () => {
                 <div style={styles.formGroup}>
                     <label style={styles.label}>
                         <FaAddressCard style={{marginRight: '10px'}}/>
-                        운전면허
+                        면허증
                     </label>
                     <input type="text" style={styles.input}/>
                 </div>
-            </div>
-            <div style={styles.submitButtonContainer}>
+                <div style={styles.submitButtonContainer}>
                 <button style={styles.submitButton}>수정하기</button>
             </div>
-        </div>
+        </div>  
+    </div>
+    
     );
 };
 

@@ -44,7 +44,7 @@ const Login_main = () => {
                   marginTop: "4%",
                   marginLeft: "20px",
                 }}
-                navigate={-1}
+                onClick={() => navigate(-1)}
               />
               <h1
                 style={{
