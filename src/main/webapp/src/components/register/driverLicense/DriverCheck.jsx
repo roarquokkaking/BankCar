@@ -1,44 +1,79 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { json, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import styles from './css/DriverCheck.module.css';
+import './css/Footer.css';
+import { useLocation } from 'react-router-dom';
 
 const DriverCheck = () => {
-    const {imageName} = useParams();
-    const [ocrData,setOcrData]=useState(null);
-    const encodedImageName = encodeURIComponent(imageName);
-    const jsonBody = {
-        "images": [
-          {
-            "format": "png",
-            "name": "medium",
-            "data": null,
-            "url": `https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/driverOCR/${encodedImageName}`
-          }
-        ],
-        "lang": "ko",
-        "requestId": "string",
-        "resultType": "string",
-        "timestamp": Date.now(),
-        "version": "V1"
+    const location = useLocation();
+    const jsonBody = location.state?.response.images[0].fields;
+    const imageName = location.state?.imageName;
+    const imageUrl =`https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/driverOCR/${imageName}`;
+    const name = jsonBody.find(item=>item.name==="name").inferText;
+    const number = jsonBody.find(item=>item.name==="number").inferText;
+    const idnumber = jsonBody.find(item=>item.name==="idnumber").inferText;
+    const opendate = jsonBody.find(item=>item.name==="opendate").inferText;
+    // console.log("name="+name+""+imageName);
+    const [info, setInfo] = useState({
+        
+        name: name,
+        number: number,
+        idnumber: idnumber,
+        opendate: opendate,
+      });
+    
+      const handleChange = (e) => {
+        const { name, value } = e.target;
+        setInfo((prevInfo) => ({
+          ...prevInfo,
+          [name]: value,
+        }));
       };
-
-    useEffect(()=>{
-        axios.post("https://a38f9drxdz.apigw.ntruss.com/custom/v1/31239/4ca06b2dc1422e572696ca3ed40326f7697fc20c038f7a227be0ef9f388404e0/infer",jsonBody,{
-            headers: {
-                "Content-Type": "application/json",
-                "X-OCR-SECRET":"Vnl4YWJGTkxNV0NZckdKdUV0VHdoQVdiQkVwSE9ha0U=",
-                
-              },
-        }).then(res=>{
-            setOcrData(res.data);
-        }).catch(error=>{
-            console.error('Error fetching OCR data:', error);
-        })
-    },[imageName])
     return (
-        <div>
-            <span>{imageName}</span>
-        </div>
+        <div className={styles["driver-info-container"]}>
+      <div className={styles["license-card"]} style={{marginTop:'20%'}}>
+        <img src={imageUrl} alt="Driver License" />
+      </div>
+      <h2>등록한 정보를 확인해주세요</h2>
+      {/* <pre>{JSON.stringify(jsonBody, null, 2)}</pre> */}
+      <div className={styles["info-item"]}>
+        <label>이름</label>
+        <input
+          type="text"
+          name="name"
+          value={info.name}
+          onChange={handleChange}
+        />
+      </div>
+      <div className={styles["info-item"]}>
+        <label>면허번호</label>
+        <input
+          type="text"
+          name="number"
+          value={info.number}
+          onChange={handleChange}
+        />
+      </div>
+      <div className={styles["info-item"]}>
+        <label>주민번호</label>
+        <input
+          type="text"
+          name="idnumber"
+          value={info.idnumber}
+          onChange={handleChange}
+        />
+      </div>
+      
+      <div className={styles["info-item"]}>
+        <label>발급일</label>
+        <input
+          type="text"
+          name="opendate"
+          value={info.opendate}
+          onChange={handleChange}
+        />
+      </div>
+      <button className="capture-button" style={{marginLeft:'25%',marginTop:'20%'}} >운전면허증 등록하기</button>
+    </div>
     );
 };
 

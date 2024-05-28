@@ -12,8 +12,8 @@ const ComponentHeader = ({text}) => {
             style={{
               width: "30px",
               height: "30px",
-              marginTop: "4%",
-              marginLeft: "20px",
+              marginTop: "3%",
+              marginLeft: "10px",
             }}
             onClick={() => navigate(-1)}
           />
