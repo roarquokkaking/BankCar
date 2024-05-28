@@ -31,7 +31,7 @@ const MobileFooter = () => {
 
       <Stack sx={{ mt: 2 }}>
         <Paper>
-          <Link href="#"> 2022 AirBnB copyright Inc</Link>
+          <Link href="#"> 2024 BankCar copyright Inc</Link>
         </Paper>
       </Stack>
       <Stack sx={{ mt: 2 }}>
