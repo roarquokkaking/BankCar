@@ -23,7 +23,6 @@ import DriverCheck from './components/register/driverLicense/DriverCheck';
 import MyWishList from "./components/MyWishList";
 import MyProfile from "./components/profile/MyProfile";
 import UseBefore from "./components/profile/UseBefore";
-import MyWishList from "./components/MyWishList";
 import BookingDetails from "./components/profile/BookingDetails";
 import MyRating from "./components/profile/MyRating";
 import {Details} from "@mui/icons-material";
