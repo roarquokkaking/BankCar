@@ -7,14 +7,15 @@ import "./LoginBtn.css";
 
 const Login_main = () => {
   const navigate = useNavigate();
+  //카카오 로그인
+  const REST_API_KEY = "f71b69bb47cf0fff57324d35d3a3ae0f";
+  const REDIRECT_URI = "http://localhost:8080/login/kakao";
+  const SCOPE = 'profile_nickname,profile_image,account_email';
+  const kakaolink = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=${SCOPE}`;
+  
 
-  // const cliend_google_id="601610993000-u4u34s3r1op37juvet6fmr0hee3e3u1d.apps.googleusercontent.com";
-  // const redirect_google_uri="http://localhost:8080/login/google";
-  // const cliend_kakao_id=""
-  // const redirect_kakao_uri="http://localhost:8080/login/kakao";
-  // onClick={()=>window.location.href=`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${cliend_kakao_id}&redirect_uri=${redirect_kakao_uri}`}
-  const cliend_id =
-    "601610993000-u4u34s3r1op37juvet6fmr0hee3e3u1d.apps.googleusercontent.com";
+  //구글 로그인
+  const cliend_id = "601610993000-u4u34s3r1op37juvet6fmr0hee3e3u1d.apps.googleusercontent.com";
   const redirect_uri = "http://localhost:8080/login/google";
 
   const isDesktopOrLaptop = useMediaQuery({
@@ -29,6 +30,9 @@ const Login_main = () => {
 
   const [pressed, setPressed] = useState(null); // 눌린 버튼의 id를 저장하는 상태
   const [selected, setSelected] = useState(1);
+  const loginHandler=() => {
+    window.location.href = kakaolink;
+  };
   return (
     <div>
       {isDesktopOrLaptop && <p>모바일 환경으로 접속 바랍니당 ~~__~~ ^^!!</p>}
@@ -61,7 +65,7 @@ const Login_main = () => {
           <div className="Logo">
             <img src="./Logo.png" alt="로고" />
           </div>
-          <button className="kakao-login-button">
+          <button className="kakao-login-button" onClick={loginHandler}>
             <img src="./kakao.png" alt="카카오 아이콘" />
             카카오로 로그인하기
           </button>

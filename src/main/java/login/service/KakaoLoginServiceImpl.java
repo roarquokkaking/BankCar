@@ -16,43 +16,52 @@ import java.util.Optional;
 
 @Transactional
 @Service
-public class LoginServiceImpl implements LoginService{
+public class KakaoLoginServiceImpl implements KakaoLoginService {
     private final RestTemplate restTemplate = new RestTemplate();
     @Autowired
     LoginDAO loginDAO;
+
     @Override
-    public void googleLogin(String code, HttpSession session) {
-        String accessToken=getAccessToken(code);
+    public void kakaoLogin(String code, HttpSession session) {
+        String accessToken = getAccessToken(code);
         JsonNode userResourceNode = getUserResource(accessToken);
         System.out.println("userResourceNode = " + userResourceNode);
-        String id = userResourceNode.get("id").asText();
-        String email = userResourceNode.get("email").asText();
-        String name = userResourceNode.get("name").asText();
-        String isExistId= isExistId(id);
+
+        if (userResourceNode == null) {
+            throw new RuntimeException("Failed to fetch user information from Kakao API");
+        }
+
+        JsonNode kakaoAccountNode = userResourceNode.get("kakao_account");
+        JsonNode profileNode = kakaoAccountNode != null ? kakaoAccountNode.get("profile") : null;
+
+        String id = userResourceNode.get("id") != null ? userResourceNode.get("id").asText() : null;
+        String name = profileNode != null && profileNode.get("nickname") != null ? profileNode.get("nickname").asText() : null;  // Fetching name as nickname
+        String email = kakaoAccountNode != null && kakaoAccountNode.get("email") != null ? kakaoAccountNode.get("email").asText() : null;
+
+        if (id == null || name == null || email == null) {
+            throw new RuntimeException("Failed to fetch required user information from Kakao API");
+        }
+
+        String isExistId = isExistId(id);
         LoginDTO loginDTO = new LoginDTO();
         loginDTO.setId(id);
         loginDTO.setEmail(email);
         loginDTO.setName(name);
-        if(isExistId.equals("exist")){
-            System.out.println("이미 존재한 회원");
-        }else{
 
+        if (isExistId.equals("exist")) {
+            System.out.println("이미 존재한 회원");
+        } else {
             insertUser(loginDTO);
             System.out.println("회원가입 완료");
         }
-        session.setAttribute("loginDTO",loginDTO);
-    }
 
+        session.setAttribute("loginDTO", loginDTO);
+    }
 
     @Override
     public String isExistId(String id) {
         Optional<LoginDTO> loginDTO = loginDAO.findById(id);
-        if(loginDTO.isPresent()){
-            return "exist";
-        }else{
-            return "non_exist";
-        }
-
+        return loginDTO.isPresent() ? "exist" : "non_exist";
     }
 
     @Override
@@ -61,34 +70,32 @@ public class LoginServiceImpl implements LoginService{
     }
 
     private String getAccessToken(String authorizationCode) {
-        String clientId = "601610993000-u4u34s3r1op37juvet6fmr0hee3e3u1d.apps.googleusercontent.com";
-        String clientSecret = "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";
-        String redirectUri = "http://localhost:8080/login/google" ;
-        String tokenUri = "https://oauth2.googleapis.com/token";
+        String clientId = "f71b69bb47cf0fff57324d35d3a3ae0f";
+        String redirectUri = "http://localhost:8080/login/kakao";
+        String tokenUri = "https://kauth.kakao.com/oauth/token";
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("code", authorizationCode);
         params.add("client_id", clientId);
-        params.add("client_secret", clientSecret);
         params.add("redirect_uri", redirectUri);
         params.add("grant_type", "authorization_code");
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        HttpEntity entity = new HttpEntity(params, headers);
-
+        HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
         ResponseEntity<JsonNode> responseNode = restTemplate.exchange(tokenUri, HttpMethod.POST, entity, JsonNode.class);
         JsonNode accessTokenNode = responseNode.getBody();
-        return accessTokenNode.get("access_token").asText();
+        return accessTokenNode != null ? accessTokenNode.get("access_token").asText() : null;
     }
 
     private JsonNode getUserResource(String accessToken) {
-        String resourceUri = "https://www.googleapis.com/oauth2/v2/userinfo";
+        String resourceUri = "https://kapi.kakao.com/v2/user/me";
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + accessToken);
-        HttpEntity entity = new HttpEntity(headers);
-        return restTemplate.exchange(resourceUri, HttpMethod.GET, entity, JsonNode.class).getBody();
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<JsonNode> responseNode = restTemplate.exchange(resourceUri, HttpMethod.GET, entity, JsonNode.class);
+        return responseNode.getBody();
     }
 }
