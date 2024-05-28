@@ -1,4 +1,5 @@
 import React, { forwardRef, useCallback, useEffect, useRef, useState } from 'react'; 
+import { useNavigate, useParams } from 'react-router-dom';
 import { FaSearchLocation, FaRegCalendarAlt } from 'react-icons/fa';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
@@ -10,8 +11,8 @@ import '../CSS/SearchCSS.css';
 const Search = () => {
     // 달력
     // const [selectedDate, setSelectedDate] = useState(new Date());
-    const [dateRange, setDateRange] = useState([null, null]);
-    const [startDate, endDate] = dateRange;
+    const [startDate,setStartDate] = useState(null);
+    const [endDate,setEndDate] = useState(null);
 
     const [startTime, setStartTime] = useState(null);
     const [endTime, setEndTime] = useState(null);
@@ -24,67 +25,13 @@ const Search = () => {
       
     const [activeTab, setActiveTab] = useState('Stays');
 
-    //맵 검색
-    // const [text, setText] = useState('')
-    // const [result, setResult] = useState(null);
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         if (text.trim() === '') return; 
-
-    //         try {
-    //             const response = await axios.get(`http://localhost:8080/search/detail`, {params: { text }});
-    //             // 여기서 응답 데이터를 처리할 수 있습니다.
-    //             const jsonData = response.data;
-    //             // 필요한 정보 추출
-    //             const items = jsonData.items;
-                
-    //             // 주소와 도로명 주소만을 리스트로 추출
-    //             const addresses = items.map(item => ({
-    //                 address: item.address,
-    //                 roadAddress: item.roadAddress
-    //             }));
-                
-    //             console.log(addresses);
-    //             setResult(addresses);
-    //         } catch (error) {
-    //             console.error('Error fetching the search results:', error);
-    //         }
-    //     };
-
-    //     fetchData();
-    // }, [text]);
-    // const fetchResults = async (query) => {
-    //     try {
-    //         const response = await fetch(`http://localhost:8080/search/detail?text=${encodeURIComponent(query)}`);
-    //         if (!response.ok) {
-    //             throw new Error('Network response was not ok');
-    //         }
-    //         const data = await response.json();
-    //         setResult(data);
-    //     } catch (error) {
-    //         console.error('Error fetching the search results:', error);
-    //     }
-    // };
-
-    // const debouncedFetchResults = useCallback(debounce(fetchResults, 300), []);
-
-    // const onInput = (e) => {
-    //     e.preventDefault();
-    //     const { name, value } = e.target;
-    //     if (name === 'text') {
-    //         setText(value);
-    //     }
-    // };
-
     const mapRef = useRef(null);
     const [addr,setAddr] = useState({
-        jibun:'',
-        road:'',
-        x:'',
-        y:''
+        jibunAddress:"",
+        roadAddress:"",
+        x:"",
+        y:""
     })
-
 
     useEffect(() =>{
         const script = document.createElement('script');
@@ -192,9 +139,17 @@ const Search = () => {
                     if (item.englishAddress) {
                         htmlAddresses.push('[영문명 주소] ' + item.englishAddress);
                     }
-                    
-                    console.log(item)
-
+                    // console.log(item)
+                    setSearchDTO({
+                        ...searchDTO,
+                        x:item.x,
+                        y:item.y,
+                        jibunAddress:item.jibunAddress,
+                        roadAddress:item.roadAddress
+                    });
+                    // updateSearchDTO(item.jibunAddress, item.roadAddress, item.y, item.x);
+                    // onInput(item.x,'x');
+                    // onInput(item.y,'y');
                     infoWindow.setContent([
                         '<div style="padding:10px;min-width:200px;line-height:150%;">',
                         '<h4 style="margin-top:5px;">검색 주소 : ' + address + '</h4><br />',
@@ -303,25 +258,83 @@ const Search = () => {
         };
     }, []);
 
+    const nav = useNavigate()
+
     const [reset, setReset] = useState(false)
+    const [dateRangeDiv, setDateRangeDiv] = useState('')
     const [startTimeDiv, setStartTimeDiv] = useState('')
     const [endTimeDiv, setEndTimeDiv] = useState('')
+
+    const [searchDTO, setSearchDTO] = useState({
+        startDate:'',
+        endDate:'',
+        startTime:'',
+        endTime:'',
+        jibunAddress: "",
+        roadAddress: "",
+        x: "",
+        y: ""
+    })
+
+    const updateSearchDTO = (jibunAddress, roadAddress, y, x) => {
+        onInput(jibunAddress, 'jibunAddress');
+        onInput(roadAddress, 'roadAddress');
+        onInput(y, 'y');
+        onInput(x, 'x');
+    };
 
     const onReset = (e)=>{
         e.preventDefault()
         setReset( !reset)
     }
 
-    const onSearch = (e) =>{
-        e.preventDefault()
+    useEffect(() => {
+        if (startDate) {
+            onInput(startDate, 'startDate');
+        }
+    }, [startDate]);
+
+    useEffect(() => {
+        if (endDate) {
+            onInput(endDate, 'endDate');
+        }
+    }, [endDate]);
+
+
+    const handleSearchClick = () => {
+        console.log(addr)
+    };
+    const onInput = (value, name) => {
+        setSearchDTO({
+          ...searchDTO,
+          [name]:value
+        });
+        console.log(searchDTO);
+    };    
+    const onSearch = () =>{
         setStartTimeDiv('')
         setEndTimeDiv('')
+        setDateRangeDiv('')
 
-        if(startTime === null){
+        if(startDate === null | endDate === null){
+            setDateRangeDiv('기간을 입력하세요')
+        }
+        else if(startTime === null){
             setStartTimeDiv('시간을 입력하세요')
         }
         else if(endTime === null){
             setEndTimeDiv('시간을 입력하세요')
+        }
+        else{
+            // axios.get(`http://localhost:8080/search/searched?jibunAddress=${searchDTO.jibunAddress}+
+            //            startDate=${searchDTO.startDate}+
+            //            endDate=${searchDTO.endDate}+
+            //            startTime=${searchDTO.startTime}+
+            //            endTime=${searchDTO.endTime}+`,)
+            // .then(res => {
+            //     alert('완료')
+            // })
+            // .catch(error => console.log(error))
         }
     }
 
@@ -340,7 +353,7 @@ const Search = () => {
                 <div className="search-bar">
                     <FaSearchLocation className='FaSearchLocation' size='25' />
                     <input type="text" id="address" placeholder="위치 찾기" />
-                    <button id="submit">Search</button>
+                    <button id="submit" onClick={handleSearchClick}>Search</button>
                     {/* <input type="text" name="text" value={text} onChange={onInput} placeholder="Search destinations" />
                     {result && (
                         <div className="results">
@@ -370,35 +383,46 @@ const Search = () => {
                             startDate={startDate}
                             endDate={endDate}
                             onChange={(update) => {
-                                setDateRange(update);
+                                setStartDate(update[0]);
+                                setEndDate(update[1]);
+                                onInput(endDate,'endDate');
+                                onInput(startDate,'startDate');
                             }}
                             withPortal
                             // locale={ko}
                         />
+                        <div>{dateRangeDiv}</div>
                         <br/>
                         <DatePicker
-                        placeholderText="대여 가능 시간"
-                        selected={startTime}
-                        onChange={(date) => setStartTime(date)}
-                        showTimeSelect
-                        showTimeSelectOnly
-                        timeIntervals={60}
-                        timeCaption="Time"
-                        dateFormat="h:mm aa"
-                        withPortal
+                            name="startTime"
+                            placeholderText="대여 가능 시간"
+                            selected={startTime}
+                            onChange={(date) => {
+                                setStartTime(date)
+                                onInput(date,'startTime');
+                            }}
+                            showTimeSelect
+                            showTimeSelectOnly
+                            timeIntervals={60}
+                            timeCaption="Time"
+                            dateFormat="h:mm aa"
+                            withPortal
                         />
                         <div>{startTimeDiv}</div>
                         <br/>
                         <DatePicker
-                        placeholderText="반납 가능 시간"
-                        selected={endTime}
-                        onChange={(date) => setEndTime(date)}
-                        showTimeSelect
-                        showTimeSelectOnly
-                        timeIntervals={60}
-                        timeCaption="Time"
-                        dateFormat="h:mm aa"
-                        withPortal
+                            placeholderText="반납 가능 시간"
+                            selected={endTime}
+                            onChange={(date) => {
+                                setEndTime(date)
+                                onInput(date,'endTime');
+                            }}
+                            showTimeSelect
+                            showTimeSelectOnly
+                            timeIntervals={60}
+                            timeCaption="Time"
+                            dateFormat="h:mm aa"
+                            withPortal
                         />
                         <div>{endTimeDiv}</div>
                     </div>

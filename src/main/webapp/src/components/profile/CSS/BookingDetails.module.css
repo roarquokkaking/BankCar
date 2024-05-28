@@ -1,0 +1,81 @@
+.container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    border-radius: 15px;
+}
+
+.content {
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: -8px;
+    border-radius: 15px;
+}
+
+.imageSlider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 50px;
+    border-radius: 15px;
+}
+
+.thumbnail {
+    margin-top: 0;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.details {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.button {
+    background-color: #405DE6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.textarea {
+    width: 100%;
+    height: 7.25em;
+    border: 1px solid black;
+    resize: none;
+    margin-bottom: 20px;
+    border-radius: 15px;
+}
+
+.buttonDiv {
+    text-align: center;
+}
+
+.IoCalendarNumber {
+    margin-right: 10px;
+}
+
+.images {
+    border-radius: 15px;
+}
+
+.FaCar {
+    margin-right: 10px;
+    color: red;
+}
+
+.FaStar {
+    margin-right: 10px;
+    color: gold;
+}
+.IoCalendarNumber{
+    color: #405DE6;
+}
