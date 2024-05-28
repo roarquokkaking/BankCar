@@ -42,7 +42,7 @@ const CarLocation = () => {
      });
    }, [map]);
   return (
-    <div className={styles.container}>
+    <div className={styles.location}>
       <div>
         주소 검색 :
         <input type="text" />

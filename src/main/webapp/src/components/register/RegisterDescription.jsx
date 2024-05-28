@@ -5,7 +5,7 @@ const RegisterDescription = () => {
   return (
     <>
       <div className={styles.container}>
-        <h1>It's easy to get started on BankCar</h1>
+        <h1>BankCar에 자동차를 등록하기</h1>
         <div className={styles.box}>
           <div className={styles.boxContent}>
             <h4>1. 당신의 자동차를 입력하세요.</h4>
@@ -29,7 +29,7 @@ const RegisterDescription = () => {
             </small>
           </div>
           <img
-            src="../image/car.png"
+            src="../image/car2.png"
             alt="자동차 2"
             className={styles.boxImage}
           />
@@ -43,7 +43,7 @@ const RegisterDescription = () => {
             </small>
           </div>
           <img
-            src="../image/car.png"
+            src="../image/car3.png"
             alt="자동차 3"
             className={styles.boxImage}
           />

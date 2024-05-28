@@ -24,7 +24,7 @@ export default function CarPhoto() {
       return /Mobi|Android/i.test(navigator.userAgent);
     };
     return (
-      <div className={styles.container}>
+      <div className={styles.photo}>
         <h1>파일 업로드</h1>
         <input
           type="file"
