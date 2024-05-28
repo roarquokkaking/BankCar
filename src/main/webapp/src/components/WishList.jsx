@@ -1,4 +1,6 @@
 import React from 'react';
+import {Box} from "@mui/material";
+import FooterMenu from "./FooterMenu";
 
 const styles = {
     container: {
@@ -29,17 +31,22 @@ const styles = {
 
 const Wishlist = () => {
     return (
-        <div style={styles.container}>
-            <h1 style={styles.header}>위시리스트</h1>
-            <div>
-                <span style={styles.mediumText}>위시리스트를 확인하려면</span><br/>
-                <span>로그인후 이용하세요</span><br/>
-                <span style={styles.smallText}>
+        <>
+            <div style={styles.container}>
+                <h1 style={styles.header}>위시리스트</h1>
+                <div>
+                    <span style={styles.mediumText}>위시리스트를 확인하려면</span><br/>
+                    <span>로그인후 이용하세요</span><br/>
+                    <span style={styles.smallText}>
                     로그인한 후 위시리스트를 생성 및 조회, <br/>수정할 수 있습니다.
                 </span>
+                </div>
+                <button style={styles.button}>로그인</button>
             </div>
-            <button style={styles.button}>로그인</button>
-        </div>
+            <Box sx={{display: {xs: "flex", md: "none"}, marginTop: "auto"}}>
+                <FooterMenu/>
+            </Box>
+        </>
     );
 }
 

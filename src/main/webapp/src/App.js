@@ -70,9 +70,6 @@ function App() {
             <Route path="/choice" element={<Choice />} />
             <Route path='/payment' element={<Payment_main />} />
           </Routes>
-          <Box sx={{ display: { xs: "flex", md: "none" }, marginTop: "auto" }}>
-            <FooterMenu />
-          </Box>
           </Provider>
           {/* <Box sx={displayOnDesktop}>
             <Footer />
