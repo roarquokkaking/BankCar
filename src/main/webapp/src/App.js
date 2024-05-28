@@ -65,7 +65,7 @@ function App() {
             </Route>
             <Route path='/car/new' element={<RegisterMain />} />
             <Route path='/car/driver' element={<DriverLicense />} />
-            <Route path='/car/driverCheck/:imageName' element={<DriverCheck />} />
+            <Route path='/car/driverCheck' element={<DriverCheck />} />
             <Route path="/search" element={<Search />} />
             <Route path="/choice" element={<Choice />} />
             <Route path='/payment' element={<Payment_main />} />
@@ -78,7 +78,6 @@ function App() {
             <Footer />
           </Box> */}
         </Box>
-
       </BrowserRouter>
     </React.Fragment>
   );
