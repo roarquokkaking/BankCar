@@ -19,7 +19,7 @@
     width: 20px; /* 이미지의 크기를 적절히 조정하세요 */
     height: 20px;
     margin-right: 20%; /* 텍스트와 이미지 사이의 간격을 설정하세요 */
-}
+  }
 
   .naver-login-button {
     display: flex;
