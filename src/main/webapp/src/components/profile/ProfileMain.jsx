@@ -4,7 +4,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import {Link, useNavigate} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {setId, setEmail, setName} from '../../store/loginSlice';
-import {Box} from "@mui/material";
+import { Box} from "@mui/material";
 import FooterMenu from "../FooterMenu";
 
 // 구분선 컴포넌트
@@ -29,6 +29,7 @@ const ProfileMain = () => {
     }
     return (
         <>
+            <Box sx={{ pb: 7 }}>
             <div className="profile-container">
                 <header>
                     <h1>프로필</h1>
@@ -115,9 +116,10 @@ const ProfileMain = () => {
 
                     }}> 로그아웃
                     </div>
-
                 </ul>
             </div>
+
+            </Box>
             <Box sx={{display: {xs: "flex", md: "none"}, marginTop: "auto"}}>
                 <FooterMenu/>
             </Box>
