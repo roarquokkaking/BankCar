@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 // react icons
 import { FaFilter } from 'react-icons/fa';
-import { locationsTab } from '../data/mock-data';
+import { categoryTab } from "../data/mock-data";
 
 const OptionsTab = () => {
   const [value, setValue] = React.useState(0);
@@ -19,10 +19,10 @@ const OptionsTab = () => {
     <Container maxWidth="xl">
       <Box
         sx={{
-          display: 'flex',
+          display: "flex",
           flexGrow: 1,
           px: { xs: 0, md: 2 },
-          alignItems: 'center',
+          alignItems: "center",
           mt: 2,
           mb: 2,
         }}
@@ -34,24 +34,24 @@ const OptionsTab = () => {
           scrollButtons
           sx={{
             [`& .${tabsClasses.scrollButtons}`]: {
-              '&.Mui-disabled': { opacity: 0.3 },
+              "&.Mui-disabled": { opacity: 0.3 },
             },
           }}
         >
-          {locationsTab.map((tab) => {
+          {categoryTab.map((tab) => {
             return <Tab key={tab.id} icon={tab.icon} label={tab.label} />;
           })}
         </Tabs>
         <Button
           sx={{
-            display: { xs: 'none', md: 'block' },
-            border: '1px solid #ddd',
+            display: { xs: "none", md: "block" },
+            border: "1px solid #ddd",
             minWidth: 90,
-            justifyContent: 'space-between',
+            justifyContent: "space-between",
             borderRadius: 2,
-            textTransform: 'capitalize',
+            textTransform: "capitalize",
             py: 1,
-            color: 'theme.palette.text.primary',
+            color: "theme.palette.text.primary",
           }}
         >
           <FaFilter /> Filters

@@ -7,14 +7,15 @@ import "./LoginBtn.css";
 
 const Login_main = () => {
   const navigate = useNavigate();
+  //카카오 로그인
+  const REST_API_KEY = "f71b69bb47cf0fff57324d35d3a3ae0f";
+  const REDIRECT_URI = "http://localhost:8080/login/kakao";
+  const SCOPE = 'profile_nickname,profile_image,account_email';
+  const kakaolink = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=${SCOPE}`;
 
-  // const cliend_google_id="601610993000-u4u34s3r1op37juvet6fmr0hee3e3u1d.apps.googleusercontent.com";
-  // const redirect_google_uri="http://localhost:8080/login/google";
-  // const cliend_kakao_id=""
-  // const redirect_kakao_uri="http://localhost:8080/login/kakao";
-  // onClick={()=>window.location.href=`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${cliend_kakao_id}&redirect_uri=${redirect_kakao_uri}`}
-  const cliend_id =
-    "601610993000-u4u34s3r1op37juvet6fmr0hee3e3u1d.apps.googleusercontent.com";
+
+  //구글 로그인
+  const cliend_id = "601610993000-u4u34s3r1op37juvet6fmr0hee3e3u1d.apps.googleusercontent.com";
   const redirect_uri = "http://localhost:8080/login/google";
 
   const isDesktopOrLaptop = useMediaQuery({
@@ -29,6 +30,9 @@ const Login_main = () => {
 
   const [pressed, setPressed] = useState(null); // 눌린 버튼의 id를 저장하는 상태
   const [selected, setSelected] = useState(1);
+  const loginHandler=() => {
+    window.location.href = kakaolink;
+  };
   return (
     <div>
       {isDesktopOrLaptop && <p>모바일 환경으로 접속 바랍니당 ~~__~~ ^^!!</p>}
@@ -59,15 +63,15 @@ const Login_main = () => {
             </div>
           </header>
           <div className="Logo">
-            <img src="./Logo.png" alt="로고" />
+            <img src="./image/Logo.png" alt="로고" />
           </div>
           <button className="kakao-login-button">
-            <img src="./kakao.png" alt="카카오 아이콘" />
+            <img src="./image/kakao.png" alt="카카오 아이콘" onClick={loginHandler}/>
             카카오로 로그인하기
           </button>
 
           <button className="naver-login-button" type="button">
-            <img src="./naverBtn.png" alt="네이버 아이콘" />
+            <img src="./image/naverBtn.png" alt="네이버 아이콘" />
             네이버로 로그인하기
           </button>
 
@@ -77,7 +81,7 @@ const Login_main = () => {
               (window.location.href = `https://accounts.google.com/o/oauth2/auth?client_id=${cliend_id}&redirect_uri=${redirect_uri}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`)
             }
           >
-            <img src="./google01.png" alt="구글 아이콘" />
+            <img src="./image/google01.png" alt="구글 아이콘" />
             구글로 로그인하기
           </button>
 
@@ -86,7 +90,7 @@ const Login_main = () => {
             type="button"
             value="깃허브로 로그인하기"
           >
-            <img src="./gitBtn.png" alt="깃허브 아이콘" />
+            <img src="./image/gitBtn.png" alt="깃허브 아이콘" />
             깃허브로 로그인하기
           </button>
         </div>

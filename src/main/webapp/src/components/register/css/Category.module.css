@@ -1,0 +1,44 @@
+/* Category css  */
+.container {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.category {
+  display: flex;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  margin: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.category .section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.category .iconBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 45%; /* 박스의 너비를 조절합니다 */
+  padding: 10px;
+  border: 1px solid #ccc; /* 경계선을 추가합니다 */
+  border-radius: 5px; /* 박스 모서리를 둥글게 합니다 */
+}
+
+.category .icon-box p {
+  text-align: center;
+}

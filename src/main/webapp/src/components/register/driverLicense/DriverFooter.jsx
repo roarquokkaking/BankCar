@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const DriverFooter = () => {
 
     const navigate =useNavigate();
-    const [imageName,setImageName]=useState("");
+    const [ocrData,setOcrData]=useState(null);
     const fileInputRef = useRef(null);
 
   const handleButtonClick = () => {
@@ -22,8 +22,8 @@ const DriverFooter = () => {
           "Content-Type": "multipart/form-data",
         },
       }).then(res=>{
-        setImageName(res.data);
-        navigate(`/car/driverCheck/${res.data}`);
+        setOcrData(res.data);
+        navigate("/car/driverCheck",{state:res.data})
 
       })
 
@@ -32,7 +32,7 @@ const DriverFooter = () => {
     return (
         <div className="Footer">
         <input type="file" accept="image/*" capture="camera" ref={fileInputRef} onChange={imgChange} hidden />
-        <button className="capture-button"  onClick={handleButtonClick} >운전면허증 촬영하기</button>
+        <button className="capture-button"   onClick={handleButtonClick} >운전면허증 촬영하기</button>
       </div>
     );
 };

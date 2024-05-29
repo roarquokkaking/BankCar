@@ -1,0 +1,16 @@
+/* styles.css */
+
+.photo {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.photo input[type="file"] {
+  margin: 20px 0;
+}
+
+.photo img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 20px;
+}

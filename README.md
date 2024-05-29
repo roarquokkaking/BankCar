@@ -17,7 +17,12 @@ npm install react-icons --save
 
 npm install react-router-dom
 
+npm install react-responsive --legacy-peer-deps
+
+npm install react-kakao-maps-sdk
+
+npm i react-number-format
+
 # 아이콘 참고
 https://react-icons.github.io/react-icons/icons/
-npm install react-responsive --legacy-peer-deps
 ```

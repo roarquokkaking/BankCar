@@ -27,6 +27,7 @@ import BookingDetails from "./components/profile/BookingDetails";
 import MyRating from "./components/profile/MyRating";
 import {Details} from "@mui/icons-material";
 import MyProfileUpdate from "./components/profile/MyProfileUpdate";
+import KakaoLogin from './components/login/KakaoLogin';
 
 function Detail() {
   return null;
@@ -51,6 +52,7 @@ function App() {
             <Route path="/myWishList" element={<MyWishList />} />
             <Route path="login"  >
               <Route index element={<Login_main />}/>
+              <Route path="kakao" element={<KakaoLogin/>}/>
               <Route path="/login/Google" element={<GoogleLogin/>}/>
             </Route>
             <Route path="/profile">
@@ -64,19 +66,14 @@ function App() {
               <Route path="myRating" element={<MyRating/>}/>
               <Route path="bookingDetails" element={<BookingDetails/>} />
               <Route path="Details" element={<Details/>} />
-
-
             </Route>
             <Route path='/car/new' element={<RegisterMain />} />
             <Route path='/car/driver' element={<DriverLicense />} />
-            <Route path='/car/driverCheck/:imageName' element={<DriverCheck />} />
+            <Route path='/car/driverCheck' element={<DriverCheck />} />
             <Route path="/search" element={<Search />} />
             <Route path="/choice" element={<Choice />} />
             <Route path='/payment' element={<Payment_main />} />
           </Routes>
-          <Box sx={{ display: { xs: "flex", md: "none" }, marginTop: "auto" }}>
-            <FooterMenu />
-          </Box>
           </Provider>
           {/* <Box sx={displayOnDesktop}>
             <Footer />
