@@ -27,14 +27,20 @@ import BookingDetails from "./components/profile/BookingDetails";
 import MyRating from "./components/profile/MyRating";
 import {Details} from "@mui/icons-material";
 import KakaoLogin from './components/login/KakaoLogin';
+import {TossModal} from './components/payment/tosspayment/TossModal';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {SuccessPayment} from './components/payment/tosspayment/SuccessPayment';
+import {FailPayment} from './components/payment/tosspayment/FailPayment';
 
 function Detail() {
   return null;
 }
-
+const queryClient = new QueryClient();
 function App() {
   return (
+    
     <React.Fragment>
+      <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <CssBaseline />
         <Box
@@ -70,7 +76,11 @@ function App() {
             <Route path='/car/driverCheck' element={<DriverCheck />} />
             <Route path="/search" element={<Search />} />
             <Route path="/choice" element={<Choice />} />
+
             <Route path='/payment' element={<Payment_main />} />
+            <Route path='/TossModal' element={<TossModal/>} />
+            <Route path='/success' element={<SuccessPayment />} />
+            <Route path='/fail' element={<FailPayment />} />
           </Routes>
           </Provider>
           {/* <Box sx={displayOnDesktop}>
@@ -78,7 +88,9 @@ function App() {
           </Box> */}
         </Box>
       </BrowserRouter>
+      </QueryClientProvider>
     </React.Fragment>
+    
   );
 }
 

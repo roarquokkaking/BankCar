@@ -5,16 +5,18 @@ import { IoCard } from "react-icons/io5";
 import './Payment.css'
 const Payment_main = () => {
 const navigate = useNavigate();
-
 const [date, setDate] = useState('05.24~05.25');
 const [price, setPrice] = useState(119000);
 const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+  const navigateToss = useNavigate();
+
+  const handleClick = () => {
+    navigateToss('/TossModal');
+  };
 return (
-<div>
-
-
+        <div>
             <header style={{marginBottom: 20}}>
             <div className="headernav">
             <GoArrowLeft style={{width:'30px', height:'30px',
@@ -26,7 +28,7 @@ return (
                             fontSize:'18px',
                             marginTop:'-8%'
                            }}>주문/결제
-                </h1>
+            </h1>
             </div>
             </header>
 
@@ -44,10 +46,12 @@ return (
                     </button>
 
                     
-                
-                    <button className="toss-payment-button"> 
+                    
+                    <button className="toss-payment-button" onClick={handleClick}> 
                     <img src="./image/tosspay.png" alt="토스페이 아이콘" />
                     </button>
+                    
+                    
 
                     <button className="apple-payment-button"> 
                     <img src="./image/applepay.png" alt="애플페이 아이콘" />
@@ -64,7 +68,7 @@ return (
                     </button>
                     
                 </div>
-                        <div className="pay">
+        <div className="pay">
             <div className="footer">
                 <div className="date-price">
                 <span>{date}</span>
