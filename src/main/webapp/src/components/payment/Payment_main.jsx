@@ -5,16 +5,18 @@ import { IoCard } from "react-icons/io5";
 import './Payment.css'
 const Payment_main = () => {
 const navigate = useNavigate();
-
 const [date, setDate] = useState('05.24~05.25');
 const [price, setPrice] = useState(119000);
 const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+  const navigateToss = useNavigate();
+
+  const handleClick = () => {
+    navigateToss('/TossModal');
+  };
 return (
-<div>
-
-
+        <div>
             <header style={{marginBottom: 20}}>
             <div className="headernav">
             <GoArrowLeft style={{width:'30px', height:'30px',
@@ -26,7 +28,7 @@ return (
                             fontSize:'18px',
                             marginTop:'-8%'
                            }}>주문/결제
-                </h1>
+            </h1>
             </div>
             </header>
 
@@ -34,27 +36,29 @@ return (
             <div className='paytitle'><h4>결제 수단</h4></div>
                     
                     <button className="kakao-payment-button"> 
-                    <img src="./kakaopay.png" alt="카카오페이 아이콘" />
+                    <img src="./image/kakaopay.png" alt="카카오페이 아이콘" />
                     </button>
                     
 
                 
                     <button className="samsungpay-payment-button"> 
-                    <img src="./samsungpay.png" alt="삼성페이 아이콘" />
+                    <img src="./image/samsungpay.png" alt="삼성페이 아이콘" />
                     </button>
 
                     
-                
-                    <button className="toss-payment-button"> 
-                    <img src="./tosspay.png" alt="토스페이 아이콘" />
+                    
+                    <button className="toss-payment-button" onClick={handleClick}> 
+                    <img src="./image/tosspay.png" alt="토스페이 아이콘" />
                     </button>
+                    
+                    
 
                     <button className="apple-payment-button"> 
-                    <img src="./applepay.png" alt="애플페이 아이콘" />
+                    <img src="./image/applepay.png" alt="애플페이 아이콘" />
                     </button>
                     
                     <button className="naver-payment-button"> 
-                    <img src="./naverpay.png" alt="네이버페이 아이콘" />
+                    <img src="./image/naverpay.png" alt="네이버페이 아이콘" />
                     </button>
                     
                     
@@ -64,7 +68,7 @@ return (
                     </button>
                     
                 </div>
-                        <div className="pay">
+        <div className="pay">
             <div className="footer">
                 <div className="date-price">
                 <span>{date}</span>

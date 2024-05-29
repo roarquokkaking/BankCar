@@ -65,8 +65,8 @@ const Login_main = () => {
           <div className="Logo">
             <img src="./image/Logo.png" alt="로고" />
           </div>
-          <button className="kakao-login-button">
-            <img src="./image/kakao.png" alt="카카오 아이콘" onClick={loginHandler}/>
+          <button className="kakao-login-button" onClick={loginHandler}>
+            <img src="./image/kakao.png" alt="카카오 아이콘" />
             카카오로 로그인하기
           </button>
 
