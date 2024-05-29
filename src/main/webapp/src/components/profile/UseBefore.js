@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './CSS/UseBefor.module.css'
 
 const pastReservations = [
     { id: 1, imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTruIoN-ElcQp-PnvoCRdtvK8NpQ3-o7YtxW8tIxLCBvzX3Sf9vgtjup9Nmtg&s', title: '예약 1' , reviewWritten: false, period: '2024-01-01 ~ 2024-01-05'},
@@ -10,66 +11,25 @@ const navigateToReviewPage = (reservationId) => {
     console.log(`Navigating to the review page: Reservation number ${reservationId}`);
 };
 
-// 스타일
-const styles = {
-    reservationItem: {
-        flexDirection: 'column',
-        marginBottom: '10px',
-        marginTop: '20px',
-        marginLeft: '40px',
-        marginRight : '40px',
-        border: '1px solid black',
-        borderRadius: 10
-    },
-
-    reservationDetail: {
-        display: 'flex',
-        alignItems: 'center',
-        marginBottom: '10px',
-        cursor: 'pointer',
-        fontSize: "12px",
-        marginRight: 80,
-        marginLeft: 12,
-        marginTop: 5,
-
-
-
-    },
-    reservationImage: {
-        width: '65px',
-        height: '65px',
-        marginRight: '10px',
-        borderRadius: '15px',
-        marginTop : 20 ,
-        marginBottom: '10px',
-
-    },
-    actionContainer: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginLeft : '10px',
-
-    }
-};
-
 const ReservationItem = ({ reservation }) => (
-    <div style={styles.reservationItem}>
-        <div style={styles.reservationDetail}>
-            <img src={reservation.imageUrl} alt={reservation.title} style={styles.reservationImage}></img>
-            <h2 style={{ margin: 10, marginTop: 0 }}>{reservation.title}</h2>
+    <div className={styles.reservationItem}>
+        <div className={styles.reservationDetail}>
+            <img src={reservation.imageUrl} alt={reservation.title} className={styles.reservationImage}></img>
+            <h2 className={styles.title}>{reservation.title}</h2>
         </div>
-        <div style={styles.actionContainer}>
+        <div className={styles.actionContainer}>
             <span>{reservation.period}</span>
             <button
                 onClick={() => navigateToReviewPage(reservation.id)}
                 style={{
-                    backgroundColor: reservation.reviewWritten ? 'grey' : '#3399d9', // 후기가 작성되지 않았을 때만 빨간색으로 설정
+                    backgroundColor: reservation.reviewWritten ? 'grey' : '#008EDC', // 후기가 작성되지 않았을 때만 빨간색으로 설정
                     color: 'white',
                     padding: '10px',
                     borderRadius: '5px',
                     border: 'none',
                     cursor: 'pointer',
+                    marginRight:'2%',
+                    marginBottom:'2%'
                 }}
             >
                 {reservation.reviewWritten ? '후기 수정' : '후기 쓰기'}
@@ -80,8 +40,20 @@ const ReservationItem = ({ reservation }) => (
 
 const UseBefore = () => (
     <div>
-        <h3 style={{textAlign :'center' , marginBottom : '50px'}}>사용 내역</h3>
-        {pastReservations.map((reservation  ) => (
+        <h3 style={{textAlign: 'center', marginBottom: '50px'}}>사용 내역</h3>
+
+        <div className={styles.selectContainer}>
+            <select className={styles.searchDate}>
+                <option> 기간별 검색</option>
+                <option>============</option>
+                <option>최근 7일</option>
+                <option>최근 15일</option>
+                <option>최근 30일</option>
+            </select>
+        </div>
+
+
+        {pastReservations.map((reservation) => (
             <ReservationItem reservation={reservation} key={reservation.id}/>
         ))}
     </div>

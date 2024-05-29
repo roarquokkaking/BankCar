@@ -1,3 +1,13 @@
+.headernav{
+    width: 30px;
+    height: 30px;
+    marginTop: "4%";
+    marginLeft: "20px";
+}
+.items{
+    margin-top: -65px;
+}
+
 .container {
     padding: 20px;
     font-family: Arial, sans-serif;
@@ -5,11 +15,20 @@
 }
 
 .content {
-    text-align: center;
+    text-align: left;
     margin-bottom: 10px;
-    margin-top: -8px;
+    margin-top: -65px;
+    margin-left: 120px;
     border-radius: 15px;
 }
+.bigSlider {
+    opacity: 1;
+    max-width: 700px;
+    border-radius: 15px;
+    width: 100%;
+    margin-top: -20%;
+}
+
 
 .imageSlider {
     display: flex;
@@ -21,7 +40,7 @@
 }
 
 .thumbnail {
-    margin-top: 0;
+    margin-top: 10px;
     margin-right: 10px;
     cursor: pointer;
     border-radius: 15px;
@@ -30,6 +49,7 @@
 .details {
     text-align: left;
     margin-bottom: 20px;
+    margin-top: 15%;
 }
 
 .button {
@@ -44,6 +64,7 @@
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 15px;
+    margin-top: 10%;
 }
 
 .textarea {
@@ -51,6 +72,7 @@
     height: 7.25em;
     border: 1px solid black;
     resize: none;
+    margin-top: 10%;
     margin-bottom: 20px;
     border-radius: 15px;
 }

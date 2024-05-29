@@ -1,0 +1,108 @@
+.reservationItem {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-left:5%;
+    margin-right:5%;
+    border: 2px solid gray;
+    border-radius: 10px; /* 단위 추가 */
+    background: #E2E2E2;
+}
+.title{
+ margin-top: 0
+}
+.reservationDetail {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-right: 80px;
+    margin-left: 12px;
+    margin-bottom: 10px;
+
+
+}
+
+.reservationImage {
+    width: 65px;
+    height: 65px;
+    border: 1px solid gray;
+    margin-right: 10px;
+    border-radius: 15px;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+.actionContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: -7%;
+    align-items: center;
+    margin-left: 10px;
+}
+button {
+    background-color: #007BFF;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/*option */
+/* UseBefor.module.css */
+.selectContainer {
+    text-align: right;
+    margin: 18px;
+    margin-bottom: 8.4%;
+
+}
+
+.searchDate {
+    font-family: 'Arial', sans-serif;
+    font-size: 20px;
+    border: 1px solid gray;
+    border-radius: 15px;
+    padding: 5px 10px;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    text-align: center;
+}
+
+.searchDate:hover {
+    background-color: #e8e8e8;
+}
+
+.searchDate:focus {
+    border-color: #E2E2E2;
+}
+.searchDate::after {
+    content: '\25BC';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+.searchDate option:nth-child(1) {
+    background-color: #e7e7e7;
+}
+
+.searchDate option:nth-child(2) {
+    background-color: #E2E2E2;
+}
+
+.searchDate option:nth-child(3) {
+    background-color: #e7e7e7;
+}
+
+.searchDate option:nth-child(4) {
+    background-color: #E2E2E2;
+}
+.searchDate option:nth-child(5) {
+    background-color: #e7e7e7;
+}

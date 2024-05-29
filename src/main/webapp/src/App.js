@@ -26,6 +26,7 @@ import UseBefore from "./components/profile/UseBefore";
 import BookingDetails from "./components/profile/BookingDetails";
 import MyRating from "./components/profile/MyRating";
 import {Details} from "@mui/icons-material";
+import MyProfileUpdate from "./components/profile/MyProfileUpdate";
 
 function Detail() {
   return null;
@@ -58,10 +59,13 @@ function App() {
               <Route path="usedCarReviews" element={<UsedCarReviews />} />
               <Route path="checkMyCar" element={<CheckMyCar/>} />
               <Route path="myProfile" element={<MyProfile/>} />
+              <Route path="myProfileUpdate" element={<MyProfileUpdate/>} />
               <Route path="useBefore" element={<UseBefore/>} />
               <Route path="myRating" element={<MyRating/>}/>
               <Route path="bookingDetails" element={<BookingDetails/>} />
               <Route path="Details" element={<Details/>} />
+
+
             </Route>
             <Route path='/car/new' element={<RegisterMain />} />
             <Route path='/car/driver' element={<DriverLicense />} />
