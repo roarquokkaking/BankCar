@@ -2,10 +2,13 @@ package driverLicense.controller;
 
 
 import driverLicense.entity.DriverEntity;
+import driverLicense.service.DriverService;
 import driverLicense.service.NCPObjectStorageService;
 import driverLicense.service.ObjectStorageService;
 import jakarta.servlet.http.HttpSession;
 import login.dto.LoginDTO;
+import login.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -24,6 +27,10 @@ import java.util.Map;
 @RequestMapping(path = "driver")
 public class DriverController {
 
+    @Autowired
+    DriverService driverService;
+    @Autowired
+    LoginService loginService;
     ObjectStorageService objectStorageService = new NCPObjectStorageService();
     private final RestTemplate restTemplate = new RestTemplate();
 
@@ -63,6 +70,13 @@ public class DriverController {
         returnValue.put("response",response.getBody());
         returnValue.put("imageName",imageName);
         return returnValue;
+    }
+
+    @PostMapping(path = "set")
+    public void set(@RequestBody DriverEntity driverEntity ){
+        driverService.write(driverEntity);
+        loginService.driverUpdate(driverEntity.getId(),true);
+        System.out.println("면허등룍완료");
     }
 
 }

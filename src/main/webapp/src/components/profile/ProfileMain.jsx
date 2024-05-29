@@ -2,9 +2,9 @@ import React from 'react';
 import "./ProfilePage.css";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import {Link, useNavigate} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {setId, setEmail, setName} from '../../store/loginSlice';
-import {Box} from "@mui/material";
+import { Box} from "@mui/material";
 import FooterMenu from "../FooterMenu";
 
 // 구분선 컴포넌트
@@ -23,12 +23,13 @@ const Divider = () => {
 const ProfileMain = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    const driverYN = useSelector((state)=>state.Login.driver);
     const onToCarNew = () => {
         navigate('/car/new');
     }
     return (
         <>
+            <Box sx={{ pb: 7 }}>
             <div className="profile-container">
                 <header>
                     <h1>프로필</h1>
@@ -65,15 +66,19 @@ const ProfileMain = () => {
           </span>
                     <img src="./image/car.png" alt="귀여운 자동차"/>
                 </button>
+
                 <button
                     className="register-button"
                     margin={20}
-                    component={Link}
-                    to={"/car/driver"}
+                    onClick={()=>navigate("/car/driver")}
+                    disabled={driverYN}
                 >
           <span>
-            BankCar에 <br/>
-              &emsp;당신의 면허증을 등록해 주세요.
+            {
+                driverYN?<>이미 면허증 등록이 완료되었습니다.</>:<>BankCar에 <br/>
+                &emsp; 당신의 면허증을 등록해 주세요.</> 
+            }
+            
             <small style={{color: "gray"}}>
               <br/>
               <br/> 지금 바로 등록하러가기
@@ -115,9 +120,10 @@ const ProfileMain = () => {
 
                     }}> 로그아웃
                     </div>
-
                 </ul>
             </div>
+
+            </Box>
             <Box sx={{display: {xs: "flex", md: "none"}, marginTop: "auto"}}>
                 <FooterMenu/>
             </Box>
