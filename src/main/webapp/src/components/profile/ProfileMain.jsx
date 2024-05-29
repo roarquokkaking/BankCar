@@ -2,7 +2,7 @@ import React from 'react';
 import "./ProfilePage.css";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import {Link, useNavigate} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {setId, setEmail, setName} from '../../store/loginSlice';
 import { Box} from "@mui/material";
 import FooterMenu from "../FooterMenu";
@@ -23,7 +23,7 @@ const Divider = () => {
 const ProfileMain = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    const driverYN = useSelector((state)=>state.Login.driver);
     const onToCarNew = () => {
         navigate('/car/new');
     }
@@ -66,15 +66,19 @@ const ProfileMain = () => {
           </span>
                     <img src="./image/car.png" alt="귀여운 자동차"/>
                 </button>
+
                 <button
                     className="register-button"
                     margin={20}
-                    component={Link}
-                    to={"/car/driver"}
+                    onClick={()=>navigate("/car/driver")}
+                    disabled={driverYN}
                 >
           <span>
-            BankCar에 <br/>
-              &emsp;당신의 면허증을 등록해 주세요.
+            {
+                driverYN?<>이미 면허증 등록이 완료되었습니다.</>:<>BankCar에 <br/>
+                &emsp; 당신의 면허증을 등록해 주세요.</> 
+            }
+            
             <small style={{color: "gray"}}>
               <br/>
               <br/> 지금 바로 등록하러가기

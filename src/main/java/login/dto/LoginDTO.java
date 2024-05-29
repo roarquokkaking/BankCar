@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 import lombok.*;
 
 @Entity
-@Table(name="usertable")
+@Table(name="user")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -22,6 +22,18 @@ public class LoginDTO {
     private String email;
     @Column(name="name")
     private String name;
+
+    @Column(name="driver")
+    private boolean driver;
+
+    public boolean isDriver() {
+        return driver;
+    }
+
+    public void setDriver(boolean driver) {
+        this.driver = driver;
+    }
+
     public String getId() {
         return id;
     }
