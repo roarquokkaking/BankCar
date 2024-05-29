@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import styles from './css/DriverCheck.module.css';
 import './css/Footer.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
+import FooterMenu from '../../FooterMenu';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { setDriver } from '../../../store/loginSlice';
 
 const DriverCheck = () => {
     const location = useLocation();
@@ -12,9 +17,13 @@ const DriverCheck = () => {
     const number = jsonBody.find(item=>item.name==="number").inferText;
     const idnumber = jsonBody.find(item=>item.name==="idnumber").inferText;
     const opendate = jsonBody.find(item=>item.name==="opendate").inferText;
+    const id= useSelector((state)=>state.Login.id);
+    const dispatch =useDispatch();
+    const navigate = useNavigate();
     // console.log("name="+name+""+imageName);
     const [info, setInfo] = useState({
-        
+        id:id,
+        imageName:imageName,
         name: name,
         number: number,
         idnumber: idnumber,
@@ -28,7 +37,18 @@ const DriverCheck = () => {
           [name]: value,
         }));
       };
+      const onDriverSet=()=>{
+        axios.post("http://localhost:8080/driver/set",info,{
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        }).then(res=>{
+          dispatch(setDriver(true))
+          navigate("/")
+        })
+      };
     return (
+      <>
         <div className={styles["driver-info-container"]}>
       <div className={styles["license-card"]} style={{marginTop:'20%'}}>
         <img src={imageUrl} alt="Driver License" />
@@ -72,8 +92,12 @@ const DriverCheck = () => {
           onChange={handleChange}
         />
       </div>
-      <button className="capture-button" style={{marginLeft:'25%',marginTop:'20%'}} >운전면허증 등록하기</button>
+      <button className="capture-button" style={{marginLeft:'25%',marginTop:'20%'}} onClick={onDriverSet} >운전면허증 등록하기</button>
     </div>
+    <Box sx={{ display: { xs: "flex", md: "none" }, marginTop: "auto" }}>
+    <FooterMenu />
+  </Box>
+  </>
     );
 };
 

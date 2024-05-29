@@ -26,7 +26,8 @@ public class LoginController {
         String id = URLEncoder.encode(loginDTO.getId(), StandardCharsets.UTF_8);
         String email = URLEncoder.encode(loginDTO.getEmail(), StandardCharsets.UTF_8);
         String name = URLEncoder.encode(loginDTO.getName(), StandardCharsets.UTF_8);
-        String url="http://localhost:3000/login/Google?id="+id+"&email="+email+"&name="+name;
+        boolean driver = loginDTO.isDriver();
+        String url="http://localhost:3000/login/Google?id="+id+"&email="+email+"&name="+name+"&driver="+driver;
         return new RedirectView(url);
     }
 

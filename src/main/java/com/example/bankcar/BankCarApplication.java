@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"login.*","driverLicense.*"})
-@EntityScan(basePackages = {"login.dto"})
-@EnableJpaRepositories(basePackages = {"login.dao"})
+@EntityScan(basePackages = {"login.dto","driverLicense.entity"})
+@EnableJpaRepositories(basePackages = {"login.dao","driverLicense.repo"})
 public class BankCarApplication {
 
     public static void main(String[] args) {
