@@ -1,0 +1,31 @@
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    gap: 10px; /* 요소 사이의 간격 */
+    padding: 20px;
+    background-color: #f7f9fc;
+}
+
+.content .roundedInput {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc; /* 경계선 */
+    border-radius: 10px; /* 둥근 모서리 */
+    resize: vertical; /* 세로 크기 조절 가능 */
+    font-size: 16px; /* 글자 크기 */
+}
+
+.content h3 {
+    margin: 0;
+    padding: 10px 0;
+    color: #333;
+    font-size: 20px;
+}
+
+.content .large {
+    height: 150px; /* 높이를 늘려서 설명 부분의 크기를 조정합니다. */
+}

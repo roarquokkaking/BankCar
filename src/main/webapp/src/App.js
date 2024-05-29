@@ -83,9 +83,6 @@ function App() {
             <Route path='/fail' element={<FailPayment />} />
           </Routes>
           </Provider>
-          {/* <Box sx={displayOnDesktop}>
-            <Footer />
-          </Box> */}
         </Box>
       </BrowserRouter>
       </QueryClientProvider>
