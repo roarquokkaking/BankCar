@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "./css/Register.module.css";
+import RegisterHeader from "./RegisterHeader";
 
 const RegisterDescription = () => {
   return (
     <>
+      <RegisterHeader text={"등록 순서"}/>
       <div className={styles.container}>
         <h1>BankCar에 자동차를 등록하기</h1>
         <div className={styles.box}>

@@ -9,6 +9,7 @@ import CarPhoto from "./CarPhoto";
 import RegisterDescription from "./RegisterDescription";
 import Category from "./Category";
 import PriceSetting from "./PriceSetting";
+import RegisterContent from "./RegisterContent";
 
 const RegisterMain = () => {
   const [seq, setSeq] = useState(1);
@@ -20,6 +21,8 @@ const RegisterMain = () => {
     { id: 4, component: <CarLocation /> },
     { id: 5, component: <CarPhoto /> },
     { id: 6, component: <PriceSetting /> },
+    { id: 7, component: <RegisterContent /> },
+    { id: 8, component: <RegisterContent /> },
   ];
 
   const theme = useTheme();
@@ -40,12 +43,12 @@ const RegisterMain = () => {
       {seqData.map((item) => (item.id === seq ? item.component : null))}
       <MobileStepper
         variant="progress"
-        steps={6}
+        steps={7}
         position="static"
         activeStep={activeStep}
         sx={{ maxWidth: 400, flexGrow: 1 }}
         nextButton={
-          <Button size="small" onClick={handleNext} disabled={activeStep === 5}>
+          <Button size="small" onClick={handleNext} disabled={activeStep === 6}>
             Next
             {theme.direction === "rtl" ? (
               <KeyboardArrowLeft />

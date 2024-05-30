@@ -22,6 +22,7 @@ import DriverLicense from './components/register/driverLicense/DriverLicense';
 import DriverCheck from './components/register/driverLicense/DriverCheck';
 import MyWishList from "./components/MyWishList";
 import MyProfile from "./components/profile/MyProfile";
+import UseBefore from "./components/profile/UseBefore";
 import BookingDetails from "./components/profile/BookingDetails";
 import MyRating from "./components/profile/MyRating";
 import {Details} from "@mui/icons-material";
@@ -29,11 +30,19 @@ import MyProfileUpdate from "./components/profile/MyProfileUpdate";
 import KakaoLogin from './components/login/KakaoLogin';
 import UseAfter from "./components/profile/UseAfter";
 import UseBefore from "./components/profile/UseBefore";
+import {TossModal} from './components/payment/tosspayment/TossModal';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {SuccessPayment} from './components/payment/tosspayment/SuccessPayment';
+import {FailPayment} from './components/payment/tosspayment/FailPayment';
 
 
+
+const queryClient = new QueryClient();
 function App() {
   return (
+
     <React.Fragment>
+      <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <CssBaseline />
         <Box
@@ -54,7 +63,6 @@ function App() {
               <Route path="/login/Google" element={<GoogleLogin/>}/>
             </Route>
             <Route path="/profile">
-
               <Route index element={<ProfileMain />} />
               <Route path="reservedCars" element={<ReservedCars />} />
               <Route path="usedCarReviews" element={<UsedCarReviews />} />
@@ -66,14 +74,17 @@ function App() {
               <Route path="myRating" element={<MyRating/>}/>
               <Route path="bookingDetails" element={<BookingDetails/>} />
               <Route path="Details" element={<Details/>} />
-
             </Route>
             <Route path='/car/new' element={<RegisterMain />} />
             <Route path='/car/driver' element={<DriverLicense />} />
             <Route path='/car/driverCheck' element={<DriverCheck />} />
             <Route path="/search" element={<Search />} />
             <Route path="/choice" element={<Choice />} />
+
             <Route path='/payment' element={<Payment_main />} />
+            <Route path='/TossModal' element={<TossModal/>} />
+            <Route path='/success' element={<SuccessPayment />} />
+            <Route path='/fail' element={<FailPayment />} />
           </Routes>
           </Provider>
           {/* <Box sx={displayOnDesktop}>
@@ -81,7 +92,9 @@ function App() {
           </Box> */}
         </Box>
       </BrowserRouter>
+      </QueryClientProvider>
     </React.Fragment>
+
   );
 }
 

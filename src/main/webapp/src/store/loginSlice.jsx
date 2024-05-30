@@ -22,7 +22,6 @@ export const loginSlice = createSlice({
         setDriver:(state,action)=>{
             state.driver= action.payload;
         }
-
     }
 });
 

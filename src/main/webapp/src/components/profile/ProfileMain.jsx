@@ -24,6 +24,7 @@ const ProfileMain = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const driverYN = useSelector((state)=>state.Login.driver);
+    const newDriverYN = driverYN==="true";
     const onToCarNew = () => {
         navigate('/car/new');
     }
@@ -71,11 +72,11 @@ const ProfileMain = () => {
                     className="register-button"
                     margin={20}
                     onClick={()=>navigate("/car/driver")}
-                    disabled={driverYN}
+                    disabled={newDriverYN}
                 >
           <span>
             {
-                driverYN?<>이미 면허증 등록이 완료되었습니다.</>:<>BankCar에 <br/>
+                newDriverYN?<>이미 면허증 등록이 완료되었습니다.</>:<>BankCar에 <br/>
                 &emsp; 당신의 면허증을 등록해 주세요.</> 
             }
             

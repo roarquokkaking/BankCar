@@ -44,7 +44,7 @@ const DriverCheck = () => {
             'Content-Type': 'application/json'
           }
         }).then(res=>{
-          dispatch(setDriver(true))
+          dispatch(setDriver("true"))
           navigate("/")
         })
       };
