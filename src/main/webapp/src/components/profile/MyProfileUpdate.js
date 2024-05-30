@@ -8,110 +8,195 @@ import { GoArrowLeft } from 'react-icons/go';
 import {Link, useNavigate} from 'react-router-dom';
 import styles from './CSS/MyProfile.module.css';
 import axios from "axios";
+import Box from "@mui/material/Box";
+import FooterMenu from "../FooterMenu";
 
 const MyProfileUpdate = () => {
     const navigate = useNavigate(); // 페이지 네비게이션 함수
     const [profileImage, setProfileImage] = useState(null); // 프로필 이미지 상태
-    const fileInputRef =useRef(null)
+    const fileInputRef = useRef(null);
+
+    const [profileUpdate, setProfileUpdate] = useState({
+        name: '',
+        phone: '',
+        email: '',
+        driver: '',
+    });
+
+    useEffect(() => {
+        // 프로필 데이터를 가져오는 함수
+        const fetchProfile = async () => {
+            try {
+                const uri = "http://localhost:8080/profile/myprofileUpdate?user_id=${user_id}"
+                const response = await axios.get(uri);
+                const profileData = response.data;
+                setProfileUpdate({
+                    name: profileData.name,
+                    phone: profileData.phone,
+                    email: profileData.email,
+                    driver: profileData.driver,
+                });
+                setProfileImage(profileData.profileImage); // 프로필 이미지 설정
+            } catch (error) {
+                console.error("프로필 데이터를 가져오는 중 오류 발생:", error);
+            }
+        };
+        fetchProfile();
+    }, []);
 
     const handleIconClick = () => {
         fileInputRef.current.click(); // file input 클릭 이벤트 발생
     };
 
-    const [UploadFile , setUploadFile] = useState(null);
-
     const ImageChange = (event) => {
         const file = event.target.files[0];
         if (file) {
-            setUploadFile(file)
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setProfileImage(reader.result);
-            };
-            reader.readAsDataURL(file);
+            // 네이버 클라우드에 이미지
+            uploadImageToNaverCloud(file).then(imageUrl => {
+                setProfileImage(imageUrl);
+            });
+        }
+    };
+
+    const uploadImageToNaverCloud = async (file) => {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try {
+            const response = await axios.post('/api/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            return response.data.imageUrl;
+        } catch (error) {
+            console.error("이미지 업로드 중 오류 발생:", error);
+            return null;
+        }
+    };
+
+    const inputhandle = (e) => {
+        const { name, value } = e.target;
+        setProfileUpdate(prevState => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
+
+    const handleSaveClick = async () => {
+        try {
+            await axios.put('/api/profile', {
+                ...profileUpdate,
+                profileImage,
+            });
+            alert('프로필이 성공적으로 저장되었습니다.');
+            navigate('/profile'); // 프로필 페이지로 이동
+        } catch (error) {
+            console.error("프로필 저장 중 오류 발생:", error);
         }
     };
 
     return (
         <div>
             {/*뒤로가기 버튼 */}
-            <div className={styles.header}>
-                <GoArrowLeft
-                    className={styles.backArrow}
-                    onClick={() => navigate(-1)}
+            <Box>
+                <div className={styles.header}>
+                    <GoArrowLeft
+                        className={styles.backArrow}
+                        onClick={() => navigate(-1)}
+                    />
+                </div>
+                {/*제목 */}
+                <h1 className={styles.title}>프로필 수정</h1>
+
+                <div className={styles.buttonDiv}>
+                    <button className={styles.button} onClick={handleIconClick}>
+                        {profileImage ? (
+                            <img src={profileImage} alt="Profile" className={styles.profileImage}/>
+                        ) : (
+                            <CgProfile className={styles.icon}/>
+                        )}
+                    </button>
+                </div>
+
+                {/* 이미지 업로드 입력 필드 */}
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={ImageChange}
+                    className={styles.imageInput}
+                    ref={fileInputRef}
                 />
-            </div>
-            {/*제목 */}
-            <h1 className={styles.title}></h1>
 
-            <div className={styles.buttonDiv}>
-                <button className={styles.button} onClick={handleIconClick}>
-                    {profileImage ? (
-                        <img src={profileImage} alt="Profile" className={styles.profileImage}/>
-                    ) : (
-                        <CgProfile className={styles.icon}/>
-                    )}
-                </button>
+                <div className={styles.formContainer}>
+                    {/* 이름 입력 폼 그룹 */}
+                    <div className={styles.formGroup}>
+                        <label className={styles.label}>
+                            <MdOutlineDriveFileRenameOutline className={styles.iconLabel}/>
+                            이름
+                        </label>
+                        <input type="text"
+                               name="name"
+                               className={styles.input}
+                               value={profileUpdate.name}
+                               onChange={inputhandle}
+                        />
+                    </div>
 
-            </div>
+                    {/* 핸드폰 번호 입력 폼 그룹 */}
+                    <div className={styles.formGroup}>
+                        <label className={styles.label}>
+                            <LuSmartphone className={styles.iconLabel}/>
+                            핸드폰 번호
+                        </label>
+                        <input type="text"
+                               name="phone"
+                               className={styles.input}
+                               value={profileUpdate.phone}
+                               onChange={inputhandle}
+                        />
+                    </div>
 
-            {/* 이미지 업로드 입력 필드 */}
-            <input
-                type="file"
-                accept="image/*"
-                onChange={ImageChange}
-                className={styles.imageInput}
-                ref={fileInputRef}
-            />
+                    {/* 이메일 입력 폼 그룹 */}
+                    <div className={styles.formGroup}>
+                        <label className={styles.label}>
+                            <MdEmail className={styles.iconLabel}/>
+                            이메일
+                        </label>
+                        <input type="text"
+                               name="email"
+                               className={styles.input}
+                               value={profileUpdate.email}
+                               onChange={inputhandle}
+                        />
+                    </div>
 
+                    {/* 면허증 입력 폼 그룹 */}
+                    <div className={styles.formGroup}>
+                        <label className={styles.label}>
+                            <FaAddressCard className={styles.iconLabel}/>
+                            면허증
+                        </label>
+                        <input type="text"
+                               name="driver"
+                               className={styles.input}
+                               value={profileUpdate.driver}
+                               onChange={inputhandle}
+                        />
+                    </div>
 
-            <div className={styles.formContainer}>
-                {/* 이름 입력 폼 그룹 */}
-                <div className={styles.formGroup}>
-                    <label className={styles.label}>
-                        <MdOutlineDriveFileRenameOutline className={styles.iconLabel}/>
-                        이름
-                    </label>
-                    <input type="text" className={styles.input}/>
+                    {/* 수정하기 버튼 */}
+                    <div className={styles.submitButtonContainer}>
+                        <button className={styles.submitButton}
+                                onClick={handleSaveClick}>
+                            저장 하기
+                        </button>
+                    </div>
                 </div>
-
-                {/* 핸드폰 번호 입력 폼 그룹 */}
-                <div className={styles.formGroup}>
-                    <label className={styles.label}>
-                        <LuSmartphone className={styles.iconLabel}/>
-                        핸드폰 번호
-                    </label>
-                    <input type="text" className={styles.input}/>
-                </div>
-
-                {/* 이메일 입력 폼 그룹 */}
-                <div className={styles.formGroup}>
-                    <label className={styles.label}>
-                        <MdEmail className={styles.iconLabel}/>
-                        이메일
-                    </label>
-                    <input type="text" className={styles.input}/>
-                </div>
-
-                {/* 면허증 입력 폼 그룹 */}
-                <div className={styles.formGroup}>
-                    <label className={styles.label}>
-                        <FaAddressCard className={styles.iconLabel}/>
-                        면허증
-                    </label>
-                    <input type="text" className={styles.input}/>
-                </div>
-
-                {/* 수정하기 버튼 */}
-                <div className={styles.submitButtonContainer} >
-                    {/*<Link to="/Profile/MyProfileUpdate">*/}
-                        <button className={styles.submitButton}>저장 하기</button>
-                    {/*</Link>*/}
-                </div>
-            </div>
+            </Box>
+            <FooterMenu/>
         </div>
     );
 };
 
 export default MyProfileUpdate;
-
