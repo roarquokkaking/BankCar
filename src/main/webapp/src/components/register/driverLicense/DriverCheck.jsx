@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './css/DriverCheck.module.css';
 import './css/Footer.css';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { json, useLocation, useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 import FooterMenu from '../../FooterMenu';
 import { useDispatch, useSelector } from 'react-redux';
@@ -44,7 +44,11 @@ const DriverCheck = () => {
           }
         }).then(res=>{
           dispatch(setDriver("true"))
-          navigate("/")
+          alert("운전면허증 등록완료.")
+          navigate("/profile")
+        }).catch(err=>{
+          alert("운전면허증 등록 실패. 종류 또는 유형이 올바르지 않습니다.");
+          navigate("/profile")
         })
       };
     return (
