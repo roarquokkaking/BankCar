@@ -28,9 +28,11 @@ import MyRating from "./components/profile/MyRating";
 import {Details} from "@mui/icons-material";
 import KakaoLogin from './components/login/KakaoLogin';
 import {TossModal} from './components/payment/tosspayment/TossModal';
+import {ChatRoom} from './components/chat/ChatRoom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {SuccessPayment} from './components/payment/tosspayment/SuccessPayment';
 import {FailPayment} from './components/payment/tosspayment/FailPayment';
+
 
 function Detail() {
   return null;
@@ -81,6 +83,8 @@ function App() {
             <Route path='/TossModal' element={<TossModal/>} />
             <Route path='/success' element={<SuccessPayment />} />
             <Route path='/fail' element={<FailPayment />} />
+            <Route path='/chatroom' element={<ChatRoom />} />
+            
           </Routes>
           </Provider>
         </Box>

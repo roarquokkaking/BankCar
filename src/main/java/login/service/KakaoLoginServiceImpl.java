@@ -26,6 +26,7 @@ public class KakaoLoginServiceImpl implements KakaoLoginService {
         String accessToken = getAccessToken(code);
         JsonNode userResourceNode = getUserResource(accessToken);
         System.out.println("userResourceNode = " + userResourceNode);
+        System.out.println("kakao login");
 
         if (userResourceNode == null) {
             throw new RuntimeException("Failed to fetch user information from Kakao API");
