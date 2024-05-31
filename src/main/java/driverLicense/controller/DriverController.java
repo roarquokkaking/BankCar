@@ -10,10 +10,7 @@ import login.dto.LoginDTO;
 import login.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,7 +32,7 @@ public class DriverController {
     private final RestTemplate restTemplate = new RestTemplate();
 
     @PostMapping(path = "upload")
-    public Map<String, Object> upload(@RequestPart("img") MultipartFile img, HttpSession session){
+    public ResponseEntity<Map<String, Object>> upload(@RequestPart("img") MultipartFile img, HttpSession session){
         LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginDTO");
 
         String imageName = objectStorageService.uploadFile( "driverOCR/", img);
@@ -65,11 +62,18 @@ public class DriverController {
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(jsonBody, headers);
 
         ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.POST, entity, Map.class);
-
+        List<Map<String, Object>> images = (List<Map<String, Object>>) response.getBody().get("images");
         Map<String, Object> returnValue = new HashMap<>();
-        returnValue.put("response",response.getBody());
-        returnValue.put("imageName",imageName);
-        return returnValue;
+        if(images.get(0).get("inferResult").equals("SUCCESS")){
+
+            returnValue.put("response",response.getBody());
+            returnValue.put("imageName",imageName);
+            return new ResponseEntity<>(returnValue, HttpStatus.OK);
+        }else{
+            returnValue.put("error","image OCR error");
+            return new ResponseEntity<>(returnValue, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     @PostMapping(path = "set")
