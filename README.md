@@ -27,6 +27,8 @@ npm i react-number-format
 npm install @tosspayments/payment-widget-sdk
 #2. 간편결제 sdk 모듈  yarn
 yarn add @tosspayments/payment-widget-sdk
+#1. 채팅관련 STOMP 모듈
+npm install @stomp/stompjs 
 
 # 아이콘 참고
 https://react-icons.github.io/react-icons/icons/

@@ -27,6 +27,7 @@ public class LoginServiceImpl implements LoginService{
         String accessToken=getAccessToken(code);
         JsonNode userResourceNode = getUserResource(accessToken);
         System.out.println("userResourceNode = " + userResourceNode);
+        System.out.println("google login");
         String id = userResourceNode.get("id").asText();
         String email = userResourceNode.get("email").asText();
         String name = userResourceNode.get("name").asText();
