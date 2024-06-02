@@ -3,7 +3,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { grey, pink } from '@mui/material/colors';
 
 const theme = createTheme({
-    tyography: {
+    typography: {
         allVariants:{
             fontFamily: 'Raleway',
             textTransform: 'none',
@@ -47,7 +47,7 @@ const theme = createTheme({
                 sx:{
                     color: theme => theme.palette.primary.main
                 },
-                nuderline:'none'
+                underline:'none'
             }
         },
         MuiButton: {
@@ -55,7 +55,8 @@ const theme = createTheme({
                 size: 'small',
                 p: 0,
                 disableRipple: true
-            },variant: 'text',
+            },
+            variant: 'text',
         },
         MuiTab:{
             defaultProps: {
@@ -63,9 +64,12 @@ const theme = createTheme({
             },
         },
     },
+    shape: {
+        borderRadius: 4, // 예를 들어, 모든 모서리의 둥글기를 4px로 설정
+    },
 });
-const AppThemeProvider = (prop) => {
-  return <ThemeProvider theme={theme}> {prop.children}</ThemeProvider>
+const AppThemeProvider = (props) => {
+  return <ThemeProvider theme={theme}> {props.children}</ThemeProvider>
     
   
 };

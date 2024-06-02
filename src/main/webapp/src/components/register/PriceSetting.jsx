@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import styles from "./css/PriceSetting.module.css";
 import ComponentHeader from "../profile/ComponentsHeader";
 import RegisterHeader from "./RegisterHeader";
+import {RegisterContext} from "./RegisterContext";
 
 const PriceSetting = () => {
-  const [price, setPrice] = useState("");
+  const {data, onAddData} = useContext(RegisterContext);
+  const [price, setPrice] = useState(data.price);
 
   // 가격 포맷 함수
   const formatPrice = (value) => {
@@ -12,9 +14,10 @@ const PriceSetting = () => {
   };
 
   const handleChange = (e) => {
-    setPrice(formatPrice(e.target.value.replace(/,/g, '')));
-
+    setPrice(e.target.value.replace(/,/g, ''));   // 숫자로 변경 후 price 변수에 저장
+    onAddData("price", e.target.value.replace(/,/g, ''))
   };
+
   return (
     <>
       <RegisterHeader text={"자동차 대여 금액"} />
@@ -28,10 +31,10 @@ const PriceSetting = () => {
               className={styles.priceInput}
               id="price"
               name="price"
-              value={price}
+              value={formatPrice(price)}
               onChange={handleChange}
           /></div>
-          <p>대여 시간: 하루 (24시간): {formatPrice(price.replace(/,/g, '') * 24)} 원</p>
+          <p>대여 시간: 하루 (24시간): {formatPrice(price * 24)} 원</p>
         </div>
       </div>
     </>

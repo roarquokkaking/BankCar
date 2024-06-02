@@ -24,6 +24,9 @@
     height: 50px;
     cursor: pointer;
 }
+.photo Alert{
+    width: calc(100% - 20px);
+}
 
 
 .photo input[type="file"] {

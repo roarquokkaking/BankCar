@@ -11,7 +11,12 @@ npm install react-swipeable-views-react-18-fix
 
 npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
 
-yarn add react-swipeable-views    
+npm install @mui/joy
+npm install @fontsource/inter
+
+yarn add react-swipeable-views   
+
+npm i react-swipeable-views-utils
 
 npm install react-icons --save
 
