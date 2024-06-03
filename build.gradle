@@ -38,6 +38,9 @@ dependencies {
 //    implementation 'com.auth0:java-jwt:4.2.1'
 //    implementation 'jakarta.platform:jakarta.jakartaee-api:8.0.0'
 
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
+
+
     testImplementation 'org.springframework.kafka:spring-kafka-test' //채팅 관련 kafka
     implementation 'org.springframework.kafka:spring-kafka' //채팅 관련 kafka
 }
