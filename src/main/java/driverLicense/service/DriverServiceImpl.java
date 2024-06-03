@@ -16,7 +16,6 @@ public class DriverServiceImpl implements DriverService{
     @Override
     public void write(DriverEntity driverEntity) {
         driverRepo.save(driverEntity);
-
     }
 
 

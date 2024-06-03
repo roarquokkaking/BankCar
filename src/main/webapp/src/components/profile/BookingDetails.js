@@ -11,23 +11,28 @@ import FooterMenu from "../FooterMenu";
 const BookingDetails = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [memo, setMemo] = useState('');
-    const [details, setDetails] = useState({
+    const [images, setImages] = useState([]);//3개여서 배열
+
+    const [detailsDTO, setDetailsDTO] = useState({
         car_model: '',
         rating: 0,
         start_date: '',
         end_date: '',
-        usagePeriod: ''
+        usagePeriod: '',
     });
-    const [images, setImages] = useState([]);
+
+
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const detailsResponse = await axios.get('http://localhost:8080/api/details');
-                const imagesResponse = await axios.get('https://navercloudapi.com/images');
-                setDetails({
+                const imagesResponse = await axios.get('https://navercloudapi.com/images'); // 실제 작동하는 URL로 교체 필요
+                console.log(detailsResponse)
+                console.log(imagesResponse)
+                setDetailsDTO({
                     ...detailsResponse.data,
-                    usagePeriod: `${detailsResponse.data.startDate} - ${detailsResponse.data.endDate}`
+                    usagePeriod: `${detailsResponse.data.start_date} - ${detailsResponse.data.end_date}` // start_date와 end_date로 수정
                 });
                 setImages(imagesResponse.data.images);
             } catch (error) {
@@ -35,12 +40,14 @@ const BookingDetails = () => {
             }
         };
         fetchData();
+    }, []);
+
+    useEffect(() => {
         const interval = setInterval(() => {
             setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
         }, 5000);
-
         return () => clearInterval(interval);
-    }, [images.length]);
+    }, [images.length]); // 여기서 images.length 의존성을 유지
 
     const navigate = useNavigate();
 
@@ -72,21 +79,25 @@ const BookingDetails = () => {
                 </header>
                 <div>
                     <div className={styles.imageSlider}>
-                        <img src={images[currentImageIndex]?.url} alt={images[currentImageIndex]?.alt}
+                        <img src={images[currentImageIndex]?.url}
+                             alt={images[currentImageIndex]?.alt}
                              className={styles.bigSlider} />
                     </div>
                     <div className={styles.imageSlider}>
                         {images.map((image, index) => (
                             <img key={index} src={image.url} alt={image.alt}
                                  className={styles.thumbnail}
-                                 style={{ width: '100px', opacity: currentImageIndex === index ? 1 : 0.5 }} />
+                                 style={{ width: '100px'
+                                     , opacity: currentImageIndex === index ? 1 : 0.5 }} />
                         ))}
                     </div>
                     <div className={styles.details}>
-                        <p><FaCar className={styles.FaCar} /> 차종: {details.carModel}</p>
-                        <p><FaStar className={styles.FaStar} /> 평점: {details.rating}</p>
-                        <p><IoCalendarNumber className={styles.IoCalendarNumber} /> 이용기간: {details.usagePeriod}</p>
+                        <p><FaCar className={styles.FaCar} /> 차종: {detailsDTO.car_model}</p>
+                        <p><FaStar className={styles.FaStar} /> 평점: {detailsDTO.rating}</p>
+                        <p><IoCalendarNumber className={styles.IoCalendarNumber} /> 이용기간: {detailsDTO.usagePeriod}</p>
                     </div>
+
+
                     <div className={styles.buttonDiv}>
                         <textarea className={styles.textarea} value={memo} onChange={(e) => setMemo(e.target.value)} />
                         <button className={styles.button} onClick={updateMemo}>수정하기</button>

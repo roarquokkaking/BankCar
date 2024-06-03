@@ -29,10 +29,12 @@ public class DriverController {
     @Autowired
     LoginService loginService;
     ObjectStorageService objectStorageService = new NCPObjectStorageService();
+
     private final RestTemplate restTemplate = new RestTemplate();
 
     @PostMapping(path = "upload")
-    public ResponseEntity<Map<String, Object>> upload(@RequestPart("img") MultipartFile img, HttpSession session){
+    public ResponseEntity<Map<String, Object>> upload(@RequestPart("img") MultipartFile img,
+                                                      HttpSession session){
         LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginDTO");
 
         String imageName = objectStorageService.uploadFile( "driverOCR/", img);

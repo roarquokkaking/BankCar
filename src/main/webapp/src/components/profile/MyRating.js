@@ -7,29 +7,41 @@ import FooterMenu from "../FooterMenu";
 
 const MyRating = () => {
     const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
+    const [comment, setComment] = useState('');
+    const [image, setImage] = useState(null);
 
+    const data = {
+        title, comment, image
+    }
     // 타이틀과 컨텐트 상태 업데이트 함수
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
     };
 
     const handleContentChange = (e) => {
-        setContent(e.target.value);
+        setComment(e.target.value);
     };
 
-
-
-
-    //  제출 함수
+    // 제출 함수
     const handleSubmit = () => {
         // axios를 사용해 서버로 데이터를 전송
-        axios.put('/api/posts', { title, content })
+        axios.put('/api/posts', { title, comment })
             .then(response => {
-                console.log('Post saved successfully', response);
+                const { title, comment } = response.data;
+                console.log('Title:', title);
+                console.log('Comment:', comment);
+                // 상태 초기화
+                setTitle('');
+                setComment('');
             })
             .catch(error => {
+                console.error('Error:', error);
             });
+    };
+
+    // 이미지 파일 선택 핸들러
+    const handleImageChange = (e) => {
+        setImage(e.target.files[0]);
     };
 
     return (
@@ -37,7 +49,7 @@ const MyRating = () => {
             <Box>
                 {/* 기존 컴포넌트 코드 */}
                 <h3 style={{ textAlign: 'center' }}>후기 페이지</h3>
-                <Details />
+                <Details data={data}/>
                 {/* 평점 관련 컴포넌트 코드 생략 */}
 
                 {/* 타이틀 입력 */}
@@ -50,13 +62,17 @@ const MyRating = () => {
                 {/* 컨텐트 입력 */}
                 <textarea
                     className={styles.inputContext}
-                    value={content}
+                    value={comment}
                     onChange={handleContentChange}
                     placeholder="내용을 입력하세요."
                 />
+                {/* 이미지 파일 선택 */}
+                <input
+                    type="file"
+                    onChange={handleImageChange}
+                />
                 <div className={styles.buttonDiv}>
                     <button className={styles.button}>사진 추가</button>
-                    {/* 저장하기 버튼에 handleSubmit 함수 연결 */}
                     <button className={styles.button} onClick={handleSubmit}>저장하기</button>
                 </div>
             </Box>

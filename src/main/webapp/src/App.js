@@ -22,7 +22,6 @@ import DriverLicense from './components/register/driverLicense/DriverLicense';
 import DriverCheck from './components/register/driverLicense/DriverCheck';
 import MyWishList from "./components/MyWishList";
 import MyProfile from "./components/profile/MyProfile";
-import UseBefore from "./components/profile/UseBefore";
 import BookingDetails from "./components/profile/BookingDetails";
 import MyRating from "./components/profile/MyRating";
 import {Details} from "@mui/icons-material";
@@ -31,8 +30,6 @@ import KakaoLogin from './components/login/KakaoLogin';
 import ChatRoom from './components/chat/ChatRoom';
 import UseAfter from "./components/profile/UseAfter";
 import UseBefore from "./components/profile/UseBefore";
-import {TossModal} from './components/payment/tosspayment/TossModal';
-import {ChatRoom} from './components/chat/ChatRoom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 
@@ -43,7 +40,7 @@ function Detail() {
 const queryClient = new QueryClient();
 function App() {
   return (
-    
+
     <React.Fragment>
       <QueryClientProvider client={queryClient}>
       <BrowserRouter>
@@ -70,8 +67,8 @@ function App() {
               <Route path="reservedCars" element={<ReservedCars />} />
               <Route path="usedCarReviews" element={<UsedCarReviews />} />
               <Route path="checkMyCar" element={<CheckMyCar/>} />
-              <Route path="myProfile:/user_id" element={<MyProfile/>} />
-              <Route path="myProfileUpdate" element={<MyProfileUpdate/>} />
+              <Route path="myProfile/:user_id" element={<MyProfile/>} />
+              <Route path="myProfileUpdate/:user_id" element={<MyProfileUpdate/>} />
               <Route path="useAfter" element={<UseAfter/>} />
               <Route path="useBefore" element={<UseBefore/>} />
               <Route path="myRating" element={<MyRating/>}/>
@@ -94,7 +91,7 @@ function App() {
       </BrowserRouter>
       </QueryClientProvider>
     </React.Fragment>
-    
+
   );
 }
 

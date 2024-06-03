@@ -10,56 +10,39 @@ import Box from "@mui/material/Box";
 import FooterMenu from "../FooterMenu";
 import axios from "axios";
 import styles from "./CSS/MyProfile.module.css";
+import {useSelector} from "react-redux";
 
 const MyProfile = () => {
+
+
     const navigate = useNavigate();
     const { user_id } = useParams();
     const [profileImage, setProfileImage] = useState(null);
+    const [previewImage, setPreviewImage] = useState('');
 
-
-
-    //객체 만들기
-    const [myprofile, setMyprofile] = useState({
+    //dto 선언 해주기
+    const [myprofileDTO, setprofileDTO] = useState({
         image_profile_name: "",
+        image_original_name: "",
+        imageUrl : "imageUrl",
         name: "",
-        phoneNumber: "",
+        phone_number: "",
         email: "",
         driver: "",
+        user_id:"user_id"
     });
 
-
-
-    //user_id 를 통해 정보 갖고오기
     useEffect(() => {
-        let url = `http://localhost:8080/profile/myprofile?user_id=${user_id}`;
-        axios.get(url)
-            .then(response => {
-                let profile = response.data;
-                setMyprofile(profile);
-                if (profile.image_profile_name) {
-                    fetchProfileImage(profile.image_profile_name);
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        const fetchUserProfile = async () => {
+            try {
+                const response = await axios.get(`/profile/myprofile/${user_id}`); // URL 수정
+                setprofileDTO(response.data);
+            } catch (error) {
+                console.error("프로필 정보를 가져오는데 실패했습니다.", error);
+            }
+        };
+        fetchUserProfile();
     }, [user_id]);
-
-
-
-    //네이버 클라우드에서 정보 갖고오기
-    const fetchProfileImage = (imageName) => {
-        const imageUrl = `https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/driverOCR/${imageName}`;
-        axios.get(imageUrl, { responseType: 'blob' })
-            .then(response => {
-                const imageObjectURL = URL.createObjectURL(response.data);
-                setProfileImage(imageObjectURL);
-            })
-            .catch(error => {
-                console.log('Error fetching the image:', error);
-            });
-    };
-
     return (
         <div>
             <Box>
@@ -69,52 +52,74 @@ const MyProfile = () => {
                         onClick={() => navigate(-1)}
                     />
                 </div>
-                <h1 className={styles.title}>{myprofile.name}</h1>
-                <div className={styles.buttonDiv}>
-                    <button className={styles.button}>
-                        {profileImage ? (
-                            <img src={profileImage} alt="Profile" className={styles.profileImage} />
-                        ) : (
-                            <CgProfile className={styles.icon} />
-                        )}
-                    </button>
-                </div>
-                <div className={styles.formContainer}>
-                    <div className={styles.formGroup}>
-                        <label className={styles.label}>
-                            <MdOutlineDriveFileRenameOutline className={styles.iconLabel} />
-                            이름
+                <h1 className={styles.title}>{myprofileDTO.name}</h1>
+                    <div className={styles.buttonDiv}>
+                        <label htmlFor="profileImage" className={styles.button}>
+                            {previewImage ? (
+                                <img src={myprofileDTO.profileImage} alt="Profile" className={styles.profileImage} />
+                            ) : (
+                                myprofileDTO.profileImage ? (
+                                    <img src={previewImage} alt="Profile" className={styles.profileImage} />
+                                ) : (
+                                    <CgProfile className={styles.icon} />
+                                )
+                            )}
                         </label>
-                        <input type="text" className={styles.input} value={myprofile.name} onChange={e => setMyprofile({ ...myprofile, name: e.target.value })} />
+                        <input
+                            type="file"
+                            id="profileImage"
+                            style={{ display: 'none' }}
+                        />
+                    </div>
+                    <div className={styles.formContainer}>
+                        <div className={styles.formGroup}>
+                            <label className={styles.label}>
+                                <MdOutlineDriveFileRenameOutline className={styles.iconLabel} />
+                                이름
+                            </label>
+                            <input type="text"
+                                   className={styles.input}
+                                   value={myprofileDTO.name}
+                                    readOnly/>
+                        </div>
+
+                        <div className={styles.formGroup}>
+                            <label className={styles.label}>
+                                <LuSmartphone className={styles.iconLabel} />
+                                핸드폰 번호
+                            </label>
+                            <input type="text"
+                                   className={styles.input}
+                                   value={myprofileDTO.phoneNumber}
+                            readOnly/>
+                        </div>
+                        <div className={styles.formGroup}>
+                            <label className={styles.label}>
+                                <MdEmail className={styles.iconLabel} />
+                                이메일
+                            </label>
+                            <input type="text"
+                                   className={styles.input}
+                                   value={myprofileDTO.email}
+                            readOnly/>
+                        </div>
+                        <div className={styles.formGroup}>
+                            <label className={styles.label}>
+                                <FaAddressCard className={styles.iconLabel} />
+                                면허증
+                            </label>
+                            <input type="text"
+                                   className={styles.input}
+                                   value={myprofileDTO.driver}
+                            readOnly/>
+                        </div>
+                        <div className={styles.submitButtonContainer}>
+                            <Link to={`/profile/myProfileUpdate/${user_id}`}>
+                            <button type="button" className={styles.submitButton}>수정하기</button>
+                            </Link>
+                        </div>
                     </div>
 
-                    <div className={styles.formGroup}>
-                        <label className={styles.label}>
-                            <LuSmartphone className={styles.iconLabel} />
-                            핸드폰 번호
-                        </label>
-                        <input type="text" className={styles.input} value={myprofile.phoneNumber} onChange={e => setMyprofile({ ...myprofile, phoneNumber: e.target.value })} />
-                    </div>
-                    <div className={styles.formGroup}>
-                        <label className={styles.label}>
-                            <MdEmail className={styles.iconLabel} />
-                            이메일
-                        </label>
-                        <input type="text" className={styles.input} value={myprofile.email} onChange={e => setMyprofile({ ...myprofile, email: e.target.value })} />
-                    </div>
-                    <div className={styles.formGroup}>
-                        <label className={styles.label}>
-                            <FaAddressCard className={styles.iconLabel} />
-                            면허증
-                        </label>
-                        <input type="text" className={styles.input} value={myprofile.license} onChange={e => setMyprofile({ ...myprofile, license: e.target.value })} />
-                    </div>
-                    <div className={styles.submitButtonContainer}>
-                        <Link to="/Profile/MyProfileUpdate">
-                            <button className={styles.submitButton}>수정하기</button>
-                        </Link>
-                    </div>
-                </div>
             </Box>
             <FooterMenu />
         </div>

@@ -5,65 +5,71 @@ import { MdEmail } from "react-icons/md";
 import { FaAddressCard } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { GoArrowLeft } from 'react-icons/go';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 import styles from './CSS/MyProfile.module.css';
 import axios from "axios";
 import Box from "@mui/material/Box";
 import FooterMenu from "../FooterMenu";
+import {useSelector} from "react-redux";
+
+
 
 const MyProfileUpdate = () => {
     const navigate = useNavigate(); // 페이지 네비게이션 함수
     const [profileImage, setProfileImage] = useState(null); // 프로필 이미지 상태
     const fileInputRef = useRef(null);
-
-    const [profileUpdate, setProfileUpdate] = useState({
-        name: '',
-        phone: '',
-        email: '',
-        driver: '',
-    });
-
-    useEffect(() => {
-        // 프로필 데이터를 가져오는 함수
-        const fetchProfile = async () => {
-            try {
-                const uri = "http://localhost:8080/profile/myprofileUpdate?user_id=${user_id}"
-                const response = await axios.get(uri);
-                const profileData = response.data;
-                setProfileUpdate({
-                    name: profileData.name,
-                    phone: profileData.phone,
-                    email: profileData.email,
-                    driver: profileData.driver,
-                });
-                setProfileImage(profileData.profileImage); // 프로필 이미지 설정
-            } catch (error) {
-                console.error("프로필 데이터를 가져오는 중 오류 발생:", error);
-            }
-        };
-        fetchProfile();
-    }, []);
+    const{user_id}=useParams()
 
     const handleIconClick = () => {
         fileInputRef.current.click(); // file input 클릭 이벤트 발생
     };
 
+    //dto 설정
+    const [UserProfileDTO, setUserProfileDTO] = useState({
+        image_profile_name: "",
+        image_original_name: "",
+        name: "",
+        phone_number: "",
+        email: "",
+        driver: "",
+        user_id:"",
+        imageUrl : "imageUrl",
+    });
+
+    //실행시 처음으로 이미지 갖고오게 만들어주는 axios
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            try {
+                const response = await axios.get(`/profile/myprofileUpdate/${user_id}`); // URL 수정
+                setUserProfileDTO(response.data);
+            } catch (error) {
+                console.error("프로필 정보를 가져오는데 실패했습니다.", error);
+            }
+        };
+        fetchUserProfile();
+    }, [user_id]);
+
+
+
     const ImageChange = (event) => {
         const file = event.target.files[0];
+
         if (file) {
             // 네이버 클라우드에 이미지
             uploadImageToNaverCloud(file).then(imageUrl => {
+                console.log(imageUrl)
                 setProfileImage(imageUrl);
             });
         }
     };
 
-    const uploadImageToNaverCloud = async (file) => {
+    const [imageUrl, setImageUrl] = useState("");
+    const uploadImageToNaverCloud = async (image) => {
         const formData = new FormData();
-        formData.append('file', file);
-
+        formData.append('UserProfileDTO',new Blob([JSON.stringify(UserProfileDTO)],{type:'application/json'}))
+        formData.append('image', image);
         try {
-            const response = await axios.post('/api/upload', formData, {
+            const response = await axios.post(`/profile/profileUpdate/${user_id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -75,9 +81,12 @@ const MyProfileUpdate = () => {
         }
     };
 
+
+
+
     const inputhandle = (e) => {
         const { name, value } = e.target;
-        setProfileUpdate(prevState => ({
+        setUserProfileDTO(prevState => ({
             ...prevState,
             [name]: value,
         }));
@@ -85,9 +94,8 @@ const MyProfileUpdate = () => {
 
     const handleSaveClick = async () => {
         try {
-            await axios.put('/api/profile', {
-                ...profileUpdate,
-                profileImage,
+            await axios.put(`/profile/profileUpdate${user_id}`, {
+                ...setUserProfileDTO,
             });
             alert('프로필이 성공적으로 저장되었습니다.');
             navigate('/profile'); // 프로필 페이지로 이동
@@ -112,7 +120,9 @@ const MyProfileUpdate = () => {
                 <div className={styles.buttonDiv}>
                     <button className={styles.button} onClick={handleIconClick}>
                         {profileImage ? (
-                            <img src={profileImage} alt="Profile" className={styles.profileImage}/>
+                            <img src={profileImage}
+                                 alt="Profile"
+                                 className={styles.profileImage}/>
                         ) : (
                             <CgProfile className={styles.icon}/>
                         )}
@@ -138,7 +148,7 @@ const MyProfileUpdate = () => {
                         <input type="text"
                                name="name"
                                className={styles.input}
-                               value={profileUpdate.name}
+                               value={UserProfileDTO.name}
                                onChange={inputhandle}
                         />
                     </div>
@@ -152,7 +162,7 @@ const MyProfileUpdate = () => {
                         <input type="text"
                                name="phone"
                                className={styles.input}
-                               value={profileUpdate.phone}
+                               value={UserProfileDTO.phone}
                                onChange={inputhandle}
                         />
                     </div>
@@ -166,7 +176,7 @@ const MyProfileUpdate = () => {
                         <input type="text"
                                name="email"
                                className={styles.input}
-                               value={profileUpdate.email}
+                               value={UserProfileDTO.email}
                                onChange={inputhandle}
                         />
                     </div>
@@ -180,7 +190,7 @@ const MyProfileUpdate = () => {
                         <input type="text"
                                name="driver"
                                className={styles.input}
-                               value={profileUpdate.driver}
+                               value={UserProfileDTO.driver}
                                onChange={inputhandle}
                         />
                     </div>
