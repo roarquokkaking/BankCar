@@ -31,12 +31,14 @@ import KakaoLogin from './components/login/KakaoLogin';
 import UseAfter from "./components/profile/UseAfter";
 import UseBefore from "./components/profile/UseBefore";
 import {TossModal} from './components/payment/tosspayment/TossModal';
+import {ChatRoom} from './components/chat/ChatRoom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {SuccessPayment} from './components/payment/tosspayment/SuccessPayment';
 import {FailPayment} from './components/payment/tosspayment/FailPayment';
 
-
-
+function Detail() {
+  return null;
+}
 const queryClient = new QueryClient();
 function App() {
   return (
@@ -85,6 +87,8 @@ function App() {
             <Route path='/TossModal' element={<TossModal/>} />
             <Route path='/success' element={<SuccessPayment />} />
             <Route path='/fail' element={<FailPayment />} />
+            <Route path='/chatroom' element={<ChatRoom />} />
+
           </Routes>
           </Provider>
           {/* <Box sx={displayOnDesktop}>

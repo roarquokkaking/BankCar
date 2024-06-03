@@ -11,7 +11,12 @@ npm install react-swipeable-views-react-18-fix
 
 npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
 
-yarn add react-swipeable-views    
+npm install @mui/joy
+npm install @fontsource/inter
+
+yarn add react-swipeable-views   
+
+npm i react-swipeable-views-utils
 
 npm install react-icons --save
 
@@ -27,6 +32,8 @@ npm i react-number-format
 npm install @tosspayments/payment-widget-sdk
 #2. 간편결제 sdk 모듈  yarn
 yarn add @tosspayments/payment-widget-sdk
+#1. 채팅관련 STOMP 모듈
+npm install @stomp/stompjs 
 
 # 아이콘 참고
 https://react-icons.github.io/react-icons/icons/

@@ -57,14 +57,14 @@ const ProfileMain = () => {
                     margin={20}
                     onClick={onToCarNew}
                 >
-          <span>
-            BankCar에 <br/>
-              &emsp;당신의 자동차를 등록해 보세요.
-            <small style={{color: "gray"}}>
-              <br/>
-              <br/> 지금 바로 등록하러가기
-            </small>
-          </span>
+                    <span>
+                    BankCar에 <br/>
+                        &emsp;당신의 자동차를 등록해 보세요.
+                    <small style={{color: "gray"}}>
+                      <br/>
+                      <br/> 지금 바로 등록하러가기
+                    </small>
+                    </span>
                     <img src="./image/car.png" alt="귀여운 자동차"/>
                 </button>
 

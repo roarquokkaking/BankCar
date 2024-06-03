@@ -7,6 +7,7 @@ import FooterMenu from '../../FooterMenu';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { setDriver } from '../../../store/loginSlice';
+import RegisterHeader from "../RegisterHeader";
 
 const DriverCheck = () => {
     const location = useLocation();
@@ -54,6 +55,7 @@ const DriverCheck = () => {
       };
     return (
       <>
+          <RegisterHeader text={"운전면허증 확인"} />
         <div className={styles["driver-info-container"]}>
       <div className={styles["license-card"]} style={{marginTop:'20%'}}>
         <img src={imageUrl} alt="Driver License" />
@@ -99,9 +101,6 @@ const DriverCheck = () => {
       </div>
       <button className="capture-button" style={{marginLeft:'25%',marginTop:'20%'}} onClick={onDriverSet} >운전면허증 등록하기</button>
     </div>
-    <Box sx={{ display: { xs: "flex", md: "none" }, marginTop: "auto" }}>
-    <FooterMenu />
-  </Box>
   </>
     );
 };

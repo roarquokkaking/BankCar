@@ -12,9 +12,6 @@ import lombok.*;
 @AllArgsConstructor
 @Data
 public class LoginDTO {
-
-
-
     @Id
     @Column(name="id")
     private String id;
@@ -22,7 +19,6 @@ public class LoginDTO {
     private String email;
     @Column(name="name")
     private String name;
-
     @Column(name="driver")
     private boolean driver;
 

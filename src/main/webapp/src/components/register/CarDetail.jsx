@@ -1,7 +1,8 @@
 import { Box, Button, Container, FormControl, FormHelperText, FormLabel, Input, MenuItem, Stack, TextField, Typography, styled } from '@mui/material';
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import styles from './css/CarDetail.module.css'
 import RegisterHeader from "./RegisterHeader";
+import {RegisterContext} from "./RegisterContext";
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   display: "flex",
@@ -34,15 +35,30 @@ const ImageContainer = styled('div')(({ theme }) => ({
 }));
 
 const CarDetail = () => {
-  const [carModel, setCarModel] = useState("");
-  const [manufactureYear, setManufactureYear] = useState("");
-  const [color, setColor] = useState("");
+  const {data, onAddData} = useContext(RegisterContext);
+  const [carModel, setCarModel] = useState(data.model);
+  const [manufactureYear, setManufactureYear] = useState(data.released);
+  const [color, setColor] = useState(data.color);
+
 
   // 제조 연도 선택을 위한 옵션 배열 생성 (예시로 1990년부터 현재 연도까지)
   const years = Array.from(
       new Array(30),
       (val, index) => new Date().getFullYear() - index
   );
+
+  const onModel = (e) => {
+    setCarModel(e.target.value);
+    onAddData("model",e.target.value);
+  }
+  const onManufactureYear = (e) => {
+    setManufactureYear(e.target.value);
+    onAddData("released", e.target.value);
+  }
+  const onColor = (e) => {
+    setColor(e.target.value);
+    onAddData("color", e.target.value)
+  }
 
   return (
       <>
@@ -56,13 +72,13 @@ const CarDetail = () => {
                 label="모델명"
                 variant="outlined"
                 value={carModel}
-                onChange={(e) => setCarModel(e.target.value)}
+                onChange={onModel}
             />
             <TextField
                 select
                 label="제조 연도"
                 value={manufactureYear}
-                onChange={(e) => setManufactureYear(e.target.value)}
+                onChange={onManufactureYear}
             >
               {years.map((year) => (
                   <MenuItem key={year} value={year}>
@@ -74,7 +90,7 @@ const CarDetail = () => {
                 label="색상"
                 variant="outlined"
                 value={color}
-                onChange={(e) => setColor(e.target.value)}
+                onChange={onColor}
             />
           </StyledForm>
         </StyledContainer>
