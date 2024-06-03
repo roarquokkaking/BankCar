@@ -1,147 +1,128 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdOutlineDriveFileRenameOutline } from "react-icons/md";
 import { LuSmartphone } from "react-icons/lu";
 import { MdEmail } from "react-icons/md";
 import { FaAddressCard } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { GoArrowLeft } from 'react-icons/go';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import Box from "@mui/material/Box";
+import FooterMenu from "../FooterMenu";
+import axios from "axios";
+import styles from "./CSS/MyProfile.module.css";
+import {useSelector} from "react-redux";
 
 const MyProfile = () => {
+
+
     const navigate = useNavigate();
-    const styles = {
-        header: {
-            marginTop: '2%',
-            marginBottom: '10px',
-            width: '390.4px',
-            height: '40px',    
-        },
-        button: {
-            textAlign: 'center',
-            width: 140,
-            height: 140,
-            padding: '10px 15px',
-            border: 'none',
-            color: '#007BFF',
-            cursor: 'pointer',
-            borderRadius: '50%',
-            right: 50,
-            marginTop:15,
-        },
-        icon: {
-            fontSize: '90px', 
-            color: 'gray', 
-        },
-        formGroup: {
-            marginTop: '12%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-        },
-        label: {
-            display: 'block',
-            marginBottom: '-5px',
-            fontWeight: 'bold',
-        },
-        input: {
-            width: '330px',
-            padding: '8px',
-            border: 'none',
-            borderBottom: '1px solid #ccc',
-            borderRadius: '4px',
-            boxSizing: 'border-box',
-            marginBottom: '20px',
-        },
-        title: {
-            color: '#333',
-            font: "apple SD Gothic Neo",
-            fontSize: "20px",
-            marginTop: "4%",
-        },
-        formContainer: {
-            paddingTop: '9px',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            marginLeft: '30px', 
-            position: 'relative',
-        },
-        submitButtonContainer: {
-            marginTop: '10px',
-            display: 'flex',
-            justifyContent: 'center',
-            width: '100%',
-            position: 'absolute',
-            bottom: -50,
-            left: -10,
-        },
-        submitButton: {
-            backgroundColor: '#3399d9',
-            color: '#fff',
-            borderRadius: '5px',
-            width: '150px',
-            height: '40px',
-            fontSize: '16px',
-            border: 'none',
-            fontWeight: 'bold',
-        },  
-        buttonDiv: {
-            textAlign: 'center',
-        },
-    };
+    const { user_id } = useParams();
+    const [profileImage, setProfileImage] = useState(null);
+    const [previewImage, setPreviewImage] = useState('');
+
+    //dto 선언 해주기
+    const [myprofileDTO, setprofileDTO] = useState({
+        image_profile_name: "",
+        image_original_name: "",
+        imageUrl : "imageUrl",
+        name: "",
+        phone_number: "",
+        email: "",
+        driver: "",
+        user_id:"user_id"
+    });
+
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            try {
+                const response = await axios.get(`/profile/myprofile/${user_id}`); // URL 수정
+                setprofileDTO(response.data);
+            } catch (error) {
+                console.error("프로필 정보를 가져오는데 실패했습니다.", error);
+            }
+        };
+        fetchUserProfile();
+    }, [user_id]);
     return (
         <div>
-            <div style={styles.header}>
-              <GoArrowLeft
-                style={{
-                  width: "30px",
-                  height: "30px",
-                  marginTop: "2%",
-                  marginLeft: "3%",
-                }}
-                onClick={() => navigate(-1)}
-              />
-              </div>
-            <h1 style={styles.title}></h1>
-            <div style={styles.buttonDiv}>
-                <button style={styles.button}
-                ><CgProfile style={styles.icon}/></button>
-            </div>
-            <div style={styles.formContainer}>
-                <div style={styles.formGroup}>
-                    <label style={styles.label}>
-                        <MdOutlineDriveFileRenameOutline style={{marginRight: '10px'}}/>
-                        이름
-                    </label>
-                    <input type="text" style={styles.input}/>
+            <Box>
+                <div className={styles.header}>
+                    <GoArrowLeft
+                        className={styles.backArrow}
+                        onClick={() => navigate(-1)}
+                    />
                 </div>
-                <div style={styles.formGroup}>
-                    <label style={styles.label}>
-                        <LuSmartphone style={{marginRight: '10px'}}/>
-                        핸드폰 번호
-                    </label>
-                    <input type="text" style={styles.input}/>
-                </div>
-                <div style={styles.formGroup}>
-                    <label style={styles.label}>
-                        <MdEmail style={{marginRight: '10px'}}/>
-                        이메일
-                    </label>
-                    <input type="text" style={styles.input}/>
-                </div>
-                <div style={styles.formGroup}>
-                    <label style={styles.label}>
-                        <FaAddressCard style={{marginRight: '10px'}}/>
-                        면허증
-                    </label>
-                    <input type="text" style={styles.input}/>
-                </div>
-                <div style={styles.submitButtonContainer}>
-                <button style={styles.submitButton}>수정하기</button>
-            </div>
-        </div>  
-    </div>
-    
+                <h1 className={styles.title}>{myprofileDTO.name}</h1>
+                    <div className={styles.buttonDiv}>
+                        <label htmlFor="profileImage" className={styles.button}>
+                            {previewImage ? (
+                                <img src={myprofileDTO.profileImage} alt="Profile" className={styles.profileImage} />
+                            ) : (
+                                myprofileDTO.profileImage ? (
+                                    <img src={previewImage} alt="Profile" className={styles.profileImage} />
+                                ) : (
+                                    <CgProfile className={styles.icon} />
+                                )
+                            )}
+                        </label>
+                        <input
+                            type="file"
+                            id="profileImage"
+                            style={{ display: 'none' }}
+                        />
+                    </div>
+                    <div className={styles.formContainer}>
+                        <div className={styles.formGroup}>
+                            <label className={styles.label}>
+                                <MdOutlineDriveFileRenameOutline className={styles.iconLabel} />
+                                이름
+                            </label>
+                            <input type="text"
+                                   className={styles.input}
+                                   value={myprofileDTO.name}
+                                    readOnly/>
+                        </div>
+
+                        <div className={styles.formGroup}>
+                            <label className={styles.label}>
+                                <LuSmartphone className={styles.iconLabel} />
+                                핸드폰 번호
+                            </label>
+                            <input type="text"
+                                   className={styles.input}
+                                   value={myprofileDTO.phoneNumber}
+                            readOnly/>
+                        </div>
+                        <div className={styles.formGroup}>
+                            <label className={styles.label}>
+                                <MdEmail className={styles.iconLabel} />
+                                이메일
+                            </label>
+                            <input type="text"
+                                   className={styles.input}
+                                   value={myprofileDTO.email}
+                            readOnly/>
+                        </div>
+                        <div className={styles.formGroup}>
+                            <label className={styles.label}>
+                                <FaAddressCard className={styles.iconLabel} />
+                                면허증
+                            </label>
+                            <input type="text"
+                                   className={styles.input}
+                                   value={myprofileDTO.driver}
+                            readOnly/>
+                        </div>
+                        <div className={styles.submitButtonContainer}>
+                            <Link to={`/profile/myProfileUpdate/${user_id}`}>
+                            <button type="button" className={styles.submitButton}>수정하기</button>
+                            </Link>
+                        </div>
+                    </div>
+
+            </Box>
+            <FooterMenu />
+        </div>
     );
 };
 

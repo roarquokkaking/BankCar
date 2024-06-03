@@ -47,6 +47,6 @@ public class NCPObjectStorageService implements ObjectStorageService{
         }catch (Exception e){
             throw new RuntimeException("파일 업로드 에러" + e);
         }
-
     }
+
 }

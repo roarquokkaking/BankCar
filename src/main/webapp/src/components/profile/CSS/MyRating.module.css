@@ -5,17 +5,16 @@
 }
 
 /* 컨테이너 스타일 */
+/* 왼쪽 섹션 스타일 */
+
 .container {
     display: flex;
     justify-content: space-between;
     padding: 20px;
     margin-right: 10px;
     margin-left: 10px;
-
     border-radius: 15px;
 }
-
-/* 왼쪽 섹션 스타일 */
 .left {
     flex: 1;
     padding: 5px;
@@ -108,10 +107,12 @@
 }
 
 /* 입력 내용 스타일 */
+/* 버튼 스타일 */
+
 .inputContext {
     display: flex;
     width: 94%;
-    height: 60%;
+    height: 20%;
     justify-content: space-between;
     border: 2.5px solid gray;
     border-radius: 15px;
@@ -120,8 +121,6 @@
     margin-right: 10px;
     font-size: 20px;
 }
-
-/* 버튼 스타일 */
 .button {
     background-color: #405DE6;
     color: white;

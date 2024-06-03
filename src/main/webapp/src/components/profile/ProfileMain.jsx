@@ -24,10 +24,12 @@ const ProfileMain = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const driverYN = useSelector((state)=>state.Login.driver);
+    const user_id = useSelector(state =>state.Login.id);
     const newDriverYN = driverYN==="true";
     const onToCarNew = () => {
         navigate('/car/new');
     }
+    console.log(user_id)
     return (
         <>
             <Box sx={{ pb: 7 }}>
@@ -35,6 +37,7 @@ const ProfileMain = () => {
                 <header>
                     <h1>프로필</h1>
                 </header>
+                <Link  to={`/profile/myprofile/${user_id}`}>
                 <section className="user-info">
                     <div className="user-img-name">
                         <img
@@ -51,6 +54,7 @@ const ProfileMain = () => {
                         <ArrowForwardIosIcon/>
                     </div>
                 </section>
+                </Link>
                 <Divider/>
                 <button
                     className="register-button"

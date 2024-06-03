@@ -1,96 +1,82 @@
 import React, { useState } from 'react';
-import { FaStar } from 'react-icons/fa';
-import styles from './CSS/MyRating.module.css';
+import axios from 'axios';
+import { Box } from "@mui/material";
+import styles from './CSS/MyRating.module.css'; // CSS 모듈 사용 방식 유지
 import Details from "./Details";
-
-
-
+import FooterMenu from "../FooterMenu";
 
 const MyRating = () => {
-    const [rating, setRating] = useState(0);
-    const [hover, setHover] = useState(0);
-    const [total, setTotal] = useState(0);
-    const [count, setCount] = useState(0);
-    const [ratings, setRatings] = useState([0, 0, 0, 0, 0]); // 각 점수별 투표 수
+    const [title, setTitle] = useState('');
+    const [comment, setComment] = useState('');
+    const [image, setImage] = useState(null);
 
-    const getAverage = (newRating) => {
-        const newTotal = total + newRating;
-        const newCount = count + 1;
-        setTotal(newTotal);
-        setCount(newCount);
-        return newTotal / newCount;
+    const data = {
+        title, comment, image
+    }
+    // 타이틀과 컨텐트 상태 업데이트 함수
+    const handleTitleChange = (e) => {
+        setTitle(e.target.value);
     };
 
-    const handleRating = (ratingValue) => {
-        const newRatings = [...ratings];
-        newRatings[ratingValue - 1] += 1;
-        setRatings(newRatings);
-        setRating(getAverage(ratingValue));
+    const handleContentChange = (e) => {
+        setComment(e.target.value);
     };
 
-    const maxVotes = Math.max(...ratings);
+    // 제출 함수
+    const handleSubmit = () => {
+        // axios를 사용해 서버로 데이터를 전송
+        axios.put('/api/posts', { title, comment })
+            .then(response => {
+                const { title, comment } = response.data;
+                console.log('Title:', title);
+                console.log('Comment:', comment);
+                // 상태 초기화
+                setTitle('');
+                setComment('');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    };
+
+    // 이미지 파일 선택 핸들러
+    const handleImageChange = (e) => {
+        setImage(e.target.files[0]);
+    };
 
     return (
         <div>
-            <h3 style={{textAlign:'center'}}>후기 페이지</h3>
-            <Details/>
-            <div className={styles.title}>
+            <Box>
+                {/* 기존 컴포넌트 코드 */}
+                <h3 style={{ textAlign: 'center' }}>후기 페이지</h3>
+                <Details data={data}/>
+                {/* 평점 관련 컴포넌트 코드 생략 */}
 
-                <div className={styles.container}>
-                    <div className={styles.left}>
-                        <div className={styles.average}>
-                            <p>{rating.toFixed(1)}</p>
-                        </div>
-                        <div className={styles.starContainer}>
-                            {[...Array(5)].map((star, index) => {
-                                const ratingValue = index + 1;
-
-                                return (
-                                    <label key={index}>
-                                        <input
-                                            type="radio"
-                                            name="rating"
-                                            value={ratingValue}
-                                            onClick={() => handleRating(ratingValue)}
-                                            style={{display: 'none'}}
-                                        />
-                                        <FaStar
-                                            className="star"
-                                            color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
-                                            size={25}
-                                            onMouseEnter={() => setHover(ratingValue)}
-                                            onMouseLeave={() => setHover(0)}
-                                        />
-                                    </label>
-                                );
-                            })}
-                        </div>
-                    </div>
-                    <div className={styles.right}>
-                        {[5, 4, 3, 2, 1].map((score, index) => {
-                            const percentage = (ratings[score - 1] / count) * 100 || 0; // 전체 클릭 수 대비 퍼센티지
-                            return (
-                                <div key={score} className={styles.gaugeContainer}>
-                                    <span className={styles.label}>{score}</span>
-                                    <div className={styles.gaugeBackground}>
-                                        <div
-                                            className={styles.gauge}
-                                            style={{width: `${percentage}%`}}
-                                        />
-                                        <span className={styles.percentage}>{`${percentage.toFixed(1)}%`}</span>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
+                {/* 타이틀 입력 */}
+                <input
+                    className={styles.inputTitle}
+                    value={title}
+                    onChange={handleTitleChange}
+                    placeholder="제목을 입력하세요."
+                />
+                {/* 컨텐트 입력 */}
+                <textarea
+                    className={styles.inputContext}
+                    value={comment}
+                    onChange={handleContentChange}
+                    placeholder="내용을 입력하세요."
+                />
+                {/* 이미지 파일 선택 */}
+                <input
+                    type="file"
+                    onChange={handleImageChange}
+                />
+                <div className={styles.buttonDiv}>
+                    <button className={styles.button}>사진 추가</button>
+                    <button className={styles.button} onClick={handleSubmit}>저장하기</button>
                 </div>
-            </div>
-            <input className={styles.inputTitle}/>
-            <input className={styles.inputContext}/>
-            <div className={styles.buttonDiv}>
-                <button className={styles.button}>사진 추가</button>
-                <button className={styles.button}>저장하기</button>
-            </div>
+            </Box>
+            <FooterMenu />
         </div>
     );
 };

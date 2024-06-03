@@ -1,5 +1,10 @@
 import React from 'react';
 import { IoHeartSharp, IoHeartOutline } from "react-icons/io5";
+import {GoArrowLeft} from "react-icons/go";
+import {useNavigate} from "react-router-dom";
+import Footer from "./Footer";
+import FooterMenu from "./FooterMenu";
+import Box from "@mui/material/Box";
 
 const photoList = [
     { id: 1, title: 'Sunset', url: 'data:image/jpeg;base64,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', isFavorite: true },
@@ -44,14 +49,42 @@ const MyWishList = () => {
     const toggleFavorite = (id) => {
         // 즐겨찾기 상태 토글 로직 추가
     };
+    const navigate = useNavigate();
+
+    const navigateToReviewPage = (reservationId) => {
+        navigate(-1);
+    };
 
     return (
-        <div className="App">
-            <h1 style={{ margin: 30 }}>Wish List</h1>
+        <div>
+            <Box sx={{pb:7}}>
+            <header>
+                <div >
+                    <GoArrowLeft
+                        style={{
+                            width: "30px",
+                            height: "30px",
+                            marginTop: "4%",
+                            marginLeft: "20px",
+                        }}
+                        onClick={() => navigate(-1)}
+                    />
+                    <h1
+                        style={{
+                            textAlign: "center",
+                            font: "apple SD Gothic Neo",
+                            fontSize: "18px",
+                            marginTop: "-9%",
+                        }}
+                    >wish List
+                    </h1>
+
+                </div>
+            </header>
             <ul>
                 {photoList.map((photo) => (
                     <li key={photo.id} style={styles.listItem}>
-                        <img src={photo.url} alt={photo.title} width="100" style={styles.image} />
+                        <img src={photo.url} alt={photo.title} width="100" style={styles.image}/>
                         <p style={styles.title}>{photo.title}</p>
                         {photo.isFavorite ? (
                             <IoHeartSharp
@@ -67,6 +100,8 @@ const MyWishList = () => {
                     </li>
                 ))}
             </ul>
+            </Box>
+            <FooterMenu/>
         </div>
     );
 };
