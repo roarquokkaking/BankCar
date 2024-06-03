@@ -37,6 +37,9 @@ dependencies {
 //    implementation 'org.springframework.boot:spring-boot-starter-security'
 //    implementation 'com.auth0:java-jwt:4.2.1'
 //    implementation 'jakarta.platform:jakarta.jakartaee-api:8.0.0'
+
+    testImplementation 'org.springframework.kafka:spring-kafka-test' //채팅 관련 kafka
+    implementation 'org.springframework.kafka:spring-kafka' //채팅 관련 kafka
 }
 
 tasks.named('test') {
