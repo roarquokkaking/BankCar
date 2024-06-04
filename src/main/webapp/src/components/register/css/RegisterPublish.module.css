@@ -19,12 +19,14 @@
     padding: 8px;
     height: 50px;
     border-bottom: 1px solid #ddd;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 .publish .infoTable tr:last-child td {
     border-bottom: none;
 }
-
 
 .publish .infoItem {
     margin: 10px 0;
@@ -61,7 +63,7 @@
     width: calc(100% - 20px);
     margin: 0 10px 60px 10px;
     padding: 10px 0;
-    background-color: #007bff;
+    background-color: #3594ff;
     color: white;
     border: none;
     border-radius: 10px;

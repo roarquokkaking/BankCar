@@ -14,6 +14,7 @@ const RegisterProvider = ({children}) => {
         model: "",
         released: "",
         color: "",
+        segment: "",
         latitude: 37.49807642572867,
         longitude: 127.02800593613699,
         price: 0,
@@ -54,15 +55,15 @@ const RegisterProvider = ({children}) => {
                 "Content-Type": "multipart/form-data"
             },
         })
-            .then(
-                (response) => {
-                    alert("자동차 정보 등록이 완료되었습니다.");
-                    navigate("/profile");
-                }
-            )
-            .catch(
-                (error) => console.log(error)
-            )
+        .then(
+            (response) => {
+                alert("자동차 정보 등록이 완료되었습니다.");
+                navigate("/profile");
+            }
+        )
+        .catch(
+            (error) => console.log(error)
+        )
     }
 
 

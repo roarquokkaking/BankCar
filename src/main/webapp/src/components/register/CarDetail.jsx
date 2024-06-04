@@ -39,6 +39,7 @@ const CarDetail = () => {
   const [carModel, setCarModel] = useState(data.model);
   const [manufactureYear, setManufactureYear] = useState(data.released);
   const [color, setColor] = useState(data.color);
+  const [segment,setSegment] = useState(data.segment);
 
 
   // 제조 연도 선택을 위한 옵션 배열 생성 (예시로 1990년부터 현재 연도까지)
@@ -46,6 +47,9 @@ const CarDetail = () => {
       new Array(30),
       (val, index) => new Date().getFullYear() - index
   );
+
+  // 자동차 크기 분류 - 경차, 소형, 중형, 대형
+  const size = ["경차", "소형", "중형", "대형"]
 
   const onModel = (e) => {
     setCarModel(e.target.value);
@@ -58,6 +62,10 @@ const CarDetail = () => {
   const onColor = (e) => {
     setColor(e.target.value);
     onAddData("color", e.target.value)
+  }
+  const onManufactureSize = (e) => {
+    setSegment(e.target.value);
+    onAddData("segment", e.target.value);
   }
 
   return (
@@ -92,6 +100,18 @@ const CarDetail = () => {
                 value={color}
                 onChange={onColor}
             />
+            <TextField
+                select
+                label="크기"
+                value={segment}
+                onChange={onManufactureSize}
+            >
+              {size.map((size) => (
+                  <MenuItem key={size} value={size}>
+                    {size}
+                  </MenuItem>
+              ))}
+            </TextField>
           </StyledForm>
         </StyledContainer>
       </>

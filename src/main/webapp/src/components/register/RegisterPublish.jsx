@@ -36,6 +36,10 @@ export function RegisterPublish() {
                         <td>{data.color}</td>
                     </tr>
                     <tr>
+                        <th>크기</th>
+                        <td>{data.segment}</td>
+                    </tr>
+                    <tr>
                         <th>자동차 위치</th>
                         <td>
                             위도 {data.latitude} <br />
@@ -58,7 +62,9 @@ export function RegisterPublish() {
                 </table>
                 <div>
                     <h2>자동차 사진</h2>
-                    <SwipeableTextMobileStepper images={selectImages} />
+                    {selectImages ?  <SwipeableTextMobileStepper images={selectImages} />
+                        : <span>등록된 이미지가 없습니다.</span>}
+
                 </div>
                 <button className={styles.submit} onClick={onInsertData} style={{ marginTop: "10px" }}>자동차 정보 등록하기</button>
             </div>
