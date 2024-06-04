@@ -1,6 +1,4 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
-import useKakaoLoader from './useKakaoLoader';
-import {Map, MapMarker} from "react-kakao-maps-sdk";
 import styles from "./css/CarLocation.module.css";
 import {Button} from '@mui/material';
 import RegisterHeader from "./RegisterHeader";
@@ -39,12 +37,15 @@ const CarLocation = () => {
 
                     geocoder.coord2Address(latlng.getLng(), latlng.getLat(), function(result, status) {
                         if (status === window.kakao.maps.services.Status.OK) {
-                            onAddData("doro_address", result[0].road_address.address_name);
-                            onAddData("jibun_address",  result[0].address.address_name);
 
-                            const message = `클릭한 위치의 위도는 ${result[0].road_address.address_name} 이고, 경도는 ${result[0].address.address_name} 입니다`;
-                            const resultDiv = document.getElementById('clickLatlng');
-                            resultDiv.innerHTML = message;
+                            var roadAddress = result[0].road_address ? result[0].road_address.address_name : "없습니다."
+                            console.log(roadAddress);
+                            console.log(result[0].address.address_name);
+
+                            onAddData("latitude", latlng.getLat());
+                            onAddData("longitude", latlng.getLng());
+                            onAddData("road_address", roadAddress);
+                            onAddData("jibun_address", result[0].address.address_name);
                         }
                     });
 
@@ -52,8 +53,7 @@ const CarLocation = () => {
                     marker.setPosition(latlng);
                     map.setCenter(latlng);
 
-                    onAddData("latitude", latlng.getLat());
-                    onAddData("longitude", latlng.getLng());
+
                 });
 
                 ps.keywordSearch(search, (data, status, pagination) => {
@@ -82,7 +82,10 @@ const CarLocation = () => {
                     <Button onClick={() => setSearch(value)}> 찾기</Button>
                 </div>
                 <div ref={mapContainer} style={{ width: '100%', height: '400px' }}></div>
-                <div id="clickLatlng"></div>
+                <div id="clickLatlng">
+                    <span>도로명 주소 : {data.road_address}</span><br />
+                    <span>지번 주소 : {data.jibun_address}</span>
+                </div>
             </div>
         </>
     );

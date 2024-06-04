@@ -13,6 +13,8 @@ export function RegisterPublish() {
         return new Intl.NumberFormat("ko-KR").format(value);
     };
 
+    console.log(data)
+
     return (
         <>
             <RegisterHeader text={"입력한 정보 확인"} />
@@ -42,8 +44,8 @@ export function RegisterPublish() {
                     <tr>
                         <th>자동차 위치</th>
                         <td>
-                            위도 {data.latitude} <br />
-                            경도 {data.longitude}
+                            도로명 :{data.road_address} <br />
+                            지번  : {data.jibun_address}
                         </td>
                     </tr>
                     <tr>

@@ -17,7 +17,7 @@ const RegisterProvider = ({children}) => {
         segment: "",
         latitude: 37.49807642572867,
         longitude: 127.02800593613699,
-        doro_address: "",
+        road_address: "",
         jibun_address: "",
         price: 0,
         title: "",
@@ -71,7 +71,7 @@ const RegisterProvider = ({children}) => {
 
     return (
         <RegisterContext.Provider
-            value={{data, selectImages, onInsertData, onAddData, onAddImageFile, onAddSelectImages}}>
+            value={{data, selectImages,setData, onInsertData, onAddData, onAddImageFile, onAddSelectImages}}>
             {children}
         </RegisterContext.Provider>
     );
