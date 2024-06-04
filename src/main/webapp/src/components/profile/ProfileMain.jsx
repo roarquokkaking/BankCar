@@ -24,12 +24,11 @@ const ProfileMain = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const driverYN = useSelector((state)=>state.Login.driver);
-    const user_id = useSelector(state =>state.Login.id);
+    const user_id = useSelector(state => state.Login.id)
     const newDriverYN = driverYN==="true";
     const onToCarNew = () => {
         navigate('/car/new');
     }
-    console.log(user_id)
     return (
         <>
             <Box sx={{ pb: 7 }}>

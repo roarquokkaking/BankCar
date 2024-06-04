@@ -33,6 +33,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ChattingRoom from './components/chat/ChattingRoom';
 import ChattingNow from './components/chat/ChattingNow';
 import ChatGroupBox from './components/chat/ChatGroupBox';
+import Searching from "./components/search/Searching";
+import Choice from "./components/choice/Choice";
 
 
 
@@ -57,6 +59,7 @@ function App() {
           <Provider store={store}>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/searching" element={<Searching />} />
             <Route path="/wishList" element={<WishList />} />
             <Route path="/myWishList" element={<MyWishList />} />
             <Route path="login"  >

@@ -38,6 +38,7 @@ const CarLocation = () => {
 
                     // 마커 위치를 클릭한 위치로 옮깁니다
                     marker.setPosition(latlng);
+                    map.setCenter(latlng);
 
                     onAddData("latitude", latlng.getLat());
                     onAddData("longitude", latlng.getLng());
@@ -70,7 +71,7 @@ const CarLocation = () => {
                 <div>
                     주소 검색 :
                     <input type="text" value={value} onChange={(e) => setValue(e.target.value)}/>
-                    <Button onClick={() => setSearch(value)}> 찾기</Button>{search}
+                    <Button onClick={() => setSearch(value)}> 찾기</Button>
                 </div>
                 <div ref={mapContainer} style={{ width: '100%', height: '400px' }}></div>
                 <div id="clickLatlng"></div>

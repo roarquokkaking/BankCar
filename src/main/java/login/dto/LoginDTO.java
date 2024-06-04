@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-
 public class LoginDTO {
     @Id
     @Column(name="id")
@@ -74,34 +73,5 @@ public class LoginDTO {
         this.image_original_name = image_original_name;
     }
 
-    public boolean isDriver() {
-        return driver;
-    }
-
-    public void setDriver(boolean driver) {
-        this.driver = driver;
-    }
-
-    public String getId() {return id;}
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
 }

@@ -9,10 +9,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"login.*","driverLicense.*","chat.*"})
+@ComponentScan(basePackages = {"login.*","driverLicense.*","chat.*","car.*"})
 @CrossOrigin(origins = "http://localhost:3000")
-@EntityScan(basePackages = {"login.dto","driverLicense.entity","chat.bean"})
-@EnableJpaRepositories(basePackages = {"login.dao","driverLicense.repo", "chat.repository"})
+@EntityScan(basePackages = {"login.dto","driverLicense.entity","chat.bean","car.entity"})
+@EnableJpaRepositories(basePackages = {"login.dao","driverLicense.repo", "chat.repository" ,"car.repo"})
 
 public class BankCarApplication {
 
