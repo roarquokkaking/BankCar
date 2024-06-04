@@ -5,32 +5,46 @@
     margin: 20px;
 }
 
-.infoSection, .imageSection {
+.publish .infoTable {
+    width: 100%;
+    border-collapse: collapse;
     background-color: #f4f4f4;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     padding: 20px;
-    width: 90%;
 }
 
-.infoItem {
+.publish .infoTable td {
+    padding: 8px;
+    height: 50px;
+    border-bottom: 1px solid #ddd;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
+}
+
+.publish .infoTable tr:last-child td {
+    border-bottom: none;
+}
+
+.publish .infoItem {
     margin: 10px 0;
     font-size: 16px;
 }
 
-.infoItem span {
+.publish .infoItem span {
     font-weight: bold;
 }
 
-.imageContainer {
+.publish .imageContainer {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
 }
 
-.carImage {
+.publish .carImage {
     max-width: 100px;
     max-height: 100px;
     border-radius: 8px;
@@ -49,7 +63,7 @@
     width: calc(100% - 20px);
     margin: 0 10px 60px 10px;
     padding: 10px 0;
-    background-color: #007bff;
+    background-color: #3594ff;
     color: white;
     border: none;
     border-radius: 10px;
