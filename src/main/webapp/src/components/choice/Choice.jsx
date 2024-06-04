@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import '../CSS/ChoiceCSS.css';
-import { Box, Container } from '@mui/material';
-import LocationCardsChoice from './LocationCardsChoice';
+import '../../CSS/ChoiceCSS.css';
+import "../profile/ProfilePage.css";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import Review from './review/Review';
-// import '../CSS/NaverMapCSS.css'
+import Review from '../review/Review';
+import { useNavigate } from "react-router-dom";
+import Carousel from './Carousel';
 
 const Choice = () => {
+    const navigate = useNavigate();
     const [startTime, setStartTime] = useState(null);
     const [endTime, setEndTime] = useState(null);
 
@@ -58,26 +59,57 @@ const Choice = () => {
 
     return (
         <div>
-            <div className="description">
-                <h1>예약 및 결제</h1>
-                <Container maxWidth="xl" sx={{ mb: 3 }}>
-                    <LocationCardsChoice />
-                    <Box
-                    sx={{
-                        display: { xs: "flex", md: "none" },
+            <header>
+                {/* <div className="headernav" style={{marginBottom:'0%'}}>
+                <GoArrowLeft
+                    style={{
+                    width: "30px",
+                    height: "30px",
+                    marginTop: "4%",
+                    marginLeft: "20px"
                     }}
-                    ></Box>
-                </Container>
-                <p>자동차 소개 글, 자동차 소개 글자동차 소개 글</p>
+                    onClick={() => navigate(-1)}
+                />
+                </div> */}
+            </header>
+            <div className="description">
+                <Carousel/>
+            </div>
+            <div className='car-description'>
+                <h3 style={{textAlign: "-webkit-left"}}>~~차에 대한 설명~~</h3>
             </div>
             <div className="owner-description">
-                <div className="profile-pic"></div>
-                <span>자동차 주인 소개</span>
+                <section className="user-info" style={{
+                                                    display: "flex",
+                                                    alignitems: "left",
+                                                    paddingLeft: "20px",
+                                                    margin: "0px",
+                                                    justifycontent: "space-between"
+                                                    }}>
+                    <div className="user-img-name" > 
+                        <img
+                            src="https://wrtn-image-user-output.s3.ap-northeast-2.amazonaws.com/6631b6db962f730c6207b3c2/fd53f817-13a7-482c-9492-26a270549528.png"
+                            alt="유저 이미지"
+                            className="user-image"
+                        />
+                        <div className="text-info">
+                            <h4>사용자 이름</h4>
+                            <p>user@example.com</p>
+                        </div>
+                        {/* 호스트 데이터 부르기 */}
+                    </div>
+                </section>
             </div>
             <div className="border-line"></div>
-            <div className="usage-time">사용 시간, 이용 시간 설정</div>
+            {/* <div className="usage-time" style={{maxwidth: "800px",
+                                                margin: "0px auto",
+                                                paddingLeft: "20px",
+                                                border: "none"
+                                                }}>
+                <h2 style={{textAlign: "-webkit-left"}}>이용 시간 설정</h2>
+            </div>
             <div className='input-group'>
-                <div className='input-box'>
+                <div className='input-box' style={{border: "none"}}>
                     <DatePicker
                     selected={startTime}
                     onChange={(date) => setStartTime(date)}
@@ -88,11 +120,7 @@ const Choice = () => {
                     dateFormat="h:mm aa"
                     withPortal
                     />
-                </div>
-            </div>
-
-            <div className='input-group'>
-                <div className='input-box'>
+                    <br/>
                     <DatePicker
                     selected={endTime}
                     onChange={(date) => setEndTime(date)}
@@ -104,8 +132,7 @@ const Choice = () => {
                     withPortal
                     />
                 </div>
-            </div>
-            <div className="additional-info">후기 버튼, 위치 정보 지도, 태그</div>
+            </div> */}
             <div>
                 <Review />
             </div>
@@ -114,8 +141,7 @@ const Choice = () => {
                     <div id="map" className='map'></div>
                 </div>
             </div>
-            {/* <div className="grey-box large"></div> */}
-            <div className="footer">
+            <div className="choice-footer">
                 <div className="price-time">
                     <span className="price">50,000원</span>
                     <span className="time">2024.06.07  17:00 <br />2024.06.09  10:00</span>
