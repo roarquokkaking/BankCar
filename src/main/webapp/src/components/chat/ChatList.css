@@ -1,0 +1,65 @@
+.messageContainer {
+    display: flex;
+    align-items: flex-start; /* 프로필 이미지와 닉네임 높이 일치 */
+    margin-bottom: 10px;
+}
+
+.ownMessageContainer {
+    flex-direction: row-reverse;
+}
+
+.otherMessageContainer {
+    flex-direction: row;
+}
+
+.message {
+    max-width: 250px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    text-align: left;
+}
+
+.ownMessage {
+    max-width: 250px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #ffecb3;
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.ownProfileImage {
+    display: none; /* 자신의 프로필 이미지 숨기기 */
+}
+
+.otherProfileImage {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 8px; /* 다른 사람의 프로필 이미지와 닉네임 사이의 거리 */
+}
+
+.textContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 닉네임과 메시지 수직 중앙 정렬 */
+}
+
+.nickName {
+    color: #757575;
+    margin-bottom: 4px; /* 닉네임과 메시지 사이의 거리 */
+}
+
+@media (max-width: 1400px) {
+}
+@media (max-width: 1200px) {
+}
+@media (max-width: 880px) {
+}
+@media (max-width: 600px) {
+}

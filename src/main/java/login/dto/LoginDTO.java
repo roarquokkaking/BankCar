@@ -28,12 +28,51 @@ public class LoginDTO {
     @Column(name = " create_date",nullable = true)
     private LocalDateTime create_date ;// 가입 날짜
     @Column(name = "rating",nullable = true)
-    private float rating ; //매너 온도
+    private Float rating ; //매너 온도
     @Column(name ="image_file_name",nullable = true)
     private String image_file_name; // 클라우드 이미지 uuid
     @Column(name ="image_original_name",nullable = true)
     private String image_original_name ; //이미지 실제 이름
 
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
+    }
+
+    public LocalDateTime getCreate_date() {
+        return create_date;
+    }
+
+    public void setCreate_date(LocalDateTime create_date) {
+        this.create_date = create_date;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    public String getImage_file_name() {
+        return image_file_name;
+    }
+
+    public void setImage_file_name(String image_file_name) {
+        this.image_file_name = image_file_name;
+    }
+
+    public String getImage_original_name() {
+        return image_original_name;
+    }
+
+    public void setImage_original_name(String image_original_name) {
+        this.image_original_name = image_original_name;
+    }
 
     public boolean isDriver() {
         return driver;

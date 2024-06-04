@@ -27,10 +27,12 @@ import MyRating from "./components/profile/MyRating";
 import {Details} from "@mui/icons-material";
 import MyProfileUpdate from "./components/profile/MyProfileUpdate";
 import KakaoLogin from './components/login/KakaoLogin';
-import ChatRoom from './components/chat/ChatRoom';
 import UseAfter from "./components/profile/UseAfter";
 import UseBefore from "./components/profile/UseBefore";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ChattingRoom from './components/chat/ChattingRoom';
+import ChattingNow from './components/chat/ChattingNow';
+import ChatGroupBox from './components/chat/ChatGroupBox';
 
 
 
@@ -83,7 +85,9 @@ function App() {
 
             <Route path='/payment' element={<Payment_main />} />
 
-            <Route path='/chatroom' element={<ChatRoom />} />
+            <Route path='/ChattingRoom' element={<ChattingRoom />} />
+            <Route path='/ChattingNow' element={<ChattingNow />} />
+            <Route path='/ChatGroupBox' element={<ChatGroupBox />} />
 
           </Routes>
           </Provider>
