@@ -6,10 +6,8 @@ import './App.css';
 import FooterMenu from './components/FooterMenu';
 import Home from './components/Home';
 import WishList from './components/WishList';
-import Search from "./components/Search";
 import Login_main from './components/login/Login_main';
 import GoogleLogin from './components/login/GoogleLogin';
-import Choice from './components/Choice';
 import ProfileMain from './components/profile/ProfileMain';
 import ReservedCars from './components/profile/ReservedCars';
 import UsedCarReviews from './components/profile/UsedCarReviews';
@@ -31,6 +29,8 @@ import ChatRoom from './components/chat/ChatRoom';
 import UseAfter from "./components/profile/UseAfter";
 import UseBefore from "./components/profile/UseBefore";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Searching from "./components/search/Searching";
+import Choice from "./components/choice/Choice";
 
 
 
@@ -55,6 +55,7 @@ function App() {
           <Provider store={store}>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/searching" element={<Searching />} />
             <Route path="/wishList" element={<WishList />} />
             <Route path="/myWishList" element={<MyWishList />} />
             <Route path="login"  >
@@ -78,7 +79,7 @@ function App() {
             <Route path='/car/new' element={<RegisterMain />} />
             <Route path='/car/driver' element={<DriverLicense />} />
             <Route path='/car/driverCheck' element={<DriverCheck />} />
-            <Route path="/search" element={<Search />} />
+
             <Route path="/choice" element={<Choice />} />
 
             <Route path='/payment' element={<Payment_main />} />

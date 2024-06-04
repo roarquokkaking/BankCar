@@ -73,7 +73,7 @@ const UserReview = () => {
   
   return (
     <div className='review-container'>
-      <h2>User Reviews</h2>
+      <h2 style={{textAlign:"-webkit-left"}}>User Reviews</h2>
       <Carousel responsive={responsive}>
         {reviews.map(review => (
           <UserReviewItem key={review.id} review={review} />
