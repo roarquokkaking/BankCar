@@ -31,6 +31,8 @@ npm i react-number-format
 npm i slick-carousel
 npm i react-slick
 
+npm install react-bootstrap
+
 #1. 간편결제 sdk 모듈  npm 다운 안되시면 2번 yarn으로 받으세용
 npm install @tosspayments/payment-widget-sdk
 #2. 간편결제 sdk 모듈  yarn
