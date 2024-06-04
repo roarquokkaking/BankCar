@@ -17,6 +17,8 @@ const RegisterProvider = ({children}) => {
         segment: "",
         latitude: 37.49807642572867,
         longitude: 127.02800593613699,
+        doro_address: "",
+        jibun_address: "",
         price: 0,
         title: "",
         content: ""

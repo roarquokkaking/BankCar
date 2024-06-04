@@ -35,6 +35,18 @@ const CarLocation = () => {
                 window.kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
                     // 클릭한 위도, 경도 정보를 가져옵니다
                     const latlng = mouseEvent.latLng;
+                    const geocoder = new window.kakao.maps.services.Geocoder();
+
+                    geocoder.coord2Address(latlng.getLng(), latlng.getLat(), function(result, status) {
+                        if (status === window.kakao.maps.services.Status.OK) {
+                            onAddData("doro_address", result[0].road_address.address_name);
+                            onAddData("jibun_address",  result[0].address.address_name);
+
+                            const message = `클릭한 위치의 위도는 ${result[0].road_address.address_name} 이고, 경도는 ${result[0].address.address_name} 입니다`;
+                            const resultDiv = document.getElementById('clickLatlng');
+                            resultDiv.innerHTML = message;
+                        }
+                    });
 
                     // 마커 위치를 클릭한 위치로 옮깁니다
                     marker.setPosition(latlng);
@@ -42,10 +54,6 @@ const CarLocation = () => {
 
                     onAddData("latitude", latlng.getLat());
                     onAddData("longitude", latlng.getLng());
-                    const message = `클릭한 위치의 위도는 ${latlng.getLat()} 이고, 경도는 ${latlng.getLng()} 입니다`;
-
-                    const resultDiv = document.getElementById('clickLatlng');
-                    resultDiv.innerHTML = message;
                 });
 
                 ps.keywordSearch(search, (data, status, pagination) => {
