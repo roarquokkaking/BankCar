@@ -47,7 +47,7 @@ text-align: center;
     align-items: center;
     margin-left: 10px;
 }
-button {
+.button {
     background-color: #007BFF;
     color: #ffffff;
     border: none;
