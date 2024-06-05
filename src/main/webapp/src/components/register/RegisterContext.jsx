@@ -17,8 +17,8 @@ const RegisterProvider = ({children}) => {
         segment: "",
         latitude: 37.49807642572867,
         longitude: 127.02800593613699,
-        road_address: "",
-        jibun_address: "",
+        doroAddress: "",
+        jibunAddress: "",
         price: 0,
         title: "",
         content: ""
@@ -34,6 +34,15 @@ const RegisterProvider = ({children}) => {
 
     const onAddSelectImages = (imageUrls) => {
         setSelectImages(imageUrls);
+    }
+
+    const onAddLocation = (location) => {
+        setData({...data,
+            latitude: location.get("latitude"),
+            longitude: location.get("longitude"),
+            doroAddress: location.get("doro_address"),
+            jibunAddress: location.get("jibun_address")
+        })
     }
 
 
@@ -52,11 +61,7 @@ const RegisterProvider = ({children}) => {
         console.log(formData)
 
         // axios로 api 호출
-        axios.post('http://localhost:8080/cars', formData, {
-            headers: {
-                "Content-Type": "multipart/form-data"
-            },
-        })
+        insertCarData(formData)
         .then(
             (response) => {
                 alert("자동차 정보 등록이 완료되었습니다.");
@@ -71,7 +76,7 @@ const RegisterProvider = ({children}) => {
 
     return (
         <RegisterContext.Provider
-            value={{data, selectImages,setData, onInsertData, onAddData, onAddImageFile, onAddSelectImages}}>
+            value={{data, selectImages, onAddLocation, onInsertData, onAddData, onAddImageFile, onAddSelectImages}}>
             {children}
         </RegisterContext.Provider>
     );

@@ -8,7 +8,7 @@ const CarLocation = () => {
     const [value, setValue] = useState("");
     const [search, setSearch] = useState('');
     const mapContainer = useRef(null); // 지도를 표시할 div의 ref
-    const {data, onAddData} = useContext(RegisterContext);      // 등록 데이터 context
+    const {data,onAddLocation} = useContext(RegisterContext);      // 등록 데이터 context
     useEffect(() => {
             window.kakao.maps.load(() => {
                 const center = new window.kakao.maps.LatLng(data.latitude, data.longitude);
@@ -41,19 +41,22 @@ const CarLocation = () => {
                             var roadAddress = result[0].road_address ? result[0].road_address.address_name : "없습니다."
                             console.log(roadAddress);
                             console.log(result[0].address.address_name);
+                            console.log(latlng.getLat())
+                            console.log(latlng.getLng())
 
-                            onAddData("latitude", latlng.getLat());
-                            onAddData("longitude", latlng.getLng());
-                            onAddData("road_address", roadAddress);
-                            onAddData("jibun_address", result[0].address.address_name);
+                            const map = new Map([
+                                ["latitude", latlng.getLat()],
+                                ["longitude", latlng.getLng()],
+                                ["jibun_address",  result[0].address.address_name],
+                                ["doro_address", roadAddress.toString()]
+                            ])
+                            onAddLocation(map);
                         }
                     });
 
                     // 마커 위치를 클릭한 위치로 옮깁니다
                     marker.setPosition(latlng);
                     map.setCenter(latlng);
-
-
                 });
 
                 ps.keywordSearch(search, (data, status, pagination) => {
@@ -83,8 +86,8 @@ const CarLocation = () => {
                 </div>
                 <div ref={mapContainer} style={{ width: '100%', height: '400px' }}></div>
                 <div id="clickLatlng">
-                    <span>도로명 주소 : {data.road_address}</span><br />
-                    <span>지번 주소 : {data.jibun_address}</span>
+                    <span>도로명 주소 : {data.doroAddress}</span><br />
+                    <span>지번 주소 : {data.jibunAddress}</span>
                 </div>
             </div>
         </>
