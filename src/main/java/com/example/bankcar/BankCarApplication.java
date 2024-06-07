@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @SpringBootApplication
 @ComponentScan(basePackages = {"login.*","driverLicense.*","chat.*","car.*"})
 @CrossOrigin(origins = "http://localhost:3000")
-@EntityScan(basePackages = {"login.dto","driverLicense.entity","chat.bean","car.entity"})
-@EnableJpaRepositories(basePackages = {"login.dao","driverLicense.repo", "chat.repository" ,"car.repo"})
+@EntityScan(basePackages = {"login.dto","driverLicense.entity","chat.entity","car.entity"})
+@EnableJpaRepositories(basePackages = {"login.dao","driverLicense.repo","chat.repository","car.repo"})
 
 public class BankCarApplication {
 

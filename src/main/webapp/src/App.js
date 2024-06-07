@@ -28,11 +28,12 @@ import KakaoLogin from './components/login/KakaoLogin';
 import UseAfter from "./components/profile/UseAfter";
 import UseBefore from "./components/profile/UseBefore";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import ChattingRoom from './components/chat/ChattingRoom';
-import ChattingNow from './components/chat/ChattingNow';
-import ChatGroupBox from './components/chat/ChatGroupBox';
+
 import Searching from "./components/search/Searching";
 import Choice from "./components/choice/Choice";
+
+import ChattingRoom from './components/chat/ChattingRoom';
+
 
 
 
@@ -86,8 +87,7 @@ function App() {
             <Route path='/payment' element={<Payment_main />} />
 
             <Route path='/ChattingRoom' element={<ChattingRoom />} />
-            <Route path='/ChattingNow' element={<ChattingNow />} />
-            <Route path='/ChatGroupBox' element={<ChatGroupBox />} />
+
 
           </Routes>
           </Provider>

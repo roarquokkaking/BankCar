@@ -1,0 +1,53 @@
+.chat-room {
+    display: flex;
+    flex-direction: column;
+    height: 95vh;
+    padding: 20px;
+}
+
+.message-container {
+    flex: 1;
+    overflow-y: auto;
+    
+}
+
+.message-box {
+    background-color: #ff02c8;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+.sent {
+    text-align: right;
+    background-color: #a700a4;
+    margin-bottom: 5px;
+    color: #000000;
+}
+
+.received {
+    text-align: left;
+    background-color: #f0f0f0;
+    margin-bottom: 5px;
+    color: #000;
+}
+.message-timestamp {
+    font-size: 15px;
+    color: #000000;
+}
+
+
+.sendbutton {
+    width: 80px;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #a700a4;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sendbutton:hover {
+    background-color: #0056b3;
+}
