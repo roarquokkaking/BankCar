@@ -44,8 +44,8 @@ export function RegisterPublish() {
                     <tr>
                         <th>자동차 위치</th>
                         <td>
-                            도로명 :{data.road_address} <br />
-                            지번  : {data.jibun_address}
+                            도로명 :{data.doroAddress} <br />
+                            지번  : {data.jibunAddress}
                         </td>
                     </tr>
                     <tr>

@@ -11,7 +11,7 @@ import GoogleLogin from './components/login/GoogleLogin';
 import ProfileMain from './components/profile/ProfileMain';
 import ReservedCars from './components/profile/ReservedCars';
 import UsedCarReviews from './components/profile/UsedCarReviews';
-import CheckMyCar from './components/profile/CheckMyCar';
+import CheckMyCar from './components/profile/checkCar/CheckMyCar';
 import RegisterMain from './components/register/RegisterMain';
 import {Provider} from 'react-redux';
 import store from './store/store';
@@ -28,14 +28,10 @@ import KakaoLogin from './components/login/KakaoLogin';
 import UseAfter from "./components/profile/UseAfter";
 import UseBefore from "./components/profile/UseBefore";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import ChattingRoom from './components/chat/ChattingRoom';
-import ChattingNow from './components/chat/ChattingNow';
-import ChatGroupBox from './components/chat/ChatGroupBox';
+
 import Searching from "./components/search/Searching";
+import ChattingRoom from './components/chat/ChattingRoom';
 import Choice from "./components/choice/Choice";
-// import Spark from './components/spark/Spark';
-
-
 
 function Detail() {
   return null;
@@ -59,6 +55,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/searching" element={<Searching />} />
+            <Route path="/choice" element={<Choice />} />
             <Route path="/wishList" element={<WishList />} />
             <Route path="/myWishList" element={<MyWishList />} />
             <Route path="login"  >
@@ -88,10 +85,7 @@ function App() {
             <Route path='/choice/:carid&:startdate&:enddate&:price' element={<Choice />} />
 
             <Route path='/ChattingRoom' element={<ChattingRoom />} />
-            <Route path='/ChattingNow' element={<ChattingNow />} />
-            <Route path='/ChatGroupBox' element={<ChatGroupBox />} />
 
-            {/*<Route path='/spark' element={<Spark />} />*/}
           </Routes>
           </Provider>
         </Box>

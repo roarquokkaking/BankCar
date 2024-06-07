@@ -1,0 +1,31 @@
+/* CheckMyCar.css */
+.check-my-car-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #e0f7fa; /* 연한 블루 배경 */
+    padding: 20px;
+}
+
+.carousel-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.slick-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-car-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    padding: 20px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.register-car-card:hover {
+    transform: scale(1.05);
+}

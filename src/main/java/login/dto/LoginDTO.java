@@ -21,6 +21,37 @@ public class LoginDTO {
     @Column(name="driver")
     private boolean driver;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isDriver() {
+        return driver;
+    }
+
+    public void setDriver(boolean driver) {
+        this.driver = driver;
+    }
 
     @Column(name = "phone_number" ,nullable = true)
     private String phone_number;// 전화번호
@@ -73,5 +104,36 @@ public class LoginDTO {
         this.image_original_name = image_original_name;
     }
 
+    @Getter
+    @Builder
+    public static class ResponseOnlyMemberName {
+        private String memberId;
+        private String nickName;
+        private String profileImage;
+
+        public String getMemberId() {
+            return memberId;
+        }
+
+        public void setMemberId(String memberId) {
+            this.memberId = memberId;
+        }
+
+        public String getNickName() {
+            return nickName;
+        }
+
+        public void setNickName(String nickName) {
+            this.nickName = nickName;
+        }
+
+        public String getProfileImage() {
+            return profileImage;
+        }
+
+        public void setProfileImage(String profileImage) {
+            this.profileImage = profileImage;
+        }
+    }
 
 }
