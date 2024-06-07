@@ -32,6 +32,8 @@ import ChattingRoom from './components/chat/ChattingRoom';
 import ChattingNow from './components/chat/ChattingNow';
 import ChatGroupBox from './components/chat/ChatGroupBox';
 import Searching from "./components/search/Searching";
+import Choice from "./components/choice/Choice";
+// import Spark from './components/spark/Spark';
 
 
 
@@ -83,10 +85,13 @@ function App() {
 
             <Route path='/payment' element={<Payment_main />} />
 
+            <Route path='/choice/:carid&:startdate&:enddate&:price' element={<Choice />} />
+
             <Route path='/ChattingRoom' element={<ChattingRoom />} />
             <Route path='/ChattingNow' element={<ChattingNow />} />
             <Route path='/ChatGroupBox' element={<ChatGroupBox />} />
 
+            {/*<Route path='/spark' element={<Spark />} />*/}
           </Routes>
           </Provider>
         </Box>

@@ -4,10 +4,19 @@ import "../profile/ProfilePage.css";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Review from '../review/Review';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Carousel from './Carousel';
+import axios from 'axios';
 
 const Choice = () => {
+    const { carid } = useParams();
+
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const startDate = searchParams.get('startdate');
+    const endDate = searchParams.get('enddate');
+    const price = searchParams.get('price');
+
     const navigate = useNavigate();
     const [startTime, setStartTime] = useState(null);
     const [endTime, setEndTime] = useState(null);
@@ -56,6 +65,14 @@ const Choice = () => {
             document.body.removeChild(script);
         };
     }, []);
+
+    const onReserve=()=>{
+        axios.post("http://localhost:8080/choice/reserve", null)
+                .then(res => {
+                    console.log(res.data);
+                })
+                .catch(error => console.log(error))
+    }
 
     return (
         <div>
@@ -144,10 +161,12 @@ const Choice = () => {
             <div className="choice-footer">
                 <div className="price-time">
                     <span className="price">50,000원</span>
-                    <span className="time">2024.06.07  17:00 <br />2024.06.09  10:00</span>
+                    <span className="starttime">2024.06.07  17:00</span>
+                    <br />
+                    <span className='endtime'>2024.06.09  10:00</span>
                 </div>
                 <div className="button-container">
-                    <span className="button-text">예약 하기</span>
+                    <span className="button-text" onClick={onReserve}>예약 하기</span>
                 </div>
             </div>
         </div>
