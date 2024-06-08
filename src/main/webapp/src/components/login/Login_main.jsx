@@ -16,7 +16,7 @@ const Login_main = () => {
 
   //구글 로그인
   const cliend_id = "601610993000-u4u34s3r1op37juvet6fmr0hee3e3u1d.apps.googleusercontent.com";
-  const redirect_uri = "http://localhost:8080/login/google";
+  const redirect_uri = "https://dongwoossltest.shop/api/login/google";
 
   const isDesktopOrLaptop = useMediaQuery({
     query: "(min-width: 1224px)",

@@ -74,7 +74,7 @@ public class LoginServiceImpl implements LoginService{
     private String getAccessToken(String authorizationCode) {
         String clientId = "601610993000-u4u34s3r1op37juvet6fmr0hee3e3u1d.apps.googleusercontent.com";
         String clientSecret = "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";
-        String redirectUri = "http://localhost:8080/login/google" ;
+        String redirectUri = "https://dongwoossltest.shop/api/login/google" ;
         String tokenUri = "https://oauth2.googleapis.com/token";
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();

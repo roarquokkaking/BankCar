@@ -10,16 +10,16 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-@CrossOrigin(origins="http://localhost:3000")    // 다른 포트에서 넘오는 것을 받을 수 있다.
+@CrossOrigin(origins="*")    // 다른 포트에서 넘오는 것을 받을 수 있다.
 @RestController
-@RequestMapping(path = "login", produces = "application/json")
+@RequestMapping(path = "/api/login", produces = "application/json")
 public class LoginController {
 
     @Autowired
     LoginService loginService;
 
 
-    @GetMapping(path = "google")
+    @GetMapping(path = "/google")
     public RedirectView google(@RequestParam String code, HttpSession session){
         loginService.googleLogin(code, session );
         LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginDTO");
@@ -27,7 +27,7 @@ public class LoginController {
         String email = URLEncoder.encode(loginDTO.getEmail(), StandardCharsets.UTF_8);
         String name = URLEncoder.encode(loginDTO.getName(), StandardCharsets.UTF_8);
         boolean driver = loginDTO.isDriver();
-        String url="http://localhost:3000/login/Google?id="+id+"&email="+email+"&name="+name+"&driver="+driver;
+        String url="https://dongwoossltest.shop/login/Google?id="+id+"&email="+email+"&name="+name+"&driver="+driver;
         return new RedirectView(url);
     }
 
