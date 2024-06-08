@@ -162,7 +162,6 @@ const Choice = () => {
                 <div className="price-time">
                     <span className="price">50,000원</span>
                     <span className="starttime">2024.06.07  17:00</span>
-                    <br />
                     <span className='endtime'>2024.06.09  10:00</span>
                 </div>
                 <div className="button-container">
