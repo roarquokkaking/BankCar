@@ -22,8 +22,11 @@ import {
   fixedBottom,
 } from "../themes/commonStyles";
 import "./CarouselCard.css";
+import { useNavigate } from "react-router-dom";
 
 const CarouselCard = ({ location }) => {
+  const navigate = useNavigate();
+
   const [activeStep, setActiveStep] = React.useState(0);
 
   const maxSteps = location.locationImages.length; // so that we know how many dots
@@ -39,6 +42,12 @@ const CarouselCard = ({ location }) => {
   const handleStepChange = (step) => {
     setActiveStep(step); // handle swipe change
   };
+
+  const goChoice = () => {
+    const url = `/choice?carid=${location.id}&startdate=${location.days}&enddate=${location.days}&price=${location.price}`;
+    navigate(url);
+  };
+
   return (
     <Box
       className="carouselCard"
@@ -66,6 +75,7 @@ const CarouselCard = ({ location }) => {
                   sx={carouselImage}
                   src={step.url}
                   alt={step.id}
+                  onClick={goChoice}
                 ></Box>
               </div>
             );
@@ -103,7 +113,7 @@ const CarouselCard = ({ location }) => {
       </Box>
 
       <Box sx={flexBetween}>
-        <Box sx={{ mt: 2 }}>
+        <Box sx={{ mt: 2 }} onClick={goChoice}>
           <Typography component="h3"> {location.location}</Typography>
           <Typography component="h4"> {location.days}</Typography>
           <Typography component="h5"> {location.price}</Typography>

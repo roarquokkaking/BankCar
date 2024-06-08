@@ -30,12 +30,8 @@ import UseBefore from "./components/profile/UseBefore";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import Searching from "./components/search/Searching";
-import Choice from "./components/choice/Choice";
-
 import ChattingRoom from './components/chat/ChattingRoom';
-
-
-
+import Choice from "./components/choice/Choice";
 
 function Detail() {
   return null;
@@ -86,8 +82,9 @@ function App() {
 
             <Route path='/payment' element={<Payment_main />} />
 
-            <Route path='/ChattingRoom' element={<ChattingRoom />} />
+            <Route path='/choice/:carid&:startdate&:enddate&:price' element={<Choice />} />
 
+            <Route path='/ChattingRoom' element={<ChattingRoom />} />
 
           </Routes>
           </Provider>
