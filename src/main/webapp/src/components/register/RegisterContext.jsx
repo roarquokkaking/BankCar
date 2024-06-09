@@ -1,6 +1,7 @@
 import React, {createContext, useState} from 'react';
-import {insertCarData} from "./api/CarApiService";
+import {insertCarDataApi} from "./api/CarApiService";
 import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
 import axios from "axios";
 
 export const RegisterContext = createContext();
@@ -9,7 +10,9 @@ export const RegisterContext = createContext();
 
 const RegisterProvider = ({children}) => {
     const navigate = useNavigate();
+    const userId = useSelector((state) => state.Login.id);
     const [data, setData] = useState({
+        userId,
         category: "",
         model: "",
         released: "",
@@ -26,7 +29,7 @@ const RegisterProvider = ({children}) => {
     const [imageFiles, setImageFiles] = useState([]);   // 이미지 파일 객체
     const [selectImages, setSelectImages] = useState([]);
     const onAddData = (target, value) => {
-        setData({...data, [target]: value})
+        setData(prevState => ({...prevState, [target]: value}))
     }
     const onAddImageFile = (files) => {
         setImageFiles(files)
@@ -35,16 +38,6 @@ const RegisterProvider = ({children}) => {
     const onAddSelectImages = (imageUrls) => {
         setSelectImages(imageUrls);
     }
-
-    const onAddLocation = (location) => {
-        setData({...data,
-            latitude: location.get("latitude"),
-            longitude: location.get("longitude"),
-            doroAddress: location.get("doro_address"),
-            jibunAddress: location.get("jibun_address")
-        })
-    }
-
 
     // 자동차 정도 등록 함수
     const onInsertData = () => {
@@ -61,7 +54,7 @@ const RegisterProvider = ({children}) => {
         console.log(formData)
 
         // axios로 api 호출
-        insertCarData(formData)
+        insertCarDataApi(formData, userId)
         .then(
             (response) => {
                 alert("자동차 정보 등록이 완료되었습니다.");
@@ -76,7 +69,7 @@ const RegisterProvider = ({children}) => {
 
     return (
         <RegisterContext.Provider
-            value={{data, selectImages, onAddLocation, onInsertData, onAddData, onAddImageFile, onAddSelectImages}}>
+            value={{data, selectImages, onInsertData, onAddData, onAddImageFile, onAddSelectImages}}>
             {children}
         </RegisterContext.Provider>
     );

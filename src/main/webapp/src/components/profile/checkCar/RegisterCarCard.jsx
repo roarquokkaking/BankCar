@@ -1,33 +1,30 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { Card, CardActions, CardContent, CardMedia, Button, Typography, Chip } from '@mui/material';
 import styles from "./CheckMyCar.module.css"
 
-export default function RegisterCarCard({car}) {
+export default function RegisterCarCard({ car, onAddService }) {
+    const imageUrl = "https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/"+ car.carId +"/"+ car.image1;
+    console.log(imageUrl)
     return (
-        <div >
-            <Card sx={{ maxWidth: 345, marginTop: '30%',marginBottom: "10px", marginX: '10%', boxShadow: "5" }}>
+        <div>
+            <Card sx={{ maxWidth: 345,  marginTop: '30%',marginBottom: "10px", marginX: '10%', boxShadow: "5"}}>
                 <CardMedia
                     sx={{ height: 240 }}
-                    image="/image/car.png"
-                    title="green iguana"
+                    image={imageUrl} // 이미지 경로에 맞게 조정하세요.
+                    title={car.model}
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        Lizard
+                        {car.car.model} - {car.car.color}
                     </Typography>
+                    <Chip label={car.car.category} color="primary" sx={{ marginBottom: 2 }} />
+                    <h3 style={{margin : 0}}>{car.car.title}</h3>
                     <Typography variant="body2" color="text.secondary">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000
-                        species, ranging across all continents except Antarctica
+                        {car.car.content}
                     </Typography>
                 </CardContent>
-                <CardActions>
-                    <Button size="small">Share</Button>
-                    <Button size="small">Learn More</Button>
+                <CardActions disableSpacing sx={{ justifyContent: 'flex-end' }}>
+                    <Button size="small" onClick={() => onAddService(car.carId)}>해당 차량 서비스등록</Button>
                 </CardActions>
             </Card>
         </div>
