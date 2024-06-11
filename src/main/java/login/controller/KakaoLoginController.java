@@ -24,6 +24,9 @@ public class KakaoLoginController {
     @GetMapping(path = "login/kakao")
     public RedirectView kakao(@RequestParam String code, HttpSession session){
         loginService.kakaoLogin(code, session );
+
+        // 세션 유효 시간을 1시간(3600초)으로 설정
+        session.setMaxInactiveInterval(3600);
         LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginDTO");
         String id = URLEncoder.encode(loginDTO.getId(), StandardCharsets.UTF_8);
         String email = URLEncoder.encode(loginDTO.getEmail(), StandardCharsets.UTF_8);
@@ -31,6 +34,8 @@ public class KakaoLoginController {
         String url="http://localhost:3000/login/kakao?id="+id+"&email="+email+"&name="+name;
         return new RedirectView(url);
     }
+
+
 
 
 

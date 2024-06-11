@@ -11,8 +11,8 @@ public class Message {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="message_id")
-    private Long id;
+    @Column(name="messageSeq")
+    private Long messageSeq;
 
     @Column(name="content", nullable = false)
     private String content;
@@ -20,26 +20,17 @@ public class Message {
     @Column(name="sentTime", nullable = false)
     private LocalDateTime sentTime;
 
-    // 송신자 ID. LoginDTO의 id와 연결
-    @ManyToOne
-    @JoinColumn(name="sender_id", referencedColumnName = "id")
-    private LoginDTO sender;
+    // 보낸 사용자의 이름을 저장할 필드
+    @Column(name="sender")
+    private String sender;
 
-    // 수신자 ID. LoginDTO의 id와 연결
-    @ManyToOne
-    @JoinColumn(name="receiver_id", referencedColumnName = "id")
-    private LoginDTO receiver;
 
-    @ManyToOne
-    @JoinColumn(name="chat_room_id", referencedColumnName = "id")
-    private MessageRoom chatRoom;
-
-    public Long getMessageId() {
-        return id;
+    public Long getMessageSeq() {
+        return messageSeq;
     }
 
-    public void setMessageId(Long id) {
-        this.id = id;
+    public void setMessageSeq(Long messageSeq) {
+        this.messageSeq = messageSeq;
     }
 
     public String getContent() {
@@ -58,30 +49,23 @@ public class Message {
         this.sentTime = sentTime;
     }
 
-    public LoginDTO getSender() {
+    public String getSender() {
         return sender;
     }
 
-    public void setSender(LoginDTO sender) {
+    public void setSender(String sender) {
         this.sender = sender;
     }
 
-    public LoginDTO getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(LoginDTO receiver) {
-        this.receiver = receiver;
-    }
 
     public Message() {
     }
 
-    public Message(String content, LocalDateTime sentTime, LoginDTO sender, LoginDTO receiver) {
+    public Message(String content, LocalDateTime sentTime, String sender) {
         this.content = content;
         this.sentTime = sentTime;
         this.sender = sender;
-        this.receiver = receiver;
     }
+
 
 }

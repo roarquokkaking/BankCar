@@ -2,6 +2,7 @@ package login.dto;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 @Table(name="user")
 @NoArgsConstructor
 @AllArgsConstructor
+@Component
 @Data
 public class LoginDTO {
     @Id
@@ -80,11 +82,11 @@ public class LoginDTO {
         this.create_date = create_date;
     }
 
-    public float getRating() {
+    public Float getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
 
