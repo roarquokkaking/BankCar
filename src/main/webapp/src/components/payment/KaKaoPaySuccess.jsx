@@ -15,7 +15,7 @@ const KaKaoPaySuccess = () => {
             totalAmount:params.get('totalAmount')
         })
         
-    },[])
+    },[params])
     return (
         <div>
             {payDetail.itemName}
