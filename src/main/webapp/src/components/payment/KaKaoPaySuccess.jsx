@@ -11,8 +11,8 @@ const KaKaoPaySuccess = () => {
     })
     useEffect(()=>{
         setPayDetail({
-            itemName:params.get(itemName),
-            totalAmount:params.get(totalAmount)
+            itemName:params.get('itemName'),
+            totalAmount:params.get('totalAmount')
         })
         
     },[])
