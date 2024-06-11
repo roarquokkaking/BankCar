@@ -56,11 +56,11 @@ public class KaKaoPayController {
     }
 
     @GetMapping(path = "/success")
-    public Map<String,Object> success(@RequestParam("pg_token") String pg_token){
+    public ResponseEntity<Object> success(@RequestParam("pg_token") String pg_token){
 
 
         Map<String,Object> map =paysuccess(pg_token);
-        return map;
+        return ResponseEntity.ok().body(map);
 
     }
 
