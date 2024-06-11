@@ -56,14 +56,15 @@ public class KaKaoPayController {
     }
 
     @GetMapping(path = "/success")
-    public void success(@RequestParam("pg_token") String pg_token){
+    public Map<String,Object> success(@RequestParam("pg_token") String pg_token){
 
 
-        paysuccess(pg_token);
+        Map<String,Object> map =paysuccess(pg_token);
+        return map;
 
     }
 
-    public RedirectView paysuccess(String pg_token){
+    public Map<String,Object> paysuccess(String pg_token){
         String url ="https://open-api.kakaopay.com/online/v1/payment/approve";
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
@@ -80,6 +81,10 @@ public class KaKaoPayController {
         String item_name = (String) response.getBody().get("item_name");
         Map<String,Object> total= (Map<String, Object>) response.getBody().get("amount");
         String total_amount= (String) total.get("total");
-        return new RedirectView("https://dongwoossltest.shop/success?itemName="+item_name+"&totalAmount="+total_amount);
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("item_name",item_name);
+        map.put("total_amount",total_amount);
+        return map;
     }
 }
