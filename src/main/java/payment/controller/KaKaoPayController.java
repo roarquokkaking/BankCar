@@ -56,26 +56,30 @@ public class KaKaoPayController {
     }
 
     @GetMapping(path = "/success")
-    public String success(@RequestParam("pg_token") String pg_token){
-//        String url ="https://open-api.kakaopay.com/online/v1/payment/approve";
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.set("Content-Type", "application/json");
-//        headers.set("Authorization", "SECRET_KEY DEV7583106F237EE21ACE826DF4ACF641C017674");
-//        Map<String, Object> jsonBody = new HashMap<>();
-//        jsonBody.put("cid",cid);
-//        jsonBody.put("tid",tid);
-//        jsonBody.put("partner_order_id",partner_order_id);
-//        jsonBody.put("partner_user_id",partner_user_id);
-//        jsonBody.put("pg_token",pg_token);
-//        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(jsonBody, headers);
-//
-//        ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.POST, entity, Map.class);
-//        String item_name = (String) response.getBody().get("item_name");
-//        Map<String,Object> total= (Map<String, Object>) response.getBody().get("amount");
-//        String total_amount= (String) total.get("total");
-//
-//
-//        return new RedirectView("https://dongwoossltest.shop/success?itemName="+item_name+"&totalAmount="+total_amount);
-        return pg_token;
+    public void success(@RequestParam("pg_token") String pg_token){
+
+
+        paysuccess(pg_token);
+
+    }
+
+    public RedirectView paysuccess(String pg_token){
+        String url ="https://open-api.kakaopay.com/online/v1/payment/approve";
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+        headers.set("Authorization", "SECRET_KEY DEV7583106F237EE21ACE826DF4ACF641C017674");
+        Map<String, Object> jsonBody = new HashMap<>();
+        jsonBody.put("cid",cid);
+        jsonBody.put("tid",tid);
+        jsonBody.put("partner_order_id",partner_order_id);
+        jsonBody.put("partner_user_id",partner_user_id);
+        jsonBody.put("pg_token",pg_token);
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(jsonBody, headers);
+
+        ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.POST, entity, Map.class);
+        String item_name = (String) response.getBody().get("item_name");
+        Map<String,Object> total= (Map<String, Object>) response.getBody().get("amount");
+        String total_amount= (String) total.get("total");
+        return new RedirectView("https://dongwoossltest.shop/success?itemName="+item_name+"&totalAmount="+total_amount);
     }
 }
