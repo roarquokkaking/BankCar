@@ -56,7 +56,7 @@ public class KaKaoPayController {
     }
 
     @GetMapping(path = "/success")
-    public RedirectView success(@RequestParam String pg_token){
+    public RedirectView success(@RequestParam("pg_token") String pg_token){
         String url ="https://open-api.kakaopay.com/online/v1/payment/approve";
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
