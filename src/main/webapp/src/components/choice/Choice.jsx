@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import '../../CSS/ChoiceCSS.css';
 import "../profile/ProfilePage.css";
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Review from '../review/Review';
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Carousel from './Carousel';
 import axios from 'axios';
+import { Map, MapMarker, useKakaoLoader,StaticMap } from 'react-kakao-maps-sdk';
 
 const Choice = () => {
     const { carid } = useParams();
@@ -18,53 +18,6 @@ const Choice = () => {
     const price = searchParams.get('price');
 
     const navigate = useNavigate();
-    const [startTime, setStartTime] = useState(null);
-    const [endTime, setEndTime] = useState(null);
-
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=13hvi289g6`;
-        script.async = true;
-        document.body.appendChild(script);
-
-        script.onload = () => {
-            const mapOptions = {
-                center: new window.naver.maps.LatLng(37.5666103, 126.9783882), // 서울시청 위치로 초기화
-                zoom: 18,
-            };
-            const map = new window.naver.maps.Map('map', mapOptions);
-
-            const marker = new window.naver.maps.Marker({
-                position: mapOptions.center,
-                map: map,
-            });
-
-            const success = (location) => {
-                const currentPosition = new window.naver.maps.LatLng(
-                    location.coords.latitude,
-                    location.coords.longitude
-                );
-                map.setCenter(currentPosition);
-                marker.setPosition(currentPosition);
-            };
-
-            const error = () => {
-                console.log('Unable to retrieve your location.');
-            };
-
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(success, error);
-            }
-        };
-
-        script.onerror = () => {
-            console.error('Failed to load the Naver Maps script.');
-        };
-
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []);
 
     const onReserve=()=>{
         axios.post("http://localhost:8080/choice/reserve", null)
@@ -77,17 +30,6 @@ const Choice = () => {
     return (
         <div>
             <header>
-                {/* <div className="headernav" style={{marginBottom:'0%'}}>
-                <GoArrowLeft
-                    style={{
-                    width: "30px",
-                    height: "30px",
-                    marginTop: "4%",
-                    marginLeft: "20px"
-                    }}
-                    onClick={() => navigate(-1)}
-                />
-                </div> */}
             </header>
             <div className="description">
                 <Carousel/>
@@ -118,45 +60,31 @@ const Choice = () => {
                 </section>
             </div>
             <div className="border-line"></div>
-            {/* <div className="usage-time" style={{maxwidth: "800px",
-                                                margin: "0px auto",
-                                                paddingLeft: "20px",
-                                                border: "none"
-                                                }}>
-                <h2 style={{textAlign: "-webkit-left"}}>이용 시간 설정</h2>
-            </div>
-            <div className='input-group'>
-                <div className='input-box' style={{border: "none"}}>
-                    <DatePicker
-                    selected={startTime}
-                    onChange={(date) => setStartTime(date)}
-                    showTimeSelect
-                    showTimeSelectOnly
-                    timeIntervals={60}
-                    timeCaption="Time"
-                    dateFormat="h:mm aa"
-                    withPortal
-                    />
-                    <br/>
-                    <DatePicker
-                    selected={endTime}
-                    onChange={(date) => setEndTime(date)}
-                    showTimeSelect
-                    showTimeSelectOnly
-                    timeIntervals={60}
-                    timeCaption="Time"
-                    dateFormat="h:mm aa"
-                    withPortal
-                    />
-                </div>
-            </div> */}
             <div>
                 <Review />
             </div>
+
             <div className="mapContainer">
                 <div>
-                    <div id="map" className='map'></div>
+                    <span>주소지 : ~~~</span>
                 </div>
+                <StaticMap // 지도를 표시할 Container
+                    center={{
+                        // 지도의 중심좌표
+                        lat: 33.450701,
+                        lng: 126.570667
+                    }}
+                    style={{
+                        // 지도의 크기
+                        width: "100%",
+                        height: "480px",
+                    }}
+                    marker={{
+                        lat: 33.450701,
+                        lng: 126.570667
+                    }}
+                    level={3}
+                />
             </div>
             <div className="choice-footer">
                 <div className="price-time">

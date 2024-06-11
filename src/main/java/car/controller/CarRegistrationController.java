@@ -2,6 +2,7 @@ package car.controller;
 
 import car.entity.Car;
 import car.entity.CarImages;
+import car.service.CarMachineLearningService;
 import car.service.CarRegistrationService;
 import driverLicense.service.ObjectStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class CarRegistrationController {
     @Autowired
     private ObjectStorageService objectStorageService;
     private List<String> carImagesUUID = new ArrayList<>();
+
+    @Autowired
+    CarMachineLearningService carMachineLearningService;
 
     @PostMapping(path = "/cars")
     public ResponseEntity<Car> createCar(@RequestPart("car") Car car,
@@ -40,5 +44,28 @@ public class CarRegistrationController {
         return ResponseEntity.ok(savedCar);
     }
 
+    // 차 가격 추천을 위한 머신러닝
+    @GetMapping("/train")
+    public String trainModel() {
+        try {
+            carMachineLearningService.trainModel();
+            return "Model trained successfully";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error training model";
+        }
+    }
 
+    @GetMapping("/predict")
+    public double predictPrice(@RequestParam String doroAddress,
+                               @RequestParam String model,
+                               @RequestParam String category,
+                               @RequestParam double rating) {
+        try {
+            return carMachineLearningService.predictPrice(doroAddress, model, category, rating);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 }

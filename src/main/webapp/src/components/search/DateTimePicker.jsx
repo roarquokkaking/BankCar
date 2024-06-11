@@ -1,21 +1,57 @@
-import React from 'react';
+import React, { useEffect, useRef, useState  } from 'react';
 import DatePicker from 'react-datepicker';
+import "../../CSS/SearchCSS.css";
+import 'react-datepicker/dist/react-datepicker.css';
 
-const DateTimePicker = ({
-    startDate,
-    setStartDate,
-    endDate,
-    setEndDate,
-    startTime,
-    setStartTime,
-    endTime,
-    setEndTime,
-    dateRangeDiv,
-    startTimeDiv,
-    endTimeDiv,
-    addHoursAndFormat,
-    onInput
-}) => {
+const DateTimePicker = ({ searchDTO, setSearchDTO }) => {
+    const [startDate,setStartDate] = useState(null);
+    const [endDate,setEndDate] = useState(null);
+
+    const [startTime, setStartTime] = useState(null);
+    const [endTime, setEndTime] = useState(null);
+
+    const [dateRangeDiv, setDateRangeDiv] = useState('')
+    const [startTimeDiv, setStartTimeDiv] = useState('')
+    const [endTimeDiv, setEndTimeDiv] = useState('')
+
+    const addDaysAndFormat = (date) => {
+        const newDate = new Date(date);
+        newDate.setDate(newDate.getDate() + 1);
+
+        return newDate.toISOString().split('T')[0];
+    };
+
+    const addHoursAndFormat = (time) => {
+        const newTime = new Date(time);
+        newTime.setHours(newTime.getHours());
+    
+        const hoursFormatted = String(newTime.getHours()).padStart(2, '0');
+        const minutes = String(newTime.getMinutes()).padStart(2, '0');
+    
+        return `${hoursFormatted}:${minutes}`;
+    };
+
+    useEffect(() => {
+        if (startDate) {
+            onInput(addDaysAndFormat(startDate), 'startDate');
+        }
+    }, [startDate]);
+
+    useEffect(() => {
+        if (endDate) {
+            onInput(addDaysAndFormat(endDate), 'endDate');
+        }
+    }, [endDate]);
+
+
+    const onInput = (value, name) => {
+        setSearchDTO({
+          ...searchDTO,
+          [name]:value
+        });
+        console.log(searchDTO);
+    };    
+
     return (
         <div>
             <div className="input-group">

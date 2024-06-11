@@ -33,5 +33,8 @@ public class CarRegistrationServiceImpl implements CarRegistrationService{
         carImageRepository.save(carImages);
     }
 
-
+    @Override
+    public List<Car> getAllCars() {
+        return carRepository.findAll();
+    }
 }

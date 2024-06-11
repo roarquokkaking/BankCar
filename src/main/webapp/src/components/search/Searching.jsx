@@ -1,14 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react'; 
+import React, { useState } from 'react'; 
 import { useNavigate} from 'react-router-dom';
-import { FaSearchLocation } from 'react-icons/fa';
 import axios from 'axios';
-import DatePicker from 'react-datepicker';
-// import { ko } from 'date-fns/esm/locale';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import '../../CSS/SearchCSS.css';
 import NaverMap from './NaverMap';
 import DateTimePicker from './DateTimePicker';
+import PriceSelect from './PriceSelect';
 
 const Searching = () => {
     // 달력
@@ -18,29 +16,22 @@ const Searching = () => {
     const [startTime, setStartTime] = useState(null);
     const [endTime, setEndTime] = useState(null);
 
-    const addDaysAndFormat = (date) => {
-        const newDate = new Date(date);
-        newDate.setDate(newDate.getDate() + 1);
+    // const addDaysAndFormat = (date) => {
+    //     const newDate = new Date(date);
+    //     newDate.setDate(newDate.getDate() + 1);
 
-        return newDate.toISOString().split('T')[0];
-    };
+    //     return newDate.toISOString().split('T')[0];
+    // };
 
-    const addHoursAndFormat = (time) => {
-        const newTime = new Date(time);
-        newTime.setHours(newTime.getHours());
+    // const addHoursAndFormat = (time) => {
+    //     const newTime = new Date(time);
+    //     newTime.setHours(newTime.getHours());
     
-        const hoursFormatted = String(newTime.getHours()).padStart(2, '0');
-        const minutes = String(newTime.getMinutes()).padStart(2, '0');
+    //     const hoursFormatted = String(newTime.getHours()).padStart(2, '0');
+    //     const minutes = String(newTime.getMinutes()).padStart(2, '0');
     
-        return `${hoursFormatted}:${minutes}`;
-    };
-    
-    const [addr,setAddr] = useState({
-        jibunAddress:"",
-        roadAddress:"",
-        x:"",
-        y:""
-    })
+    //     return `${hoursFormatted}:${minutes}`;
+    // };
 
     const nav = useNavigate()
 
@@ -65,29 +56,6 @@ const Searching = () => {
         setReset(!reset)
     }
 
-    useEffect(() => {
-        if (startDate) {
-            onInput(addDaysAndFormat(startDate), 'startDate');
-        }
-    }, [startDate]);
-
-    useEffect(() => {
-        if (endDate) {
-            onInput(addDaysAndFormat(endDate), 'endDate');
-        }
-    }, [endDate]);
-
-
-    const handleSearchClick = () => {
-        console.log(addr)
-    };
-    const onInput = (value, name) => {
-        setSearchDTO({
-          ...searchDTO,
-          [name]:value
-        });
-        console.log(searchDTO);
-    };    
     const onSearch = () =>{
         setStartTimeDiv('')
         setEndTimeDiv('')
@@ -113,42 +81,16 @@ const Searching = () => {
 
     return (
         <div>
-            <div className="header">
-                {/* <div className={`tab ${activeTab === 'Rent' ? 'active' : ''}`} onClick={() => setActiveTab('Rent')}>
-                    Rent
-                </div>
-                <div className={`tab ${activeTab === 'Experiences' ? 'active' : ''}`} onClick={() => setActiveTab('Experiences')}>
-                    Experiences
-                </div> */}
-            </div>
+            <div className="search-header"></div>
             <div className="search-container">
                 <h2>오데가노?</h2>
-                <div className="search-bar">
-                    <FaSearchLocation className='FaSearchLocation' size='25' />
-                    <input type="text" id="address" placeholder="위치 찾기" />
-                    <button id="submit" onClick={handleSearchClick}>Search</button>
-                </div>
-                <NaverMap 
-                    searchDTO={searchDTO} 
-                    setSearchDTO={setSearchDTO}
-                />
-                <DateTimePicker
-                    startDate={startDate}
-                    setStartDate={setStartDate}
-                    endDate={endDate}
-                    setEndDate={setEndDate}
-                    startTime={startTime}
-                    setStartTime={setStartTime}
-                    endTime={endTime}
-                    setEndTime={setEndTime}
-                    dateRangeDiv={dateRangeDiv}
-                    startTimeDiv={startTimeDiv}
-                    endTimeDiv={endTimeDiv}
-                    addHoursAndFormat={addHoursAndFormat}
-                    onInput={onInput}
-                />
+                <NaverMap  searchDTO={searchDTO} setSearchDTO={setSearchDTO}/>
+                <br/>
+                <DateTimePicker  searchDTO={searchDTO} setSearchDTO={setSearchDTO}/>
+                <br/>
+                <PriceSelect fixedMinPrice={10000} fixedMaxPrice={1000000} priceGap={100}/>
             </div>
-            <div className="footer">
+            <div className="search-footer">
                 <div className="clear-button" type="reset" onClick={onReset}>Clear all</div>
                 <div className="search-button" type="button" onClick={onSearch}>Search</div>
             </div>
