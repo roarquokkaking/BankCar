@@ -17,7 +17,7 @@ const DriverFooter = () => {
     const formData = new FormData();
     formData.append("img",file);
 
-    axios.post("http://dongwoossltest.shop/api/driver/upload",formData, {
+    axios.post("https://dongwoossltest.shop/api/driver/upload",formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
