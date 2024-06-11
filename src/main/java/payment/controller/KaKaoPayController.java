@@ -56,7 +56,7 @@ public class KaKaoPayController {
     }
 
     @GetMapping(path = "/success")
-    public void success(@RequestParam String pg_token){
+    public RedirectView success(@RequestParam String pg_token){
         String url ="https://open-api.kakaopay.com/online/v1/payment/approve";
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
@@ -70,7 +70,11 @@ public class KaKaoPayController {
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(jsonBody, headers);
 
         ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.POST, entity, Map.class);
-        String payment_method_type = (String) response.getBody().get("payment_method_type");
-        System.out.println("payment_method_type"+payment_method_type);
+        String item_name = (String) response.getBody().get("item_name");
+        Map<String,Object> total= (Map<String, Object>) response.getBody().get("amount");
+        String total_amount= (String) total.get("total");
+
+
+        return new RedirectView("https://dongwoossltest.shop/success?itemName="+item_name+"&totalAmount="+total_amount);
     }
 }
