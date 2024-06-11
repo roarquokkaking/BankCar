@@ -14,7 +14,7 @@ const KaKaoPay = () => {
 		"total_amount": "2200",
 		"vat_amount": "200",
 		"tax_free_amount": "0",
-		"approval_url": "https://dongwoossltest.shop/api/payment/success",
+		"approval_url": "https://dongwoossltest.shop/success",
 		"fail_url": "https://dongwoossltest.shop/fail",
 		"cancel_url": "https://dongwoossltest.shop/cancel"
     })

@@ -4,22 +4,14 @@ import { useLocation } from 'react-router-dom';
 const KaKaoPaySuccess = () => {
     const location=useLocation();
     const params=new URLSearchParams(location.search);
-    const [payDetail,setPayDetail]=useState({
-        "itemName":"",
-        "totalAmount":""
-
-    })
+    const [pg_token,setPg_token]=useState('');
     useEffect(()=>{
-        setPayDetail({
-            "itemName":params.get('itemName'),
-            "totalAmount":params.get('totalAmount')
-        })
+        setPg_token(params.get('pg_token'));
         
     },[params])
     return (
         <div>
-            {payDetail.itemName}
-            <div>{payDetail.totalAmount}</div>
+            {pg_token}
         </div>
     );
 };
