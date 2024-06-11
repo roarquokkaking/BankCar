@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FaSearchLocation } from 'react-icons/fa';
 import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 
-const NaverMap = ({ searchDTO, setSearchDTO }) => {
+const KakaoMap = ({ searchDTO, setSearchDTO }) => {
     useKakaoLoader();
 
     const [info, setInfo] = useState(null);
@@ -109,4 +109,4 @@ const NaverMap = ({ searchDTO, setSearchDTO }) => {
     );
 };
 
-export default NaverMap;
+export default KakaoMap;

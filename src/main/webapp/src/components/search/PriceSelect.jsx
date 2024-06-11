@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const PriceSelect = ({ fixedMinPrice, fixedMaxPrice, priceGap }) => {
+const PriceSelect = ({ searchDTO, setSearchDTO, fixedMinPrice, fixedMaxPrice, priceGap }) => {
     const [rangeMinValue, setRangeMinValue] = useState(fixedMinPrice);
     const [rangeMaxValue, setRangeMaxValue] = useState(fixedMaxPrice);
     const [rangeMinPercent, setRangeMinPercent] = useState(0);
@@ -26,6 +26,14 @@ const PriceSelect = ({ fixedMinPrice, fixedMaxPrice, priceGap }) => {
         }
     };
 
+    useEffect(() => {
+        setSearchDTO({
+            ...searchDTO,
+            minPrice: rangeMinValue,
+            maxPrice: rangeMaxValue
+        });
+    }, [rangeMinValue, rangeMaxValue, setSearchDTO]);
+
     return (
         <>
             <FilterPriceSlide>
@@ -38,14 +46,14 @@ const PriceSelect = ({ fixedMinPrice, fixedMaxPrice, priceGap }) => {
                 <FilterPriceRangeMin
                     type="range"
                     min={fixedMinPrice}
-                    max={fixedMaxPrice - priceGap}
+                    max={fixedMaxPrice}
                     step="1000"
                     value={rangeMinValue}
                     onChange={priceRangeMinValueHandler}
                 />
                 <FilterPriceRangeMax
                     type="range"
-                    min={fixedMinPrice + priceGap}
+                    min={fixedMinPrice}
                     max={fixedMaxPrice}
                     step="1000"
                     value={rangeMaxValue}
@@ -78,7 +86,7 @@ const PriceSelect = ({ fixedMinPrice, fixedMaxPrice, priceGap }) => {
                     min={fixedMinPrice + priceGap}
                     max={fixedMaxPrice}
                     value={rangeMaxValue}
-                    onChange={priceRangeMinValueHandler}
+                    onChange={priceRangeMaxValueHandler}
                     className="w-full rounded-lg border border-gray-300 px-2 py-1 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-slate-500"
                 />
             </div>

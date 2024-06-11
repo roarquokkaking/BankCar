@@ -3,21 +3,16 @@ import DatePicker from 'react-datepicker';
 import "../../CSS/SearchCSS.css";
 import 'react-datepicker/dist/react-datepicker.css';
 
-const DateTimePicker = ({ searchDTO, setSearchDTO }) => {
+const DateTimePicker = ({ searchDTO, setSearchDTO, validationMessages, reset, setReset}) => {
     const [startDate,setStartDate] = useState(null);
     const [endDate,setEndDate] = useState(null);
 
     const [startTime, setStartTime] = useState(null);
     const [endTime, setEndTime] = useState(null);
 
-    const [dateRangeDiv, setDateRangeDiv] = useState('')
-    const [startTimeDiv, setStartTimeDiv] = useState('')
-    const [endTimeDiv, setEndTimeDiv] = useState('')
-
     const addDaysAndFormat = (date) => {
         const newDate = new Date(date);
         newDate.setDate(newDate.getDate() + 1);
-
         return newDate.toISOString().split('T')[0];
     };
 
@@ -43,6 +38,15 @@ const DateTimePicker = ({ searchDTO, setSearchDTO }) => {
         }
     }, [endDate]);
 
+    useEffect(() => {
+        if (reset) {
+            setStartDate(null);
+            setEndDate(null);
+            setStartTime(null);
+            setEndTime(null);
+            setReset(false);
+        }
+    }, [reset, setReset]);
 
     const onInput = (value, name) => {
         setSearchDTO({
@@ -70,7 +74,7 @@ const DateTimePicker = ({ searchDTO, setSearchDTO }) => {
                         }}
                         withPortal
                     />
-                    <div>{dateRangeDiv}</div>
+                    <div>{validationMessages.date}</div>
                     <br/>
                     <DatePicker
                         name="startTime"
@@ -87,7 +91,7 @@ const DateTimePicker = ({ searchDTO, setSearchDTO }) => {
                         dateFormat="h:mm aa"
                         withPortal
                     />
-                    <div>{startTimeDiv}</div>
+                    <div>{validationMessages.starttime}</div>
                     <br/>
                     <DatePicker
                         placeholderText="반납 가능 시간"
@@ -103,7 +107,7 @@ const DateTimePicker = ({ searchDTO, setSearchDTO }) => {
                         dateFormat="h:mm aa"
                         withPortal
                     />
-                    <div>{endTimeDiv}</div>
+                    <div>{validationMessages.endtime}</div>
                 </div>
             </div>
         </div>
