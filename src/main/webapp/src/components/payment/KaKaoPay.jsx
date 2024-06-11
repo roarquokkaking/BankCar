@@ -19,7 +19,7 @@ const KaKaoPay = () => {
 		"cancel_url": "https://dongwoossltest.shop/cancel"
     })
     const onPay=()=>{
-        axios.get("http://localhost:8080/api/payment/kakaoPay",{
+        axios.get("https://dongwoossltest.shop/api/payment/kakaoPay",{
             params: payDetail,
             headers:{
               'Content-Type': 'application/json'
