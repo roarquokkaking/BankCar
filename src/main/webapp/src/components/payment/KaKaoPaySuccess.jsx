@@ -5,14 +5,14 @@ const KaKaoPaySuccess = () => {
     const location=useLocation();
     const params=new URLSearchParams(location.search);
     const [payDetail,setPayDetail]=useState({
-        itemName:"",
-        totalAmount:""
+        "itemName":"",
+        "totalAmount":""
 
     })
     useEffect(()=>{
         setPayDetail({
-            itemName:params.get('itemName'),
-            totalAmount:params.get('totalAmount')
+            "itemName":params.get('itemName'),
+            "totalAmount":params.get('totalAmount')
         })
         
     },[params])
