@@ -32,6 +32,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Searching from "./components/search/Searching";
 import ChattingRoom from './components/chat/ChattingRoom';
 import Choice from "./components/choice/Choice";
+import KaKaoPay from './components/payment/KaKaoPay';
+import KaKaoPaySuccess from './components/payment/KaKaoPaySuccess';
 
 function Detail() {
   return null;
@@ -81,6 +83,10 @@ function App() {
             <Route path='/car/driverCheck' element={<DriverCheck />} />
 
             <Route path='/payment' element={<Payment_main />} />
+            <Route path='/kakaopay' element={<KaKaoPay />} />
+            <Route path='/success' element={<KaKaoPaySuccess />} />
+            
+
 
             <Route path='/choice/:carid&:startdate&:enddate&:price' element={<Choice />} />
 
