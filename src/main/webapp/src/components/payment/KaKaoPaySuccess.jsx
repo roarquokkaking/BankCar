@@ -19,12 +19,7 @@ const KaKaoPaySuccess = () => {
         
         if(pg_token){
             alert(pg_token);
-        axios.get("https://dongwoossltest.shop/api/payment/success",{
-            params:{
-                pg_token
-            },
-            
-        }).then(res=>
+        axios.post("https://dongwoossltest.shop/api/payment/success",{pg_token:pg_token}).then(res=>
             {
                 setPayDetail(res.data);
             }

@@ -65,7 +65,7 @@ public class KaKaoPayController {
         return pc_url;
     }
 
-    @GetMapping(path = "/success")
+    @PostMapping(path = "/success")
     public ResponseEntity<Object> success(@RequestParam("pg_token") String pg_token,HttpSession session){
 
 
