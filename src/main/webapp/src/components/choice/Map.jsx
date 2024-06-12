@@ -11,10 +11,10 @@ const Map = ({ address, coordinates }) => {
                 center={coordinates}
                 style={{
                     width: "100%",
-                    height: "480px",
+                    height: "250px",
                 }}
                 marker={coordinates}
-                level={3}
+                level={4}
             />
         </div>
     );

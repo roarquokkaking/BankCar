@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../CSS/ChoiceCSS.css';
 import "../profile/ProfilePage.css";
 import 'react-datepicker/dist/react-datepicker.css';
 import Review from '../review/Review';
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Carousel from './Carousel';
 import axios from 'axios';
 import OwnerDescription from './OwnerDescription';
@@ -11,19 +11,30 @@ import ChoiceFooter from './ChoiceFooter';
 import Map from './Map';
 
 const Choice = () => {
-    const { carid } = useParams();
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
+    const carid = searchParams.get('carid');
     const startDate = searchParams.get('startdate');
     const endDate = searchParams.get('enddate');
     const price = searchParams.get('price');
 
-    const onReserve=()=>{
-        axios.post("http://localhost:8080/choice/reserve", null)
-                .then(res => {
-                    console.log(res.data);
-                })
-                .catch(error => console.log(error))
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+
+    const navigate = useNavigate();
+    const onReserve = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const url = `/payment?carid=${carid}&startdate=${startDate}&enddate=${endDate}&price=${price}`;
+            navigate(url);
+        } catch (error) {
+            console.error(error);
+            setError('결제 실패..');
+        } finally {
+            setLoading(false);
+        }
     }
 
     const choicedata = {
@@ -43,7 +54,9 @@ const Choice = () => {
             price: "50,000",
             startTime: "2024.06.07  17:00",
             endTime: "2024.06.09  10:00",
-            onReserve: onReserve
+            onReserve: onReserve,
+            loading: loading,
+            error: error
         }
     };
 

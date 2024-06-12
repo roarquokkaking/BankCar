@@ -181,3 +181,15 @@ body {
     /* Remove background-size and background-position */
 }
 
+.choice-footer .error-message {
+    color: red;
+    margin-top: 10px;
+}
+.choice-footer .button-text:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.review-container h2 {
+    margin: 0;
+}
