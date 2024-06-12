@@ -11,7 +11,9 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -31,13 +33,17 @@ public class ChatController {
     }
 
     @GetMapping("/userInfo")
-    public String getUserInfo(@SessionAttribute(name = "loginDTO", required = false) LoginDTO loginDTO) {
+    public Map<String, String> getUserInfo(@SessionAttribute(name = "loginDTO", required = false) LoginDTO loginDTO) {
+        Map<String, String> userInfo = new HashMap<>();
         if (loginDTO != null) {
-            return loginDTO.getName();
+            userInfo.put("name", loginDTO.getName());
+            userInfo.put("profile_image", loginDTO.getProfile_image());
         } else {
             // 로그인되지 않은 경우에 대한 처리
-            return null;
+            userInfo.put("name", null);
+            userInfo.put("profile_image", null);
         }
+        return userInfo;
     }
 
     @PostMapping("/send")

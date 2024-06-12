@@ -8,6 +8,7 @@ export const loginSlice = createSlice({
         name:'',
         email:'',
         driver:'',
+        profile_image:''
     },
     reducers:{
         setId:(state,action)=>{
@@ -21,9 +22,12 @@ export const loginSlice = createSlice({
         },
         setDriver:(state,action)=>{
             state.driver= action.payload;
+        },
+        setProfile_image:(state,action)=>{
+            state.profile_image= action.payload;
         }
     }
 });
 
-export const {setEmail,setId,setName,setDriver} = loginSlice.actions;
+export const {setEmail,setId,setName,setDriver,setProfile_image} = loginSlice.actions;
 export default loginSlice.reducer;
