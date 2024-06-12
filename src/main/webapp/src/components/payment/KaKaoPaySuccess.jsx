@@ -6,10 +6,16 @@ const KaKaoPaySuccess = () => {
     const location=useLocation();
     const params=new URLSearchParams(location.search);
     const [pg_token,setPg_token]=useState('');
-    const [payDetail,setPayDetail]=useState(null);
+    const [payDetail,setPayDetail]=useState({});
+
+
     useEffect(()=>{
         setPg_token(params.get('pg_token'));
         
+    },[params])
+
+    useEffect(()=>{
+        alert(pg_token);
         axios.get("https://dongwoossltest.shop/api/payment/success",{
             params:{
                 pg_token
@@ -20,7 +26,7 @@ const KaKaoPaySuccess = () => {
                 setPayDetail(res.data);
             }
         )
-    },[params])
+    },[pg_token])
 
     return (
         <div>

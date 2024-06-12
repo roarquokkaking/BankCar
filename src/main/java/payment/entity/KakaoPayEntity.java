@@ -1,20 +1,41 @@
 package payment.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 
+@Entity
+@Table(name = "payment")
 public class KakaoPayEntity {
+    @Id
+    @Column(name="id")
+    private String id;
+
+    @Column(name="cid")
     private String cid;
+    @Column(name="tid")
+    private String tid;
+    @Column(name="partner_order_id")
     private String partner_order_id;
+    @Column(name="partner_user_id")
     private String partner_user_id;
+    @Column(name="item_name")
     private String item_name;
+    @Column(name="quantity")
     private String quantity;
+    @Column(name="total_amount")
     private String total_amount;
+    @Column(name="vat_amount")
     private String vat_amount;
+    @Column(name="tax_free_amount")
     private String tax_free_amount;
+    @Column(name="approval_url")
     private String approval_url;
+    @Column(name="fail_url")
     private String fail_url;
+    @Column(name="cancel_url")
     private String cancel_url;
 
 
@@ -104,5 +125,21 @@ public class KakaoPayEntity {
 
     public void setCancel_url(String cancel_url) {
         this.cancel_url = cancel_url;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTid() {
+        return tid;
+    }
+
+    public void setTid(String tid) {
+        this.tid = tid;
     }
 }
