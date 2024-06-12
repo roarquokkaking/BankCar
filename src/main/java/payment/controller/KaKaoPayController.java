@@ -106,7 +106,7 @@ public class KaKaoPayController {
 //        return ResponseEntity.ok().body(map);
 //
 //    }
-@PostMapping(path = "/success")
+@GetMapping(path = "/success")
 public String success(@RequestParam("pgToken") String pg_token){
 
     return pg_token;
