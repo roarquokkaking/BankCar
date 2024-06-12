@@ -65,53 +65,48 @@ public class KaKaoPayController {
         return pc_url;
     }
 
-//    @PostMapping(path = "/success")
-//    public ResponseEntity<Object> success(@RequestParam("pg_token") String pg_token,HttpSession session){
-//        LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginDTO");
-//
-//        System.out.println("pg_token="+pg_token);
-//        logger.info("pg_token",pg_token);
-//        String url ="https://open-api.kakaopay.com/online/v1/payment/approve";
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.set("Content-Type", "application/json");
-//        headers.set("Authorization", "SECRET_KEY DEV7583106F237EE21ACE826DF4ACF641C017674");
-//
-//        Optional<KakaoPayEntity> optionalKakaoPayEntity = kakaoPayService.getData(loginDTO.getId());
-//
-//        KakaoPayEntity kakaoPayEntity;
-//        if(optionalKakaoPayEntity.isPresent()){
-//            kakaoPayEntity=optionalKakaoPayEntity.get();
-//        }else{
-//            kakaoPayEntity=null;
-//        }
-//
-//
-//        Map<String, Object> jsonBody = new HashMap<>();
-//        jsonBody.put("cid",kakaoPayEntity.getCid());
-//        jsonBody.put("tid",kakaoPayEntity.getTid());
-//        jsonBody.put("partner_order_id",kakaoPayEntity.getPartner_order_id());
-//        jsonBody.put("partner_user_id",kakaoPayEntity.getPartner_user_id());
-//        logger.info("cid=",kakaoPayEntity.getCid());
-//        jsonBody.put("pg_token",pg_token);
-//        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(jsonBody, headers);
-//
-//        ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.POST, entity, Map.class);
-//        String item_name = (String) response.getBody().get("item_name");
-//        Map<String,Object> total= (Map<String, Object>) response.getBody().get("amount");
-//        String total_amount= (String) total.get("total");
-//
-//        Map<String,Object> map = new HashMap<>();
-//        map.put("item_name",item_name);
-//        map.put("total_amount",total_amount);
-//        return ResponseEntity.ok().body(map);
-//
-//    }
-@GetMapping(path = "/success")
-public String success(@RequestParam("pgToken") String pg_token){
+    @GetMapping(path = "/success")
+    public Map<String,Object> success(@RequestParam("pgToken") String pg_token,HttpSession session){
+        LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginDTO");
 
-    return pg_token;
+        System.out.println("pg_token="+pg_token);
+        logger.info("pg_token:{}",pg_token);
+        String url ="https://open-api.kakaopay.com/online/v1/payment/approve";
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+        headers.set("Authorization", "SECRET_KEY DEV7583106F237EE21ACE826DF4ACF641C017674");
 
-}
+        Optional<KakaoPayEntity> optionalKakaoPayEntity = kakaoPayService.getData(loginDTO.getId());
+
+        KakaoPayEntity kakaoPayEntity;
+        if(optionalKakaoPayEntity.isPresent()){
+            kakaoPayEntity=optionalKakaoPayEntity.get();
+        }else{
+            kakaoPayEntity=null;
+        }
+
+
+        Map<String, Object> jsonBody = new HashMap<>();
+        jsonBody.put("cid",kakaoPayEntity.getCid());
+        jsonBody.put("tid",kakaoPayEntity.getTid());
+        jsonBody.put("partner_order_id",kakaoPayEntity.getPartner_order_id());
+        jsonBody.put("partner_user_id",kakaoPayEntity.getPartner_user_id());
+        logger.info("cid={}",kakaoPayEntity.getCid());
+        jsonBody.put("pg_token",pg_token);
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(jsonBody, headers);
+
+        ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.POST, entity, Map.class);
+        String item_name = (String) response.getBody().get("item_name");
+        Map<String,Object> total= (Map<String, Object>) response.getBody().get("amount");
+        int total_amount= (int) total.get("total");
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("item_name",item_name);
+        map.put("total_amount",total_amount);
+        return map;
+
+    }
+
 
 
 }

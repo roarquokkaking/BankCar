@@ -24,10 +24,10 @@ const KaKaoPaySuccess = () => {
                 pgToken:pg_token
             }
         }).then(res=>
-            // {
-            //     setPayDetail(res.data);
-            // }
-            console.log(res.data)
+            {
+                setPayDetail(res.data);
+                console.log(res.data);
+            }
         ).catch(err=>console.log(err))
     }
     },[pg_token])
@@ -36,6 +36,7 @@ const KaKaoPaySuccess = () => {
     return (
         <div>
            {payDetail.item_name}
+           <div>{payDetail.total_amount}</div>
         </div>
     );
 };
