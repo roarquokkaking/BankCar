@@ -19,15 +19,17 @@ const KaKaoPaySuccess = () => {
         
         if(pg_token){
             alert(pg_token);
-        axios.post("https://dongwoossltest.shop/api/payment/success",{pg_token:pg_token},{
+        axios.post("https://dongwoossltest.shop/api/payment/success",{pgToken:pg_token},{
             headers:{
               'Content-Type': 'application/json'
             }
           }).then(res=>
-            {
-                setPayDetail(res.data);
-            }
-        )}
+            // {
+            //     setPayDetail(res.data);
+            // }
+            console.log(res.data)
+        ).catch(err=>console.log(err))
+    }
     },[pg_token])
 
 
