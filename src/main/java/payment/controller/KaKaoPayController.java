@@ -70,7 +70,7 @@ public class KaKaoPayController {
 
 
         System.out.println("pg_token="+pg_token);
-        logger.info(pg_token);
+        logger.info("pg_token",pg_token);
         Map<String,Object> map =paysuccess(pg_token,session);
         return ResponseEntity.ok().body(map);
 
@@ -100,7 +100,7 @@ public class KaKaoPayController {
         jsonBody.put("tid",kakaoPayEntity.getTid());
         jsonBody.put("partner_order_id",kakaoPayEntity.getPartner_order_id());
         jsonBody.put("partner_user_id",kakaoPayEntity.getPartner_user_id());
-        logger.info("cid="+kakaoPayEntity.getCid());
+        logger.info("cid=",kakaoPayEntity.getCid());
         jsonBody.put("pg_token",pg_token);
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(jsonBody, headers);
 
