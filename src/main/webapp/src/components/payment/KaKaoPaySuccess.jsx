@@ -18,7 +18,7 @@ const KaKaoPaySuccess = () => {
     useEffect(()=>{
         
         if(pg_token){
-            alert(pg_token);
+            // alert(pg_token);
         axios.get("https://dongwoossltest.shop/api/payment/success",{
             params:{
                 pgToken:pg_token
