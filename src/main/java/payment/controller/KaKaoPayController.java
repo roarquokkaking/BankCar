@@ -2,6 +2,8 @@ package payment.controller;
 
 import jakarta.servlet.http.HttpSession;
 import login.dto.LoginDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -21,6 +23,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "/api/payment" , produces = "application/json")
 public class KaKaoPayController {
+    private static final Logger logger = LoggerFactory.getLogger(KaKaoPayController.class);
     private final RestTemplate restTemplate = new RestTemplate();
 
     @Autowired
@@ -67,6 +70,7 @@ public class KaKaoPayController {
 
 
         System.out.println("pg_token="+pg_token);
+        logger.info(pg_token);
         Map<String,Object> map =paysuccess(pg_token,session);
         return ResponseEntity.ok().body(map);
 
@@ -96,7 +100,7 @@ public class KaKaoPayController {
         jsonBody.put("tid",kakaoPayEntity.getTid());
         jsonBody.put("partner_order_id",kakaoPayEntity.getPartner_order_id());
         jsonBody.put("partner_user_id",kakaoPayEntity.getPartner_user_id());
-        System.out.println("cid="+kakaoPayEntity.getCid());
+        logger.info("cid="+kakaoPayEntity.getCid());
         jsonBody.put("pg_token",pg_token);
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(jsonBody, headers);
 
