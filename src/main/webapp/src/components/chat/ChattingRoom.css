@@ -6,18 +6,23 @@
     display: flex;
     flex-direction: column;
     height: 120vh;
-    background-color: #abb7d3;
+    background-color: #ffffff;
 }
-
+.chat-headernav{
+    position: fixed;
+    background-color: rgb(252, 232, 232);
+    border-bottom:2px solid #dfdfdf;
+    height: 60px;
+    width: 400px;
+}
 .message-container {
      flex: 1; 
      overflow-y: auto; 
-     padding: 6px;
-     height: 100%;
+     margin-top:65px;
+     padding: 3px;
+     max-height: 660px;
      width: 100%;
- 
 }
-
 .message-box {
     display: flex;
     flex-direction: column;
@@ -45,31 +50,52 @@
     width: 100px;
     font-size: 1.2em;
     margin-left: 10px; /* 버튼 사이 여백 조절 */
-    background-color: #FFEB34;
-    color: black;
+    background-color: #ff5f84;
+    color: rgb(249, 247, 247);
     border: 0;
     /* border-radius: 5px; */
     cursor: pointer;
     font-weight: bold;
     font-family: 'Noto Sans KR', sans-serif; /* 원하는 글꼴로 변경 */
 }
-
-.input-area img{
-    width: 25px;
-    height: 25px;
-    margin-right: 10px; 
-    margin-bottom: 10px; 
-    position: fixed;
-    bottom: 10px;
+.input-area button :hover{
+    font-style: white;
 }
+/* 기본 스타일 */
+.image-clip, .image-emog, .image-setting {
+    width: 25px; /* 기본 크기 */
+    height: 25px; /* 기본 크기 */
+    transition: all 0.3s ease; /* 전환 효과 */
+    cursor: pointer; /* 포인터 커서 */
+    position: fixed; /* 고정 위치 */
+    filter: contrast(8%); /* 대비 조절 */
+    bottom: 10px; /* 하단 위치 */
+}
+/* 개별 위치 조정 */
+.image-clip {
+    margin-right: 10px;
+    
+}
+
+.image-emog {
+    margin-left: 39px;
+    
+}
+
+.image-setting {
+    margin-left: 78px;
+    
+}
+
 .message-box-send {
     display: flex;
     flex-direction: column;
     max-width: 50%; 
+    width: fit-content;
     margin-bottom: 8px;
     margin-left: auto;
     text-align: right; 
-    color: #000000; 
+    color: #3c3c3c; 
     padding: 0; 
 }
 
@@ -83,19 +109,21 @@
 }
 
 .message-box-send .message-content {
+    border: 2px solid rgb(224, 200, 200);
     word-wrap: break-word; 
-    background-color: #FDF01B;
+    background-color: rgb(232, 204, 204);
+    text-align: left; 
     /* position: relative; */
     padding: 8px;
     margin-top: -20px;
     font-size:1.07rem;
     border-radius: 10px;
-    margin-right: 55px;
+    margin-right: 50px;
     width: auto; /* 가로 크기를 자동으로 조절 */
     max-width: calc(90% - 10px); /* 최대 가로 크기 설정 */
     height: auto; /* 세로 크기를 자동으로 조절 */
     max-height: 600px; /* 최대 세로 크기 설정 */
-    font-weight: bold;
+    font-weight: 500;
     font-family: 'Noto Sans KR', sans-serif;
 }
 .message-content ::after{
@@ -108,11 +136,15 @@
 }
 
 .message-box-send .profile-image {
-    width: 55px;
-    height: 55px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     margin-right: 0;
     margin-top: 20px;
+}
+.message-box-send strong{
+    font-weight: 500;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 
@@ -122,6 +154,7 @@
     display: flex;
     flex-direction: column;
     max-width: 50%; 
+    width: fit-content;
     margin-bottom: 8px;
     margin-right: auto; /* 왼쪽 정렬을 위해 margin-right를 사용 */
     text-align: left; 
@@ -138,28 +171,34 @@
 }
 
 .message-box-receive .message-content {
+    border: 2px solid rgb(210, 186, 186);
     word-wrap: break-word; 
     background-color: #ffffff;
-    position: relative;
+    /* position: relative; */
     padding: 8px;
     margin-top: -20px;
     font-size: 1.07rem;
     border-radius: 10px;
-    margin-left: 55px; /* 내용의 왼쪽 여백을 설정 */
+    margin-left: 50px; /* 내용의 왼쪽 여백을 설정 */
     width: auto; /* 가로 크기를 자동으로 조절 */
     max-width: calc(90% - 10px); /* 최대 가로 크기 설정 */
     height: auto; /* 세로 크기를 자동으로 조절 */
     max-height: 600px; /* 최대 세로 크기 설정 */
-    font-weight: bold;
+    font-weight: 500;
     font-family: 'Noto Sans KR', sans-serif;
 }
 
 .message-box-receive .profile-image {
-    width: 50px;
-    height: 50px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     margin-left: -100;
     margin-top: 20px;
+}
+
+.message-box-receive strong{
+    font-weight: 500;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 

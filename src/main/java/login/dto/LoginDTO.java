@@ -1,9 +1,11 @@
 package login.dto;
 
+import booking.entity.BookingEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name="user")
@@ -80,7 +82,7 @@ public class LoginDTO {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id")
-    private List<BookingEntity>BookingEntity;
+    private List<BookingEntity> bookingEntity;
 
 
 

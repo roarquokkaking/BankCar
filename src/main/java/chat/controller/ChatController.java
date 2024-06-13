@@ -23,13 +23,13 @@ public class ChatController {
 
     private final SimpMessagingTemplate messagingTemplate;
     private final MessageService messageService;
-    private final LoginDTO loginDTO;
+
 
     @Autowired
-    public ChatController(SimpMessagingTemplate messagingTemplate, MessageService messageService, LoginDTO loginDTO) {
+    public ChatController(SimpMessagingTemplate messagingTemplate, MessageService messageService) {
         this.messagingTemplate = messagingTemplate;
         this.messageService = messageService;
-        this.loginDTO = loginDTO;
+
     }
 
     @GetMapping("/userInfo")
