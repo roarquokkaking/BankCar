@@ -1,27 +1,29 @@
 package chat.service;
 
-import java.util.List;
-import lombok.extern.slf4j.Slf4j;
-import chat.bean.Message;
-import chat.bean.MessageRoom;
+import chat.entity.Message;
 import chat.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import login.dto.LoginDTO;
+
+import java.util.List;
 
 @Service
-@Slf4j
 public class MessageService {
-    @Autowired
+
     private final MessageRepository messageRepository;
 
-
+    @Autowired
     public MessageService(MessageRepository messageRepository) {
         this.messageRepository = messageRepository;
     }
 
-    public List<Message> getMessage(String messageRoomId) {
-        return messageRepository.findByMessageRoomId(messageRoomId);
+    // 메시지 저장
+    public Message saveMessage(Message message) {
+        return messageRepository.save(message);
     }
 
+    // 모든 메시지 조회
+    public List<Message> getAllMessages() {
+        return messageRepository.findAll();
+    }
 }

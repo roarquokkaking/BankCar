@@ -1,46 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import { FaCar, FaStar } from "react-icons/fa";
 import { IoCalendarNumber } from "react-icons/io5";
 import { GoArrowLeft } from "react-icons/go";
 import Box from "@mui/material/Box";
 import styles from './CSS/BookingDetails.module.css';
 import FooterMenu from "../FooterMenu";
+import {useSelector} from "react-redux";
 
 const BookingDetails = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [memo, setMemo] = useState('');
     const [images, setImages] = useState([]);//3개여서 배열
+    const {car_id}=useParams()
+    const user_id = useSelector(state => state.Login.id)
+    const navigate = useNavigate();
+    const [detailsDTO, setDetailsDTO] = useState([]);
 
-    const [detailsDTO, setDetailsDTO] = useState({
-        car_model: '',
-        rating: 0,
-        start_date: '',
-        end_date: '',
-        usagePeriod: '',
-    });
-
-
-
+    /*서버에 정보 보내기 */
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const detailsResponse = await axios.get('http://localhost:8080/api/details');
-                const imagesResponse = await axios.get('https://navercloudapi.com/images'); // 실제 작동하는 URL로 교체 필요
-                console.log(detailsResponse)
-                console.log(imagesResponse)
-                setDetailsDTO({
-                    ...detailsResponse.data,
-                    usagePeriod: `${detailsResponse.data.start_date} - ${detailsResponse.data.end_date}` // start_date와 end_date로 수정
-                });
-                setImages(imagesResponse.data.images);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-        fetchData();
-    }, []);
+
+        axios.get(`/Booking/bookingDetail/${user_id}/${car_id}`)
+            .then((response)=>response.data(setDetailsDTO()))
+            .catch((error)=>console.log(error))
+    }, [user_id]);
+
+
+
+
+
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -49,11 +38,14 @@ const BookingDetails = () => {
         return () => clearInterval(interval);
     }, [images.length]); // 여기서 images.length 의존성을 유지
 
-    const navigate = useNavigate();
 
     const updateMemo = async () => {
         try {
-            await axios.post('http://localhost:8080/api/memo', { memo });
+            await axios.post('http://dongwoossltest.shop/api/Booking/bookingDetail/memo', {
+                memo:memo,
+                user_id: user_id,
+                // booking_id : booking_id,
+            });
             alert('메모가 저장되었습니다.');
         } catch (error) {
             console.error('Error sending memo:', error);

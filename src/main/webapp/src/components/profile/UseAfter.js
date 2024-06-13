@@ -2,17 +2,20 @@
 import React, { useEffect, useState } from 'react';
 import styles from './CSS/UseAfter.module.css';
 import { GoArrowLeft } from "react-icons/go";
-import { useNavigate } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Box from "@mui/material/Box";
 import FooterMenu from "../FooterMenu";
+import axios from "axios";
+
 
 
 const UseAfter = () => {
     const navigate = useNavigate();
     const [pastReservations, setPastReservations] = useState([]);
+    const {user_id}=useParams()
 
 
-
+console.log(user_id)
 
 
 
@@ -21,9 +24,14 @@ const UseAfter = () => {
     };
 
 
+    const[BookingDTO, setBookingDTO]= useState([])
 
-
-
+    useEffect(() => {
+        axios.get(`/Booking/after/${user_id}`)
+            .then(response=>
+                setBookingDTO(response.data))
+            .catch(error=>console.log(error))
+    }, [user_id]);
 
     const ReservationItem = ({ reservation }) => (
         <div className={styles.reservationItem}>
@@ -67,6 +75,7 @@ const UseAfter = () => {
                                 }}
                                 onClick={() => navigate(-1)}
                             />
+                            제목
                             <h1
                                 style={{
                                     textAlign: "center",
@@ -80,19 +89,19 @@ const UseAfter = () => {
                     </header>
                 </div>
                 <div className={styles.selectContainer}>
-                    <select className={styles.searchDate}>
-                        <option>기간별 검색</option>
-                        <option>============</option>
-                        <option>최근 7일</option>
-                        <option>최근 15일</option>
-                        <option>최근 30일</option>
-                    </select>
+                        <select className={styles.searchDate} onChange={e => e.target.value}>
+                            <option value="all">기간별 검색</option>
+                            <option disabled>============</option>
+                            <option value="7">최근 7일</option>
+                            <option value="15">최근 15일</option>
+                            <option value="30">최근 30일</option>
+                        </select>
                 </div>
                 {pastReservations.map((reservation) => (
-                    <ReservationItem reservation={reservation} key={reservation.id} />
+                    <ReservationItem reservation={reservation} key={reservation.id}/>
                 ))}
             </Box>
-            <FooterMenu />
+            <FooterMenu/>
         </div>
     );
 };

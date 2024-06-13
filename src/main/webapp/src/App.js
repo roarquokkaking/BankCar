@@ -28,13 +28,12 @@ import KakaoLogin from './components/login/KakaoLogin';
 import UseAfter from "./components/profile/UseAfter";
 import UseBefore from "./components/profile/UseBefore";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import ChattingRoom from './components/chat/ChattingRoom';
-import ChattingNow from './components/chat/ChattingNow';
-import ChatGroupBox from './components/chat/ChatGroupBox';
+
 import Searching from "./components/search/Searching";
+import ChattingRoom from './components/chat/ChattingRoom';
 import Choice from "./components/choice/Choice";
-
-
+import NaverPay from './components/payment/NaverPay';
+import NaverPayCompletion from './components/payment/NaverPayCompletion';
 
 function Detail() {
   return null;
@@ -58,7 +57,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/searching" element={<Searching />} />
+
             <Route path="/choice" element={<Choice />} />
+            <Route path='payment'>
+              <Route index element={<Payment_main />}/>
+              <Route path='naverpay' element={NaverPay}/>
+              <Route path='naverpaycompletion' element={NaverPayCompletion}></Route>
+            </Route>
+
             <Route path="/wishList" element={<WishList />} />
             <Route path="/myWishList" element={<MyWishList />} />
             <Route path="login"  >
@@ -73,8 +79,8 @@ function App() {
               <Route path="checkMyCar" element={<CheckMyCar/>} />
               <Route path="myProfile/:user_id" element={<MyProfile/>} />
               <Route path="myProfileUpdate/:user_id" element={<MyProfileUpdate/>} />
-              <Route path="useAfter" element={<UseAfter/>} />
-              <Route path="useBefore" element={<UseBefore/>} />
+              <Route path="useAfter/:user_id" element={<UseAfter/>} />
+              <Route path="useBefore/:user_id" element={<UseBefore/>} />
               <Route path="myRating" element={<MyRating/>}/>
               <Route path="bookingDetails" element={<BookingDetails/>} />
               <Route path="Details" element={<Details/>} />
@@ -82,12 +88,7 @@ function App() {
             <Route path='/car/new' element={<RegisterMain />} />
             <Route path='/car/driver' element={<DriverLicense />} />
             <Route path='/car/driverCheck' element={<DriverCheck />} />
-
-            <Route path='/payment' element={<Payment_main />} />
-
             <Route path='/ChattingRoom' element={<ChattingRoom />} />
-            <Route path='/ChattingNow' element={<ChattingNow />} />
-            <Route path='/ChatGroupBox' element={<ChatGroupBox />} />
 
           </Routes>
           </Provider>

@@ -1,13 +1,18 @@
 import {Box, Button, Container, createTheme, styled} from '@mui/material';
 import SearchIcon from "@mui/icons-material/Search";
 import React from 'react';
-import Header from './Header';
 import OptionsTab from './OptionsTab';
 import LocationCards from './choice/LocationCards';
 import MobileFooter from './MobileFooter';
 import FooterMenu from "./FooterMenu";
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+    const navigate = useNavigate();
+
+    const goSearch = () => {
+        navigate('/searching');
+      };
 
     const SearchBtn = styled(Button)(({theme}) => ({
         backgroundColor: "#ffffff", // 흰색 배경
@@ -32,7 +37,7 @@ const Home = () => {
                 }}
             >
                 {/* <Header /> */}
-                <SearchBtn variant="contained">
+                <SearchBtn variant="contained" onClick={goSearch}>
                     <SearchIcon/>
                     검색하기
                 </SearchBtn>

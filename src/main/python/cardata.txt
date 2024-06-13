@@ -1,0 +1,2296 @@
+[
+  {
+    "metadata": {
+      "searchKey": "eyJkcml2ZXJzQWdlIjozMCwiZHJvcE9mZkRhdGVUaW1lIjoiMjAyNC0wNi0xN1QxMDowMDowMCIsImRyb3BPZmZMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwiZHJvcE9mZkxvY2F0aW9uVHlwZSI6IkxBVExPTkciLCJwaWNrVXBEYXRlVGltZSI6IjIwMjQtMDYtMTZUMTA6MDA6MDAiLCJwaWNrVXBMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwicGlja1VwTG9jYXRpb25UeXBlIjoiTEFUTE9ORyIsInJlbnRhbER1cmF0aW9uSW5EYXlzIjoxLCJzZWFyY2hNZXRhZGF0YSI6IntcInBpY2tVcExvY2F0aW9uTmFtZVwiOlwi6rCV64Ko6rWsXCIsXCJkcm9wT2ZmTG9jYXRpb25OYW1lXCI6XCLqsJXrgqjqtaxcIn0iLCJzZXJ2aWNlRmVhdHVyZXMiOlsiSU5DTFVERV9QUk9EVUNUX1JFTEFUSU9OU0hJUFMiXX0=",
+      "product": {
+        "id": "759822906",
+        "largeBags": 1,
+        "smallBags": 1,
+        "rateType": "PAY_NOW"
+      },
+      "supplier": {
+        "id": "3662",
+        "name": "Yesaway"
+      },
+      "depots": {
+        "pickupDepot": {
+          "name": "강남",
+          "id": "4725041"
+        },
+        "dropoffDepot": {
+          "name": "강남",
+          "id": "4725041"
+        }
+      }
+    },
+    "props": {
+      "title": "Hyundai Avante",
+      "subtitle": "또는 동급의 대형 차량",
+      "a11yTranslation": "Product Card",
+      "image": {
+        "src": "https://cdn2.rcstatic.com/images/car_images_b/web/hyundai/avante_lrg.jpg",
+        "fallbackSrc": "https://cdn2.rcstatic.com/images/car_images/web/hyundai/avante_lrg.jpg",
+        "alt": ""
+      },
+      "supplierImage": {
+        "src": "https://cdn2.rcstatic.com/sp/images/suppliers/3662_logo_200.png",
+        "alt": "Yesaway 제공"
+      },
+      "tags": [
+        {
+          "text": "가족 여행객에 적합",
+          "variant": "brand-primary",
+          "id": "ideal-for-families"
+        }
+      ],
+      "info": [
+        {
+          "id": "number-of-seats",
+          "icon": "PersonHalfIcon",
+          "text": "5 인승"
+        },
+        {
+          "id": "transmission",
+          "icon": "GearboxAutomaticIcon",
+          "text": "자동",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        },
+        {
+          "id": "large-bags",
+          "icon": "SuitcaseIcon",
+          "text": "큰 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 1개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "small-bags",
+          "icon": "CabinTrolleyIcon",
+          "text": "작은 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 1개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "mileage",
+          "icon": "DashboardIcon",
+          "text": "주행거리 제한 없음",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        }
+      ],
+      "ctaTitle": "특가 보기",
+      "price": {
+        "label": "1일 기준 요금:",
+        "current": "₩140,934.00"
+      },
+      "location": [
+        {
+          "name": "강남",
+          "info": "시내",
+          "id": "pickup-location-is-dropoff-location"
+        }
+      ],
+      "qualifiers": [
+        {
+          "id": "free-cancellation",
+          "text": "무료 취소",
+          "icon": "CheckmarkIcon"
+        }
+      ],
+      "actions": {
+        "items": [
+          {
+            "id": "important-info",
+            "icon": "InfoSignIcon",
+            "text": "중요 정보"
+          },
+          {
+            "id": "map",
+            "icon": "MapsPinIcon",
+            "text": "지도"
+          },
+          {
+            "id": "quotes",
+            "icon": "EmailIcon",
+            "text": "이메일로 견적 받기"
+          }
+        ]
+      },
+      "alerts": [
+        
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "searchKey": "eyJkcml2ZXJzQWdlIjozMCwiZHJvcE9mZkRhdGVUaW1lIjoiMjAyNC0wNi0xN1QxMDowMDowMCIsImRyb3BPZmZMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwiZHJvcE9mZkxvY2F0aW9uVHlwZSI6IkxBVExPTkciLCJwaWNrVXBEYXRlVGltZSI6IjIwMjQtMDYtMTZUMTA6MDA6MDAiLCJwaWNrVXBMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwicGlja1VwTG9jYXRpb25UeXBlIjoiTEFUTE9ORyIsInJlbnRhbER1cmF0aW9uSW5EYXlzIjoxLCJzZWFyY2hNZXRhZGF0YSI6IntcInBpY2tVcExvY2F0aW9uTmFtZVwiOlwi6rCV64Ko6rWsXCIsXCJkcm9wT2ZmTG9jYXRpb25OYW1lXCI6XCLqsJXrgqjqtaxcIn0iLCJzZXJ2aWNlRmVhdHVyZXMiOlsiSU5DTFVERV9QUk9EVUNUX1JFTEFUSU9OU0hJUFMiXX0=",
+      "product": {
+        "id": "758902421",
+        "largeBags": 1,
+        "smallBags": 1,
+        "rateType": "PAY_NOW"
+      },
+      "supplier": {
+        "id": "3662",
+        "name": "Yesaway"
+      },
+      "depots": {
+        "pickupDepot": {
+          "name": "서울 시내",
+          "id": "4721574"
+        },
+        "dropoffDepot": {
+          "name": "서울 시내",
+          "id": "4721574"
+        }
+      }
+    },
+    "props": {
+      "title": "Hyundai Avante",
+      "subtitle": "또는 동급의 대형 차량",
+      "a11yTranslation": "Product Card",
+      "image": {
+        "src": "https://cdn2.rcstatic.com/images/car_images_b/web/hyundai/avante_lrg.jpg",
+        "fallbackSrc": "https://cdn2.rcstatic.com/images/car_images/web/hyundai/avante_lrg.jpg",
+        "alt": ""
+      },
+      "supplierImage": {
+        "src": "https://cdn2.rcstatic.com/sp/images/suppliers/3662_logo_200.png",
+        "alt": "Yesaway 제공"
+      },
+      "tags": [
+        
+      ],
+      "info": [
+        {
+          "id": "number-of-seats",
+          "icon": "PersonHalfIcon",
+          "text": "5 인승"
+        },
+        {
+          "id": "transmission",
+          "icon": "GearboxAutomaticIcon",
+          "text": "자동",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        },
+        {
+          "id": "large-bags",
+          "icon": "SuitcaseIcon",
+          "text": "큰 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 1개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "small-bags",
+          "icon": "CabinTrolleyIcon",
+          "text": "작은 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 1개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "mileage",
+          "icon": "DashboardIcon",
+          "text": "주행거리 제한 없음",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        }
+      ],
+      "review": {
+        "score": "9.5",
+        "scoreAriaLabel": "9.5",
+        "rating": "강력 추천",
+        "ratingReviewAriaLabel": "고객 평점 9.5, 강력 추천",
+        "reviewCount": "리뷰 1건",
+        "categories": {
+          "title": "고객 평점",
+          "closeAriaLabel": "close",
+          "items": [
+            {
+              "label": "가성비",
+              "rating": 6
+            },
+            {
+              "label": "차량 청결도",
+              "rating": 10
+            },
+            {
+              "label": "픽업 장소의 접근성",
+              "rating": 10
+            },
+            {
+              "label": "친절도",
+              "rating": 10
+            },
+            {
+              "label": "반납 소요 시간",
+              "rating": 10
+            },
+            {
+              "label": "차량 상태",
+              "rating": 10
+            },
+            {
+              "label": "픽업 소요 시간",
+              "rating": 10
+            }
+          ]
+        },
+        "link": {
+          "text": "고객 이용후기 보기"
+        }
+      },
+      "ctaTitle": "특가 보기",
+      "price": {
+        "label": "1일 기준 요금:",
+        "current": "₩140,934.00"
+      },
+      "location": [
+        {
+          "name": "서울 시내",
+          "info": "시내",
+          "id": "pickup-location-is-dropoff-location"
+        }
+      ],
+      "qualifiers": [
+        {
+          "id": "free-cancellation",
+          "text": "무료 취소",
+          "icon": "CheckmarkIcon"
+        }
+      ],
+      "actions": {
+        "items": [
+          {
+            "id": "important-info",
+            "icon": "InfoSignIcon",
+            "text": "중요 정보"
+          },
+          {
+            "id": "map",
+            "icon": "MapsPinIcon",
+            "text": "지도"
+          },
+          {
+            "id": "quotes",
+            "icon": "EmailIcon",
+            "text": "이메일로 견적 받기"
+          }
+        ]
+      },
+      "alerts": [
+        {
+          "icon": "GiftIcon",
+          "title": "추가 운전자 1명 포함"
+        }
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "searchKey": "eyJkcml2ZXJzQWdlIjozMCwiZHJvcE9mZkRhdGVUaW1lIjoiMjAyNC0wNi0xN1QxMDowMDowMCIsImRyb3BPZmZMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwiZHJvcE9mZkxvY2F0aW9uVHlwZSI6IkxBVExPTkciLCJwaWNrVXBEYXRlVGltZSI6IjIwMjQtMDYtMTZUMTA6MDA6MDAiLCJwaWNrVXBMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwicGlja1VwTG9jYXRpb25UeXBlIjoiTEFUTE9ORyIsInJlbnRhbER1cmF0aW9uSW5EYXlzIjoxLCJzZWFyY2hNZXRhZGF0YSI6IntcInBpY2tVcExvY2F0aW9uTmFtZVwiOlwi6rCV64Ko6rWsXCIsXCJkcm9wT2ZmTG9jYXRpb25OYW1lXCI6XCLqsJXrgqjqtaxcIn0iLCJzZXJ2aWNlRmVhdHVyZXMiOlsiSU5DTFVERV9QUk9EVUNUX1JFTEFUSU9OU0hJUFMiXX0=",
+      "product": {
+        "id": "758902441",
+        "largeBags": 2,
+        "smallBags": 1,
+        "rateType": "PAY_NOW"
+      },
+      "supplier": {
+        "id": "3662",
+        "name": "Yesaway"
+      },
+      "depots": {
+        "pickupDepot": {
+          "name": "서울 시내",
+          "id": "4721574"
+        },
+        "dropoffDepot": {
+          "name": "서울 시내",
+          "id": "4721574"
+        }
+      }
+    },
+    "props": {
+      "title": "Kia Carnival",
+      "subtitle": "또는 동급의 미니밴",
+      "a11yTranslation": "Product Card",
+      "image": {
+        "src": "https://cdn2.rcstatic.com/images/car_images_b/web/kia/carnival_lrg.jpg",
+        "fallbackSrc": "https://cdn2.rcstatic.com/images/car_images/web/kia/carnival_lrg.jpg",
+        "alt": ""
+      },
+      "supplierImage": {
+        "src": "https://cdn2.rcstatic.com/sp/images/suppliers/3662_logo_200.png",
+        "alt": "Yesaway 제공"
+      },
+      "tags": [
+        
+      ],
+      "info": [
+        {
+          "id": "number-of-seats",
+          "icon": "PersonHalfIcon",
+          "text": "7 인승"
+        },
+        {
+          "id": "transmission",
+          "icon": "GearboxAutomaticIcon",
+          "text": "자동",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        },
+        {
+          "id": "large-bags",
+          "icon": "SuitcaseIcon",
+          "text": "2 큰 가방",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 2개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "small-bags",
+          "icon": "CabinTrolleyIcon",
+          "text": "작은 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 2개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "mileage",
+          "icon": "DashboardIcon",
+          "text": "주행거리 제한 없음",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        }
+      ],
+      "review": {
+        "score": "9.5",
+        "scoreAriaLabel": "9.5",
+        "rating": "강력 추천",
+        "ratingReviewAriaLabel": "고객 평점 9.5, 강력 추천",
+        "reviewCount": "리뷰 1건",
+        "categories": {
+          "title": "고객 평점",
+          "closeAriaLabel": "close",
+          "items": [
+            {
+              "label": "가성비",
+              "rating": 6
+            },
+            {
+              "label": "차량 청결도",
+              "rating": 10
+            },
+            {
+              "label": "픽업 장소의 접근성",
+              "rating": 10
+            },
+            {
+              "label": "친절도",
+              "rating": 10
+            },
+            {
+              "label": "반납 소요 시간",
+              "rating": 10
+            },
+            {
+              "label": "차량 상태",
+              "rating": 10
+            },
+            {
+              "label": "픽업 소요 시간",
+              "rating": 10
+            }
+          ]
+        },
+        "link": {
+          "text": "고객 이용후기 보기"
+        }
+      },
+      "ctaTitle": "특가 보기",
+      "price": {
+        "label": "1일 기준 요금:",
+        "current": "₩256,244.00"
+      },
+      "location": [
+        {
+          "name": "서울 시내",
+          "info": "시내",
+          "id": "pickup-location-is-dropoff-location"
+        }
+      ],
+      "qualifiers": [
+        {
+          "id": "free-cancellation",
+          "text": "무료 취소",
+          "icon": "CheckmarkIcon"
+        }
+      ],
+      "actions": {
+        "items": [
+          {
+            "id": "important-info",
+            "icon": "InfoSignIcon",
+            "text": "중요 정보"
+          },
+          {
+            "id": "map",
+            "icon": "MapsPinIcon",
+            "text": "지도"
+          },
+          {
+            "id": "quotes",
+            "icon": "EmailIcon",
+            "text": "이메일로 견적 받기"
+          }
+        ]
+      },
+      "alerts": [
+        {
+          "icon": "GiftIcon",
+          "title": "추가 운전자 1명 포함"
+        }
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "searchKey": "eyJkcml2ZXJzQWdlIjozMCwiZHJvcE9mZkRhdGVUaW1lIjoiMjAyNC0wNi0xN1QxMDowMDowMCIsImRyb3BPZmZMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwiZHJvcE9mZkxvY2F0aW9uVHlwZSI6IkxBVExPTkciLCJwaWNrVXBEYXRlVGltZSI6IjIwMjQtMDYtMTZUMTA6MDA6MDAiLCJwaWNrVXBMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwicGlja1VwTG9jYXRpb25UeXBlIjoiTEFUTE9ORyIsInJlbnRhbER1cmF0aW9uSW5EYXlzIjoxLCJzZWFyY2hNZXRhZGF0YSI6IntcInBpY2tVcExvY2F0aW9uTmFtZVwiOlwi6rCV64Ko6rWsXCIsXCJkcm9wT2ZmTG9jYXRpb25OYW1lXCI6XCLqsJXrgqjqtaxcIn0iLCJzZXJ2aWNlRmVhdHVyZXMiOlsiSU5DTFVERV9QUk9EVUNUX1JFTEFUSU9OU0hJUFMiXX0=",
+      "product": {
+        "id": "759822911",
+        "largeBags": 1,
+        "smallBags": 1,
+        "rateType": "PAY_NOW"
+      },
+      "supplier": {
+        "id": "3662",
+        "name": "Yesaway"
+      },
+      "depots": {
+        "pickupDepot": {
+          "name": "강남",
+          "id": "4725041"
+        },
+        "dropoffDepot": {
+          "name": "강남",
+          "id": "4725041"
+        }
+      }
+    },
+    "props": {
+      "title": "Hyundai Sonata",
+      "subtitle": "또는 동급의 대형 차량",
+      "a11yTranslation": "Product Card",
+      "image": {
+        "src": "https://cdn2.rcstatic.com/images/car_images_b/web/hyundai/sonata_lrg.jpg",
+        "fallbackSrc": "https://cdn2.rcstatic.com/images/car_images/web/hyundai/sonata_lrg.jpg",
+        "alt": ""
+      },
+      "supplierImage": {
+        "src": "https://cdn2.rcstatic.com/sp/images/suppliers/3662_logo_200.png",
+        "alt": "Yesaway 제공"
+      },
+      "tags": [
+        
+      ],
+      "info": [
+        {
+          "id": "number-of-seats",
+          "icon": "PersonHalfIcon",
+          "text": "5 인승"
+        },
+        {
+          "id": "transmission",
+          "icon": "GearboxAutomaticIcon",
+          "text": "자동",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        },
+        {
+          "id": "large-bags",
+          "icon": "SuitcaseIcon",
+          "text": "큰 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 1개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "small-bags",
+          "icon": "CabinTrolleyIcon",
+          "text": "작은 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 1개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "mileage",
+          "icon": "DashboardIcon",
+          "text": "주행거리 제한 없음",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        }
+      ],
+      "ctaTitle": "특가 보기",
+      "price": {
+        "label": "1일 기준 요금:",
+        "current": "₩153,746.00"
+      },
+      "location": [
+        {
+          "name": "강남",
+          "info": "시내",
+          "id": "pickup-location-is-dropoff-location"
+        }
+      ],
+      "qualifiers": [
+        {
+          "id": "free-cancellation",
+          "text": "무료 취소",
+          "icon": "CheckmarkIcon"
+        }
+      ],
+      "actions": {
+        "items": [
+          {
+            "id": "important-info",
+            "icon": "InfoSignIcon",
+            "text": "중요 정보"
+          },
+          {
+            "id": "map",
+            "icon": "MapsPinIcon",
+            "text": "지도"
+          },
+          {
+            "id": "quotes",
+            "icon": "EmailIcon",
+            "text": "이메일로 견적 받기"
+          }
+        ]
+      },
+      "alerts": [
+        
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "searchKey": "eyJkcml2ZXJzQWdlIjozMCwiZHJvcE9mZkRhdGVUaW1lIjoiMjAyNC0wNi0xN1QxMDowMDowMCIsImRyb3BPZmZMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwiZHJvcE9mZkxvY2F0aW9uVHlwZSI6IkxBVExPTkciLCJwaWNrVXBEYXRlVGltZSI6IjIwMjQtMDYtMTZUMTA6MDA6MDAiLCJwaWNrVXBMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwicGlja1VwTG9jYXRpb25UeXBlIjoiTEFUTE9ORyIsInJlbnRhbER1cmF0aW9uSW5EYXlzIjoxLCJzZWFyY2hNZXRhZGF0YSI6IntcInBpY2tVcExvY2F0aW9uTmFtZVwiOlwi6rCV64Ko6rWsXCIsXCJkcm9wT2ZmTG9jYXRpb25OYW1lXCI6XCLqsJXrgqjqtaxcIn0iLCJzZXJ2aWNlRmVhdHVyZXMiOlsiSU5DTFVERV9QUk9EVUNUX1JFTEFUSU9OU0hJUFMiXX0=",
+      "product": {
+        "id": "758902426",
+        "largeBags": 1,
+        "smallBags": 1,
+        "rateType": "PAY_NOW"
+      },
+      "supplier": {
+        "id": "3662",
+        "name": "Yesaway"
+      },
+      "depots": {
+        "pickupDepot": {
+          "name": "서울 시내",
+          "id": "4721574"
+        },
+        "dropoffDepot": {
+          "name": "서울 시내",
+          "id": "4721574"
+        }
+      }
+    },
+    "props": {
+      "title": "Hyundai Sonata",
+      "subtitle": "또는 동급의 대형 차량",
+      "a11yTranslation": "Product Card",
+      "image": {
+        "src": "https://cdn2.rcstatic.com/images/car_images_b/web/hyundai/sonata_lrg.jpg",
+        "fallbackSrc": "https://cdn2.rcstatic.com/images/car_images/web/hyundai/sonata_lrg.jpg",
+        "alt": ""
+      },
+      "supplierImage": {
+        "src": "https://cdn2.rcstatic.com/sp/images/suppliers/3662_logo_200.png",
+        "alt": "Yesaway 제공"
+      },
+      "tags": [
+        
+      ],
+      "info": [
+        {
+          "id": "number-of-seats",
+          "icon": "PersonHalfIcon",
+          "text": "5 인승"
+        },
+        {
+          "id": "transmission",
+          "icon": "GearboxAutomaticIcon",
+          "text": "자동",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        },
+        {
+          "id": "large-bags",
+          "icon": "SuitcaseIcon",
+          "text": "큰 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 1개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "small-bags",
+          "icon": "CabinTrolleyIcon",
+          "text": "작은 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 1개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "mileage",
+          "icon": "DashboardIcon",
+          "text": "주행거리 제한 없음",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        }
+      ],
+      "review": {
+        "score": "9.5",
+        "scoreAriaLabel": "9.5",
+        "rating": "강력 추천",
+        "ratingReviewAriaLabel": "고객 평점 9.5, 강력 추천",
+        "reviewCount": "리뷰 1건",
+        "categories": {
+          "title": "고객 평점",
+          "closeAriaLabel": "close",
+          "items": [
+            {
+              "label": "가성비",
+              "rating": 6
+            },
+            {
+              "label": "차량 청결도",
+              "rating": 10
+            },
+            {
+              "label": "픽업 장소의 접근성",
+              "rating": 10
+            },
+            {
+              "label": "친절도",
+              "rating": 10
+            },
+            {
+              "label": "반납 소요 시간",
+              "rating": 10
+            },
+            {
+              "label": "차량 상태",
+              "rating": 10
+            },
+            {
+              "label": "픽업 소요 시간",
+              "rating": 10
+            }
+          ]
+        },
+        "link": {
+          "text": "고객 이용후기 보기"
+        }
+      },
+      "ctaTitle": "특가 보기",
+      "price": {
+        "label": "1일 기준 요금:",
+        "current": "₩153,746.00"
+      },
+      "location": [
+        {
+          "name": "서울 시내",
+          "info": "시내",
+          "id": "pickup-location-is-dropoff-location"
+        }
+      ],
+      "qualifiers": [
+        {
+          "id": "free-cancellation",
+          "text": "무료 취소",
+          "icon": "CheckmarkIcon"
+        }
+      ],
+      "actions": {
+        "items": [
+          {
+            "id": "important-info",
+            "icon": "InfoSignIcon",
+            "text": "중요 정보"
+          },
+          {
+            "id": "map",
+            "icon": "MapsPinIcon",
+            "text": "지도"
+          },
+          {
+            "id": "quotes",
+            "icon": "EmailIcon",
+            "text": "이메일로 견적 받기"
+          }
+        ]
+      },
+      "alerts": [
+        {
+          "icon": "GiftIcon",
+          "title": "추가 운전자 1명 포함"
+        }
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "searchKey": "eyJkcml2ZXJzQWdlIjozMCwiZHJvcE9mZkRhdGVUaW1lIjoiMjAyNC0wNi0xN1QxMDowMDowMCIsImRyb3BPZmZMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwiZHJvcE9mZkxvY2F0aW9uVHlwZSI6IkxBVExPTkciLCJwaWNrVXBEYXRlVGltZSI6IjIwMjQtMDYtMTZUMTA6MDA6MDAiLCJwaWNrVXBMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwicGlja1VwTG9jYXRpb25UeXBlIjoiTEFUTE9ORyIsInJlbnRhbER1cmF0aW9uSW5EYXlzIjoxLCJzZWFyY2hNZXRhZGF0YSI6IntcInBpY2tVcExvY2F0aW9uTmFtZVwiOlwi6rCV64Ko6rWsXCIsXCJkcm9wT2ZmTG9jYXRpb25OYW1lXCI6XCLqsJXrgqjqtaxcIn0iLCJzZXJ2aWNlRmVhdHVyZXMiOlsiSU5DTFVERV9QUk9EVUNUX1JFTEFUSU9OU0hJUFMiXX0=",
+      "product": {
+        "id": "759822926",
+        "largeBags": 2,
+        "smallBags": 1,
+        "rateType": "PAY_NOW"
+      },
+      "supplier": {
+        "id": "3662",
+        "name": "Yesaway"
+      },
+      "depots": {
+        "pickupDepot": {
+          "name": "강남",
+          "id": "4725041"
+        },
+        "dropoffDepot": {
+          "name": "강남",
+          "id": "4725041"
+        }
+      }
+    },
+    "props": {
+      "title": "Kia Carnival",
+      "subtitle": "또는 동급의 미니밴",
+      "a11yTranslation": "Product Card",
+      "image": {
+        "src": "https://cdn2.rcstatic.com/images/car_images_b/web/kia/carnival_lrg.jpg",
+        "fallbackSrc": "https://cdn2.rcstatic.com/images/car_images/web/kia/carnival_lrg.jpg",
+        "alt": ""
+      },
+      "supplierImage": {
+        "src": "https://cdn2.rcstatic.com/sp/images/suppliers/3662_logo_200.png",
+        "alt": "Yesaway 제공"
+      },
+      "tags": [
+        
+      ],
+      "info": [
+        {
+          "id": "number-of-seats",
+          "icon": "PersonHalfIcon",
+          "text": "7 인승"
+        },
+        {
+          "id": "transmission",
+          "icon": "GearboxAutomaticIcon",
+          "text": "자동",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        },
+        {
+          "id": "large-bags",
+          "icon": "SuitcaseIcon",
+          "text": "2 큰 가방",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 2개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "small-bags",
+          "icon": "CabinTrolleyIcon",
+          "text": "작은 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 2개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "mileage",
+          "icon": "DashboardIcon",
+          "text": "주행거리 제한 없음",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        }
+      ],
+      "ctaTitle": "특가 보기",
+      "price": {
+        "label": "1일 기준 요금:",
+        "current": "₩256,244.00"
+      },
+      "location": [
+        {
+          "name": "강남",
+          "info": "시내",
+          "id": "pickup-location-is-dropoff-location"
+        }
+      ],
+      "qualifiers": [
+        {
+          "id": "free-cancellation",
+          "text": "무료 취소",
+          "icon": "CheckmarkIcon"
+        }
+      ],
+      "actions": {
+        "items": [
+          {
+            "id": "important-info",
+            "icon": "InfoSignIcon",
+            "text": "중요 정보"
+          },
+          {
+            "id": "map",
+            "icon": "MapsPinIcon",
+            "text": "지도"
+          },
+          {
+            "id": "quotes",
+            "icon": "EmailIcon",
+            "text": "이메일로 견적 받기"
+          }
+        ]
+      },
+      "alerts": [
+        
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "searchKey": "eyJkcml2ZXJzQWdlIjozMCwiZHJvcE9mZkRhdGVUaW1lIjoiMjAyNC0wNi0xN1QxMDowMDowMCIsImRyb3BPZmZMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwiZHJvcE9mZkxvY2F0aW9uVHlwZSI6IkxBVExPTkciLCJwaWNrVXBEYXRlVGltZSI6IjIwMjQtMDYtMTZUMTA6MDA6MDAiLCJwaWNrVXBMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwicGlja1VwTG9jYXRpb25UeXBlIjoiTEFUTE9ORyIsInJlbnRhbER1cmF0aW9uSW5EYXlzIjoxLCJzZWFyY2hNZXRhZGF0YSI6IntcInBpY2tVcExvY2F0aW9uTmFtZVwiOlwi6rCV64Ko6rWsXCIsXCJkcm9wT2ZmTG9jYXRpb25OYW1lXCI6XCLqsJXrgqjqtaxcIn0iLCJzZXJ2aWNlRmVhdHVyZXMiOlsiSU5DTFVERV9QUk9EVUNUX1JFTEFUSU9OU0hJUFMiXX0=",
+      "product": {
+        "id": "758902431",
+        "largeBags": 2,
+        "smallBags": 1,
+        "rateType": "PAY_NOW"
+      },
+      "supplier": {
+        "id": "3662",
+        "name": "Yesaway"
+      },
+      "depots": {
+        "pickupDepot": {
+          "name": "서울 시내",
+          "id": "4721574"
+        },
+        "dropoffDepot": {
+          "name": "서울 시내",
+          "id": "4721574"
+        }
+      }
+    },
+    "props": {
+      "title": "Genesis G80",
+      "subtitle": "또는 동급의 프리미엄 차량",
+      "a11yTranslation": "Product Card",
+      "image": {
+        "src": "https://cdn2.rcstatic.com/images/car_images_b/default_lrg.jpg",
+        "fallbackSrc": "https://cdn2.rcstatic.com/images/car_images/default_lrg.jpg",
+        "alt": ""
+      },
+      "supplierImage": {
+        "src": "https://cdn2.rcstatic.com/sp/images/suppliers/3662_logo_200.png",
+        "alt": "Yesaway 제공"
+      },
+      "tags": [
+        
+      ],
+      "info": [
+        {
+          "id": "number-of-seats",
+          "icon": "PersonHalfIcon",
+          "text": "5 인승"
+        },
+        {
+          "id": "transmission",
+          "icon": "GearboxAutomaticIcon",
+          "text": "자동",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        },
+        {
+          "id": "large-bags",
+          "icon": "SuitcaseIcon",
+          "text": "2 큰 가방",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 2개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "small-bags",
+          "icon": "CabinTrolleyIcon",
+          "text": "작은 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 2개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "mileage",
+          "icon": "DashboardIcon",
+          "text": "주행거리 제한 없음",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        }
+      ],
+      "review": {
+        "score": "9.5",
+        "scoreAriaLabel": "9.5",
+        "rating": "강력 추천",
+        "ratingReviewAriaLabel": "고객 평점 9.5, 강력 추천",
+        "reviewCount": "리뷰 1건",
+        "categories": {
+          "title": "고객 평점",
+          "closeAriaLabel": "close",
+          "items": [
+            {
+              "label": "가성비",
+              "rating": 6
+            },
+            {
+              "label": "차량 청결도",
+              "rating": 10
+            },
+            {
+              "label": "픽업 장소의 접근성",
+              "rating": 10
+            },
+            {
+              "label": "친절도",
+              "rating": 10
+            },
+            {
+              "label": "반납 소요 시간",
+              "rating": 10
+            },
+            {
+              "label": "차량 상태",
+              "rating": 10
+            },
+            {
+              "label": "픽업 소요 시간",
+              "rating": 10
+            }
+          ]
+        },
+        "link": {
+          "text": "고객 이용후기 보기"
+        }
+      },
+      "ctaTitle": "특가 보기",
+      "price": {
+        "label": "1일 기준 요금:",
+        "current": "₩256,244.00"
+      },
+      "location": [
+        {
+          "name": "서울 시내",
+          "info": "시내",
+          "id": "pickup-location-is-dropoff-location"
+        }
+      ],
+      "qualifiers": [
+        {
+          "id": "free-cancellation",
+          "text": "무료 취소",
+          "icon": "CheckmarkIcon"
+        }
+      ],
+      "actions": {
+        "items": [
+          {
+            "id": "important-info",
+            "icon": "InfoSignIcon",
+            "text": "중요 정보"
+          },
+          {
+            "id": "map",
+            "icon": "MapsPinIcon",
+            "text": "지도"
+          },
+          {
+            "id": "quotes",
+            "icon": "EmailIcon",
+            "text": "이메일로 견적 받기"
+          }
+        ]
+      },
+      "alerts": [
+        {
+          "icon": "GiftIcon",
+          "title": "추가 운전자 1명 포함"
+        }
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "searchKey": "eyJkcml2ZXJzQWdlIjozMCwiZHJvcE9mZkRhdGVUaW1lIjoiMjAyNC0wNi0xN1QxMDowMDowMCIsImRyb3BPZmZMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwiZHJvcE9mZkxvY2F0aW9uVHlwZSI6IkxBVExPTkciLCJwaWNrVXBEYXRlVGltZSI6IjIwMjQtMDYtMTZUMTA6MDA6MDAiLCJwaWNrVXBMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwicGlja1VwTG9jYXRpb25UeXBlIjoiTEFUTE9ORyIsInJlbnRhbER1cmF0aW9uSW5EYXlzIjoxLCJzZWFyY2hNZXRhZGF0YSI6IntcInBpY2tVcExvY2F0aW9uTmFtZVwiOlwi6rCV64Ko6rWsXCIsXCJkcm9wT2ZmTG9jYXRpb25OYW1lXCI6XCLqsJXrgqjqtaxcIn0iLCJzZXJ2aWNlRmVhdHVyZXMiOlsiSU5DTFVERV9QUk9EVUNUX1JFTEFUSU9OU0hJUFMiXX0=",
+      "product": {
+        "id": "759360596",
+        "largeBags": 1,
+        "smallBags": 1,
+        "rateType": "PAY_NOW"
+      },
+      "supplier": {
+        "id": "3662",
+        "name": "Yesaway"
+      },
+      "depots": {
+        "pickupDepot": {
+          "name": "서울 김포 공항",
+          "id": "4722759"
+        },
+        "dropoffDepot": {
+          "name": "서울 김포 공항",
+          "id": "4722759"
+        }
+      }
+    },
+    "props": {
+      "title": "Hyundai Avante",
+      "subtitle": "또는 동급의 대형 차량",
+      "a11yTranslation": "Product Card",
+      "image": {
+        "src": "https://cdn2.rcstatic.com/images/car_images_b/web/hyundai/avante_lrg.jpg",
+        "fallbackSrc": "https://cdn2.rcstatic.com/images/car_images/web/hyundai/avante_lrg.jpg",
+        "alt": ""
+      },
+      "supplierImage": {
+        "src": "https://cdn2.rcstatic.com/sp/images/suppliers/3662_logo_200.png",
+        "alt": "Yesaway 제공"
+      },
+      "tags": [
+        
+      ],
+      "info": [
+        {
+          "id": "number-of-seats",
+          "icon": "PersonHalfIcon",
+          "text": "5 인승"
+        },
+        {
+          "id": "transmission",
+          "icon": "GearboxAutomaticIcon",
+          "text": "자동",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        },
+        {
+          "id": "large-bags",
+          "icon": "SuitcaseIcon",
+          "text": "큰 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 1개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "small-bags",
+          "icon": "CabinTrolleyIcon",
+          "text": "작은 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 1개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "mileage",
+          "icon": "DashboardIcon",
+          "text": "주행거리 제한 없음",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        }
+      ],
+      "ctaTitle": "특가 보기",
+      "price": {
+        "label": "1일 기준 요금:",
+        "current": "₩140,934.00"
+      },
+      "location": [
+        {
+          "name": "서울 김포 공항",
+          "info": "픽업 서비스",
+          "id": "pickup-location-is-dropoff-location"
+        }
+      ],
+      "qualifiers": [
+        {
+          "id": "free-cancellation",
+          "text": "무료 취소",
+          "icon": "CheckmarkIcon"
+        }
+      ],
+      "actions": {
+        "items": [
+          {
+            "id": "important-info",
+            "icon": "InfoSignIcon",
+            "text": "중요 정보"
+          },
+          {
+            "id": "map",
+            "icon": "MapsPinIcon",
+            "text": "지도"
+          },
+          {
+            "id": "quotes",
+            "icon": "EmailIcon",
+            "text": "이메일로 견적 받기"
+          }
+        ]
+      },
+      "alerts": [
+        {
+          "icon": "GiftIcon",
+          "title": "추가 운전자 1명 포함"
+        }
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "searchKey": "eyJkcml2ZXJzQWdlIjozMCwiZHJvcE9mZkRhdGVUaW1lIjoiMjAyNC0wNi0xN1QxMDowMDowMCIsImRyb3BPZmZMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwiZHJvcE9mZkxvY2F0aW9uVHlwZSI6IkxBVExPTkciLCJwaWNrVXBEYXRlVGltZSI6IjIwMjQtMDYtMTZUMTA6MDA6MDAiLCJwaWNrVXBMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwicGlja1VwTG9jYXRpb25UeXBlIjoiTEFUTE9ORyIsInJlbnRhbER1cmF0aW9uSW5EYXlzIjoxLCJzZWFyY2hNZXRhZGF0YSI6IntcInBpY2tVcExvY2F0aW9uTmFtZVwiOlwi6rCV64Ko6rWsXCIsXCJkcm9wT2ZmTG9jYXRpb25OYW1lXCI6XCLqsJXrgqjqtaxcIn0iLCJzZXJ2aWNlRmVhdHVyZXMiOlsiSU5DTFVERV9QUk9EVUNUX1JFTEFUSU9OU0hJUFMiXX0=",
+      "product": {
+        "id": "758902436",
+        "largeBags": 2,
+        "smallBags": 1,
+        "rateType": "PAY_NOW"
+      },
+      "supplier": {
+        "id": "3662",
+        "name": "Yesaway"
+      },
+      "depots": {
+        "pickupDepot": {
+          "name": "서울 시내",
+          "id": "4721574"
+        },
+        "dropoffDepot": {
+          "name": "서울 시내",
+          "id": "4721574"
+        }
+      }
+    },
+    "props": {
+      "title": "Hyundai Grandeur",
+      "subtitle": "또는 동급의 대형 차량",
+      "a11yTranslation": "Product Card",
+      "image": {
+        "src": "https://cdn2.rcstatic.com/images/car_images_b/web/hyundai/grandeur_lrg.jpg",
+        "fallbackSrc": "https://cdn2.rcstatic.com/images/car_images/web/hyundai/grandeur_lrg.jpg",
+        "alt": ""
+      },
+      "supplierImage": {
+        "src": "https://cdn2.rcstatic.com/sp/images/suppliers/3662_logo_200.png",
+        "alt": "Yesaway 제공"
+      },
+      "tags": [
+        
+      ],
+      "info": [
+        {
+          "id": "number-of-seats",
+          "icon": "PersonHalfIcon",
+          "text": "5 인승"
+        },
+        {
+          "id": "transmission",
+          "icon": "GearboxAutomaticIcon",
+          "text": "자동",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        },
+        {
+          "id": "large-bags",
+          "icon": "SuitcaseIcon",
+          "text": "2 큰 가방",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 2개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "small-bags",
+          "icon": "CabinTrolleyIcon",
+          "text": "작은 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 2개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "mileage",
+          "icon": "DashboardIcon",
+          "text": "주행거리 제한 없음",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        }
+      ],
+      "review": {
+        "score": "9.5",
+        "scoreAriaLabel": "9.5",
+        "rating": "강력 추천",
+        "ratingReviewAriaLabel": "고객 평점 9.5, 강력 추천",
+        "reviewCount": "리뷰 1건",
+        "categories": {
+          "title": "고객 평점",
+          "closeAriaLabel": "close",
+          "items": [
+            {
+              "label": "가성비",
+              "rating": 6
+            },
+            {
+              "label": "차량 청결도",
+              "rating": 10
+            },
+            {
+              "label": "픽업 장소의 접근성",
+              "rating": 10
+            },
+            {
+              "label": "친절도",
+              "rating": 10
+            },
+            {
+              "label": "반납 소요 시간",
+              "rating": 10
+            },
+            {
+              "label": "차량 상태",
+              "rating": 10
+            },
+            {
+              "label": "픽업 소요 시간",
+              "rating": 10
+            }
+          ]
+        },
+        "link": {
+          "text": "고객 이용후기 보기"
+        }
+      },
+      "ctaTitle": "특가 보기",
+      "price": {
+        "label": "1일 기준 요금:",
+        "current": "₩217,807.00"
+      },
+      "location": [
+        {
+          "name": "서울 시내",
+          "info": "시내",
+          "id": "pickup-location-is-dropoff-location"
+        }
+      ],
+      "qualifiers": [
+        {
+          "id": "free-cancellation",
+          "text": "무료 취소",
+          "icon": "CheckmarkIcon"
+        }
+      ],
+      "actions": {
+        "items": [
+          {
+            "id": "important-info",
+            "icon": "InfoSignIcon",
+            "text": "중요 정보"
+          },
+          {
+            "id": "map",
+            "icon": "MapsPinIcon",
+            "text": "지도"
+          },
+          {
+            "id": "quotes",
+            "icon": "EmailIcon",
+            "text": "이메일로 견적 받기"
+          }
+        ]
+      },
+      "alerts": [
+        {
+          "icon": "GiftIcon",
+          "title": "추가 운전자 1명 포함"
+        }
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "searchKey": "eyJkcml2ZXJzQWdlIjozMCwiZHJvcE9mZkRhdGVUaW1lIjoiMjAyNC0wNi0xN1QxMDowMDowMCIsImRyb3BPZmZMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwiZHJvcE9mZkxvY2F0aW9uVHlwZSI6IkxBVExPTkciLCJwaWNrVXBEYXRlVGltZSI6IjIwMjQtMDYtMTZUMTA6MDA6MDAiLCJwaWNrVXBMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwicGlja1VwTG9jYXRpb25UeXBlIjoiTEFUTE9ORyIsInJlbnRhbER1cmF0aW9uSW5EYXlzIjoxLCJzZWFyY2hNZXRhZGF0YSI6IntcInBpY2tVcExvY2F0aW9uTmFtZVwiOlwi6rCV64Ko6rWsXCIsXCJkcm9wT2ZmTG9jYXRpb25OYW1lXCI6XCLqsJXrgqjqtaxcIn0iLCJzZXJ2aWNlRmVhdHVyZXMiOlsiSU5DTFVERV9QUk9EVUNUX1JFTEFUSU9OU0hJUFMiXX0=",
+      "product": {
+        "id": "759360611",
+        "largeBags": 2,
+        "smallBags": 1,
+        "rateType": "PAY_NOW"
+      },
+      "supplier": {
+        "id": "3662",
+        "name": "Yesaway"
+      },
+      "depots": {
+        "pickupDepot": {
+          "name": "서울 김포 공항",
+          "id": "4722759"
+        },
+        "dropoffDepot": {
+          "name": "서울 김포 공항",
+          "id": "4722759"
+        }
+      }
+    },
+    "props": {
+      "title": "Hyundai Grandeur",
+      "subtitle": "또는 동급의 대형 차량",
+      "a11yTranslation": "Product Card",
+      "image": {
+        "src": "https://cdn2.rcstatic.com/images/car_images_b/web/hyundai/grandeur_lrg.jpg",
+        "fallbackSrc": "https://cdn2.rcstatic.com/images/car_images/web/hyundai/grandeur_lrg.jpg",
+        "alt": ""
+      },
+      "supplierImage": {
+        "src": "https://cdn2.rcstatic.com/sp/images/suppliers/3662_logo_200.png",
+        "alt": "Yesaway 제공"
+      },
+      "tags": [
+        
+      ],
+      "info": [
+        {
+          "id": "number-of-seats",
+          "icon": "PersonHalfIcon",
+          "text": "5 인승"
+        },
+        {
+          "id": "transmission",
+          "icon": "GearboxAutomaticIcon",
+          "text": "자동",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        },
+        {
+          "id": "large-bags",
+          "icon": "SuitcaseIcon",
+          "text": "2 큰 가방",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 2개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "small-bags",
+          "icon": "CabinTrolleyIcon",
+          "text": "작은 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 2개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "mileage",
+          "icon": "DashboardIcon",
+          "text": "주행거리 제한 없음",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        }
+      ],
+      "ctaTitle": "특가 보기",
+      "price": {
+        "label": "1일 기준 요금:",
+        "current": "₩217,807.00"
+      },
+      "location": [
+        {
+          "name": "서울 김포 공항",
+          "info": "픽업 서비스",
+          "id": "pickup-location-is-dropoff-location"
+        }
+      ],
+      "qualifiers": [
+        {
+          "id": "free-cancellation",
+          "text": "무료 취소",
+          "icon": "CheckmarkIcon"
+        }
+      ],
+      "actions": {
+        "items": [
+          {
+            "id": "important-info",
+            "icon": "InfoSignIcon",
+            "text": "중요 정보"
+          },
+          {
+            "id": "map",
+            "icon": "MapsPinIcon",
+            "text": "지도"
+          },
+          {
+            "id": "quotes",
+            "icon": "EmailIcon",
+            "text": "이메일로 견적 받기"
+          }
+        ]
+      },
+      "alerts": [
+        {
+          "icon": "GiftIcon",
+          "title": "추가 운전자 1명 포함"
+        }
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "searchKey": "eyJkcml2ZXJzQWdlIjozMCwiZHJvcE9mZkRhdGVUaW1lIjoiMjAyNC0wNi0xN1QxMDowMDowMCIsImRyb3BPZmZMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwiZHJvcE9mZkxvY2F0aW9uVHlwZSI6IkxBVExPTkciLCJwaWNrVXBEYXRlVGltZSI6IjIwMjQtMDYtMTZUMTA6MDA6MDAiLCJwaWNrVXBMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwicGlja1VwTG9jYXRpb25UeXBlIjoiTEFUTE9ORyIsInJlbnRhbER1cmF0aW9uSW5EYXlzIjoxLCJzZWFyY2hNZXRhZGF0YSI6IntcInBpY2tVcExvY2F0aW9uTmFtZVwiOlwi6rCV64Ko6rWsXCIsXCJkcm9wT2ZmTG9jYXRpb25OYW1lXCI6XCLqsJXrgqjqtaxcIn0iLCJzZXJ2aWNlRmVhdHVyZXMiOlsiSU5DTFVERV9QUk9EVUNUX1JFTEFUSU9OU0hJUFMiXX0=",
+      "product": {
+        "id": "759360601",
+        "largeBags": 1,
+        "smallBags": 1,
+        "rateType": "PAY_NOW"
+      },
+      "supplier": {
+        "id": "3662",
+        "name": "Yesaway"
+      },
+      "depots": {
+        "pickupDepot": {
+          "name": "서울 김포 공항",
+          "id": "4722759"
+        },
+        "dropoffDepot": {
+          "name": "서울 김포 공항",
+          "id": "4722759"
+        }
+      }
+    },
+    "props": {
+      "title": "Hyundai Sonata",
+      "subtitle": "또는 동급의 대형 차량",
+      "a11yTranslation": "Product Card",
+      "image": {
+        "src": "https://cdn2.rcstatic.com/images/car_images_b/web/hyundai/sonata_lrg.jpg",
+        "fallbackSrc": "https://cdn2.rcstatic.com/images/car_images/web/hyundai/sonata_lrg.jpg",
+        "alt": ""
+      },
+      "supplierImage": {
+        "src": "https://cdn2.rcstatic.com/sp/images/suppliers/3662_logo_200.png",
+        "alt": "Yesaway 제공"
+      },
+      "tags": [
+        
+      ],
+      "info": [
+        {
+          "id": "number-of-seats",
+          "icon": "PersonHalfIcon",
+          "text": "5 인승"
+        },
+        {
+          "id": "transmission",
+          "icon": "GearboxAutomaticIcon",
+          "text": "자동",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        },
+        {
+          "id": "large-bags",
+          "icon": "SuitcaseIcon",
+          "text": "큰 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 1개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "small-bags",
+          "icon": "CabinTrolleyIcon",
+          "text": "작은 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 1개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "mileage",
+          "icon": "DashboardIcon",
+          "text": "주행거리 제한 없음",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        }
+      ],
+      "ctaTitle": "특가 보기",
+      "price": {
+        "label": "1일 기준 요금:",
+        "current": "₩153,746.00"
+      },
+      "location": [
+        {
+          "name": "서울 김포 공항",
+          "info": "픽업 서비스",
+          "id": "pickup-location-is-dropoff-location"
+        }
+      ],
+      "qualifiers": [
+        {
+          "id": "free-cancellation",
+          "text": "무료 취소",
+          "icon": "CheckmarkIcon"
+        }
+      ],
+      "actions": {
+        "items": [
+          {
+            "id": "important-info",
+            "icon": "InfoSignIcon",
+            "text": "중요 정보"
+          },
+          {
+            "id": "map",
+            "icon": "MapsPinIcon",
+            "text": "지도"
+          },
+          {
+            "id": "quotes",
+            "icon": "EmailIcon",
+            "text": "이메일로 견적 받기"
+          }
+        ]
+      },
+      "alerts": [
+        {
+          "icon": "GiftIcon",
+          "title": "추가 운전자 1명 포함"
+        }
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "searchKey": "eyJkcml2ZXJzQWdlIjozMCwiZHJvcE9mZkRhdGVUaW1lIjoiMjAyNC0wNi0xN1QxMDowMDowMCIsImRyb3BPZmZMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwiZHJvcE9mZkxvY2F0aW9uVHlwZSI6IkxBVExPTkciLCJwaWNrVXBEYXRlVGltZSI6IjIwMjQtMDYtMTZUMTA6MDA6MDAiLCJwaWNrVXBMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwicGlja1VwTG9jYXRpb25UeXBlIjoiTEFUTE9ORyIsInJlbnRhbER1cmF0aW9uSW5EYXlzIjoxLCJzZWFyY2hNZXRhZGF0YSI6IntcInBpY2tVcExvY2F0aW9uTmFtZVwiOlwi6rCV64Ko6rWsXCIsXCJkcm9wT2ZmTG9jYXRpb25OYW1lXCI6XCLqsJXrgqjqtaxcIn0iLCJzZXJ2aWNlRmVhdHVyZXMiOlsiSU5DTFVERV9QUk9EVUNUX1JFTEFUSU9OU0hJUFMiXX0=",
+      "product": {
+        "id": "759360606",
+        "largeBags": 2,
+        "smallBags": 1,
+        "rateType": "PAY_NOW"
+      },
+      "supplier": {
+        "id": "3662",
+        "name": "Yesaway"
+      },
+      "depots": {
+        "pickupDepot": {
+          "name": "서울 김포 공항",
+          "id": "4722759"
+        },
+        "dropoffDepot": {
+          "name": "서울 김포 공항",
+          "id": "4722759"
+        }
+      }
+    },
+    "props": {
+      "title": "Genesis G80",
+      "subtitle": "또는 동급의 프리미엄 차량",
+      "a11yTranslation": "Product Card",
+      "image": {
+        "src": "https://cdn2.rcstatic.com/images/car_images_b/default_lrg.jpg",
+        "fallbackSrc": "https://cdn2.rcstatic.com/images/car_images/default_lrg.jpg",
+        "alt": ""
+      },
+      "supplierImage": {
+        "src": "https://cdn2.rcstatic.com/sp/images/suppliers/3662_logo_200.png",
+        "alt": "Yesaway 제공"
+      },
+      "tags": [
+        
+      ],
+      "info": [
+        {
+          "id": "number-of-seats",
+          "icon": "PersonHalfIcon",
+          "text": "5 인승"
+        },
+        {
+          "id": "transmission",
+          "icon": "GearboxAutomaticIcon",
+          "text": "자동",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        },
+        {
+          "id": "large-bags",
+          "icon": "SuitcaseIcon",
+          "text": "2 큰 가방",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 2개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "small-bags",
+          "icon": "CabinTrolleyIcon",
+          "text": "작은 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 2개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "mileage",
+          "icon": "DashboardIcon",
+          "text": "주행거리 제한 없음",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        }
+      ],
+      "ctaTitle": "특가 보기",
+      "price": {
+        "label": "1일 기준 요금:",
+        "current": "₩256,244.00"
+      },
+      "location": [
+        {
+          "name": "서울 김포 공항",
+          "info": "픽업 서비스",
+          "id": "pickup-location-is-dropoff-location"
+        }
+      ],
+      "qualifiers": [
+        {
+          "id": "free-cancellation",
+          "text": "무료 취소",
+          "icon": "CheckmarkIcon"
+        }
+      ],
+      "actions": {
+        "items": [
+          {
+            "id": "important-info",
+            "icon": "InfoSignIcon",
+            "text": "중요 정보"
+          },
+          {
+            "id": "map",
+            "icon": "MapsPinIcon",
+            "text": "지도"
+          },
+          {
+            "id": "quotes",
+            "icon": "EmailIcon",
+            "text": "이메일로 견적 받기"
+          }
+        ]
+      },
+      "alerts": [
+        {
+          "icon": "GiftIcon",
+          "title": "추가 운전자 1명 포함"
+        }
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "searchKey": "eyJkcml2ZXJzQWdlIjozMCwiZHJvcE9mZkRhdGVUaW1lIjoiMjAyNC0wNi0xN1QxMDowMDowMCIsImRyb3BPZmZMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwiZHJvcE9mZkxvY2F0aW9uVHlwZSI6IkxBVExPTkciLCJwaWNrVXBEYXRlVGltZSI6IjIwMjQtMDYtMTZUMTA6MDA6MDAiLCJwaWNrVXBMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwicGlja1VwTG9jYXRpb25UeXBlIjoiTEFUTE9ORyIsInJlbnRhbER1cmF0aW9uSW5EYXlzIjoxLCJzZWFyY2hNZXRhZGF0YSI6IntcInBpY2tVcExvY2F0aW9uTmFtZVwiOlwi6rCV64Ko6rWsXCIsXCJkcm9wT2ZmTG9jYXRpb25OYW1lXCI6XCLqsJXrgqjqtaxcIn0iLCJzZXJ2aWNlRmVhdHVyZXMiOlsiSU5DTFVERV9QUk9EVUNUX1JFTEFUSU9OU0hJUFMiXX0=",
+      "product": {
+        "id": "759822921",
+        "largeBags": 2,
+        "smallBags": 1,
+        "rateType": "PAY_NOW"
+      },
+      "supplier": {
+        "id": "3662",
+        "name": "Yesaway"
+      },
+      "depots": {
+        "pickupDepot": {
+          "name": "강남",
+          "id": "4725041"
+        },
+        "dropoffDepot": {
+          "name": "강남",
+          "id": "4725041"
+        }
+      }
+    },
+    "props": {
+      "title": "Hyundai Grandeur",
+      "subtitle": "또는 동급의 대형 차량",
+      "a11yTranslation": "Product Card",
+      "image": {
+        "src": "https://cdn2.rcstatic.com/images/car_images_b/web/hyundai/grandeur_lrg.jpg",
+        "fallbackSrc": "https://cdn2.rcstatic.com/images/car_images/web/hyundai/grandeur_lrg.jpg",
+        "alt": ""
+      },
+      "supplierImage": {
+        "src": "https://cdn2.rcstatic.com/sp/images/suppliers/3662_logo_200.png",
+        "alt": "Yesaway 제공"
+      },
+      "tags": [
+        
+      ],
+      "info": [
+        {
+          "id": "number-of-seats",
+          "icon": "PersonHalfIcon",
+          "text": "5 인승"
+        },
+        {
+          "id": "transmission",
+          "icon": "GearboxAutomaticIcon",
+          "text": "자동",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        },
+        {
+          "id": "large-bags",
+          "icon": "SuitcaseIcon",
+          "text": "2 큰 가방",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 2개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "small-bags",
+          "icon": "CabinTrolleyIcon",
+          "text": "작은 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 2개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "mileage",
+          "icon": "DashboardIcon",
+          "text": "주행거리 제한 없음",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        }
+      ],
+      "ctaTitle": "특가 보기",
+      "price": {
+        "label": "1일 기준 요금:",
+        "current": "₩217,807.00"
+      },
+      "location": [
+        {
+          "name": "강남",
+          "info": "시내",
+          "id": "pickup-location-is-dropoff-location"
+        }
+      ],
+      "qualifiers": [
+        {
+          "id": "free-cancellation",
+          "text": "무료 취소",
+          "icon": "CheckmarkIcon"
+        }
+      ],
+      "actions": {
+        "items": [
+          {
+            "id": "important-info",
+            "icon": "InfoSignIcon",
+            "text": "중요 정보"
+          },
+          {
+            "id": "map",
+            "icon": "MapsPinIcon",
+            "text": "지도"
+          },
+          {
+            "id": "quotes",
+            "icon": "EmailIcon",
+            "text": "이메일로 견적 받기"
+          }
+        ]
+      },
+      "alerts": [
+        
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "searchKey": "eyJkcml2ZXJzQWdlIjozMCwiZHJvcE9mZkRhdGVUaW1lIjoiMjAyNC0wNi0xN1QxMDowMDowMCIsImRyb3BPZmZMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwiZHJvcE9mZkxvY2F0aW9uVHlwZSI6IkxBVExPTkciLCJwaWNrVXBEYXRlVGltZSI6IjIwMjQtMDYtMTZUMTA6MDA6MDAiLCJwaWNrVXBMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwicGlja1VwTG9jYXRpb25UeXBlIjoiTEFUTE9ORyIsInJlbnRhbER1cmF0aW9uSW5EYXlzIjoxLCJzZWFyY2hNZXRhZGF0YSI6IntcInBpY2tVcExvY2F0aW9uTmFtZVwiOlwi6rCV64Ko6rWsXCIsXCJkcm9wT2ZmTG9jYXRpb25OYW1lXCI6XCLqsJXrgqjqtaxcIn0iLCJzZXJ2aWNlRmVhdHVyZXMiOlsiSU5DTFVERV9QUk9EVUNUX1JFTEFUSU9OU0hJUFMiXX0=",
+      "product": {
+        "id": "759822916",
+        "largeBags": 2,
+        "smallBags": 1,
+        "rateType": "PAY_NOW"
+      },
+      "supplier": {
+        "id": "3662",
+        "name": "Yesaway"
+      },
+      "depots": {
+        "pickupDepot": {
+          "name": "강남",
+          "id": "4725041"
+        },
+        "dropoffDepot": {
+          "name": "강남",
+          "id": "4725041"
+        }
+      }
+    },
+    "props": {
+      "title": "Genesis G80",
+      "subtitle": "또는 동급의 프리미엄 차량",
+      "a11yTranslation": "Product Card",
+      "image": {
+        "src": "https://cdn2.rcstatic.com/images/car_images_b/default_lrg.jpg",
+        "fallbackSrc": "https://cdn2.rcstatic.com/images/car_images/default_lrg.jpg",
+        "alt": ""
+      },
+      "supplierImage": {
+        "src": "https://cdn2.rcstatic.com/sp/images/suppliers/3662_logo_200.png",
+        "alt": "Yesaway 제공"
+      },
+      "tags": [
+        
+      ],
+      "info": [
+        {
+          "id": "number-of-seats",
+          "icon": "PersonHalfIcon",
+          "text": "5 인승"
+        },
+        {
+          "id": "transmission",
+          "icon": "GearboxAutomaticIcon",
+          "text": "자동",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        },
+        {
+          "id": "large-bags",
+          "icon": "SuitcaseIcon",
+          "text": "2 큰 가방",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 2개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "small-bags",
+          "icon": "CabinTrolleyIcon",
+          "text": "작은 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 2개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "mileage",
+          "icon": "DashboardIcon",
+          "text": "주행거리 제한 없음",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        }
+      ],
+      "ctaTitle": "특가 보기",
+      "price": {
+        "label": "1일 기준 요금:",
+        "current": "₩256,244.00"
+      },
+      "location": [
+        {
+          "name": "강남",
+          "info": "시내",
+          "id": "pickup-location-is-dropoff-location"
+        }
+      ],
+      "qualifiers": [
+        {
+          "id": "free-cancellation",
+          "text": "무료 취소",
+          "icon": "CheckmarkIcon"
+        }
+      ],
+      "actions": {
+        "items": [
+          {
+            "id": "important-info",
+            "icon": "InfoSignIcon",
+            "text": "중요 정보"
+          },
+          {
+            "id": "map",
+            "icon": "MapsPinIcon",
+            "text": "지도"
+          },
+          {
+            "id": "quotes",
+            "icon": "EmailIcon",
+            "text": "이메일로 견적 받기"
+          }
+        ]
+      },
+      "alerts": [
+        
+      ]
+    }
+  },
+  {
+    "metadata": {
+      "searchKey": "eyJkcml2ZXJzQWdlIjozMCwiZHJvcE9mZkRhdGVUaW1lIjoiMjAyNC0wNi0xN1QxMDowMDowMCIsImRyb3BPZmZMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwiZHJvcE9mZkxvY2F0aW9uVHlwZSI6IkxBVExPTkciLCJwaWNrVXBEYXRlVGltZSI6IjIwMjQtMDYtMTZUMTA6MDA6MDAiLCJwaWNrVXBMb2NhdGlvbiI6IjM3LjQ5NzQ2MywxMjcuMDYyMzU1IiwicGlja1VwTG9jYXRpb25UeXBlIjoiTEFUTE9ORyIsInJlbnRhbER1cmF0aW9uSW5EYXlzIjoxLCJzZWFyY2hNZXRhZGF0YSI6IntcInBpY2tVcExvY2F0aW9uTmFtZVwiOlwi6rCV64Ko6rWsXCIsXCJkcm9wT2ZmTG9jYXRpb25OYW1lXCI6XCLqsJXrgqjqtaxcIn0iLCJzZXJ2aWNlRmVhdHVyZXMiOlsiSU5DTFVERV9QUk9EVUNUX1JFTEFUSU9OU0hJUFMiXX0=",
+      "product": {
+        "id": "759360616",
+        "largeBags": 2,
+        "smallBags": 1,
+        "rateType": "PAY_NOW"
+      },
+      "supplier": {
+        "id": "3662",
+        "name": "Yesaway"
+      },
+      "depots": {
+        "pickupDepot": {
+          "name": "서울 김포 공항",
+          "id": "4722759"
+        },
+        "dropoffDepot": {
+          "name": "서울 김포 공항",
+          "id": "4722759"
+        }
+      }
+    },
+    "props": {
+      "title": "Kia Carnival",
+      "subtitle": "또는 동급의 미니밴",
+      "a11yTranslation": "Product Card",
+      "image": {
+        "src": "https://cdn2.rcstatic.com/images/car_images_b/web/kia/carnival_lrg.jpg",
+        "fallbackSrc": "https://cdn2.rcstatic.com/images/car_images/web/kia/carnival_lrg.jpg",
+        "alt": ""
+      },
+      "supplierImage": {
+        "src": "https://cdn2.rcstatic.com/sp/images/suppliers/3662_logo_200.png",
+        "alt": "Yesaway 제공"
+      },
+      "tags": [
+        
+      ],
+      "info": [
+        {
+          "id": "number-of-seats",
+          "icon": "PersonHalfIcon",
+          "text": "7 인승"
+        },
+        {
+          "id": "transmission",
+          "icon": "GearboxAutomaticIcon",
+          "text": "자동",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        },
+        {
+          "id": "large-bags",
+          "icon": "SuitcaseIcon",
+          "text": "2 큰 가방",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 2개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "small-bags",
+          "icon": "CabinTrolleyIcon",
+          "text": "작은 가방 1",
+          "tooltip": {
+            "tooltipInfo": {
+              "title": "트렁크 적재 용량:",
+              "content": [
+                "대형 가방 2개 (약 78 x 53 x 34cm)",
+                "소형 가방 1개 (약 52 x 35 x 24cm)"
+              ]
+            },
+            "closeAriaLabel": "닫기",
+            "tooltipAriaLabel": "Tooltip arial label"
+          }
+        },
+        {
+          "id": "mileage",
+          "icon": "DashboardIcon",
+          "text": "주행거리 제한 없음",
+          "iconColor": "constructive",
+          "textColor": "constructive"
+        }
+      ],
+      "ctaTitle": "특가 보기",
+      "price": {
+        "label": "1일 기준 요금:",
+        "current": "₩256,244.00"
+      },
+      "location": [
+        {
+          "name": "서울 김포 공항",
+          "info": "픽업 서비스",
+          "id": "pickup-location-is-dropoff-location"
+        }
+      ],
+      "qualifiers": [
+        {
+          "id": "free-cancellation",
+          "text": "무료 취소",
+          "icon": "CheckmarkIcon"
+        }
+      ],
+      "actions": {
+        "items": [
+          {
+            "id": "important-info",
+            "icon": "InfoSignIcon",
+            "text": "중요 정보"
+          },
+          {
+            "id": "map",
+            "icon": "MapsPinIcon",
+            "text": "지도"
+          },
+          {
+            "id": "quotes",
+            "icon": "EmailIcon",
+            "text": "이메일로 견적 받기"
+          }
+        ]
+      },
+      "alerts": [
+        {
+          "icon": "GiftIcon",
+          "title": "추가 운전자 1명 포함"
+        }
+      ]
+    }
+  }
+]

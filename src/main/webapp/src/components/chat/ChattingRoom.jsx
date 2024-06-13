@@ -1,136 +1,120 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Client } from '@stomp/stompjs';
+import React, { useState, useEffect, useRef } from 'react';
+import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
-import ImageAndTextInput from './ImageAndTextInput';
-import ChatList from './ChatList';
 import axios from 'axios';
+import { TextField, Button, MenuItem, Select } from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
+import './ChattingRoom.css'; // 채팅방 스타일을 정의하는 CSS 파일을 불러옵니다.
+import moment from 'moment';
 
-const ChattingRoom = ({ id, topic, roomNo }) => {
-    const [stompClient, setStompClient] = useState(null);
+const ChattingRoom = () => {
+    const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
-    const [messageInput, setMessageInput] = useState('');
-    const [selectedImage, setSelectedImage] = useState(null);
-    const url = 'http://localhost:8080/ws/chat';
-    const messagesContainerRef = useRef(null);
+    const [selectedUser, setSelectedUser] = useState('User2'); // 선택된 사용자 상태 추가
+    const socket = useRef(null);
+    const stompClient = useRef(null);
 
     useEffect(() => {
-        axios.get('/api/messages', { params: { roomNo } })
-            .then(response => {
-                setMessages(response.data.messages);
-            })
-            .catch(error => {
-                console.error('Failed to load messages:', error);
+        socket.current = new SockJS('http://localhost:8080/ws');
+        stompClient.current = Stomp.over(socket.current);
+
+        stompClient.current.connect({}, () => {
+            stompClient.current.subscribe('/topic/public', (message) => {
+                const receivedMessage = JSON.parse(message.body);
+                setMessages((prevMessages) => [...prevMessages, receivedMessage]);
             });
-    }, [roomNo]);
-
-    const scrollToBottom = () => {
-        const scrollHeight = messagesContainerRef.current?.scrollHeight;
-        const height = messagesContainerRef.current?.clientHeight;
-        const maxScrollTop = scrollHeight - height;
-        messagesContainerRef.current?.scrollTo({ top: maxScrollTop, behavior: 'smooth' });
-    };
-
-    useEffect(scrollToBottom, [messages]);
-
-    useEffect(() => {
-        if (stompClient) {
-            return;
-        }
-
-        const sock = new SockJS(url);
-        const stomp = new Client({
-            webSocketFactory: () => sock,
-            brokerURL: url,
-            connectHeaders: {
-                id: id
-            },
-            debug: (str) => {
-                console.log(str);
-            },
         });
 
-        stomp.onConnect = () => {
-            console.log('웹소켓 연결 성공');
-            setStompClient(stomp);
-
-            stomp.subscribe(`/sub/${topic}`, (message) => {
-                const newMessage = JSON.parse(message.body);
-                setMessages((prevMessages) => [...prevMessages, newMessage]);
-            });
-        };
-
-        stomp.activate();
+        axios.get('http://localhost:8080/api/messages')
+            .then(response => {
+                setMessages(response.data);
+            })
+            .catch(error => console.error("There was an error!", error));
 
         return () => {
-            if (stomp) {
-                stomp.deactivate();
-            }
+            stompClient.current.disconnect();
         };
-    }, [topic, id, url]);
+    }, []);
 
-    const handleImageUpload = async (imageFile) => {
-        setSelectedImage(imageFile);
-
-        // 이미지를 업로드하고, 업로드된 이미지의 URL을 반환받는 로직을 구현해야 합니다.
-        try {
-            const formData = new FormData();
-            formData.append('image', imageFile);
-
-            // 이미지를 업로드하는 API endpoint에 요청을 보냅니다.
-            const response = await axios.post('/api/upload-image', formData);
-
-            // 업로드된 이미지의 URL을 얻어옵니다.
-            const imageUrl = response.data.imageUrl;
-
-            // 이미지 URL을 메시지에 포함하여 sendMessage 함수를 호출합니다.
-            sendMessage(imageUrl);
-        } catch (error) {
-            console.error('Failed to upload image:', error);
-        }
+    const sendMessage = (message) => {
+        axios.post('http://localhost:8080/api/messages/send', message)
+            .then(response => {
+                console.log('Message sent successfully', response.data);
+            })
+            .catch(error => {
+                console.error('There was an error sending the message', error);
+            });
     };
 
-    const sendMessage = (imageUrl) => {
-        if (stompClient && (messageInput || selectedImage)) {
-            let message;
-            if (selectedImage && imageUrl) {
-                // 이미지가 있고 이미지 URL이 있는 경우
-                message = {
-                    roomNo,
-                    id,
-                    messageType: 1,
-                    content: imageUrl,
-                };
-            } else if (messageInput) {
-                // 텍스트 메시지인 경우
-                message = {
-                    roomNo,
-                    id,
-                    messageType: 0,
-                    content: messageInput,
-                };
-            }
+    const handleSend = () => {
+        const messageObj = { from: 'User1', to: selectedUser, content: message, timestamp: new Date().toISOString() };
+        sendMessage(messageObj);
+        setMessage('');
+    };
 
-            if (message) {
-                stompClient.publish({ destination: `/pub/${topic}`, body: JSON.stringify(message) });
-                setMessageInput('');
-                setSelectedImage(null);
-            }
+    const formatDate = (dateString) => {
+        try {
+            // Moment.js를 사용하여 문자열을 날짜로 파싱하고 원하는 형식으로 변환
+            const formattedDate = moment(dateString).format('A hh:mm');
+            return formattedDate;
+        } catch (error) {
+            console.error('Error formatting date:', error);
+            return 'Invalid Date';
         }
     };
 
     return (
-        <div style={{ position: 'relative', height: '100%', backgroundColor: '#F0F0F0' }}>
-            <div ref={messagesContainerRef} style={{ height: 'calc(100% - 50px)', overflowY: 'auto', padding: '10px' }}>
-                <ChatList messages={messages} id={id} />
+        <div className="chat-room">
+            <Select
+                value={selectedUser}
+                onChange={(e) => setSelectedUser(e.target.value)}
+                variant="outlined"
+                fullWidth
+            >
+                <MenuItem value="User2">User2</MenuItem>
+                <MenuItem value="User3">User3</MenuItem>
+                {/* 추가적인 사용자들 */}
+            </Select>
+            
+            <div className="message-container">
+                {messages.map((msg, index) => (
+                    <div 
+                        key={index} 
+                        className={`message-box ${msg.from === 'User1' ? 'sent' : 'received'}`}
+                    >
+                        <div className="message-content">
+                            <strong>{msg.from}</strong>: {msg.content}
+                        </div>
+                        <div className="message-timestamp">{formatDate(msg.timestamp)}</div>
+                    </div>
+                ))}
             </div>
-            <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%' }}>
-                <ImageAndTextInput
-                    messageInput={messageInput}
-                    onTextChange={setMessageInput}
-                    onImageUpload={handleImageUpload}
-                    onSendMessage={sendMessage}
-                />
-            </div>
+            <TextField
+                fullWidth
+                variant="outlined"
+                label="메시지를 입력하세요..."
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' ? handleSend() : null}
+            />
+            <Button 
+                variant="contained"
+                endIcon={<SendIcon />}
+                onClick={handleSend}
+                style={{
+                    width: '80px',
+                    padding: '10px',
+                    marginLeft: '270.5px',
+                    marginTop: '10px',
+                    backgroundColor: '#a700a4',
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: '5px',
+                    cursor: 'pointer',
+                }}
+            >
+                전송
+            </Button>
         </div>
     );
 };

@@ -11,16 +11,20 @@ import java.time.LocalDateTime;
 @Builder
 
 public class ReviewDTO {
-    private String car_id;
+    private Long car_id;
 
     private String user_id;
-    private String rating;
+    private int rating;
 
     private String title;
 
     private String comment;
     private String car_model;
     private LocalDateTime dateTime;
+
+    private String carModel;
+
+    private Long review_id;
 
 
 }

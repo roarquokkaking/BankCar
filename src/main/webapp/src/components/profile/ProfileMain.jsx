@@ -92,7 +92,7 @@ const ProfileMain = () => {
                 </button>
                 <ul className="profile-actions">
                     <li>
-                        <Link to="reservedCars">
+                        <Link to={`/profile/usebefore/${user_id}`}>
                             예약한 자동차 보기
                             <div style={{marginRight: "10px"}}>
                                 <ArrowForwardIosIcon/>
@@ -100,7 +100,7 @@ const ProfileMain = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="usedCarReviews">
+                        <Link to={`/profile/useafter/${user_id}`}>
                             사용한 자동차 후기 남기기
                             <div style={{marginRight: "10px"}}>
                                 <ArrowForwardIosIcon/>
