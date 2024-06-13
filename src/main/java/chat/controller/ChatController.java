@@ -24,12 +24,10 @@ public class ChatController {
     private final SimpMessagingTemplate messagingTemplate;
     private final MessageService messageService;
 
-
     @Autowired
     public ChatController(SimpMessagingTemplate messagingTemplate, MessageService messageService) {
         this.messagingTemplate = messagingTemplate;
         this.messageService = messageService;
-
     }
 
     @GetMapping("/userInfo")
