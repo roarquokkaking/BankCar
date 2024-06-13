@@ -10,4 +10,6 @@ public interface CarRegistrationService {
     Car saveCar(Car car);
 
     void saveCarImages(CarImages carImages, List<String> carImagesUUID);
+
+    List<Car> getAllCars();
 }

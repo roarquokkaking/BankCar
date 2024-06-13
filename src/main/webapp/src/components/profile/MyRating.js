@@ -25,7 +25,7 @@ const MyRating = () => {
     // 제출 함수
     const handleSubmit = () => {
         // axios를 사용해 서버로 데이터를 전송
-        axios.put('/api/posts', { title, comment })
+        axios.put('', { title, comment })
             .then(response => {
                 const { title, comment } = response.data;
                 console.log('Title:', title);

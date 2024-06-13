@@ -2,7 +2,6 @@ package login.dto;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
@@ -10,7 +9,7 @@ import java.time.LocalDateTime;
 @Table(name="user")
 @NoArgsConstructor
 @AllArgsConstructor
-@Component
+@Getter
 @Data
 public class LoginDTO {
     @Id
@@ -22,8 +21,11 @@ public class LoginDTO {
     private String name;
     @Column(name="driver")
     private boolean driver;
+    private String imageUrl;
+
     @Column(name="profile_image")
     private String profile_image;
+
 
     public String getId() {
         return id;
@@ -76,6 +78,12 @@ public class LoginDTO {
     @Column(name ="image_original_name",nullable = true)
     private String image_original_name ; //이미지 실제 이름
 
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "booking_id")
+    private List<BookingEntity>BookingEntity;
+
+
+
     public String getPhone_number() {
         return phone_number;
     }
@@ -92,9 +100,6 @@ public class LoginDTO {
         this.create_date = create_date;
     }
 
-    public Float getRating() {
-        return rating;
-    }
 
     public void setRating(Float rating) {
         this.rating = rating;
@@ -114,6 +119,13 @@ public class LoginDTO {
 
     public void setImage_original_name(String image_original_name) {
         this.image_original_name = image_original_name;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    public float getRating() {
+        return (rating != null) ? rating : 0.0f;
     }
 
 

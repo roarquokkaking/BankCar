@@ -1,0 +1,25 @@
+/* timeCaption의 너비를 조정합니다 */
+.react-datepicker__time-container .react-datepicker__header {
+    width: 200px !important; /* 기본값은 70px입니다. 필요에 따라 조정하세요. */
+}
+
+/* 시간 선택 부분의 너비를 늘립니다. */
+.react-datepicker__time-container .react-datepicker__time {
+    width: 200px !important; /* 기본값은 70px입니다. 필요에 따라 조정하세요. */
+}
+
+.react-datepicker__time-container .react-datepicker__time-box {
+    width: 200px !important; /* 너비를 조정하고 싶은 경우 변경하세요. */
+}
+
+.serviceButton{
+    width: calc(100% - 20px);
+    margin: 20px 10px 60px 10px;
+    padding: 10px 0;
+    background-color: #3594ff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    height: 50px;
+    cursor: pointer;
+}

@@ -1,7 +1,9 @@
 package car.entity;
 
+import booking.entity.BookingEntity;
 import jakarta.persistence.*;
 import lombok.Data;
+import wishList.entity.WishListEntity;
 
 @Entity
 @Data
@@ -22,4 +24,18 @@ public class CarImages {
     private String image3;
     @Column
     private String image4;
+    @Column
+    private String main_image;
+
+    @JoinColumn
+    @OneToOne(fetch = FetchType.LAZY)
+    private WishListEntity wishListEntity;
+
+
+    @JoinColumn(name="booking_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private BookingEntity bookingEntity;
+
+
 }
+
