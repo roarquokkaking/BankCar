@@ -2,7 +2,9 @@ package car.entity;
 
 import jakarta.persistence.*;
 import login.dto.LoginDTO;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -10,6 +12,8 @@ import java.util.List;
 @Entity
 @Table(name = "CAR")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +23,10 @@ public class Car {
     // fetch = FetchType.LAZY는 지연 로딩 전략을 사용하여 관련 엔티티를 필요할 때만 불러오도록 설정합니다.
 //    @ManyToOne(fetch = FetchType.LAZY)  // user 테이블과 다대일(Many-to-One)
 //    @JoinColumn(name = "id", nullable = false)
-//    private LoginDTO user;
+//    private User user;
+
+    @Column(name = "user_id")
+    private String userId;
 
     @Column(name = "title")
     private String title;
@@ -61,7 +68,7 @@ public class Car {
     @Column(name = "created_date", nullable = false, updatable = false)     // 자동차 등록 날짜
     private LocalDateTime createdDate;
 
-    @Column(name = "rating", nullable = false)  // 자동차 평점
+    @Column(name = "rating")  // 자동차 평점
     private float rating;
 
     @Column(name = "wish")

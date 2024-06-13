@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { GoArrowLeft } from "react-icons/go";
 
 import "./LoginBtn.css";
+import {onNaverLogin} from "../register/api/NaverLogin";
 
 const Login_main = () => {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ const Login_main = () => {
   const loginHandler=() => {
     window.location.href = kakaolink;
   };
+
   return (
     <div>
       {isDesktopOrLaptop && <p>모바일 환경으로 접속 바랍니당 ~~__~~ ^^!!</p>}
@@ -71,7 +73,7 @@ const Login_main = () => {
           </button>
 
           <button className="naver-login-button" type="button">
-            <img src="./image/naverBtn.png" alt="네이버 아이콘" />
+            <img src="./image/naverBtn.png" alt="네이버 아이콘" onClick={onNaverLogin}/>
             네이버로 로그인하기
           </button>
 
