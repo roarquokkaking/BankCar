@@ -31,13 +31,16 @@ public class KakaoLoginServiceImpl implements KakaoLoginService {
         if (userResourceNode == null) {
             throw new RuntimeException("Failed to fetch user information from Kakao API");
         }
-
+        JsonNode propertiesNode = userResourceNode.get("properties");
         JsonNode kakaoAccountNode = userResourceNode.get("kakao_account");
         JsonNode profileNode = kakaoAccountNode != null ? kakaoAccountNode.get("profile") : null;
 
         String id = userResourceNode.get("id") != null ? userResourceNode.get("id").asText() : null;
         String name = profileNode != null && profileNode.get("nickname") != null ? profileNode.get("nickname").asText() : null;  // Fetching name as nickname
         String email = kakaoAccountNode != null && kakaoAccountNode.get("email") != null ? kakaoAccountNode.get("email").asText() : null;
+        String profile_image = propertiesNode != null && propertiesNode.get("profile_image") != null ? propertiesNode.get("profile_image").asText() : null;
+
+        System.out.println("Profile Image URL: " + profile_image);  // 디버깅용 출력
 
         if (id == null || name == null || email == null) {
             throw new RuntimeException("Failed to fetch required user information from Kakao API");
@@ -48,6 +51,7 @@ public class KakaoLoginServiceImpl implements KakaoLoginService {
         loginDTO.setId(id);
         loginDTO.setEmail(email);
         loginDTO.setName(name);
+        loginDTO.setProfile_image(profile_image != null ? profile_image : "default_profile_image_url"); // 기본값 설정
 
         if (isExistId.equals("exist")) {
             System.out.println("이미 존재한 회원");

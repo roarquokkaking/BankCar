@@ -8,7 +8,7 @@ const CarLocation = () => {
     const [value, setValue] = useState("");
     const [search, setSearch] = useState('');
     const mapContainer = useRef(null); // 지도를 표시할 div의 ref
-    const {data,onAddLocation} = useContext(RegisterContext);      // 등록 데이터 context
+    const {data,onAddData} = useContext(RegisterContext);      // 등록 데이터 context
     useEffect(() => {
             window.kakao.maps.load(() => {
                 const center = new window.kakao.maps.LatLng(data.latitude, data.longitude);
@@ -39,18 +39,14 @@ const CarLocation = () => {
                         if (status === window.kakao.maps.services.Status.OK) {
 
                             var roadAddress = result[0].road_address ? result[0].road_address.address_name : "없습니다."
-                            console.log(roadAddress);
-                            console.log(result[0].address.address_name);
-                            console.log(latlng.getLat())
-                            console.log(latlng.getLng())
+                            console.log(result[0].address.address_name)
+                            console.log(roadAddress.toString())
 
-                            const map = new Map([
-                                ["latitude", latlng.getLat()],
-                                ["longitude", latlng.getLng()],
-                                ["jibun_address",  result[0].address.address_name],
-                                ["doro_address", roadAddress.toString()]
-                            ])
-                            onAddLocation(map);
+                            onAddData("latitude", latlng.getLat());
+                            onAddData("longitude", latlng.getLng());
+                            onAddData("jibunAddress",  result[0].address.address_name)
+                            onAddData("doroAddress", roadAddress.toString())
+
                         }
                     });
 
@@ -73,7 +69,7 @@ const CarLocation = () => {
 
             });
 
-    }, [search]);
+    }, [search,data]);
 
     return (
         <>

@@ -34,6 +34,8 @@ import ChattingRoom from './components/chat/ChattingRoom';
 import Choice from "./components/choice/Choice";
 import KaKaoPay from './components/payment/KaKaoPay';
 import KaKaoPaySuccess from './components/payment/KaKaoPaySuccess';
+import NaverPay from './components/payment/NaverPay';
+import NaverPayCompletion from './components/payment/NaverPayCompletion';
 
 function Detail() {
   return null;
@@ -57,7 +59,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/searching" element={<Searching />} />
+
             <Route path="/choice" element={<Choice />} />
+            <Route path='payment'>
+              <Route index element={<Payment_main />}/>
+              <Route path='naverpay' element={NaverPay}/>
+              <Route path='naverpaycompletion' element={NaverPayCompletion}></Route>
+            </Route>
+
             <Route path="/wishList" element={<WishList />} />
             <Route path="/myWishList" element={<MyWishList />} />
             <Route path="login"  >
@@ -72,8 +81,8 @@ function App() {
               <Route path="checkMyCar" element={<CheckMyCar/>} />
               <Route path="myProfile/:user_id" element={<MyProfile/>} />
               <Route path="myProfileUpdate/:user_id" element={<MyProfileUpdate/>} />
-              <Route path="useAfter" element={<UseAfter/>} />
-              <Route path="useBefore" element={<UseBefore/>} />
+              <Route path="useAfter/:user_id" element={<UseAfter/>} />
+              <Route path="useBefore/:user_id" element={<UseBefore/>} />
               <Route path="myRating" element={<MyRating/>}/>
               <Route path="bookingDetails" element={<BookingDetails/>} />
               <Route path="Details" element={<Details/>} />
@@ -82,10 +91,10 @@ function App() {
             <Route path='/car/driver' element={<DriverLicense />} />
             <Route path='/car/driverCheck' element={<DriverCheck />} />
 
-            <Route path='/payment' element={<Payment_main />} />
+
             <Route path='/kakaopay' element={<KaKaoPay />} />
             <Route path='/success' element={<KaKaoPaySuccess />} />
-            
+
 
 
             <Route path='/choice/:carid&:startdate&:enddate&:price' element={<Choice />} />

@@ -19,12 +19,14 @@ public class ReviewEntity {
 
     @Id
     @GeneratedValue
-    private String car_id;
+    private Long review_id;
+
+    private Long car_id;
 
     private String user_id;
 
     @Column(name = "rating")
-    private String rating;
+    private int rating;
 
     @Column(name = "title")
     private String title;

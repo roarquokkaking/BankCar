@@ -33,12 +33,16 @@ npm i react-slick
 
 npm install react-bootstrap
 
+npm install react-datepicker react-time-picker
+
 #1. 간편결제 sdk 모듈  npm 다운 안되시면 2번 yarn으로 받으세용
 npm install @tosspayments/payment-widget-sdk
 #2. 간편결제 sdk 모듈  yarn
 yarn add @tosspayments/payment-widget-sdk
 #1. 채팅관련 STOMP 모듈
 npm install @stomp/stompjs 
+
+
 
 # 아이콘 참고
 https://react-icons.github.io/react-icons/icons/

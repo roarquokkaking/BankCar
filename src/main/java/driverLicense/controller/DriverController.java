@@ -67,7 +67,6 @@ public class DriverController {
         List<Map<String, Object>> images = (List<Map<String, Object>>) response.getBody().get("images");
         Map<String, Object> returnValue = new HashMap<>();
         if(images.get(0).get("inferResult").equals("SUCCESS")){
-
             returnValue.put("response",response.getBody());
             returnValue.put("imageName",imageName);
             return new ResponseEntity<>(returnValue, HttpStatus.OK);

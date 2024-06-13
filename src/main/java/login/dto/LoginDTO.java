@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @Table(name="user")
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 @Data
 public class LoginDTO {
     @Id
@@ -20,6 +21,11 @@ public class LoginDTO {
     private String name;
     @Column(name="driver")
     private boolean driver;
+    private String imageUrl;
+
+    @Column(name="profile_image")
+    private String profile_image;
+
 
     public String getId() {
         return id;
@@ -53,6 +59,14 @@ public class LoginDTO {
         this.driver = driver;
     }
 
+    public String getProfile_image() {
+        return profile_image;
+    }
+
+    public void setProfile_image(String profile_image) {
+        this.profile_image = profile_image;
+    }
+
     @Column(name = "phone_number" ,nullable = true)
     private String phone_number;// 전화번호
     @Column(name = " create_date",nullable = true)
@@ -63,6 +77,12 @@ public class LoginDTO {
     private String image_file_name; // 클라우드 이미지 uuid
     @Column(name ="image_original_name",nullable = true)
     private String image_original_name ; //이미지 실제 이름
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "booking_id")
+    private List<BookingEntity>BookingEntity;
+
+
 
     public String getPhone_number() {
         return phone_number;
@@ -80,11 +100,8 @@ public class LoginDTO {
         this.create_date = create_date;
     }
 
-    public float getRating() {
-        return rating;
-    }
 
-    public void setRating(float rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
 
@@ -104,36 +121,12 @@ public class LoginDTO {
         this.image_original_name = image_original_name;
     }
 
-    @Getter
-    @Builder
-    public static class ResponseOnlyMemberName {
-        private String memberId;
-        private String nickName;
-        private String profileImage;
-
-        public String getMemberId() {
-            return memberId;
-        }
-
-        public void setMemberId(String memberId) {
-            this.memberId = memberId;
-        }
-
-        public String getNickName() {
-            return nickName;
-        }
-
-        public void setNickName(String nickName) {
-            this.nickName = nickName;
-        }
-
-        public String getProfileImage() {
-            return profileImage;
-        }
-
-        public void setProfileImage(String profileImage) {
-            this.profileImage = profileImage;
-        }
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
+    public float getRating() {
+        return (rating != null) ? rating : 0.0f;
+    }
+
 
 }

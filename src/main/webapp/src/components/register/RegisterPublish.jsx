@@ -3,7 +3,6 @@ import styles from "./css/RegisterPublish.module.css"
 import { RegisterContext } from "./RegisterContext";
 import RegisterHeader from "./RegisterHeader";
 import SwipeableTextMobileStepper from "./SwipeableTextMobileStepper";
-import {insertCarData} from "./api/CarApiService";
 
 export function RegisterPublish() {
     const { data, selectImages, onInsertData } = useContext(RegisterContext)
@@ -62,6 +61,7 @@ export function RegisterPublish() {
                     </tr>
                     </tbody>
                 </table>
+                {data.id}
                 <div>
                     <h2>자동차 사진</h2>
                     {selectImages ?  <SwipeableTextMobileStepper images={selectImages} />

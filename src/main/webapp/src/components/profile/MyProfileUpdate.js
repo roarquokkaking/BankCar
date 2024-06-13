@@ -11,15 +11,17 @@ import axios from "axios";
 import Box from "@mui/material/Box";
 import FooterMenu from "../FooterMenu";
 import {useSelector} from "react-redux";
+import myProfileUpdate from "./MyProfileUpdate";
 
 
 
 const MyProfileUpdate = () => {
     const navigate = useNavigate(); // 페이지 네비게이션 함수
     const [profileImage, setProfileImage] = useState(null); // 프로필 이미지 상태
-    const fileInputRef = useRef(null);
+    const fileInputRef = useRef();
     const{user_id}=useParams()
 
+    console.log(user_id)
     const handleIconClick = () => {
         fileInputRef.current.click(); // file input 클릭 이벤트 발생
     };
@@ -40,7 +42,7 @@ const MyProfileUpdate = () => {
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
-                const response = await axios.get(`/profile/myprofileUpdate/${user_id}`); // URL 수정
+                const response = await axios.get(`http://localhost:8080/profile/myprofileUpdate/${user_id}`); // URL 수정
                 setUserProfileDTO(response.data);
             } catch (error) {
                 console.error("프로필 정보를 가져오는데 실패했습니다.", error);
@@ -69,7 +71,7 @@ const MyProfileUpdate = () => {
         formData.append('UserProfileDTO',new Blob([JSON.stringify(UserProfileDTO)],{type:'application/json'}))
         formData.append('image', image);
         try {
-            const response = await axios.post(`/profile/profileUpdate/${user_id}`, formData, {
+            const response = await axios.post(`http://localhost:8080/profile/profileUpdate/${user_id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -82,8 +84,6 @@ const MyProfileUpdate = () => {
     };
 
 
-
-
     const inputhandle = (e) => {
         const { name, value } = e.target;
         setUserProfileDTO(prevState => ({
@@ -92,17 +92,19 @@ const MyProfileUpdate = () => {
         }));
     };
 
+
     const handleSaveClick = async () => {
         try {
-            await axios.put(`/profile/profileUpdate${user_id}`, {
-                ...setUserProfileDTO,
-            });
+
+            await axios.post(`http://localhost:8080/profile/updateProfile/${user_id}`,UserProfileDTO);
             alert('프로필이 성공적으로 저장되었습니다.');
             navigate('/profile'); // 프로필 페이지로 이동
         } catch (error) {
             console.error("프로필 저장 중 오류 발생:", error);
         }
     };
+    console.log(profileImage)
+
 
     return (
         <div>
@@ -115,12 +117,12 @@ const MyProfileUpdate = () => {
                     />
                 </div>
                 {/*제목 */}
-                <h1 className={styles.title}>프로필 수정</h1>
+                {/*<h1 className={styles.title}>프로필 수정</h1>*/}
 
                 <div className={styles.buttonDiv}>
                     <button className={styles.button} onClick={handleIconClick}>
-                        {profileImage ? (
-                            <img src={profileImage}
+                        {UserProfileDTO.imageUrl ? (
+                            <img src={UserProfileDTO.imageUrl}
                                  alt="Profile"
                                  className={styles.profileImage}/>
                         ) : (
@@ -138,6 +140,7 @@ const MyProfileUpdate = () => {
                     ref={fileInputRef}
                 />
 
+
                 <div className={styles.formContainer}>
                     {/* 이름 입력 폼 그룹 */}
                     <div className={styles.formGroup}>
@@ -152,7 +155,6 @@ const MyProfileUpdate = () => {
                                onChange={inputhandle}
                         />
                     </div>
-
                     {/* 핸드폰 번호 입력 폼 그룹 */}
                     <div className={styles.formGroup}>
                         <label className={styles.label}>

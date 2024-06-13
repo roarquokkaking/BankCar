@@ -15,23 +15,30 @@ const footerMenu = [
     },
     {
         id: 3,
+        text: "위시리스트",
+        icon: <FaRegHeart size={18}/>,
+        path: "/mywishList",
+    },
+    {
+        id: 4,
         text: "로그인",
         icon: <FaRegUserCircle size={18}/>,
         path: "/login",
     },
     {
-        id: 4,
+        id: 5,
         text: "프로필",
         icon: <FaRegUserCircle size={18}/>,
         path: "/profile",
     },
+
 ];
 
 const FooterMenu = () => {
     const [selected, setSelected] = useState(1);
     const id = useSelector((state) => state.Login.id);
 
-    const footerMenuFilter = id ? footerMenu.filter(item => item.id !== 3) : footerMenu.filter(item => item.id !== 4);
+    const footerMenuFilter = id ? footerMenu.filter(item => item.id !== 2 && item.id!==4) : footerMenu.filter(item => item.id !== 3 &&item.id !==5);
 
     return (
         <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0}} elevation={3}>
