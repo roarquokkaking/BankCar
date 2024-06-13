@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @SpringBootApplication
-
 @ComponentScan(basePackages = {"login.*","driverLicense.*","user.*" ,"booking.*","chat.*","car.*","wishList.*","search.*","main.*","payment.*"})
 //@CrossOrigin(origins = "http://localhost:3000")
 @EntityScan(basePackages = {"login.dto","driverLicense.entity","chat.dto","booking.entity","chat.bean","car.entity","wishList.entity","chat.entity","search.bean","chat.entity"})

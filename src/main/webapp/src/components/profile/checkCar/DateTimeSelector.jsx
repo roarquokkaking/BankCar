@@ -68,10 +68,10 @@ const DateTimePicker = ({ carId }) => {
             setDateRangeDiv("서비스 날짜를 설정해 주세요.");
             return;
         } else if (startTime === null) {
-            setStartTimeDiv("대여 시작 시간을 설정해 주세요.");
+            setStartTimeDiv("서비스 시작 시간을 설정해 주세요.");
             return;
         } else if (endTime === null) {
-            setEndTimeDiv("반납 시간을 설정해 주세요.");
+            setEndTimeDiv("서비스 반납 시간을 설정해 주세요.");
             return;
         }
 
@@ -90,7 +90,7 @@ const DateTimePicker = ({ carId }) => {
                 <div className="input-box">
                     <h5>대여 기간</h5>
                     <DatePicker
-                        placeholderText="대여 기간"
+                        placeholderText="서비스 기간"
                         dateFormat="yyyy년 MM월 dd일"
                         minDate={new Date()}
                         selectsRange={true}
@@ -105,7 +105,7 @@ const DateTimePicker = ({ carId }) => {
                     />
                     <div>{dateRangeDiv}</div>
                     <br />
-                    <h5>{startDate && formatDateString(startDate)} / 대여 시작 시간</h5>
+                    <h5>{startDate && formatDateString(startDate)} /서비스 대여 시작 시간</h5>
                     <DatePicker
                         placeholderText="대여 시작 가능 시간"
                         selected={startTime}
@@ -123,7 +123,7 @@ const DateTimePicker = ({ carId }) => {
                     />
                     <div>{startTimeDiv}</div>
                     <br />
-                    <h5>{endDate && formatDateString(endDate)} / 반납 시간</h5>
+                    <h5>{endDate && formatDateString(endDate)} /서비스 반납 시간</h5>
                     <DatePicker
                         placeholderText="대여 반납 가능 시간"
                         selected={endTime}

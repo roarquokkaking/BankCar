@@ -7,10 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import RegisterCarCard from "./RegisterCarCard";
 import styles from "./CheckMyCar.module.css"
-import FooterMenu from "../../FooterMenu";
-import DateTimePicker from "../../search/DateTimePicker";
 import DateTimeSelector from "./DateTimeSelector";
-import axios from "axios";
 import {useSelector} from "react-redux";
 import {selectUserCarList} from "../../register/api/CarApiService";
 
