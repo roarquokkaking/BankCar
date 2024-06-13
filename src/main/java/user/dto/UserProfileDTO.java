@@ -1,9 +1,16 @@
-package login.dto;
+package user.dto;
 
+import booking.entity.BookingEntity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import wishList.dto.WishListDTO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
@@ -22,6 +29,9 @@ public class UserProfileDTO {
 
     private String image_file_name; // 클라우등 이미지 uri
     private String image_original_name; //실제 이름
+    private List<WishListDTO> wishList = new ArrayList<>();
+
+
 
     public String getEmail() {
         return email;

@@ -79,8 +79,8 @@ function App() {
               <Route path="checkMyCar" element={<CheckMyCar/>} />
               <Route path="myProfile/:user_id" element={<MyProfile/>} />
               <Route path="myProfileUpdate/:user_id" element={<MyProfileUpdate/>} />
-              <Route path="useAfter" element={<UseAfter/>} />
-              <Route path="useBefore" element={<UseBefore/>} />
+              <Route path="useAfter/:user_id" element={<UseAfter/>} />
+              <Route path="useBefore/:user_id" element={<UseBefore/>} />
               <Route path="myRating" element={<MyRating/>}/>
               <Route path="bookingDetails" element={<BookingDetails/>} />
               <Route path="Details" element={<Details/>} />

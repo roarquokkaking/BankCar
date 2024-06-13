@@ -71,6 +71,12 @@ public class LoginServiceImpl implements LoginService{
         loginDAO.updateDriver(id,driverYN);
     }
 
+    @Override
+    public Optional<LoginDTO> findById(String userId) {
+
+        return loginDAO.findById(userId);
+    }
+
     private String getAccessToken(String authorizationCode) {
         String clientId = "601610993000-u4u34s3r1op37juvet6fmr0hee3e3u1d.apps.googleusercontent.com";
         String clientSecret = "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";
