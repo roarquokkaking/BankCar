@@ -3,7 +3,7 @@ body {
     overflow-y: auto;
 }
 
-.container {
+.search-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,11 +12,12 @@ body {
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 600px;
+    max-width: 700px;
     margin: auto;
+    margin-bottom: 50px; /* footer와 충돌하지 않도록 여백 추가 */
 }
 
-.header {
+.search-header {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -130,20 +131,27 @@ body {
     font-size: 16px;
 }
 
-.footer {
+.search-footer {
     display: flex;
     justify-content: space-between;
     width: 100%;
-
+    transform: translateY(0%);
+    position: relative; /* 화면 아래 고정 */
+    bottom: 0; /* 화면 아래에 고정 */
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    padding: 16px 24px;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* footer 아래 그림자 추가 */
 }
 
-.footer .clear-button {
+.search-footer .clear-button {
     font-size: 16px;
     cursor: pointer;
     color: #d13661;
 }
 
-.footer .search-button {
+.search-footer .search-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -155,12 +163,8 @@ body {
     font-size: 16px;
 }
 
-/* .date-picker {
-    color: #a8a8a8 !important;
-    pointer-events: none;
-} */
 .react-datepicker__input-container input {
-    width: 250px;
+    width: 300px;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
