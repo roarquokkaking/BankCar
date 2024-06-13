@@ -33,7 +33,6 @@ const Details = ({data}) => {
                 console.error('이미지를 불러오는데 실패했습니다.', error);
             }
         };
-
         const fetchDetails = async () => {
             try {
                 const response = await axios.get('여기에 상세 정보 API URL');
@@ -42,17 +41,12 @@ const Details = ({data}) => {
                 console.error('상세 정보를 불러오는데 실패했습니다.', error);
             }
         };
-
         fetchImages();
         fetchDetails();
-
         //이미지 5초마다 이동시키기
         const interval = setInterval(() => {
             setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
         }, 5000);
-
-
-
 
         return () => clearInterval(interval);
     }, [images.length]);

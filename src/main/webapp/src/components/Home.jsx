@@ -1,7 +1,6 @@
 import {Box, Button, Container, createTheme, styled} from '@mui/material';
 import SearchIcon from "@mui/icons-material/Search";
 import React from 'react';
-import Header from './Header';
 import OptionsTab from './OptionsTab';
 import LocationCards from './choice/LocationCards';
 import MobileFooter from './MobileFooter';
