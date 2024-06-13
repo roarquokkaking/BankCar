@@ -12,45 +12,43 @@ public class MessageRoom {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Long 타입으로 변경 및 AUTO_INCREMENT 설정
+    private Long roomSeq; // Long 타입으로 변경 및 AUTO_INCREMENT 설정
 
-    @Column(name="room_name", nullable = false)
-    private String roomName;
+    @Column(nullable = false)
+    private String host;
 
-    @ElementCollection
-    @CollectionTable(name="chat_room_users", joinColumns = @JoinColumn(name="chat_room_id"))
-    @Column(name="user_id")
-    private Set<String> userIds = new HashSet<>();
+    @Column( nullable = false)
+    private String guest;
 
-    public MessageRoom() {
+//
+//    @Column(name="room_name", nullable = false)
+//    private String roomName;
+
+
+
+    public String getHost() {
+        return host;
     }
 
-    public MessageRoom(String roomName, Set<String> userIds) {
-        this.roomName = roomName;
-        this.userIds = userIds;
+    public void setHost(String host) {
+        this.host = host;
     }
 
-    public Long getId() {
-        return id;
+    public String getGuest() {
+        return guest;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setGuest(String guest) {
+        this.guest = guest;
     }
 
-    public String getRoomName() {
-        return roomName;
+
+    public Long getRoomSeq() {
+        return roomSeq;
     }
 
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
+    public void setRoomSeq(Long roomSeq) {
+        this.roomSeq = roomSeq;
     }
 
-    public Set<String> getUserIds() {
-        return userIds;
-    }
-
-    public void setUserIds(Set<String> userIds) {
-        this.userIds = userIds;
-    }
 }

@@ -1,11 +1,9 @@
 package login.dto;
 
-import booking.entity.BookingEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name="user")
@@ -17,17 +15,21 @@ public class LoginDTO {
     @Id
     @Column(name="id")
     private String id;
-
     @Column(name="email")
     private String email;
-
     @Column(name="name")
     private String name;
-
     @Column(name="driver")
     private boolean driver;
     private String imageUrl;
 
+    @Column(name="profile_image")
+    private String profile_image;
+
+
+    public String getId() {
+        return id;
+    }
 
     public void setId(String id) {
         this.id = id;
@@ -57,18 +59,22 @@ public class LoginDTO {
         this.driver = driver;
     }
 
+    public String getProfile_image() {
+        return profile_image;
+    }
+
+    public void setProfile_image(String profile_image) {
+        this.profile_image = profile_image;
+    }
+
     @Column(name = "phone_number" ,nullable = true)
     private String phone_number;// 전화번호
-
     @Column(name = " create_date",nullable = true)
     private LocalDateTime create_date ;// 가입 날짜
-
     @Column(name = "rating",nullable = true)
     private Float rating ; //매너 온도
-
     @Column(name ="image_file_name",nullable = true)
     private String image_file_name; // 클라우드 이미지 uuid
-
     @Column(name ="image_original_name",nullable = true)
     private String image_original_name ; //이미지 실제 이름
 
@@ -95,8 +101,7 @@ public class LoginDTO {
     }
 
 
-
-    public void setRating(float rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
 
@@ -123,36 +128,5 @@ public class LoginDTO {
         return (rating != null) ? rating : 0.0f;
     }
 
-    @Getter
-    @Builder
-    public static class ResponseOnlyMemberName {
-        private String memberId;
-        private String nickName;
-        private String profileImage;
-
-        public String getMemberId() {
-            return memberId;
-        }
-
-        public void setMemberId(String memberId) {
-            this.memberId = memberId;
-        }
-
-        public String getNickName() {
-            return nickName;
-        }
-
-        public void setNickName(String nickName) {
-            this.nickName = nickName;
-        }
-
-        public String getProfileImage() {
-            return profileImage;
-        }
-
-        public void setProfileImage(String profileImage) {
-            this.profileImage = profileImage;
-        }
-    }
 
 }
