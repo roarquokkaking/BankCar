@@ -1,8 +1,13 @@
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
-module.exports = (app) => {
+module.exports = function(app) {
     app.use(
-        "/api/wss",
-        createProxyMiddleware({ target: "https://dongwoossltest.shop", wss: true })
+        "/api/ws",  // 프록시할 경로
+        createProxyMiddleware({
+            target: "wss://dongwoossltest.shop",  // WebSocket 서버 주소
+            ws: true,  
+            secure: true,  
+            changeOrigin: true,  
+        })
     );
 };
