@@ -65,9 +65,6 @@ public class NaverLoginController {
         String existId = loginService.isExistId(oauthToken.getAccessToken());
         System.out.println("existId = " + existId);
 
-        if(existId.equals("")){
-
-        }
 
         LoginDTO user = new LoginDTO();
 
@@ -75,8 +72,15 @@ public class NaverLoginController {
         user.setName(res_obj.get("name").toString().replaceAll("\"", ""));
         user.setEmail(res_obj.get("email").toString().replaceAll("\"", ""));
         user.setPhone_number(res_obj.get("mobile").toString().replaceAll("\"", ""));
+        System.out.println(user.toString());
+
+        if(existId.equals("non_exist")){
+            loginService.insertUser(user);
+        }
 
         return ResponseEntity.ok(user);
+
+
     }
 
     @GetMapping("/remove") //token = access_token임

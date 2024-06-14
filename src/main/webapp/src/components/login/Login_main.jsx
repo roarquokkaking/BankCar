@@ -5,6 +5,7 @@ import { GoArrowLeft } from "react-icons/go";
 
 import "./LoginBtn.css";
 import {onNaverLogin} from "../register/api/NaverLogin";
+import NaverLogin from "./NaverLogin";
 
 const Login_main = () => {
   const navigate = useNavigate();
@@ -34,6 +35,9 @@ const Login_main = () => {
   const loginHandler=() => {
     window.location.href = kakaolink;
   };
+
+  // 네이버 로그인
+  const [naverLogin, setNaverLogin] = useState(false);
 
   return (
     <div>
@@ -72,8 +76,8 @@ const Login_main = () => {
             카카오로 로그인하기
           </button>
 
-          <button className="naver-login-button" type="button">
-            <img src="./image/naverBtn.png" alt="네이버 아이콘" onClick={onNaverLogin}/>
+          <button className="naver-login-button" type="button" onClick={() => setNaverLogin(true)}>
+            <img src="./image/naverBtn.png" alt="네이버 아이콘"/>
             네이버로 로그인하기
           </button>
 
@@ -97,6 +101,7 @@ const Login_main = () => {
           </button>
         </div>
       )}
+      {naverLogin && <NaverLogin />}
     </div>
   );
 };

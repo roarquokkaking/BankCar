@@ -6,5 +6,5 @@ const apiClient = axios.create({
 });
 
 export function onNaverLogin(){
-     apiClient.post(`/user/naverLogin`).then(res => res.data).catch(error=> console.log(error))
+
 }
