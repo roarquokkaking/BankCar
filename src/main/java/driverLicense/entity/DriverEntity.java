@@ -19,19 +19,19 @@ public class DriverEntity {
     @Column(name = "id")
     private String id;
 
-    @Column(name="imgName")
-    private String imgName;
+    @Column(name="imageName")
+    private String imageName;
 
     @Column(name="name")
     private String name;
     @Column(name="number")
     private String number;
 
-    @Column(name="idNumber")
-    private String idNumber;
+    @Column(name="idnumber")
+    private String idnumber;
 
-    @Column(name="openDate")
-    private String openDate;
+    @Column(name="opendate")
+    private String opendate;
 
     public String getId() {
         return id;
@@ -41,12 +41,12 @@ public class DriverEntity {
         this.id = id;
     }
 
-    public String getImgName() {
-        return imgName;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setImgName(String imgName) {
-        this.imgName = imgName;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 
     public String getName() {
@@ -65,19 +65,19 @@ public class DriverEntity {
         this.number = number;
     }
 
-    public String getIdNumber() {
-        return idNumber;
+    public String getIdnumber() {
+        return idnumber;
     }
 
-    public void setIdNumber(String idNumber) {
-        this.idNumber = idNumber;
+    public void setIdnumber(String idnumber) {
+        this.idnumber = idnumber;
     }
 
-    public String getOpenDate() {
-        return openDate;
+    public String getOpendate() {
+        return opendate;
     }
 
-    public void setOpenDate(String openDate) {
-        this.openDate = openDate;
+    public void setOpendate(String opendate) {
+        this.opendate = opendate;
     }
 }

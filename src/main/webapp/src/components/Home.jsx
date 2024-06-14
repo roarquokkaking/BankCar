@@ -3,7 +3,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import React from 'react';
 import Header from './Header';
 import OptionsTab from './OptionsTab';
-import LocationCards from './LocationCards';
+import LocationCards from './choice/LocationCards';
 import MobileFooter from './MobileFooter';
 import FooterMenu from "./FooterMenu";
 

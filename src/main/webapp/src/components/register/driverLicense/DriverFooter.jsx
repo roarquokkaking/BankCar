@@ -17,7 +17,7 @@ const DriverFooter = () => {
     const formData = new FormData();
     formData.append("img",file);
 
-    axios.post("http://localhost:8080/driver/upload",formData, {
+    axios.post("https://dongwoossltest.shop/api/driver/upload",formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -25,6 +25,9 @@ const DriverFooter = () => {
         setOcrData(res.data);
         navigate("/car/driverCheck",{state:res.data})
 
+      }).catch(err=>{
+        alert("운전면허증 등록 실패. 종류 또는 유형이 올바르지 않습니다.");
+        navigate("/profile")
       })
 
 

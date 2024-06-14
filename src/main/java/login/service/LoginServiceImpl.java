@@ -12,12 +12,14 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import javax.swing.text.StyledEditorKit;
 import java.util.Optional;
 
 @Transactional
 @Service
 public class LoginServiceImpl implements LoginService{
     private final RestTemplate restTemplate = new RestTemplate();
+    private boolean driverYN;
     @Autowired
     LoginDAO loginDAO;
     @Override
@@ -25,6 +27,7 @@ public class LoginServiceImpl implements LoginService{
         String accessToken=getAccessToken(code);
         JsonNode userResourceNode = getUserResource(accessToken);
         System.out.println("userResourceNode = " + userResourceNode);
+        System.out.println("google login");
         String id = userResourceNode.get("id").asText();
         String email = userResourceNode.get("email").asText();
         String name = userResourceNode.get("name").asText();
@@ -34,9 +37,10 @@ public class LoginServiceImpl implements LoginService{
         loginDTO.setEmail(email);
         loginDTO.setName(name);
         if(isExistId.equals("exist")){
+            loginDTO.setDriver(driverYN);
             System.out.println("이미 존재한 회원");
         }else{
-
+            loginDTO.setDriver(false);
             insertUser(loginDTO);
             System.out.println("회원가입 완료");
         }
@@ -48,6 +52,8 @@ public class LoginServiceImpl implements LoginService{
     public String isExistId(String id) {
         Optional<LoginDTO> loginDTO = loginDAO.findById(id);
         if(loginDTO.isPresent()){
+            LoginDTO loginDTO1 = loginDTO.get();
+            driverYN=loginDTO1.isDriver();
             return "exist";
         }else{
             return "non_exist";
@@ -60,10 +66,15 @@ public class LoginServiceImpl implements LoginService{
         loginDAO.save(loginDTO);
     }
 
+    @Override
+    public void driverUpdate(String id,boolean driverYN) {
+        loginDAO.updateDriver(id,driverYN);
+    }
+
     private String getAccessToken(String authorizationCode) {
         String clientId = "601610993000-u4u34s3r1op37juvet6fmr0hee3e3u1d.apps.googleusercontent.com";
         String clientSecret = "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";
-        String redirectUri = "http://localhost:8080/login/google" ;
+        String redirectUri = "https://dongwoossltest.shop/api/login/google" ;
         String tokenUri = "https://oauth2.googleapis.com/token";
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();

@@ -1,0 +1,72 @@
+.publish {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.publish .infoTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.publish .infoTable td {
+    padding: 8px;
+    height: 50px;
+    border-bottom: 1px solid #ddd;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
+}
+
+.publish .infoTable tr:last-child td {
+    border-bottom: none;
+}
+
+.publish .infoItem {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.publish .infoItem span {
+    font-weight: bold;
+}
+
+.publish .imageContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.publish .carImage {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 8px;
+}
+
+.publish .submit:hover {
+    background-color: #0056b3;
+}
+
+.publish h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.publish .submit {
+    width: calc(100% - 20px);
+    margin: 0 10px 60px 10px;
+    padding: 10px 0;
+    background-color: #3594ff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    height: 50px;
+    cursor: pointer;
+}

@@ -1,9 +1,31 @@
-/* styles.css */
-
 .photo {
+  margin: 0;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ffffff;
   text-align: center;
-  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
 }
+
+.photo button {
+    width: calc(100% - 20px);
+    margin: 0 10px;
+    padding: 10px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    height: 50px;
+    cursor: pointer;
+}
+.photo Alert{
+    width: calc(100% - 20px);
+}
+
 
 .photo input[type="file"] {
   margin: 20px 0;

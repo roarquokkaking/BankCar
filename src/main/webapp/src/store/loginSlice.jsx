@@ -6,7 +6,8 @@ export const loginSlice = createSlice({
     initialState:{
         id:'',
         name:'',
-        email:''
+        email:'',
+        driver:'',
     },
     reducers:{
         setId:(state,action)=>{
@@ -17,10 +18,12 @@ export const loginSlice = createSlice({
         },
         setName:(state,action)=>{
             state.name= action.payload;
+        },
+        setDriver:(state,action)=>{
+            state.driver= action.payload;
         }
-
     }
 });
 
-export const {setEmail,setId,setName} = loginSlice.actions;
+export const {setEmail,setId,setName,setDriver} = loginSlice.actions;
 export default loginSlice.reducer;

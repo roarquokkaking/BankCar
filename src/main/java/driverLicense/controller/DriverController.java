@@ -2,15 +2,15 @@ package driverLicense.controller;
 
 
 import driverLicense.entity.DriverEntity;
+import driverLicense.service.DriverService;
 import driverLicense.service.NCPObjectStorageService;
 import driverLicense.service.ObjectStorageService;
 import jakarta.servlet.http.HttpSession;
 import login.dto.LoginDTO;
+import login.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,14 +21,20 @@ import java.util.Map;
 
 @CrossOrigin    // 다른 포트에서 넘오는 것을 받을 수 있다.
 @RestController
-@RequestMapping(path = "driver")
+@RequestMapping(path = "/api/driver")
 public class DriverController {
 
+    @Autowired
+    DriverService driverService;
+    @Autowired
+    LoginService loginService;
     ObjectStorageService objectStorageService = new NCPObjectStorageService();
+
     private final RestTemplate restTemplate = new RestTemplate();
 
     @PostMapping(path = "upload")
-    public Map<String, Object> upload(@RequestPart("img") MultipartFile img, HttpSession session){
+    public ResponseEntity<Map<String, Object>> upload(@RequestPart("img") MultipartFile img,
+                                                      HttpSession session){
         LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginDTO");
 
         String imageName = objectStorageService.uploadFile( "driverOCR/", img);
@@ -58,11 +64,25 @@ public class DriverController {
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(jsonBody, headers);
 
         ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.POST, entity, Map.class);
-
+        List<Map<String, Object>> images = (List<Map<String, Object>>) response.getBody().get("images");
         Map<String, Object> returnValue = new HashMap<>();
-        returnValue.put("response",response.getBody());
-        returnValue.put("imageName",imageName);
-        return returnValue;
+        if(images.get(0).get("inferResult").equals("SUCCESS")){
+
+            returnValue.put("response",response.getBody());
+            returnValue.put("imageName",imageName);
+            return new ResponseEntity<>(returnValue, HttpStatus.OK);
+        }else{
+            returnValue.put("error","image OCR error");
+            return new ResponseEntity<>(returnValue, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @PostMapping(path = "set")
+    public void set(@RequestBody DriverEntity driverEntity ){
+        driverService.write(driverEntity);
+        loginService.driverUpdate(driverEntity.getId(),true);
+        System.out.println("면허등룍완료");
     }
 
 }

@@ -32,6 +32,7 @@ const styles = {
 const Wishlist = () => {
     return (
         <>
+
             <div style={styles.container}>
                 <h1 style={styles.header}>위시리스트</h1>
                 <div>

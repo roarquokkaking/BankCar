@@ -7,7 +7,7 @@ const ComponentHeader = ({text}) => {
   return (
     <div>
       <header>
-        <div className="headernav">
+        <div>
           <GoArrowLeft
             style={{
               width: "30px",
