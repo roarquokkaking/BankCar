@@ -10,3 +10,4 @@ public interface SearchDAO extends JpaRepository<SearchDTO,Integer> {
 
     
 }
+    

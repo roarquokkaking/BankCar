@@ -16,10 +16,12 @@ const Searching = () => {
     const [startTime, setStartTime] = useState(null);
     const [endTime, setEndTime] = useState(null);
 
-    const [reset, setReset] = useState(false)
-    const [dateRangeDiv, setDateRangeDiv] = useState('')
-    const [startTimeDiv, setStartTimeDiv] = useState('')
-    const [endTimeDiv, setEndTimeDiv] = useState('')
+    const [reset, setReset] = useState(false);
+    const [dateRangeDiv, setDateRangeDiv] = useState('');
+    const [startTimeDiv, setStartTimeDiv] = useState('');
+    const [endTimeDiv, setEndTimeDiv] = useState('');
+
+    const navigate = useNavigate();
 
     const [searchDTO, setSearchDTO] = useState({
         startDate:'',
@@ -82,11 +84,8 @@ const Searching = () => {
         setValidationMessages(newValidationMessages);
 
         if (isValid) {
-            axios.post("http://localhost:8080/searching/searchList", null, { params: searchDTO })
-                .then(res => {
-                    console.log(res.data);
-                })
-                .catch(error => console.log(error));
+            const params = new URLSearchParams(searchDTO).toString();
+            navigate(`/?${params}`);
         }
     };
 

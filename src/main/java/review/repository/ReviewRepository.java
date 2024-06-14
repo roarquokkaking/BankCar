@@ -40,9 +40,4 @@ public interface ReviewRepository extends JpaRepository<ReviewEntity, Long> {
     Optional<ReviewEntity> findDeleteReview(@Param("user_id") String userId ,@Param("review_id")Long review_id);
 
 
-
-
-
-
-
 }
