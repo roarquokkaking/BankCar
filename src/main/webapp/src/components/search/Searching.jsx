@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'; 
 import { useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -16,12 +16,10 @@ const Searching = () => {
     const [startTime, setStartTime] = useState(null);
     const [endTime, setEndTime] = useState(null);
 
-    const [reset, setReset] = useState(false);
-    const [dateRangeDiv, setDateRangeDiv] = useState('');
-    const [startTimeDiv, setStartTimeDiv] = useState('');
-    const [endTimeDiv, setEndTimeDiv] = useState('');
-
-    const navigate = useNavigate();
+    const [reset, setReset] = useState(false)
+    const [dateRangeDiv, setDateRangeDiv] = useState('')
+    const [startTimeDiv, setStartTimeDiv] = useState('')
+    const [endTimeDiv, setEndTimeDiv] = useState('')
 
     const [searchDTO, setSearchDTO] = useState({
         startDate:'',
@@ -84,8 +82,11 @@ const Searching = () => {
         setValidationMessages(newValidationMessages);
 
         if (isValid) {
-            const params = new URLSearchParams(searchDTO).toString();
-            navigate(`/?${params}`);
+            axios.post("https://dongwoossltest.shop/api/searching/searchList", null, { params: searchDTO })
+                .then(res => {
+                    console.log(res.data);
+                })
+                .catch(error => console.log(error));
         }
     };
 
