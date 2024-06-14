@@ -35,7 +35,7 @@ public class ChatController {
         Map<String, String> userInfo = new HashMap<>();
         if (loginDTO != null) {
             userInfo.put("name", loginDTO.getName());
-            userInfo.put("profile_image", loginDTO.getProfile_image());
+//            userInfo.put("profile_image", loginDTO.getProfile_image());
         } else {
             // 로그인되지 않은 경우에 대한 처리
             userInfo.put("name", null);
