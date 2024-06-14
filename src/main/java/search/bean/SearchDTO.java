@@ -1,25 +1,15 @@
 package search.bean;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import lombok.*;
+
+import java.sql.Time;
 import java.util.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import java.sql.Time;
-
-@Entity
-@Table(name="CAR")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Getter
-@Setter
 public class SearchDTO {
     @Id
     @Column(name="car_id")
