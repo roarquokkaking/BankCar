@@ -1,24 +1,15 @@
 package search.bean;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import lombok.*;
+
+import java.sql.Time;
 import java.util.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Entity
-@Table(name="CAR")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Getter
-@Setter
 public class SearchDTO {
     @Id
     @Column(name="car_id")
@@ -33,8 +24,11 @@ public class SearchDTO {
     @Column(name="longitude")
     private String longitude;
     
-    @Column(name="address")
-    private String address;
+    @Column(name="jibunAddress")
+    private String jibunAddress;
+
+    @Column(name="roadAddress")
+    private String roadAddress;
     
     @Column(name="category")
     private String category;
@@ -56,4 +50,22 @@ public class SearchDTO {
     
     @Column(name="rating")
     private Float rating;
+
+    @Column(name = "startDate")
+    private Date startDate;
+
+    @Column(name = "endDate")
+    private Date endDate;
+
+    @Column(name = "startTime")
+    private Time startTime;
+
+    @Column(name = "endTime")
+    private Time endTime;
+
+    @Column(name = "minPrice")
+    private int minPrice;
+
+    @Column(name = "maxPrice")
+    private int maxPrice;
 }

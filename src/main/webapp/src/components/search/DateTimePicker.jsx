@@ -19,10 +19,10 @@ const DateTimePicker = ({ searchDTO, setSearchDTO, validationMessages, reset, se
     const addHoursAndFormat = (time) => {
         const newTime = new Date(time);
         newTime.setHours(newTime.getHours());
-    
+
         const hoursFormatted = String(newTime.getHours()).padStart(2, '0');
         const minutes = String(newTime.getMinutes()).padStart(2, '0');
-    
+
         return `${hoursFormatted}:${minutes}`;
     };
 
@@ -50,11 +50,11 @@ const DateTimePicker = ({ searchDTO, setSearchDTO, validationMessages, reset, se
 
     const onInput = (value, name) => {
         setSearchDTO({
-          ...searchDTO,
-          [name]:value
+            ...searchDTO,
+            [name]:value
         });
         console.log(searchDTO);
-    };    
+    };
 
     return (
         <div>
