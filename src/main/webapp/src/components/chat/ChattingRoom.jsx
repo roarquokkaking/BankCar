@@ -20,7 +20,7 @@ const ChattingRoom = () => {
     const messageEndRef = useRef(null); // 새로운 useRef 추가
 
     useEffect(() => {
-        socket.current = new SockJS('http://localhost:8080/ws');
+        socket.current = new SockJS('https://dongwoossltest.shop/api/wss',  null, { wss: true });
         stompClient.current = Stomp.over(socket.current);
 
         stompClient.current.connect({}, () => {
@@ -30,7 +30,7 @@ const ChattingRoom = () => {
             });
         });
 
-        axios.get('http://localhost:8080/api/messages/userInfo', { withCredentials: true })
+        axios.get('https://dongwoossltest.shop/api/messages/userInfo', { withCredentials: true })
             .then(response => {
                 const userData = response.data;
                 setUserName(userData.name);
@@ -39,7 +39,7 @@ const ChattingRoom = () => {
             })
             .catch(error => console.error("Error fetching user data:", error));
 
-        axios.get('http://localhost:8080/api/messages')
+        axios.get('https://dongwoossltest.shop/api/messages')
             .then(response => {
                 setMessages(response.data);
                 console.log(response.data);
@@ -62,7 +62,7 @@ const ChattingRoom = () => {
     const handleSend = async () => {
         try {
             const messageObj = { sender: userName, content: message, timestamp: new Date().toISOString() };
-            const response = await axios.post('http://localhost:8080/api/messages/send', messageObj, { withCredentials: true });
+            const response = await axios.post('https://dongwoossltest.shop/api/messages/send', messageObj, { withCredentials: true });
             console.log('Message sent successfully', response.data);
             setMessage('');
         } catch (error) {

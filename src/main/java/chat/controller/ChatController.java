@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/messages")
 public class ChatController {
@@ -26,7 +26,7 @@ public class ChatController {
 
 
     @Autowired
-    public ChatController(SimpMessagingTemplate messagingTemplate, MessageService messageService, LoginDTO loginDTO) {
+    public ChatController(SimpMessagingTemplate messagingTemplate, MessageService messageService) {
         this.messagingTemplate = messagingTemplate;
         this.messageService = messageService;
 
