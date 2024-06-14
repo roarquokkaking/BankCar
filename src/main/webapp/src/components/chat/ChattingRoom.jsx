@@ -2,21 +2,25 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import axios from 'axios';
-import {  Button, TextField } from '@mui/material';
+import {TextField } from '@mui/material';
 import moment from 'moment';
 import SendIcon from '@mui/icons-material/Send';
+import { useNavigate } from 'react-router-dom';
+import { GoArrowLeft } from "react-icons/go";
 import './ChattingRoom.css';
 
 const ChattingRoom = () => {
+    const navigate = useNavigate();
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const [profileImage, setProfileImage] = useState('');
     const [userName, setUserName] = useState('');
     const socket = useRef(null);
     const stompClient = useRef(null);
+    const messageEndRef = useRef(null); // 새로운 useRef 추가
 
     useEffect(() => {
-        socket.current = new SockJS('http://localhost:8080/ws');
+        socket.current = new SockJS('https://dongwoossltest.shop/api/wss',  null, { wss: true });
         stompClient.current = Stomp.over(socket.current);
 
         stompClient.current.connect({}, () => {
@@ -26,7 +30,7 @@ const ChattingRoom = () => {
             });
         });
 
-        axios.get('http://localhost:8080/api/messages/userInfo', { withCredentials: true })
+        axios.get('https://dongwoossltest.shop/api/messages/userInfo', { withCredentials: true })
             .then(response => {
                 const userData = response.data;
                 setUserName(userData.name);
@@ -35,7 +39,7 @@ const ChattingRoom = () => {
             })
             .catch(error => console.error("Error fetching user data:", error));
 
-        axios.get('http://localhost:8080/api/messages')
+        axios.get('https://dongwoossltest.shop/api/messages')
             .then(response => {
                 setMessages(response.data);
                 console.log(response.data);
@@ -47,10 +51,18 @@ const ChattingRoom = () => {
         };
     }, []);
 
+    useEffect(() => {
+        scrollToBottom(); // 메시지 업데이트 시 자동 스크롤
+    }, [messages]); // messages 배열이 변경될 때마다 호출
+
+    const scrollToBottom = () => {
+        messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
     const handleSend = async () => {
         try {
             const messageObj = { sender: userName, content: message, timestamp: new Date().toISOString() };
-            const response = await axios.post('http://localhost:8080/api/messages/send', messageObj, { withCredentials: true });
+            const response = await axios.post('https://dongwoossltest.shop/api/messages/send', messageObj, { withCredentials: true });
             console.log('Message sent successfully', response.data);
             setMessage('');
         } catch (error) {
@@ -68,6 +80,20 @@ const ChattingRoom = () => {
 
     return (
         <div className="chat-room">
+            <header style={{marginBottom: -10, width: '200px'}}>
+            <div className="chat-headernav" >
+            <GoArrowLeft style={{width:'30px', height:'30px',
+                marginTop:'4%', marginLeft:'20px'
+            }}onClick={()=>{navigate(-1)}}
+            />
+            <h1 style={{textAlign:'center', 
+                            font:'apple SD Gothic Neo',
+                            fontSize:'18px',
+                            marginTop:'-6%'
+                           }}>BankCarChat
+            </h1>
+            </div>
+            </header>
             <div className="message-container">
                 {messages.map((msg, index) => {
                     if (msg.sender === userName) {
@@ -105,6 +131,7 @@ const ChattingRoom = () => {
                         );
                     }
                 })}
+                <div ref={messageEndRef} /> {/* 메시지 끝 부분에 ref 추가 */}
             </div>
             
             <div className="input-area">
@@ -123,8 +150,9 @@ const ChattingRoom = () => {
                 >
                     전송
                 </button>
-                
-                <img src="./image/clip.png" alt="Clip" />
+                <img className="image-clip"src="./image/clip.png" alt="Clip" />
+                <img className="image-emog"src="./image/emog.png" alt="Clip" />
+                <img className="image-setting"src="./image/setting.png" alt="Clip" />
             </div>
         </div>
     );
