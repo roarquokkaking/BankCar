@@ -20,7 +20,7 @@ const ChattingRoom = () => {
     const messageEndRef = useRef(null); // 새로운 useRef 추가
 
     useEffect(() => {
-        socket.current = new SockJS('wss://dongwoossltest.shop/api/wss',  null, { wss: true });
+        socket.current = new SockJS('wss://dongwoossltest.shop/api/ws');
         stompClient.current = Stomp.over(socket.current);
 
         stompClient.current.connect({}, () => {
