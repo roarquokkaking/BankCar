@@ -1,4 +1,4 @@
-package payment.Service;
+package payment.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
