@@ -21,7 +21,7 @@ import java.util.Map;
 
 @CrossOrigin    // 다른 포트에서 넘오는 것을 받을 수 있다.
 @RestController
-@RequestMapping(path = "driver")
+@RequestMapping(path = "/api/driver")
 public class DriverController {
 
     @Autowired

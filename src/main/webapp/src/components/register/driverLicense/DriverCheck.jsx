@@ -40,7 +40,7 @@ const DriverCheck = () => {
       };
 
       const onDriverSet=()=>{
-        axios.post("http://localhost:8080/driver/set",info,{
+        axios.post("https://dongwoossltest.shop/api/driver/set",info,{
           headers:{
             'Content-Type': 'application/json'
           }

@@ -26,7 +26,7 @@ public class ChatController {
 
 
     @Autowired
-    public ChatController(SimpMessagingTemplate messagingTemplate, MessageService messageService) {
+    public ChatController(SimpMessagingTemplate messagingTemplate, MessageService messageService, LoginDTO loginDTO) {
         this.messagingTemplate = messagingTemplate;
         this.messageService = messageService;
 
