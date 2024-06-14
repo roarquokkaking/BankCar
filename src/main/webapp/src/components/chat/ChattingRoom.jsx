@@ -2,20 +2,25 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import axios from 'axios';
-import { TextField, Button, MenuItem, Select } from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
-import './ChattingRoom.css'; // 채팅방 스타일을 정의하는 CSS 파일을 불러옵니다.
+import {TextField } from '@mui/material';
 import moment from 'moment';
+import SendIcon from '@mui/icons-material/Send';
+import { useNavigate } from 'react-router-dom';
+import { GoArrowLeft } from "react-icons/go";
+import './ChattingRoom.css';
 
 const ChattingRoom = () => {
+    const navigate = useNavigate();
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
-    const [selectedUser, setSelectedUser] = useState('User2'); // 선택된 사용자 상태 추가
+    const [profileImage, setProfileImage] = useState('');
+    const [userName, setUserName] = useState('');
     const socket = useRef(null);
     const stompClient = useRef(null);
+    const messageEndRef = useRef(null); // 새로운 useRef 추가
 
     useEffect(() => {
-        socket.current = new SockJS('http://localhost:8080/ws');
+        socket.current = new SockJS('https://dongwoossltest.shop/api/wss');
         stompClient.current = Stomp.over(socket.current);
 
         stompClient.current.connect({}, () => {
@@ -25,9 +30,19 @@ const ChattingRoom = () => {
             });
         });
 
-        axios.get('http://localhost:8080/api/messages')
+        axios.get('https://dongwoossltest.shop/api/messages/userInfo', { withCredentials: true })
+            .then(response => {
+                const userData = response.data;
+                setUserName(userData.name);
+                setProfileImage(userData.profile_image); // 프로필 이미지 설정
+                console.log(response.data);
+            })
+            .catch(error => console.error("Error fetching user data:", error));
+
+        axios.get('https://dongwoossltest.shop/api/messages')
             .then(response => {
                 setMessages(response.data);
+                console.log(response.data);
             })
             .catch(error => console.error("There was an error!", error));
 
@@ -36,85 +51,109 @@ const ChattingRoom = () => {
         };
     }, []);
 
-    const sendMessage = (message) => {
-        axios.post('http://localhost:8080/api/messages/send', message)
-            .then(response => {
-                console.log('Message sent successfully', response.data);
-            })
-            .catch(error => {
-                console.error('There was an error sending the message', error);
-            });
+    useEffect(() => {
+        scrollToBottom(); // 메시지 업데이트 시 자동 스크롤
+    }, [messages]); // messages 배열이 변경될 때마다 호출
+
+    const scrollToBottom = () => {
+        messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
-    const handleSend = () => {
-        const messageObj = { from: 'User1', to: selectedUser, content: message, timestamp: new Date().toISOString() };
-        sendMessage(messageObj);
-        setMessage('');
-    };
-
-    const formatDate = (dateString) => {
+    const handleSend = async () => {
         try {
-            // Moment.js를 사용하여 문자열을 날짜로 파싱하고 원하는 형식으로 변환
-            const formattedDate = moment(dateString).format('A hh:mm');
-            return formattedDate;
+            const messageObj = { sender: userName, content: message, timestamp: new Date().toISOString() };
+            const response = await axios.post('https://dongwoossltest.shop/api/messages/send', messageObj, { withCredentials: true });
+            console.log('Message sent successfully', response.data);
+            setMessage('');
         } catch (error) {
-            console.error('Error formatting date:', error);
-            return 'Invalid Date';
+            console.error('Error handling send:', error);
         }
+    };
+    
+    const formatTimestamp = (sentTime) => {
+        const date = new Date(sentTime);
+        // moment.lang('ko', {weekdays: ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"], weekdaysShort: ["일","월","화","수","목","금","토"],});
+
+        const formattedDate = moment(date).format('Ahh:mm').replace('AM','오전').replace('PM','오후'); // 요일과 AM/PM 형식으로 시간 표시
+        return formattedDate;
     };
 
     return (
         <div className="chat-room">
-            <Select
-                value={selectedUser}
-                onChange={(e) => setSelectedUser(e.target.value)}
-                variant="outlined"
-                fullWidth
-            >
-                <MenuItem value="User2">User2</MenuItem>
-                <MenuItem value="User3">User3</MenuItem>
-                {/* 추가적인 사용자들 */}
-            </Select>
-            
-            <div className="message-container">
-                {messages.map((msg, index) => (
-                    <div 
-                        key={index} 
-                        className={`message-box ${msg.from === 'User1' ? 'sent' : 'received'}`}
-                    >
-                        <div className="message-content">
-                            <strong>{msg.from}</strong>: {msg.content}
-                        </div>
-                        <div className="message-timestamp">{formatDate(msg.timestamp)}</div>
-                    </div>
-                ))}
-            </div>
-            <TextField
-                fullWidth
-                variant="outlined"
-                label="메시지를 입력하세요..."
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' ? handleSend() : null}
+            <header style={{marginBottom: -10, width: '200px'}}>
+            <div className="chat-headernav" >
+            <GoArrowLeft style={{width:'30px', height:'30px',
+                marginTop:'4%', marginLeft:'20px'
+            }}onClick={()=>{navigate(-1)}}
             />
-            <Button 
-                variant="contained"
-                endIcon={<SendIcon />}
-                onClick={handleSend}
-                style={{
-                    width: '80px',
-                    padding: '10px',
-                    marginLeft: '270.5px',
-                    marginTop: '10px',
-                    backgroundColor: '#a700a4',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer',
-                }}
-            >
-                전송
-            </Button>
+            <h1 style={{textAlign:'center', 
+                            font:'apple SD Gothic Neo',
+                            fontSize:'18px',
+                            marginTop:'-6%'
+                           }}>BankCarChat
+            </h1>
+            </div>
+            </header>
+            <div className="message-container">
+                {messages.map((msg, index) => {
+                    if (msg.sender === userName) {
+                        return (
+                            <div key={index} className="message-box-send">
+                                <div className="message-info">
+                                    
+                                    <strong>{msg.sender}</strong>
+                                    <img src={profileImage} alt="Profile Image" className="profile-image" />
+                                </div>
+                                <div className="message-content">
+                                    {msg.content}
+                                </div>
+                                <div className="message-timestamp">
+                                    {formatTimestamp(msg.sentTime)}
+                                </div>
+                            </div>
+                        );
+                    } else {
+                        return (
+                            <div key={index} className="message-box-receive">
+                                <div className="message-info">
+                                {/* <img src={profileImage} alt="Profile Image" className="profile-image" /> */}
+                                <img src='./image/pulover.png' alt="Profile Image" className="profile-image" />
+                                    <strong>{msg.sender}</strong> 
+                                </div>
+                                
+                                <div className="message-content">
+                                    {msg.content} 
+                                </div>
+                                <div className="message-timestamp">
+                                    {formatTimestamp(msg.sentTime)}
+                                </div>
+                            </div>
+                        );
+                    }
+                })}
+                <div ref={messageEndRef} /> {/* 메시지 끝 부분에 ref 추가 */}
+            </div>
+            
+            <div className="input-area">
+                <TextField
+                    fullWidth
+                    variant="outlined"
+                    label="메시지를 입력하세요..."
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' ? handleSend() : null}
+                />
+                <button 
+                    variant="contained"
+                    endIcon={<SendIcon />}
+                    onClick={handleSend}
+                >
+                    전송
+                </button>
+                <img className="image-clip"src="./image/clip.png" alt="Clip" />
+                <img className="image-emog"src="./image/emog.png" alt="Clip" />
+                <img className="image-setting"src="./image/setting.png" alt="Clip" />
+            </div>
         </div>
     );
 };
