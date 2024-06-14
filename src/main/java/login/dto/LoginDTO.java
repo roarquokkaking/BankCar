@@ -20,8 +20,8 @@ public class LoginDTO {
     private String name;
     @Column(name="driver")
     private boolean driver;
-    @Column(name="profile_image")
-    private String profile_image;
+//    @Column(name="profile_image")
+//    private String profile_image;
 
     public String getId() {
         return id;
