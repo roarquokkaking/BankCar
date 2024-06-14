@@ -2,7 +2,7 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = (app) => {
     app.use(
-        "/ws",
-        createProxyMiddleware({ target: "http://localhost:8080", ws: true })
+        "/api/wss",
+        createProxyMiddleware({ target: "https://dongwoossltest.shop", wss: true })
     );
 };

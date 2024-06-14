@@ -2,7 +2,7 @@ import axios from "axios";
 
 // 기본 URL 설정
 const apiClient = axios.create({
-    baseURL: 'https://dongwoossltest.shop/api'    // https://dongwoossltest.shop//api
+    baseURL: 'https://dongwoossltest.shop/api'    // https://dongwoossltest.shop/api
 });
 
 // userId가 자동차 등록하는 api
