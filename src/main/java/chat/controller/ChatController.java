@@ -10,7 +10,9 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @CrossOrigin(origins = "*")
@@ -21,10 +23,25 @@ public class ChatController {
     private final SimpMessagingTemplate messagingTemplate;
     private final MessageService messageService;
 
+
     @Autowired
     public ChatController(SimpMessagingTemplate messagingTemplate, MessageService messageService) {
         this.messagingTemplate = messagingTemplate;
         this.messageService = messageService;
+    }
+
+    @GetMapping("/userInfo")
+    public Map<String, String> getUserInfo(@SessionAttribute(name = "loginDTO", required = false) LoginDTO loginDTO) {
+        Map<String, String> userInfo = new HashMap<>();
+        if (loginDTO != null) {
+            userInfo.put("name", loginDTO.getName());
+            userInfo.put("profile_image", loginDTO.getProfile_image());
+        } else {
+            // 로그인되지 않은 경우에 대한 처리
+            userInfo.put("name", null);
+            userInfo.put("profile_image", null);
+        }
+        return userInfo;
     }
 
     @PostMapping("/send")

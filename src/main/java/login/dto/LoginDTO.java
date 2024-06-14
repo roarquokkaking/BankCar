@@ -20,6 +20,8 @@ public class LoginDTO {
     private String name;
     @Column(name="driver")
     private boolean driver;
+    @Column(name="profile_image")
+    private String profile_image;
 
     public String getId() {
         return id;
@@ -104,36 +106,5 @@ public class LoginDTO {
         this.image_original_name = image_original_name;
     }
 
-    @Getter
-    @Builder
-    public static class ResponseOnlyMemberName {
-        private String memberId;
-        private String nickName;
-        private String profileImage;
-
-        public String getMemberId() {
-            return memberId;
-        }
-
-        public void setMemberId(String memberId) {
-            this.memberId = memberId;
-        }
-
-        public String getNickName() {
-            return nickName;
-        }
-
-        public void setNickName(String nickName) {
-            this.nickName = nickName;
-        }
-
-        public String getProfileImage() {
-            return profileImage;
-        }
-
-        public void setProfileImage(String profileImage) {
-            this.profileImage = profileImage;
-        }
-    }
 
 }
