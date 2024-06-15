@@ -21,6 +21,11 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 
     @Override
     public Optional<KakaoPayEntity> getData(String id) {
-        return paymentRepo.findById(id);
+        return paymentRepo.findByIdandstatus(id);
+    }
+
+    @Override
+    public void setStatus(KakaoPayEntity kakaoPayEntity) {
+        paymentRepo.save(kakaoPayEntity);
     }
 }

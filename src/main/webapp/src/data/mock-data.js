@@ -8,24 +8,92 @@ import {
   MdBusinessCenter,
 } from 'react-icons/md';
 import {
+  GiBrainDump,
   GiCampingTent,
+  GiFlamer,
 } from 'react-icons/gi';
 import { FaCar, FaMotorcycle, FaTruck } from 'react-icons/fa';
 import { MdOutlineElectricalServices } from "react-icons/md";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
+
+
+
 
 
 export const categoryTab = [
-  { id: 1, label: "캠핑", icon: <GiCampingTent size={24} /> },
-  { id: 2, label: "비지니스", icon: <MdBusinessCenter size={24} /> },
-  { id: 3, label: "데이트", icon: <MdOutlineDateRange size={24} /> },
-  { id: 4, label: "여행", icon: <MdFlightTakeoff size={24} /> },
-  { id: 5, label: "스포츠카", icon: <FaCar size={24} /> },
-  { id: 6, label: "오토바이", icon: <FaMotorcycle size={24} /> },
-  { id: 7, label: "트럭", icon: <FaTruck size={24} /> },
-  { id: 8, label: "전기차", icon: <MdOutlineElectricalServices size={24} /> },
+  { id: 1, label: "전체", icon: <GiFlamer size={24} /> },
+  { id: 2, label: "캠핑", icon: <GiCampingTent size={24} /> },
+  { id: 3, label: "비지니스", icon: <MdBusinessCenter size={24} /> },
+  { id: 4, label: "데이트", icon: <MdOutlineDateRange size={24} /> },
+  { id: 5, label: "여행", icon: <MdFlightTakeoff size={24} /> },
+  { id: 6, label: "스포츠카", icon: <FaCar size={24} /> },
+  { id: 7, label: "오토바이", icon: <FaMotorcycle size={24} /> },
+  { id: 8, label: "트럭", icon: <FaTruck size={24} /> },
+  { id: 9, label: "전기차", icon: <MdOutlineElectricalServices size={24} /> },
 ];
 
-export const locations = [
+export const Locations =()=>{ 
+
+  const [carData,setCarData]=useState([]);
+    
+  
+    useEffect(()=>{
+
+      
+          axios.get("https://dongwoossltest.shop/api/cars/getcardata")
+          .then(res=>{
+            setCarData(res.data);
+            const car1=carData[0];
+            console.log(car1);
+            // return axios.get("http://localhost:8080/api/cars/getcarservicedata")
+        })
+        //  .then(res=>console.log(res.data))
+        
+        },[])
+
+
+
+ 
+  return carData.map((item,index)=>(
+
+    {
+      id: index+1,
+      locationImages: [
+        {
+          id: 1,
+          url: 'https://images.unsplash.com/photo-1600240644455-3edc55c375fe?auto=format&fit=crop&w=400&h=250&q=60',
+        },
+        {
+          id: 2,
+          url: 'https://images.unsplash.com/photo-1653408400816-af6dba0c9432?auto=format&fit=crop&w=400&h=250&q=60',
+        },
+        {
+          id: 3,
+          url: 'https://images.unsplash.com/photo-1653312727964-736f11663ef6?auto=format&fit=crop&w=400&h=250&q=80',
+        },
+        {
+          id: 4,
+          url: 'https://images.unsplash.com/photo-1629447236132-22c57cd0f0bf?auto=format&fit=crop&w=400&h=250&q=60',
+        },
+      ],
+      location: item[0].doroAddress,
+      days: `${item[1].startDate} ~ ${item[1].endDate}`,
+      price: `\\${item[0].price}/시간`,
+      isNew: false,
+      rating: item[0].rating===0?'0.0':item[0].rating,
+    
+
+  }));
+    
+      
+    
+  
+
+};
+
+export const locationss =[
   {
     id: 1,
     locationImages: [
@@ -46,7 +114,7 @@ export const locations = [
         url: 'https://images.unsplash.com/photo-1629447236132-22c57cd0f0bf?auto=format&fit=crop&w=400&h=250&q=60',
       },
     ],
-    location: 'Gardon Reveira, Italy',
+    location: '',
     days: 'Oct 2-9',
     price: '$14,999 CAD night',
     isNew: true,
