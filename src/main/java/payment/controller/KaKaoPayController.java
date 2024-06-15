@@ -1,6 +1,5 @@
 package payment.controller;
 
-import jakarta.servlet.http.HttpSession;
 import login.dto.LoginDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,10 +10,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.view.RedirectView;
 import payment.entity.KakaoPayEntity;
 import payment.service.KakaoPayService;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;

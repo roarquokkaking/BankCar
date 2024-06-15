@@ -1,14 +1,11 @@
 package car.entity;
 
-import booking.entity.BookingEntity;
-import jakarta.persistence.*;
-import login.dto.LoginDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 import wishList.entity.WishListEntity;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 

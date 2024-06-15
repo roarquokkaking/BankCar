@@ -1,10 +1,6 @@
 package chat.entity;
 
-import jakarta.persistence.*;
-import login.dto.LoginDTO;
-
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.*;
 
 @Entity
 @Table(name="messageroom")

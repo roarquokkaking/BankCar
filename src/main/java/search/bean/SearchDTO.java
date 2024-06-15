@@ -1,7 +1,5 @@
 package search.bean;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
 import lombok.*;
 
 import java.sql.Time;

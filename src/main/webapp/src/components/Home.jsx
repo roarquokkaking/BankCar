@@ -2,7 +2,7 @@ import {Box, Button, Container, createTheme, styled} from '@mui/material';
 import SearchIcon from "@mui/icons-material/Search";
 import React from 'react';
 import OptionsTab from './OptionsTab';
-import LocationCards from './choice/LocationCards';
+import LocationCards from './LocationCards';
 import MobileFooter from './MobileFooter';
 import FooterMenu from "./FooterMenu";
 import { useNavigate } from 'react-router-dom';

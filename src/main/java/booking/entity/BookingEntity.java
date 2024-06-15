@@ -5,12 +5,11 @@ import booking.contoller.ReviewStatus;
 import booking.dto.BookingDTO;
 import car.entity.Car;
 import car.entity.CarImages;
-import jakarta.persistence.*;
 import login.dto.LoginDTO;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.joda.time.DateTime;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
