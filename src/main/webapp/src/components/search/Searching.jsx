@@ -82,7 +82,7 @@ const Searching = () => {
         setValidationMessages(newValidationMessages);
 
         if (isValid) {
-            axios.post("http://localhost:8080/searching/searchList", null, { params: searchDTO })
+            axios.post("https://dongwoossltest.shop/api/searching/searchList", null, { params: searchDTO })
                 .then(res => {
                     console.log(res.data);
                 })

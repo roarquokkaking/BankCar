@@ -1,51 +1,46 @@
 package search.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import search.service.SearchService;
+import org.springframework.web.bind.annotation.*;
+import search.bean.SearchDTO;
 
 @CrossOrigin
 @RestController
 @RequestMapping(path="searching",produces="application/json")
 public class SearchController {
 
-    @Autowired
-    SearchService searchService;
+//    @Autowired
+//    SearchService searchService;
 
-    @PostMapping("searchList")
-    public ResponseEntity<Object> searchList(@ModelAttribute(value="startDate") String startDate,
-                        @ModelAttribute(value="endDate") String endDate,
-                        @ModelAttribute(value="startTime") String startTime,
-                        @ModelAttribute(value="endTime") String endTime,
-                        @ModelAttribute(value="jibunAddress") String jibunAddress,
-                        @ModelAttribute(value="roadAddress") String roadAddress,
-                        @ModelAttribute(value="x") String x,
-                        @ModelAttribute(value="y") String y, Model model) {
-
-        model.addAttribute("startDate", startDate);
-        model.addAttribute("endDate", endDate);
-        model.addAttribute("startTime", startTime);
-        model.addAttribute("endTime", endTime);
-        model.addAttribute("jibunAddress", jibunAddress);
-        System.out.println("startDate : "+ startDate);
-        System.out.println("endDate : "+ endDate);
-        System.out.println("startTime : "+ startTime);
-        System.out.println("endTime : "+ endTime);
-        System.out.println("jibunAddress : "+ jibunAddress);
-        System.out.println("roadAddress : "+ roadAddress);
-        System.out.println("-------------------");
-        return ResponseEntity.ok().build(); // Modify to return the appropriate response
-    }
-    // @PostMapping("searchList")
-    // public ResponseEntity<Object> searchList(@RequestBody SearchDTO searchDTO) {
-    //     // 이 예제에서는 간단히 전달된 DTO를 그대로 반환하겠습니다.
-    //     return ResponseEntity.ok(searchDTO);
-    // }
+//    @PostMapping("searchList")
+//    public ResponseEntity<Object> searchList( @RequestParam("startDate") String startDate,
+//                                              @RequestParam("endDate") String endDate,
+//                                              @RequestParam("startTime") String startTime,
+//                                              @RequestParam("endTime") String endTime,
+//                                              @RequestParam("jibunAddress") String jibunAddress,
+//                                              @RequestParam("roadAddress") String roadAddress,
+//                                              @RequestParam("x") String x,
+//                                              @RequestParam("y") String y,
+//                                              @RequestParam("minPrice") String minPrice,
+//                                              @RequestParam("maxPrice") String maxPrice) {
+//        Map<String, Object> params = new HashMap<>();
+//        params.put("startDate", startDate);
+//        params.put("endDate", endDate);
+//        params.put("startTime", startTime);
+//        params.put("endTime", endTime);
+//        params.put("jibunAddress", jibunAddress);
+//        params.put("roadAddress", roadAddress);
+//        params.put("x", x);
+//        params.put("y", y);
+//        params.put("minPrice", minPrice);
+//        params.put("maxPrice", maxPrice);
+//
+//        Map<String, Object> result = searchService.search(params);
+//        return ResponseEntity.ok(params);
+//    }
+     @PostMapping("searchList")
+     public ResponseEntity<Object> searchList(@RequestBody SearchDTO searchDTO) {
+         // 이 예제에서는 간단히 전달된 DTO를 그대로 반환하겠습니다.
+         return ResponseEntity.ok(searchDTO);
+     }
 }
