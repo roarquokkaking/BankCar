@@ -18,4 +18,8 @@ public interface CarService {
     List<Car> getCarsByUserId(String userId);
 
     CarImages getCarImagesByCarId(Long carId);
+
+    List<Object[]> getCarData();
+
+
 }

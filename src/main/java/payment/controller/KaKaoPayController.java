@@ -61,6 +61,7 @@ public class KaKaoPayController {
 //        System.out.println("pc_url="+pc_url);
         String tid= (String) response.getBody().get("tid");
         kakaoPayEntity.setTid(tid);
+        kakaoPayEntity.setStatus(0);
         kakaoPayService.insert(kakaoPayEntity);
         return pc_url;
     }
@@ -103,6 +104,9 @@ public class KaKaoPayController {
         Map<String,Object> map = new HashMap<>();
         map.put("item_name",item_name);
         map.put("total_amount",total_amount);
+
+        kakaoPayEntity.setStatus(1);
+        kakaoPayService.setStatus(kakaoPayEntity);
         return map;
 
     }
