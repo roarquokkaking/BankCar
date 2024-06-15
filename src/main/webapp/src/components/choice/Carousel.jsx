@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { locations as cardLocations } from '../../data/mock-data';
+import { locationss as cardLocations } from '../../data/mock-data';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
