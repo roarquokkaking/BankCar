@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import axios from 'axios';
-import {TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import moment from 'moment';
 import SendIcon from '@mui/icons-material/Send';
 import { useNavigate } from 'react-router-dom';
@@ -17,10 +17,11 @@ const ChattingRoom = () => {
     const [userName, setUserName] = useState('');
     const socket = useRef(null);
     const stompClient = useRef(null);
-    const messageEndRef = useRef(null); // 새로운 useRef 추가
+    const messageEndRef = useRef(null);
 
     useEffect(() => {
         socket.current = new SockJS('https://dongwoossltest.shop/api/chattingroom');
+        // socket.current = new SockJS('http://localhost:8080/ws');
         stompClient.current = Stomp.over(socket.current);
 
         stompClient.current.connect({}, () => {
@@ -31,6 +32,7 @@ const ChattingRoom = () => {
         });
 
         axios.get('https://dongwoossltest.shop/api/messages/userInfo', { withCredentials: true })
+        // axios.get('http://localhost:8080/api/messages/userInfo', { withCredentials: true })
             .then(response => {
                 const userData = response.data;
                 setUserName(userData.name);
@@ -40,6 +42,7 @@ const ChattingRoom = () => {
             .catch(error => console.error("Error fetching user data:", error));
 
         axios.get('https://dongwoossltest.shop/api/messages')
+        // axios.get('http://localhost:8080/api/messages')
             .then(response => {
                 setMessages(response.data);
                 console.log(response.data);
@@ -62,19 +65,18 @@ const ChattingRoom = () => {
     const handleSend = async () => {
         try {
             const messageObj = { sender: userName, content: message, timestamp: new Date().toISOString() };
-            const response = await axios.post('https://dongwoossltest.shop/api/messages/send', messageObj, { withCredentials: true });
+             const response = await axios.post('https://dongwoossltest.shop/api/messages/send', messageObj, { withCredentials: true });
+            // const response = await axios.post('http://localhost:8080/api/messages/send', messageObj, { withCredentials: true });
             console.log('Message sent successfully', response.data);
             setMessage('');
         } catch (error) {
             console.error('Error handling send:', error);
         }
     };
-    
-    const formatTimestamp = (sentTime) => {
-        const date = new Date(sentTime);
-        // moment.lang('ko', {weekdays: ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"], weekdaysShort: ["일","월","화","수","목","금","토"],});
 
-        const formattedDate = moment(date).format('Ahh:mm').replace('AM','오전').replace('PM','오후'); // 요일과 AM/PM 형식으로 시간 표시
+    const formatTimestamp = (sentTime) => {
+        const date = moment.utc(sentTime).toDate(); // UTC 시간으로 파싱
+        const formattedDate = moment(date).local().format('Ahh:mm').replace('AM','오전').replace('PM','오후');
         return formattedDate;
     };
 
@@ -117,7 +119,7 @@ const ChattingRoom = () => {
                             <div key={index} className="message-box-receive">
                                 <div className="message-info">
                                 {/* <img src={profileImage} alt="Profile Image" className="profile-image" /> */}
-                                <img src='./image/pulover.png' alt="Profile Image" className="profile-image" />
+                                <img src='./image/nullimage2.png' alt="Profile Image" className="profile-image" />
                                     <strong>{msg.sender}</strong> 
                                 </div>
                                 
@@ -147,6 +149,7 @@ const ChattingRoom = () => {
                     variant="contained"
                     endIcon={<SendIcon />}
                     onClick={handleSend}
+                    disabled={!message}//값 없을때 못보냄 
                 >
                     전송
                 </button>
