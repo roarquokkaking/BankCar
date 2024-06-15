@@ -14,6 +14,7 @@
     border-bottom:2px solid #dfdfdf;
     height: 60px;
     width: 400px;
+    z-index: 9999; 
 }
 .message-container {
      flex: 1; 
@@ -23,12 +24,12 @@
      max-height: 660px;
      width: 100%;
 }
-.message-box {
+/* .message-box {
     display: flex;
-    flex-direction: column;
-    max-width: 50%; 
+    flex-direction: column; 
+     max-width: 100%; 
     margin-bottom: 8px;
-}
+} */
 .message-info{
     margin-top:-5px;
 }
@@ -57,6 +58,9 @@
     cursor: pointer;
     font-weight: bold;
     font-family: 'Noto Sans KR', sans-serif; /* 원하는 글꼴로 변경 */
+}
+.input-area button:disabled {
+    background-color: #bdbdbd;
 }
 .input-area button :hover{
     font-style: white;
@@ -151,40 +155,41 @@
 /*receiver*/
 
 .message-box-receive {
-    display: flex;
-    flex-direction: column;
-    max-width: 50%; 
+    position: relative; /* 상대 위치 지정 */
+    max-width: 65.4%; 
     width: fit-content;
     margin-bottom: 8px;
-    margin-right: auto; /* 왼쪽 정렬을 위해 margin-right를 사용 */
+    clear: both; /* float을 clear하는 요소 추가 */
     text-align: left; 
     color: #000000; 
-    padding: 0; 
+    /* padding: 10px;  */
 }
 
 .message-box-receive .message-timestamp {
-    width: 100px;
+    position: absolute; /* 절대 위치 설정 */
+    right: calc(15.8% - 95.8px); /* content의 오른쪽에 위치하도록 설정 */
+    bottom: 0; /* content의 상단에 맞춰 위치 */
     font-size: 13.5px;
     color: #000000;
-    margin-left: 200px; /* 타임스탬프를 내용 오른쪽에 위치시키기 위해 margin-right를 사용 */
-    margin-top: -19px;
+    margin-top: 2px;
 }
 
 .message-box-receive .message-content {
     border: 2px solid rgb(210, 186, 186);
     word-wrap: break-word; 
     background-color: #ffffff;
-    /* position: relative; */
+    display: inline-block;
     padding: 8px;
-    margin-top: -20px;
+    margin-top: -21px;
     font-size: 1.07rem;
     border-radius: 10px;
     margin-left: 50px; /* 내용의 왼쪽 여백을 설정 */
     width: auto; /* 가로 크기를 자동으로 조절 */
-    max-width: calc(90% - 10px); /* 최대 가로 크기 설정 */
+    max-width: calc(80% - 10px); /* 최대 가로 크기 설정 */
     height: auto; /* 세로 크기를 자동으로 조절 */
     max-height: 600px; /* 최대 세로 크기 설정 */
     font-weight: 500;
+    position: relative; /* 내부 요소들의 위치 지정을 위해 relative를 설정합니다 */
     font-family: 'Noto Sans KR', sans-serif;
 }
 
@@ -197,6 +202,7 @@
 }
 
 .message-box-receive strong{
+    margin-left: 10px;
     font-weight: 500;
     font-family: 'Noto Sans KR', sans-serif;
 }
@@ -208,3 +214,5 @@
     top: 0;
     font-size: 1.5rem;
 }
+
+

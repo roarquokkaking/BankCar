@@ -39,7 +39,6 @@ public class BookingEntity {
     @Column(name="end_time")
     private LocalTime end_time;
 
-
     @Enumerated(EnumType.STRING)
     @Column(name="review_status")
     private ReviewStatus review_status;

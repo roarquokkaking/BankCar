@@ -29,6 +29,4 @@ public class BookingDTO {
     private LocalDateTime create_date;
     private LoginDTO loginDTO;
     private Float rating;
-
-
 }
