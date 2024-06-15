@@ -2,14 +2,12 @@ import axios from "axios";
 
 // 기본 URL 설정
 const apiClient = axios.create({
-    baseURL: 'http://localhost:8080'    // https://dongwoossltest.shop//api
+    baseURL: 'http://localhost:8080/api'    // https://dongwoossltest.shop/api
 });
 
 // userId가 자동차 등록하는 api
 export function insertCarDataApi(formData, userId){
-    return apiClient.post(`/users/${userId}/cars`, formData, {
-        headers: {"Content-Type": "multipart/form-data"}
-    });
+    return apiClient.post(`/users/${userId}/cars`, formData);
 }
 
 // carId 자동차를 서비스에 등록시키는 api

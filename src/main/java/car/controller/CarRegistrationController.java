@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@RequestMapping(path = "/api")
 public class CarRegistrationController {
     @Autowired
     private CarService carRegistrationService;
