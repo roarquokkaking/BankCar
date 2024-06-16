@@ -38,12 +38,12 @@ const Login_main = () => {
   // 네이버 로그인
 
   const naverLogin = () => {
-    axios.get(`http://localhost:8080/api/user/naverLogin`,{
-      withCredentials:true
-    })
+    axios.get(`http://localhost:8080/api/user/naverLogin`)
         .then(res => {
-          console.log("응답: ",res.data)
-          window.location.href = ""+res.data;
+          const data = res.data;
+          localStorage.setItem("naverState", data.state)
+          console.log("응답: ", ''+data.url)
+          window.location.href = ""+data.url;
         })
         .catch(error=> console.log(error))
   }

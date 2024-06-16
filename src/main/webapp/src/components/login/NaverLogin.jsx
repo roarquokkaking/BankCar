@@ -14,7 +14,10 @@ const NaverLogin = () => {
 
     useEffect(() => {
         const userStr = params.get("user");
-        if (userStr) {
+        const savedState = localStorage.getItem("naverState");
+        const responseState = params.get("naverState");
+
+        if (userStr && (savedState === responseState)) {
             try {
                 const user = JSON.parse(decodeURIComponent(userStr));
                 console.log(user);
@@ -31,6 +34,8 @@ const NaverLogin = () => {
             } catch (error) {
                 console.error("Failed to parse user data:", error);
             }
+        }else {
+            console.log("서버에서 값을 받지 못했거나 응답 코드가 맞지 않습니다.")
         }
 
         navigate('/');

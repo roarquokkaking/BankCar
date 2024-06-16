@@ -23,6 +23,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/user", produces = "application/json")
@@ -34,10 +36,11 @@ public class NaverLoginController {
     private LoginService loginService;
 
     @GetMapping("/naverLogin")
-    public ResponseEntity<String> naverLogin(HttpSession session){
-        String url = naverLoginService.getAuthorizationUrl(session);
-        System.out.println(url);
-        return ResponseEntity.ok(url);
+    public ResponseEntity<Map<String, String>> naverLogin(HttpSession session){
+        Map<String, String> authorization = naverLoginService.getAuthorizationUrl(session);
+        System.out.println(authorization);
+
+        return ResponseEntity.ok(authorization);
     }
     @GetMapping("/oauth2/login")
     public RedirectView  Oauth2Login(RedirectAttributes attributes, @RequestParam(name = "code") String code, @RequestParam(name = "state") String state, HttpSession session, Model model) throws IOException, JsonParseException {
@@ -85,6 +88,7 @@ public class NaverLoginController {
         // RedirectAttribute는 객체를 문자열로 변환하지 않고 그대로 전달하므로 JSON으로 파싱한 후 넣어주기
         String userJson = URLEncoder.encode(new ObjectMapper().writeValueAsString(user), "UTF-8");
         attributes.addAttribute("user", userJson);
+        attributes.addAttribute("naverState", state);
         return new RedirectView("http://localhost:3000/login/naverLogin");
     }
 
