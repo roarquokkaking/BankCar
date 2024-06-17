@@ -42,6 +42,7 @@ const Login_main = () => {
         .then(res => {
           const data = res.data;
           localStorage.setItem("naverState", data.state)
+
           console.log("응답: ", ''+data.url)
           window.location.href = ""+data.url;
         })
