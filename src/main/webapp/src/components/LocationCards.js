@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import CarouselCard from '../CarouselCard';
+import CarouselCard from './CarouselCard';
 import axios from 'axios';
-import { Locations as cardLocations } from '../../data/mock-data';
+import { Locations as cardLocations } from '../data/mock-data';
 import { useLocation } from 'react-router-dom';
 
 const LocationCards = () => {

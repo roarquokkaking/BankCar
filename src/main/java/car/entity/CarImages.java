@@ -16,8 +16,9 @@ public class CarImages {
     @Column(name = "car_image_id")
     private Long carImageId;
 
-    @OneToOne(mappedBy = "carImages")
-    private Car car;        // Car 엔티티
+    @OneToOne
+    @JoinColumn(name = "car_id", referencedColumnName = "car_id")
+    private Car car;
 
     @Column
     private String image1;

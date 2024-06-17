@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
 @Entity
 @Table(name = "CAR")
 @Data
@@ -28,9 +29,7 @@ public class Car {
     @Column(name = "user_id")
     private String userId;
 
-    @OneToOne
-    @MapsId  //@MapsId를 사용하면 Car 엔티티의 기본 키와 CarImage 엔티티의 기본 키가 동일하게 설정. 즉, Car 엔티티의 기본 키가 CarImage 엔티티의 기본 키를 참조.
-    @JoinColumn(name = "car_image_Id") // Car Image 엔티티의 기본 키를 참조하는 외래 키
+    @OneToOne(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
     private CarImages carImages;
 
     @Column(name = "title")
