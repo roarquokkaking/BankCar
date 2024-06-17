@@ -10,13 +10,15 @@ import javax.persistence.*;
 @Data
 @Table(name = "CAR_IMAGE")
 public class CarImages {
-    @Id
-    private Long carId;        // carImage의 기본 키 & 외래 키
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "carId") // Car 엔티티의 기본 키를 참조하는 외래 키
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "car_image_id")
+    private Long carImageId;
+
+    @OneToOne(mappedBy = "carImages")
     private Car car;        // Car 엔티티
+
     @Column
     private String image1;
     @Column
@@ -28,14 +30,14 @@ public class CarImages {
     @Column
     private String main_image;
 
-    @JoinColumn
-    @OneToOne(fetch = FetchType.LAZY)
-    private WishListEntity wishListEntity;
-
-
-    @JoinColumn(name="booking_id")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private BookingEntity bookingEntity;
+//    @JoinColumn
+//    @OneToOne(fetch = FetchType.LAZY)
+//    private WishListEntity wishListEntity;
+//
+//
+//    @JoinColumn(name="booking_id")
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private BookingEntity bookingEntity;
 
 
 }

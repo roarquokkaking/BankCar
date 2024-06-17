@@ -28,6 +28,11 @@ public class Car {
     @Column(name = "user_id")
     private String userId;
 
+    @OneToOne
+    @MapsId  //@MapsId를 사용하면 Car 엔티티의 기본 키와 CarImage 엔티티의 기본 키가 동일하게 설정. 즉, Car 엔티티의 기본 키가 CarImage 엔티티의 기본 키를 참조.
+    @JoinColumn(name = "car_image_Id") // Car Image 엔티티의 기본 키를 참조하는 외래 키
+    private CarImages carImages;
+
     @Column(name = "title")
     private String title;
 
@@ -73,7 +78,6 @@ public class Car {
 
     @Column(name = "wish")
     private int wish;
-
 
     //cascade = CascadeType.ALL : 영속성 변경(생성, 수정, 삭제 등)이 연관된 WishList 엔티티들에게도 적용, ex)  Car 엔티티를 삭제하면,
     //이와 관련된 모든 WishList 엔티티들도 함께 삭제
