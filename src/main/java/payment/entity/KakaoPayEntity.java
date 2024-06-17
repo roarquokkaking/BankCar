@@ -38,6 +38,9 @@ public class KakaoPayEntity {
     @Column(name="cancel_url")
     private String cancel_url;
 
+    @Column(name="status")
+    private int status;
+
 
     public String getCid() {
         return cid;
@@ -141,5 +144,13 @@ public class KakaoPayEntity {
 
     public void setTid(String tid) {
         this.tid = tid;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

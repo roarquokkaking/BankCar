@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import CarouselCard from './CarouselCard';
+import CarouselCard from '../CarouselCard';
 import axios from 'axios';
+import { Locations as cardLocations } from '../../data/mock-data';
 import { useLocation } from 'react-router-dom';
 
 const LocationCards = () => {
 
     const location = useLocation();
     const [searchData, setSearchData] = useState([]);
-    const [cards, setCards] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [cards, setCards] = useState('');
+    const [loading, setLoading] = useState(false);
+    const newLocations = cardLocations();
+
 
     // useEffect(() => {
     //     const searchParams = new URLSearchParams(location.search);
@@ -84,34 +87,34 @@ const LocationCards = () => {
         // 검색 데이터가 변경될 때마다 다시 검색 요청
     }, [location.search]);
 
-    useEffect(() => {
-        const fetchLocations = async () => {
-            try {
-                const response = await axios.get('https://dongwoossltest.shop/api/home');
-                setCards(response.data);
-            } catch (error) {
-                console.error('오류', error);
-            } finally {
-                setLoading(false);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchLocations = async () => {
+    //         try {
+    //             const response = await axios.get('http://localhost:8080/home');
+    //             setCards(response.data);
+    //         } catch (error) {
+    //             console.error('오류', error);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
 
-        fetchLocations(); // 컴포넌트가 처음 마운트될 때 한 번 호출
+    //     fetchLocations(); // 컴포넌트가 처음 마운트될 때 한 번 호출
 
-    }, []);
+    // }, []);
 
     if (loading) {
         return <div>Loading...</div>;
     }
 
-    if (!cards.length) {
+    if (!newLocations.length) {
         return <div>자료가 없습니다.</div>;
     }
 
     return (
         <Box sx={{ mx: 2 }}>
             <Grid container rowSpacing={3} columnSpacing={3}>
-                {cards.map((location) => (
+                {newLocations.map((location) => (
                     <Grid key={location.id} item xs={12} sm={4} md={4} lg={3}>
                         <CarouselCard location={location} />
                     </Grid>

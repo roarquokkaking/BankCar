@@ -59,5 +59,10 @@ public class CarServiceImpl implements CarService {
                 .orElseThrow(() -> new EntityNotFoundException("carImages entity not found with id: " + carId));
     }
 
+    @Override
+    public List<Object[]> getCarData() {
+        return carRepository.findAllOrderByIdDesc();
+    }
+
 
 }

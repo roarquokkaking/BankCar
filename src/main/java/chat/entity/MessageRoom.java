@@ -2,6 +2,14 @@ package chat.entity;
 
 import javax.persistence.*;
 
+import login.dto.LoginDTO;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
+@Getter
+@Setter
 @Entity
 @Table(name="messageroom")
 public class MessageRoom {
@@ -16,35 +24,5 @@ public class MessageRoom {
     @Column( nullable = false)
     private String guest;
 
-//
-//    @Column(name="room_name", nullable = false)
-//    private String roomName;
-
-
-
-    public String getHost() {
-        return host;
-    }
-
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    public String getGuest() {
-        return guest;
-    }
-
-    public void setGuest(String guest) {
-        this.guest = guest;
-    }
-
-
-    public Long getRoomSeq() {
-        return roomSeq;
-    }
-
-    public void setRoomSeq(Long roomSeq) {
-        this.roomSeq = roomSeq;
-    }
 
 }

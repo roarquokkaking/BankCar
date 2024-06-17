@@ -7,6 +7,7 @@ import MobileFooter from './MobileFooter';
 import FooterMenu from "./FooterMenu";
 import { useNavigate } from 'react-router-dom';
 
+
 const Home = () => {
     const navigate = useNavigate();
     // const location = useLocation();
@@ -76,6 +77,7 @@ const Home = () => {
                     }}
                 >
                     <Container maxWidth="xl" sx={{mb: 3}}>
+                        
                         <LocationCards/>
                         <Box
                             sx={{

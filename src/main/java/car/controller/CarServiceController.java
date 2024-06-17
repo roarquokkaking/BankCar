@@ -20,8 +20,6 @@ import java.util.List;
 public class CarServiceController {
     @Autowired
     private CarService carService;
-    @Autowired
-    private ServiceCarRepository serviceCarRepository;
 
     // 자동차 서비스 등록 api
     @PostMapping(path = "/cars/{carId}/service")
@@ -39,6 +37,12 @@ public class CarServiceController {
         ServiceCar saveServiceCar = carService.saveServiceCar(serviceCar);
 
         return ResponseEntity.ok(saveServiceCar);
+    }
+
+
+    @GetMapping(path = "/cars/getcardata")
+    public List<Object[]> getcardata(){
+        return carService.getCarData();
     }
 
 

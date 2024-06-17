@@ -13,6 +13,7 @@ import java.nio.charset.StandardCharsets;
 @CrossOrigin(origins="*")    // 다른 포트에서 넘오는 것을 받을 수 있다.
 @RestController
 @RequestMapping(path = "/api/login", produces = "application/json")
+
 public class LoginController {
 
     @Autowired
@@ -28,6 +29,7 @@ public class LoginController {
         String name = URLEncoder.encode(loginDTO.getName(), StandardCharsets.UTF_8);
         boolean driver = loginDTO.isDriver();
         String url="https://dongwoossltest.shop/login/Google?id="+id+"&email="+email+"&name="+name+"&driver="+driver;
+
         return new RedirectView(url);
     }
 
