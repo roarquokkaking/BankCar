@@ -13,7 +13,7 @@ const LocationCards = () => {
     const [cards, setCards] = useState('');
     const [loading, setLoading] = useState(false);
     const newLocations = cardLocations();
-    
+
 
     // useEffect(() => {
     //     const searchParams = new URLSearchParams(location.search);
@@ -72,7 +72,7 @@ const LocationCards = () => {
 
                 // 검색 조건이 있는 경우에만 서버에 POST 요청
                 if (searchDTO.startDate && searchDTO.endDate && searchDTO.startTime && searchDTO.endTime) {
-                    const response = await axios.post("https://dongwoossltest.shop/api/searching/searchList", null, { params: searchDTO });
+                    const response = await axios.get("https://dongwoossltest.shop/api/searching/searchList", null, { params: searchDTO });
                     setSearchData(response.data);
                 } else {
                     setSearchData([]); // 검색 조건이 없으면 빈 배열 설정

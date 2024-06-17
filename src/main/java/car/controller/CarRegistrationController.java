@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping(path = "/api")
 public class CarRegistrationController {
     @Autowired
-    private CarService carRegistrationService;
+    private CarRegistrationService carRegistrationService;
     @Autowired
     private ObjectStorageService objectStorageService;
 

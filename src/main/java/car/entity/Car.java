@@ -1,14 +1,11 @@
 package car.entity;
 
-import booking.entity.BookingEntity;
-import jakarta.persistence.*;
-import login.dto.LoginDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 import wishList.entity.WishListEntity;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,9 +21,9 @@ public class Car {
     private Long carId;
 
     // fetch = FetchType.LAZY는 지연 로딩 전략을 사용하여 관련 엔티티를 필요할 때만 불러오도록 설정합니다.
-//    @ManyToOne(fetch = FetchType.LAZY)  // user 테이블과 다대일(Many-to-One)
-//    @JoinColumn(name = "id", nullable = false)
-//    private User user;
+    // @JoinColumn(name = "id", nullable = false)
+    // private User user;
+    // @ManyToOne(fetch = FetchType.LAZY)  // user 테이블과 다대일(Many-to-One)
 
     @Column(name = "user_id")
     private String userId;

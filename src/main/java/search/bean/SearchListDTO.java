@@ -1,5 +1,6 @@
 package search.bean;
 
+import java.sql.Time;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -28,5 +29,9 @@ public class SearchListDTO {
 
     private DateTime start_date;
 
-    private DateTime end_date;    
+    private DateTime end_date;
+
+    private Time startTime;
+
+    private Time endTime;
 }

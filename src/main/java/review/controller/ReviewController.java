@@ -2,7 +2,6 @@ package review.controller;
 
 import driverLicense.service.NCPObjectStorageService;
 import driverLicense.service.ObjectStorageService;
-import jakarta.validation.Valid;
 import login.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,6 +11,7 @@ import review.dto.ReviewDTO;
 import review.entity.ReviewEntity;
 import review.service.ReviewService;
 
+import javax.validation.Valid;
 import java.util.*;
 
 @RequestMapping(path = "api/review")

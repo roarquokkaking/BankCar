@@ -1,13 +1,12 @@
 package wishList.entity;
 
-import booking.dto.BookingDTO;
 import car.entity.Car;
 import car.entity.CarImages;
-import jakarta.persistence.*;
 import login.dto.LoginDTO;
 import lombok.*;
-import org.springframework.context.annotation.Lazy;
 import wishList.dto.WishListDTO;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "wishList")

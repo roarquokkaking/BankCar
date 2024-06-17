@@ -1,6 +1,7 @@
 package chat.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+
 import login.dto.LoginDTO;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,8 +1,6 @@
 package chat.entity;
 
-import jakarta.persistence.*;
-import login.dto.LoginDTO;
-
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity

@@ -3,18 +3,14 @@ package booking.contoller;
 import booking.dto.BookingDTO;
 import booking.entity.BookingEntity;
 import booking.service.BookingService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.checkerframework.checker.optional.qual.Present;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @CrossOrigin

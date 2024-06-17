@@ -2,7 +2,6 @@ package chat.controller;
 
 import chat.entity.Message;
 import chat.service.MessageService;
-import jakarta.servlet.http.HttpSession;
 import login.dto.LoginDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

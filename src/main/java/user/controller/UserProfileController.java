@@ -3,20 +3,21 @@ package user.controller;
 
 import driverLicense.service.NCPObjectStorageService;
 import driverLicense.service.ObjectStorageService;
-import jakarta.servlet.http.HttpSession;
 import login.dto.LoginDTO;
-import user.dto.UserProfileDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
-import org.springframework.http.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import user.service.UserProfileService;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+import user.dto.UserProfileDTO;
+import user.service.UserProfileService;
 
-import java.io.IOException;
-import java.util.*;
+import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
