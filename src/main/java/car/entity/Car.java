@@ -1,5 +1,7 @@
 package car.entity;
 
+
+import login.dto.LoginDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +10,6 @@ import wishList.entity.WishListEntity;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-
 
 @Entity
 @Table(name = "CAR")
@@ -22,15 +23,16 @@ public class Car {
     private Long carId;
 
     // fetch = FetchType.LAZY는 지연 로딩 전략을 사용하여 관련 엔티티를 필요할 때만 불러오도록 설정합니다.
-    // @JoinColumn(name = "id", nullable = false)
-    // private User user;
-    // @ManyToOne(fetch = FetchType.LAZY)  // user 테이블과 다대일(Many-to-One)
+    @ManyToOne(fetch = FetchType.LAZY)  // user 테이블과 다대일(Many-to-One)
+    @JoinColumn(name = "id", nullable = false)
+    private LoginDTO user;
 
-    @Column(name = "user_id")
-    private String userId;
-
-    @OneToOne(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne
+    @JoinColumn(name = "car_image_id")
     private CarImages carImages;
+
+//    @Column(name = "user_id")
+//    private String userId;
 
     @Column(name = "title")
     private String title;
@@ -77,6 +79,7 @@ public class Car {
 
     @Column(name = "wish")
     private int wish;
+
 
     //cascade = CascadeType.ALL : 영속성 변경(생성, 수정, 삭제 등)이 연관된 WishList 엔티티들에게도 적용, ex)  Car 엔티티를 삭제하면,
     //이와 관련된 모든 WishList 엔티티들도 함께 삭제

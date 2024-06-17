@@ -13,11 +13,9 @@ public class CarImages {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "car_image_id")
     private Long carImageId;
 
-    @OneToOne
-    @JoinColumn(name = "car_id", referencedColumnName = "car_id")
+    @OneToOne(mappedBy = "carImages")
     private Car car;
 
     @Column
@@ -31,14 +29,14 @@ public class CarImages {
     @Column
     private String main_image;
 
-//    @JoinColumn
-//    @OneToOne(fetch = FetchType.LAZY)
-//    private WishListEntity wishListEntity;
-//
-//
-//    @JoinColumn(name="booking_id")
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private BookingEntity bookingEntity;
+    @JoinColumn
+    @OneToOne(fetch = FetchType.LAZY)
+    private WishListEntity wishListEntity;
+
+
+    @JoinColumn(name="booking_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private BookingEntity bookingEntity;
 
 
 }
