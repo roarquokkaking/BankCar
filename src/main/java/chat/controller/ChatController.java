@@ -17,7 +17,7 @@ import java.util.*;
 
 
 //@CrossOrigin(origins = "http://localhost:3000")
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/messages")
 public class ChatController {
@@ -80,7 +80,7 @@ public class ChatController {
         }
     }
 
-    @GetMapping("/roomseq/{roomseq}")
+    @GetMapping("/roomseq/{roomSeq}")
     public ResponseEntity<List<Message>> getMessagesByRoomSeq(@PathVariable Long roomseq) {
         try {
             List<Message> messages = messageService.findByMessageRoom_RoomSeq(roomseq);
