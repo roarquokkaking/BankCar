@@ -37,6 +37,7 @@ import KaKaoPaySuccess from './components/payment/KaKaoPaySuccess';
 import NaverPay from './components/payment/NaverPay';
 import NaverPayCompletion from './components/payment/NaverPayCompletion';
 import NaverLogin from "./components/login/NaverLogin";
+import ChattingList from './components/chat/ChattingList';
 
 function Detail() {
   return null;
@@ -101,7 +102,8 @@ function App() {
 
             <Route path='/choice/:carid&:startdate&:enddate&:price' element={<Choice />} />
 
-            <Route path='/ChattingRoom' element={<ChattingRoom />} />
+            <Route path='/ChattingRoom/:roomSeq' element={<ChattingRoom />} />
+            <Route path='/ChattingList' element={<ChattingList />} />
 
           </Routes>
           </Provider>

@@ -4,12 +4,12 @@ import SockJS from 'sockjs-client';
 import axios from 'axios';
 import { TextField } from '@mui/material';
 import moment from 'moment';
-import SendIcon from '@mui/icons-material/Send';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { GoArrowLeft } from "react-icons/go";
-import './ChattingRoom.css';
+import './css/ChattingRoom.css';
 
 const ChattingRoom = () => {
+    const { roomSeq } = useParams();
     const navigate = useNavigate();
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
@@ -20,43 +20,44 @@ const ChattingRoom = () => {
     const messageEndRef = useRef(null);
 
     useEffect(() => {
+        if (!roomSeq) return; // roomSeq 값이 없으면 초기화 진행하지 않음
+
         socket.current = new SockJS('https://dongwoossltest.shop/api/chattingroom');
         // socket.current = new SockJS('http://localhost:8080/ws');
         stompClient.current = Stomp.over(socket.current);
 
         stompClient.current.connect({}, () => {
-            stompClient.current.subscribe('/topic/public', (message) => {
+            stompClient.current.subscribe(`/topic/public/${roomSeq}`, (message) => {
                 const receivedMessage = JSON.parse(message.body);
-                setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+                setMessages(prevMessages => [...prevMessages, receivedMessage]);
             });
         });
 
-        axios.get('https://dongwoossltest.shop/api/messages/userInfo', { withCredentials: true })
+        axios.get(`https://dongwoossltest.shop/api/messages/roomseq/${roomSeq}`)
+        // axios.get(`http://localhost:8080/api/messages/roomseq/${roomSeq}`)
+            .then(response => {
+                setMessages(response.data);
+            })
+            .catch(error => console.error("Error fetching messages:", error));
+
+            axios.get('https://dongwoossltest.shop/api/messages/userInfo', { withCredentials: true })
         // axios.get('http://localhost:8080/api/messages/userInfo', { withCredentials: true })
             .then(response => {
                 const userData = response.data;
                 setUserName(userData.name);
-                setProfileImage(userData.profile_image); // 프로필 이미지 설정
+                setProfileImage(userData.profile_image);
                 console.log(response.data);
             })
             .catch(error => console.error("Error fetching user data:", error));
 
-        axios.get('https://dongwoossltest.shop/api/messages')
-        // axios.get('http://localhost:8080/api/messages')
-            .then(response => {
-                setMessages(response.data);
-                console.log(response.data);
-            })
-            .catch(error => console.error("There was an error!", error));
-
         return () => {
             stompClient.current.disconnect();
         };
-    }, []);
+    }, [roomSeq]);
 
     useEffect(() => {
-        scrollToBottom(); // 메시지 업데이트 시 자동 스크롤
-    }, [messages]); // messages 배열이 변경될 때마다 호출
+        scrollToBottom();
+    }, [messages]);
 
     const scrollToBottom = () => {
         messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -64,10 +65,22 @@ const ChattingRoom = () => {
 
     const handleSend = async () => {
         try {
-            const messageObj = { sender: userName, content: message, timestamp: new Date().toISOString() };
-             const response = await axios.post('https://dongwoossltest.shop/api/messages/send', messageObj, { withCredentials: true });
+            // 디버깅을 위해 변수 로그 추가
+            console.log('userName:', userName);
+            console.log('roomseq:', roomSeq);
+    
+            const messageObj = {
+                sender: userName,
+                content: message,
+                timestamp: new Date().toISOString(),
+                messageRoom: { roomSeq: roomSeq }
+            };
+            console.log('Sending message:', messageObj); // 디버깅을 위해 로그 추가
+            const response = await axios.post('https://dongwoossltest.shop/api/messages/send', messageObj, { withCredentials: true });
             // const response = await axios.post('http://localhost:8080/api/messages/send', messageObj, { withCredentials: true });
             console.log('Message sent successfully', response.data);
+
+            setMessages((prevMessages) => [...prevMessages, response.data]);
             setMessage('');
         } catch (error) {
             console.error('Error handling send:', error);
@@ -75,7 +88,7 @@ const ChattingRoom = () => {
     };
 
     const formatTimestamp = (sentTime) => {
-        const date = moment.utc(sentTime).toDate(); // UTC 시간으로 파싱
+        const date = moment.utc(sentTime).toDate();
         const formattedDate = moment(date).local().format('Ahh:mm').replace('AM','오전').replace('PM','오후');
         return formattedDate;
     };
@@ -119,7 +132,7 @@ const ChattingRoom = () => {
                             <div key={index} className="message-box-receive">
                                 <div className="message-info">
                                 {/* <img src={profileImage} alt="Profile Image" className="profile-image" /> */}
-                                <img src='./image/nullimage2.png' alt="Profile Image" className="profile-image" />
+                                <img src={profileImage} alt="Profile Image" className="profile-image" />
                                     <strong>{msg.sender}</strong> 
                                 </div>
                                 
@@ -147,15 +160,15 @@ const ChattingRoom = () => {
                 />
                 <button 
                     variant="contained"
-                    endIcon={<SendIcon />}
+                   
                     onClick={handleSend}
                     disabled={!message}//값 없을때 못보냄 
                 >
                     전송
                 </button>
-                <img className="image-clip"src="./image/clip.png" alt="Clip" />
-                <img className="image-emog"src="./image/emog.png" alt="Clip" />
-                <img className="image-setting"src="./image/setting.png" alt="Clip" />
+                <img className="image-clip"src={`${process.env.PUBLIC_URL}/image/clip.png`} alt="clip" />
+                <img className="image-emog"src={`${process.env.PUBLIC_URL}/image/emog.png`} alt="emog" />
+                <img className="image-setting"src={`${process.env.PUBLIC_URL}/image/setting.png`} alt="setting" />
             </div>
         </div>
     );

@@ -22,6 +22,8 @@ public class BookingDTO {
     private String status;
     private String title ;
     private String content;
+    private String host_name;
+    private String guest_name;
     private Long carId ;
     private String period;
     private String imageUrl;
