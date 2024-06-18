@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import CarouselCard from '../CarouselCard';
+import CarouselCard from './CarouselCard';
 import axios from 'axios';
-import { Locations as cardLocations } from '../../data/mock-data';
+import { Locations as cardLocations } from '../data/mock-data';
 import { useLocation } from 'react-router-dom';
 import {useSelector} from "react-redux";
 
@@ -16,8 +16,6 @@ const LocationCards = () => {
     const user_id = useSelector(state => state.Login.id)
     const [isHeartClicked, setIsHeartClicked] = useState([]);
 
-    const [searchData, setSearchData] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [searchDTO, setSearchDTO] = useState({
         startDate: '',
         endDate: '',
