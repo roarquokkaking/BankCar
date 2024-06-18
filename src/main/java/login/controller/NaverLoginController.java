@@ -27,7 +27,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/user", produces = "application/json")
-@CrossOrigin
+@CrossOrigin(origins="http://localhost:3000")
 public class NaverLoginController {
     @Autowired
     private NaverLoginService naverLoginService;
@@ -36,8 +36,9 @@ public class NaverLoginController {
 
     @GetMapping("/naverLogin")
     public ResponseEntity<Map<String, String>> naverLogin(HttpSession session){
+        System.out.println("url create");
         Map<String, String> authorization = naverLoginService.getAuthorizationUrl(session);
-        System.out.println(authorization);
+        System.out.println("authorization = " + authorization.toString());
 
         return ResponseEntity.ok(authorization);
     }

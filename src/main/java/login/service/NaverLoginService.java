@@ -46,22 +46,17 @@ public class NaverLoginService {
     }
 
     public OAuth2AccessToken getAccessToken(HttpSession session, String code, String state) throws IOException {
-        String sessionState = (String) session.getAttribute(SESSION_STATE);
+        OAuth20Service oAuthService = new ServiceBuilder()
+                .apiKey(CLIENT_ID)
+                .apiSecret(CLIENT_SECRET)
+                .callback(REDIRECT_URI)
+                .state(state)
+                .build(NaverLoginApi.instance());
 
-        if (StringUtils.pathEquals(sessionState, state)) {
-            OAuth20Service oAuthService = new ServiceBuilder()
-                    .apiKey(CLIENT_ID)
-                    .apiSecret(CLIENT_SECRET)
-                    .callback(REDIRECT_URI)
-                    .state(state)
-                    .build(NaverLoginApi.instance());
+        OAuth2AccessToken accessToken = oAuthService.getAccessToken(code);
 
-            OAuth2AccessToken accessToken = oAuthService.getAccessToken(code);
+        return accessToken;
 
-            return accessToken;
-        }
-
-        return null;
     }
 
     public String getUserProfile(OAuth2AccessToken oauthToken) throws IOException {

@@ -12,9 +12,13 @@ const NaverLogin = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+
+
     useEffect(() => {
         const userStr = params.get("user");
-        if (userStr) {
+        const state = params.get('naverState');
+        const savedState = localStorage.getItem('naverState'); // 저장된 `state` 값 불러오기
+        if (userStr && (savedState === state)) {
             try {
                 const user = JSON.parse(decodeURIComponent(userStr));
                 console.log(user);
@@ -31,8 +35,11 @@ const NaverLogin = () => {
             } catch (error) {
                 console.error("Failed to parse user data:", error);
             }
+        }else {
+            console.log("회원 정보가 없거나 확인 코드가 다릅니다.")
         }
 
+        localStorage.removeItem('naverState'); // `state` 값 삭제
         navigate('/');
     }, [params, location, dispatch, navigate]);
 
