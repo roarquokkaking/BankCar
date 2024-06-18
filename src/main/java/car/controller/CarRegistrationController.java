@@ -6,6 +6,8 @@ import car.service.CarService;
 import car.service.CarMachineLearningService;
 import car.service.CarRegistrationService;
 import driverLicense.service.ObjectStorageService;
+import login.dto.LoginDTO;
+import login.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins="http://localhost:3000")
 @RequestMapping(path = "/api")
 public class CarRegistrationController {
     @Autowired
@@ -29,12 +32,17 @@ public class CarRegistrationController {
     @Autowired
     CarMachineLearningService carMachineLearningService;
 
+    @Autowired
+    LoginService loginService;
+
     @PostMapping(path = "/users/{userId}/cars", consumes = {"multipart/form-data"})
     public ResponseEntity<Car> createCar(@RequestPart("car") Car car,
                                          @RequestPart("images") List<MultipartFile> images,
                                          @PathVariable("userId") String userId) {
         System.out.println("CarController start");
         // userId와 User 엔티티 연결..
+        Optional<LoginDTO> byId = loginService.findById(userId);
+        car.setUser(byId.get());
 
         System.out.println(car.toString());
 
