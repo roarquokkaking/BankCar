@@ -105,7 +105,7 @@ const ProfileMain = () => {
                 </button>
                 <ul className="profile-actions">
                     <li>
-                        <Link to={`/profile/usebefore/${user_id}`}>
+                        <Link to={`/profile/checkUseBefore/${user_id}`}>
                             예약한 자동차 보기
                             <div style={{marginRight: "10px"}}>
                                 <ArrowForwardIosIcon/>
