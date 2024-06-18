@@ -27,9 +27,13 @@ header h1 {
 }
 
 .text-info h4, .text-info p {
-  margin: 0;
+  margin: 0 10px;
+  color: black;
+}
 
-
+.user-profile {
+  text-decoration: none;
+  color: black;
 }
 
 .action-buttons {
@@ -88,5 +92,7 @@ header h1 {
     width: 70px;
     border-radius: 10px;
 }
+
+
 
 

@@ -42,8 +42,10 @@ const Login_main = () => {
       withCredentials:true
     })
         .then(res => {
-          console.log("응답: ",res.data)
-          window.location.href = ""+res.data;
+          const data = res.data;
+          localStorage.setItem('naverState', data.state); // `state` 값을 저장
+          console.log("응답: ",data.url)
+          window.location.href = ""+data.url;
         })
         .catch(error=> console.log(error))
   }
