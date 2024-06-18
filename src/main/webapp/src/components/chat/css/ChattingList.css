@@ -1,0 +1,81 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+
+
+/* ChattingList.css */
+
+.chat-headernav2{
+    position: fixed;
+    background-color: rgb(252, 232, 232);
+    border-bottom:2px solid #dfdfdf;
+    height: 80px;
+    width: 400px;
+    z-index: 9999; 
+}
+
+.currentName {
+    font-family: 'Apple SD Gothic Neo', sans-serif;
+    font-size: 1.37em;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    margin-left: -8px;
+}
+
+.chatlist {
+    list-style: none;
+    padding: 0;
+    margin-top:90px;
+}
+
+.chatlistdetail {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.chatlistdetail:last-child {
+    border-bottom: none;
+}
+
+.chatlistdetail img.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.chatlistdetail .chat-link {
+    font-family: 'Apple SD Gothic Neo', sans-serif;
+    text-decoration: none;
+    color: #333; /* 원하는 색상으로 변경 */
+    font-weight: 700;
+    font-size:1.2em;
+}
+
+.chatlistdetail .chat-link:hover {
+    text-decoration: underline;
+}
+
+.chatlistdetail span{
+    color:rgb(127, 127, 127);
+    margin-left: 12px;
+    margin-top: 10px;
+}
+
+.no-chat-item {
+    padding: 10px;
+    text-align: center;
+    color: #888;
+}
+
+.profile-image{
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+}
+.close-image{
+    width: 11px;
+    height: 11px;
+    margin-left: 140px;
+}
