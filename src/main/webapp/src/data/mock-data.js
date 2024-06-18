@@ -80,7 +80,7 @@ export const Locations =()=>{
       ],
       location: item[0].doroAddress,
       days: `${item[1].startDate} ~ ${item[1].endDate}`,
-      price: `\\${item[0].price}/시간`,
+      price: `${item[0].price} 원/시간`,
       isNew: false,
       rating: item[0].rating===0?'0.0':item[0].rating,
     
