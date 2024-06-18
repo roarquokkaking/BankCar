@@ -1,8 +1,7 @@
 import React, {createContext, useState} from 'react';
-import {insertCarDataApi} from "./api/CarApiService";
+import {insertCarDataApi} from "../api/CarApiService";
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
-import axios from "axios";
 
 export const RegisterContext = createContext();
 
