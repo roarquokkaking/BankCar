@@ -2,7 +2,7 @@ import axios from "axios";
 
 // 기본 URL 설정
 const apiClient = axios.create({
-    baseURL: 'http://localhost:8080/api'    // https://dongwoossltest.shop/api
+    baseURL: 'https://dongwoossltest.shop/api'    // https://dongwoossltest.shop/api  //http://localhost:8080/api
 });
 
 // userId가 자동차 등록하는 api
@@ -18,6 +18,12 @@ export function insertCarServiceApi(serviceDTO, carId){
 // userId가 등록한 자동차 리스트 가져오는 api
 export function selectUserCarList(userId){
     return apiClient.get(`/users/${userId}/cars`)
+}
+
+export function getNaverLoginUrlApi(userId){
+    return apiClient.get(`/user/naverLogin`,{
+        withCredentials:true
+    })
 }
 
 
