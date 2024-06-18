@@ -71,11 +71,7 @@ public class BookingEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private CarImages carImages;
 
-    @Column(name = "host_name")
-    private String host_name;
 
-    @Column(name = "guest_name")
-    private String guest_name;
 
     //===== 서비스 구현 =====//
 

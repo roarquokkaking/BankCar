@@ -33,8 +33,7 @@ public class BookingDTO {
     private Float rating;
     private String driverName;
 
-    private String host_name;
-    private String guest_name;
+
 
 
 
