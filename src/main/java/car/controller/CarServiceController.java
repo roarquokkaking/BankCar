@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin(origins="https://dongwoossltest.shop")
+@CrossOrigin(origins="http://localhost:3000")
 @RestController
 @RequestMapping(path = "/api")
 public class CarServiceController {
