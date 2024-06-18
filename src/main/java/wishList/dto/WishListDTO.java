@@ -23,7 +23,7 @@ public class WishListDTO {
 
 
     private String id;
-    private String carId;
+    private Long carId;
 
 
     private List<WishListDTO> wishList;

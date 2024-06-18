@@ -2,9 +2,9 @@ import React, {useState} from "react";
 import { useMediaQuery } from "react-responsive";
 import { useNavigate} from "react-router-dom";
 import { GoArrowLeft } from "react-icons/go";
-import axios from "axios"
 
 import "./LoginBtn.css";
+import {getNaverLoginUrlApi} from "../register/api/CarApiService";
 
 const Login_main = () => {
   const navigate = useNavigate();
@@ -36,11 +36,8 @@ const Login_main = () => {
   };
 
   // 네이버 로그인
-
   const naverLogin = () => {
-    axios.get(`http://localhost:8080/api/user/naverLogin`,{
-      withCredentials:true
-    })
+    getNaverLoginUrlApi
         .then(res => {
           const data = res.data;
           localStorage.setItem('naverState', data.state); // `state` 값을 저장

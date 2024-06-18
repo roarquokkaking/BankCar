@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Box from "@mui/material/Box";
 import MobileStepper from "@mui/material/MobileStepper";
 import Typography from "@mui/material/Typography";
@@ -12,7 +12,7 @@ import SwipeableViews from "react-swipeable-views-react-18-fix";
 
 // react icons
 import { AiFillStar } from "react-icons/ai";
-import { FaRegHeart } from "react-icons/fa";
+import {FaHeart, FaRegHeart} from "react-icons/fa";
 import {
   flexBetween,
   dFlex,
@@ -24,11 +24,11 @@ import {
 import "./CarouselCard.css";
 import { useNavigate } from "react-router-dom";
 
-const CarouselCard = ({ location }) => {
+const CarouselCard = ({ location,isHeartClick,onHeartClick }) => {
   const navigate = useNavigate();
 
   const [activeStep, setActiveStep] = React.useState(0);
-
+  const [isHeartClicked, setIsHeartClicked] = useState([]); // 하트 상태 관리
   const maxSteps = location.locationImages.length; // so that we know how many dots
 
   const handleNext = () => {
@@ -42,7 +42,10 @@ const CarouselCard = ({ location }) => {
   const handleStepChange = (step) => {
     setActiveStep(step); // handle swipe change
   };
-
+  const handleHeartClick = () => {
+    setIsHeartClicked((prev) => !prev);
+    onHeartClick();
+  };
   const goChoice = () => {
     const url = `/choice?carid=${location.id}&startdate=${location.days}&enddate=${location.days}&price=${location.price}`;
     navigate(url);
@@ -56,9 +59,14 @@ const CarouselCard = ({ location }) => {
         position: "relative",
       }}
     >
-      <Box sx={fixedIcon}>
-        <FaRegHeart size={24} color="#fff" />
+      <Box sx={fixedIcon} onClick={handleHeartClick}>
+        {isHeartClicked ? (
+            <FaHeart size={24} color="red" />
+        ) : (
+            <FaRegHeart size={24} color="#fff" />
+        )}
       </Box>
+
 
       {location.locationImages.length && (
         <SwipeableViews

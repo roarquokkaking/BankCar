@@ -11,6 +11,8 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.joda.time.DateTime;
 
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -28,10 +30,10 @@ public class BookingEntity {
     private Long booking_id;
 
     @Column(name = "start_date")
-    private DateTime start_date;
+    private LocalDate start_date;
 
     @Column(name="end_date")
-    private DateTime end_date;
+    private LocalDate end_date;
 
     @Column(name="start_time")
     private LocalTime start_time;
@@ -70,10 +72,8 @@ public class BookingEntity {
     private CarImages carImages;
 
 
-    //===== 서비스 구현 =====//
-
     public void setBookingStatus(BookingEntity booking) {
-        DateTime now = DateTime.now();
+        LocalDate now = LocalDate.now();
 
         if (now.isBefore(booking.getStart_date())) {
             booking.setBooking_status(BookingStatus.BEFORE);

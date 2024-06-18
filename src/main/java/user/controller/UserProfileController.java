@@ -5,22 +5,23 @@ import driverLicense.service.NCPObjectStorageService;
 import driverLicense.service.ObjectStorageService;
 import jakarta.servlet.http.HttpSession;
 import login.dto.LoginDTO;
-import user.dto.UserProfileDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
-import org.springframework.http.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import user.service.UserProfileService;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+import user.dto.UserProfileDTO;
+import user.service.UserProfileService;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping(path = "/profile", produces = "application/json")
+@RequestMapping(path = "/api/profile", produces = "application/json")
 public class UserProfileController {
 
     @Autowired
@@ -133,7 +134,6 @@ public class UserProfileController {
         user.setImage_file_name(imageFileName);
         user.setImage_original_name(imageOriginalName);
         user.setImageUrl(fileUrl);
-//        user.setNickname(userProfileDTO.getNickname());
         user.setEmail(userProfileDTO.getEmail());
         // userProfileDTO의 다른 필드를 user 객체에 반영
 
@@ -162,6 +162,8 @@ public class UserProfileController {
             LoginDTO user = loginDTO.get();
             user.setName(userProfileDTO.getName());
             user.setEmail(userProfileDTO.getEmail());
+            user.setPhone_number(userProfileDTO.getPhone_number());
+//            user.setDriver(userProfileDTO.getDriver());
             userProfileService.saveUserProfileDTO(user);
         } else{
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
