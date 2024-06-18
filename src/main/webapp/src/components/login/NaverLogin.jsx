@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {setEmail, setId, setName} from "../../store/loginSlice";
+import {setEmail, setId, setName, setProfile_image} from "../../store/loginSlice";
 
 
 const NaverLogin = () => {
@@ -12,12 +12,13 @@ const NaverLogin = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+
+
     useEffect(() => {
         const userStr = params.get("user");
-        const savedState = localStorage.getItem("naverState");
-        const responseState = params.get("naverState");
-
-        if (userStr && (savedState === responseState)) {
+        const state = params.get('naverState');
+        const savedState = localStorage.getItem('naverState'); // 저장된 `state` 값 불러오기
+        if (userStr && (savedState === state)) {
             try {
                 const user = JSON.parse(decodeURIComponent(userStr));
                 console.log(user);
@@ -25,19 +26,22 @@ const NaverLogin = () => {
                 const id = user.id;
                 const email = user.email;
                 const name = user.name;
+                const profileImage = user.profile_image;
 
                 if (id && email && name) {
                     dispatch(setId(id));
                     dispatch(setEmail(email));
                     dispatch(setName(name));
+                    dispatch(setProfile_image(profileImage))
                 }
             } catch (error) {
                 console.error("Failed to parse user data:", error);
             }
         }else {
-            console.log("서버에서 값을 받지 못했거나 응답 코드가 맞지 않습니다.")
+            console.log("회원 정보가 없거나 확인 코드가 다릅니다.")
         }
 
+        localStorage.removeItem('naverState'); // `state` 값 삭제
         navigate('/');
     }, [params, location, dispatch, navigate]);
 

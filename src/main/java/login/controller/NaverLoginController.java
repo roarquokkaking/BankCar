@@ -23,12 +23,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/user", produces = "application/json")
-@CrossOrigin
+@CrossOrigin(origins="http://localhost:3000")
 public class NaverLoginController {
     @Autowired
     private NaverLoginService naverLoginService;
@@ -37,8 +35,9 @@ public class NaverLoginController {
 
     @GetMapping("/naverLogin")
     public ResponseEntity<Map<String, String>> naverLogin(HttpSession session){
+        System.out.println("url create");
         Map<String, String> authorization = naverLoginService.getAuthorizationUrl(session);
-        System.out.println(authorization);
+        System.out.println("authorization = " + authorization.toString());
 
         return ResponseEntity.ok(authorization);
     }
@@ -79,6 +78,7 @@ public class NaverLoginController {
         user.setName(res_obj.get("name").toString().replaceAll("\"", ""));
         user.setEmail(res_obj.get("email").toString().replaceAll("\"", ""));
         user.setPhone_number(res_obj.get("mobile").toString().replaceAll("\"", ""));
+        user.setProfile_image(res_obj.get("profile_image").toString().replaceAll("\"", ""));
         System.out.println(user.toString());
 
         if(existId.equals("non_exist")){

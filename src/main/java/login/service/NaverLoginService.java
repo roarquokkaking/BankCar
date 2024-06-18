@@ -46,9 +46,6 @@ public class NaverLoginService {
     }
 
     public OAuth2AccessToken getAccessToken(HttpSession session, String code, String state) throws IOException {
-        String sessionState = (String) session.getAttribute("state");
-        System.out.println("sessionState = " + sessionState);
-
         OAuth20Service oAuthService = new ServiceBuilder()
                 .apiKey(CLIENT_ID)
                 .apiSecret(CLIENT_SECRET)
@@ -59,7 +56,6 @@ public class NaverLoginService {
         OAuth2AccessToken accessToken = oAuthService.getAccessToken(code);
 
         return accessToken;
-
 
     }
 

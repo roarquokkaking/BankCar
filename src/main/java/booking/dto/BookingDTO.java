@@ -16,12 +16,14 @@ public class BookingDTO {
 
     private Long booking_id;
     private LocalDate start_date;
-    private LocalDateTime end_date;
+    private LocalDate end_date;
     private LocalTime start_time;
     private LocalTime end_time;
     private String status;
     private String title ;
     private String content;
+    private String host_name;
+    private String guest_name;
     private Long carId ;
     private String period;
     private String imageUrl;
@@ -29,4 +31,11 @@ public class BookingDTO {
     private LocalDateTime create_date;
     private LoginDTO loginDTO;
     private Float rating;
+    private String driverName;
+
+    private String host_name;
+    private String guest_name;
+
+
+
 }

@@ -16,7 +16,7 @@ const UseBefore = () => {
 
 
     useEffect(() => {
-        axios.get(`/Booking/before/${user_id}`)
+        axios.get(`https://dongwoossltest.shop/api/Booking/before/${user_id}`)
             .then(response => {
                 console.log(response.data)
                 setBookingDTO(response.data);
@@ -45,35 +45,43 @@ const UseBefore = () => {
     console.log(user_id)
 
     return (
+
         <div>
-            <div className={styles.container}>
-                <header>
-                    <div>
-                        <GoArrowLeft
-                            style={{
-                                width: "30px",
-                                height: "30px",
-                                marginTop: "4%",
-                                marginLeft: "20px",
-                            }}
-                            onClick={() => navigate(-1)}
-                        />
-                        <h1
-                            style={{
-                                textAlign: "center",
-                                font: "apple SD Gothic Neo",
-                                fontSize: "18px",
-                                marginTop: "-9%",
-                            }}
-                        >이용내역</h1>
-                    </div>
-                </header>
+
+            <div>
             </div>
-            {BookingDTO.map((reservation) => (
-                <ReservationItem reservation={reservation} key={reservation.id} />
-            ))}
-            <FooterMenu />
         </div>
+
+
+        // <div>
+        //     <div className={styles.container}>
+        //         <header>
+        //             <div>
+        //                 <GoArrowLeft
+        //                     style={{
+        //                         width: "30px",
+        //                         height: "30px",
+        //                         marginTop: "4%",
+        //                         marginLeft: "20px",
+        //                     }}
+        //                     onClick={() => navigate(-1)}
+        //                 />
+        //                 <h1
+        //                     style={{
+        //                         textAlign: "center",
+        //                         font: "apple SD Gothic Neo",
+        //                         fontSize: "18px",
+        //                         marginTop: "-9%",
+        //                     }}
+        //                 >이용내역</h1>
+        //             </div>
+        //         </header>
+        //     </div>
+        //     {BookingDTO.map((reservation) => (
+        //         <ReservationItem reservation={reservation} key={reservation.id} />
+        //     ))}
+        //     <FooterMenu />
+        // </div>
     );
 };
 

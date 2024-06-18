@@ -32,7 +32,7 @@ public class KakaoLoginController {
         String email = URLEncoder.encode(loginDTO.getEmail(), StandardCharsets.UTF_8);
         String name = URLEncoder.encode(loginDTO.getName(), StandardCharsets.UTF_8);
         String profile_image = URLEncoder.encode(loginDTO.getProfile_image(), StandardCharsets.UTF_8);
-        String url="http://localhost:3000/login/kakao?id="+id+"&email="+email+"&name="+name+"&profile_image="+profile_image;
+        String url="https://dongwoossltest.shop/login/kakao?id="+id+"&email="+email+"&name="+name+"&profile_image="+profile_image;
         return new RedirectView(url);
     }
 }

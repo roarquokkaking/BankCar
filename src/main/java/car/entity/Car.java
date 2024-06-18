@@ -1,6 +1,5 @@
 package car.entity;
 
-
 import login.dto.LoginDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -77,8 +76,8 @@ public class Car {
     @Column(name = "rating")  // 자동차 평점
     private float rating;
 
-    @Column(name = "wish")
-    private int wish;
+//    @Column(name = "wish")
+//    private int wish;
 
 
     //cascade = CascadeType.ALL : 영속성 변경(생성, 수정, 삭제 등)이 연관된 WishList 엔티티들에게도 적용, ex)  Car 엔티티를 삭제하면,
@@ -94,10 +93,10 @@ public class Car {
     }
 //
 //    /*엔티티의 상태가 변경될 때마다 wishLists 필드의 상태를 기반으로 wish 필드를 동기화하여, 데이터 일관성을 유지*/
-    @PostLoad       // Car 엔티티가 데이터베이스에서 load 된 후에 호출
-    @PostPersist    // 처음으로 데이터베이스에 저장된 후 호출
-    @PostUpdate     // WishList 데이터베이스에 업데이트된 후 호출
-    private void updateWishCount() {
-        this.wish = wishLists == null ? 0 : wishLists.size();
-    }
+//    @PostLoad       // Car 엔티티가 데이터베이스에서 load 된 후에 호출
+//    @PostPersist    // 처음으로 데이터베이스에 저장된 후 호출
+//    @PostUpdate     // WishList 데이터베이스에 업데이트된 후 호출
+//    private void updateWishCount() {
+//        this.wish = wishLists == null ? 0 : wishLists.size();
+//    }
 }

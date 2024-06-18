@@ -76,7 +76,7 @@ public class KakaoLoginServiceImpl implements KakaoLoginService {
 
     private String getAccessToken(String authorizationCode) {
         String clientId = "f71b69bb47cf0fff57324d35d3a3ae0f";
-        String redirectUri = "http://localhost:8080/login/kakao";
+        String redirectUri = "https://dongwoossltest.shop/api/login/kakao";
         String tokenUri = "https://kauth.kakao.com/oauth/token";
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();

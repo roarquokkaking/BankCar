@@ -10,7 +10,7 @@ const Login_main = () => {
   const navigate = useNavigate();
   //카카오 로그인
   const REST_API_KEY = "f71b69bb47cf0fff57324d35d3a3ae0f";
-  const REDIRECT_URI = "http://localhost:8080/login/kakao";
+  const REDIRECT_URI = "https://dongwoossltest.shop/api/login/kakao";
   const SCOPE = 'profile_nickname,profile_image,account_email';
   const kakaolink = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=${SCOPE}`;
 
@@ -38,12 +38,13 @@ const Login_main = () => {
   // 네이버 로그인
 
   const naverLogin = () => {
-    axios.get(`http://localhost:8080/api/user/naverLogin`)
+    axios.get(`http://localhost:8080/api/user/naverLogin`,{
+      withCredentials:true
+    })
         .then(res => {
           const data = res.data;
-          localStorage.setItem("naverState", data.state)
-
-          console.log("응답: ", ''+data.url)
+          localStorage.setItem('naverState', data.state); // `state` 값을 저장
+          console.log("응답: ",data.url)
           window.location.href = ""+data.url;
         })
         .catch(error=> console.log(error))

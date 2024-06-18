@@ -21,7 +21,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping(path = "/profile", produces = "application/json")
+@RequestMapping(path = "/api/profile", produces = "application/json")
 public class UserProfileController {
 
     @Autowired
@@ -134,7 +134,6 @@ public class UserProfileController {
         user.setImage_file_name(imageFileName);
         user.setImage_original_name(imageOriginalName);
         user.setImageUrl(fileUrl);
-//        user.setNickname(userProfileDTO.getNickname());
         user.setEmail(userProfileDTO.getEmail());
         // userProfileDTO의 다른 필드를 user 객체에 반영
 
@@ -163,6 +162,8 @@ public class UserProfileController {
             LoginDTO user = loginDTO.get();
             user.setName(userProfileDTO.getName());
             user.setEmail(userProfileDTO.getEmail());
+            user.setPhone_number(userProfileDTO.getPhone_number());
+//            user.setDriver(userProfileDTO.getDriver());
             userProfileService.saveUserProfileDTO(user);
         } else{
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");

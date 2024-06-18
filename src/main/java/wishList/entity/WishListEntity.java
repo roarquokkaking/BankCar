@@ -23,7 +23,7 @@ public class WishListEntity {
     private Long wishlistId;
 
     @Column(name="wish")
-    private int wish;
+    private boolean wish;
     
     @JoinColumn(name = "car_id")
     @ManyToOne(fetch = FetchType.LAZY)
@@ -48,7 +48,5 @@ public class WishListEntity {
 
         //보고 수정해서 이미지 갖고오기
     }
-
-
 
 }

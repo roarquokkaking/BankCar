@@ -6,8 +6,8 @@ import car.service.CarService;
 import car.service.CarMachineLearningService;
 import car.service.CarRegistrationService;
 import driverLicense.service.ObjectStorageService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import login.dto.LoginDTO;
+import login.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,14 +15,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins="http://localhost:3000")
 @RequestMapping(path = "/api")
 public class CarRegistrationController {
-    private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
-    private CarRegistrationService carRegistrationService;
+    private CarService carRegistrationService;
     @Autowired
     private ObjectStorageService objectStorageService;
 
@@ -32,15 +32,20 @@ public class CarRegistrationController {
     @Autowired
     CarMachineLearningService carMachineLearningService;
 
+    @Autowired
+    LoginService loginService;
+
     @PostMapping(path = "/users/{userId}/cars", consumes = {"multipart/form-data"})
     public ResponseEntity<Car> createCar(@RequestPart("car") Car car,
                                          @RequestPart("images") List<MultipartFile> images,
                                          @PathVariable("userId") String userId) {
         System.out.println("CarController start");
         // userId와 User 엔티티 연결..
+        Optional<LoginDTO> byId = loginService.findById(userId);
+        car.setUser(byId.get());
 
         System.out.println(car.toString());
-        
+
         CarImages carImages = new CarImages();
 
         // car images uuid 값들을 저장
@@ -60,12 +65,19 @@ public class CarRegistrationController {
 
     // 해당 유저의 등록된 자동차 목록을 가져오는 api
     @GetMapping(path = "/users/{userId}/cars")
-    public ResponseEntity<List<Car>> getCarsByUserId(@PathVariable("userId") String userId){
+    public ResponseEntity<List<CarImages>> getCarsByUserId(@PathVariable("userId") String userId){
         List<Car> carList = carService.getCarsByUserId(userId);
         if (carList.isEmpty()) {
             return ResponseEntity.notFound().build(); // 찾을 수 없는 경우 404 응답
         }
-        return ResponseEntity.ok(carList); // 찾은 경우 200 응답과 함께 자동차 및 이미지 정보 목록 반환
+
+        List<CarImages> carImagesList = new ArrayList<>();
+        for(Car car : carList){
+            CarImages carImages = carService.getCarImagesByCarId(car.getCarId());   // 자동차 이미지 정보를 가져오는 로직
+            carImagesList.add(carImages);
+        }
+        // CarImages 객체만 넘기면, 해당 객체에 Car 엔티티가 연관관계로 잡혀있기 때문에 Car정보와 CarImages의 정보 둘 다 넘어간다.
+        return ResponseEntity.ok(carImagesList); // 찾은 경우 200 응답과 함께 자동차 및 이미지 정보 목록 반환
     }
 
     // 차 가격 추천을 위한 머신러닝

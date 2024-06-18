@@ -10,14 +10,12 @@ import javax.persistence.*;
 @Data
 @Table(name = "CAR_IMAGE")
 public class CarImages {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long carImageId;
 
     @OneToOne(mappedBy = "carImages")
     private Car car;
-
     @Column
     private String image1;
     @Column

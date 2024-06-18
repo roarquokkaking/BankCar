@@ -40,29 +40,29 @@ const ProfileMain = () => {
                     <h1>프로필</h1>
                 </header>
                 <Link  to={`/profile/myprofile/${user_id}`} className="user-profile">
-                <section className="user-info">
-                    <div className="user-img-name">
-                        {
-                            profileImage ?
-                                <img
-                                    src={profileImage}
-                                    alt="유저 이미지"
-                                    className="user-image"
-                                /> :
-                                <img
-                                    src={`${process.env.PUBLIC_URL}/image/nullImage2.png`}
-                                    alt="유저 이미지"
-                                    className="user-image"
-                                />
-                        }
+                    <section className="user-info">
+                        <div className="user-img-name">
+                            {
+                                profileImage ?
+                                    <img
+                                        src={profileImage}
+                                        alt="유저 이미지"
+                                        className="user-image"
+                                    /> :
+                                    <img
+                                        src={`${process.env.PUBLIC_URL}/image/nullImage2.png`}
+                                        alt="유저 이미지"
+                                        className="user-image"
+                                    />
+                            }
 
 
-                        <div className="text-info">
-                            <h4>{userName}</h4>
-                            <p>{userEmail}</p>
+                            <div className="text-info">
+                                <h4>{userName}</h4>
+                                <p>{userEmail}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div style={{marginRight: "10px"}}>
+                        <div style={{marginRight: "10px"}}>
                         <ArrowForwardIosIcon/>
                     </div>
                 </section>
@@ -105,7 +105,7 @@ const ProfileMain = () => {
                 </button>
                 <ul className="profile-actions">
                     <li>
-                        <Link to={`/profile/usebefore/${user_id}`}>
+                        <Link to={`/profile/checkUseBefore/${user_id}`}>
                             예약한 자동차 보기
                             <div style={{marginRight: "10px"}}>
                                 <ArrowForwardIosIcon/>

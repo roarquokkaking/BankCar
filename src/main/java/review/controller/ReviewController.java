@@ -11,7 +11,6 @@ import review.dto.ReviewDTO;
 import review.entity.ReviewEntity;
 import review.service.ReviewService;
 
-import javax.validation.Valid;
 import java.util.*;
 
 @RequestMapping(path = "api/review")
@@ -30,8 +29,8 @@ public class ReviewController {
      * */
     @PostMapping(path="writeReview/{user_id}/{car_id}")
     public List<ReviewEntity>writeReview(@ModelAttribute ReviewDTO reviewDTO,
-                                         @Valid String user_id,
-                                         @Valid String car_id
+                                         @PathVariable String user_id,
+                                         @PathVariable String car_id
 //                                         @Validated String user_id,
 //                                         @RequestPart("img") MultipartFile img
     ){
@@ -99,7 +98,7 @@ public class ReviewController {
 
     @PutMapping(path = "updateReview/{user_id}/{review_id}")
     public ReviewDTO UpdateReivewService (@ModelAttribute ReviewDTO reviewDTO ,
-                                          @Valid String user_id , @Valid Long review_id){
+                                          @PathVariable String user_id , @PathVariable Long review_id){
 
         ReviewEntity review   = reviewService.updateReview(user_id, review_id);
         if(review == null) {
@@ -114,8 +113,8 @@ public class ReviewController {
  * review delete
  * */
     @DeleteMapping(path = "/delete/{user_id}/{review_id}")
-    public ResponseEntity<Void> deleteReview(@PathVariable("user_id") @Valid String user_id,
-                                             @PathVariable("review_id") @Valid Long review_id) {
+    public ResponseEntity<Void> deleteReview(@PathVariable("user_id")  String user_id,
+                                             @PathVariable("review_id")  Long review_id) {
         Optional<ReviewEntity> reviewEntity = reviewService.findDeleteReview(user_id, review_id);
         if (reviewEntity.isEmpty()) {
             throw new NoSuchElementException("리뷰없어~!");

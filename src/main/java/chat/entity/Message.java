@@ -1,5 +1,8 @@
 package chat.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import login.dto.LoginDTO;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -22,6 +25,19 @@ public class Message {
     @Column(name="sender")
     private String sender;
 
+
+    @ManyToOne
+    @JoinColumn(name = "roomSeq")
+    @JsonBackReference
+    private MessageRoom messageRoom;
+
+    public MessageRoom getMessageRoom() {
+        return messageRoom;
+    }
+
+    public void setMessageRoom(MessageRoom messageRoom) {
+        this.messageRoom = messageRoom;
+    }
 
     public Long getMessageSeq() {
         return messageSeq;
@@ -55,7 +71,6 @@ public class Message {
         this.sender = sender;
     }
 
-
     public Message() {
     }
 
@@ -64,6 +79,7 @@ public class Message {
         this.sentTime = sentTime;
         this.sender = sender;
     }
+
 
 
 }

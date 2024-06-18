@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import CarouselCard from './CarouselCard';
+import CarouselCard from '../CarouselCard';
 import axios from 'axios';
-import { Locations as cardLocations } from '../data/mock-data';
+import { Locations as cardLocations } from '../../data/mock-data';
 import { useLocation } from 'react-router-dom';
+import {useSelector} from "react-redux";
 
 const LocationCards = () => {
-
     const location = useLocation();
     const [searchData, setSearchData] = useState([]);
     const [cards, setCards] = useState('');
     const [loading, setLoading] = useState(false);
     const newLocations = cardLocations();
-
+    const user_id = useSelector(state => state.Login.id)
+    const [isHeartClicked, setIsHeartClicked] = useState([]);
 
     // useEffect(() => {
     //     const searchParams = new URLSearchParams(location.search);
@@ -87,6 +88,24 @@ const LocationCards = () => {
         // 검색 데이터가 변경될 때마다 다시 검색 요청
     }, [location.search]);
 
+    const handleHeartClick = async (carId,index) => {
+        setLoading(true);
+        try {
+            const response =
+                await axios.post(`http://localhost:8080/WishList/wish/toggle/${user_id}/${carId}`);//${carId}
+            setCards(response.data);
+
+            // 하트 클릭 상태 업데이트
+            const newIsHeartClicked = [...isHeartClicked];
+            newIsHeartClicked[index] = !newIsHeartClicked[index];
+            setIsHeartClicked(newIsHeartClicked);
+        } catch (error) {
+            console.error('데이터 가져오기 오류', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     // useEffect(() => {
     //     const fetchLocations = async () => {
     //         try {
@@ -114,9 +133,11 @@ const LocationCards = () => {
     return (
         <Box sx={{ mx: 2 }}>
             <Grid container rowSpacing={3} columnSpacing={3}>
-                {newLocations.map((location) => (
+                {newLocations.map((location, index) => (
                     <Grid key={location.id} item xs={12} sm={4} md={4} lg={3}>
-                        <CarouselCard location={location} />
+                        <CarouselCard location={location}
+                                      isHeartClicked={isHeartClicked[index]}
+                                      onHeartClick={() => handleHeartClick(index)} />
                     </Grid>
                 ))}
             </Grid>
