@@ -36,21 +36,22 @@ public class CarRegistrationController {
         System.out.println("CarController start");
         // userId와 User 엔티티 연결..
 
+        System.out.println(car.toString());
 
-        Car savedCar = carRegistrationService.saveCar(car);     // 자동차 저장
         CarImages carImages = new CarImages();
-        carImages.setCar(savedCar);                             // Car 엔티티를 연결
 
-
+        // car images uuid 값들을 저장
         List<String> carImagesUUID = new ArrayList<>();
         for(MultipartFile image: images){
-            String uploadFileName = objectStorageService.uploadFile("cars/" + savedCar.getCarId() + "/", image);
+            String uploadFileName = objectStorageService.uploadFile("cars/" , image);
             carImagesUUID.add(uploadFileName);
             System.out.println("uploadFileName = " + uploadFileName);
         }
-
-        // car images uuid 값들을 저장
         carRegistrationService.saveCarImages(carImages, carImagesUUID);
+
+        car.setCarImages(carImages);
+        Car savedCar = carRegistrationService.saveCar(car);     // 자동차 저장
+
         return ResponseEntity.ok(savedCar);
     }
 

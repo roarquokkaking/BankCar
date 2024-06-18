@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -23,17 +25,20 @@ public class NaverLoginService {
     public final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
 
 
-    public String getAuthorizationUrl(HttpSession session) {
+    public Map<String, String> getAuthorizationUrl(HttpSession session) {
         // 보안때문에 난수를 생성
         String state = generateRandomString();
-        session.setAttribute(SESSION_STATE, state);
 
         String url = "https://nid.naver.com/oauth2.0/authorize?response_type=code" +
                 "&client_id=" + CLIENT_ID +
                 "&redirect_uri=" + REDIRECT_URI +
                 "&state=" + state;
 
-        return url;
+        Map<String, String> map = new HashMap<>();
+        map.put("url", url);
+        map.put("state", state);
+
+        return map;
     }
 
     private String generateRandomString() {

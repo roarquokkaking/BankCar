@@ -1,5 +1,6 @@
 package login.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
@@ -13,12 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -28,14 +33,15 @@ public class NaverLoginController {
     @Autowired
     private LoginService loginService;
 
-    @GetMapping("naverLogin")
-    public ResponseEntity<String> naverLogin(HttpSession session){
-        String url = naverLoginService.getAuthorizationUrl(session);
-        System.out.println(url);
-        return ResponseEntity.ok(url);
+    @GetMapping("/naverLogin")
+    public ResponseEntity<Map<String, String>> naverLogin(HttpSession session){
+        Map<String, String> authorization = naverLoginService.getAuthorizationUrl(session);
+        System.out.println(authorization);
+
+        return ResponseEntity.ok(authorization);
     }
     @GetMapping("/oauth2/login")
-    public ResponseEntity<LoginDTO> Oauth2Login(@RequestParam String code, @RequestParam String state, HttpSession session, Model model) throws IOException, JsonParseException {
+    public RedirectView Oauth2Login(RedirectAttributes attributes, @RequestParam String code, @RequestParam String state, HttpSession session, Model model) throws IOException, JsonParseException {
         OAuth2AccessToken oauthToken;
         oauthToken = naverLoginService.getAccessToken(session, code, state);
         System.out.println("oauthToken = " + oauthToken);
@@ -76,7 +82,12 @@ public class NaverLoginController {
         user.setEmail(res_obj.get("email").toString().replaceAll("\"", ""));
         user.setPhone_number(res_obj.get("mobile").toString().replaceAll("\"", ""));
 
-        return ResponseEntity.ok(user);
+        // RedirectAttribute는 객체를 문자열로 변환하지 않고 그대로 전달하므로 JSON으로 파싱한 후 넣어주기
+        String userJson = URLEncoder.encode(new ObjectMapper().writeValueAsString(user), "UTF-8");
+        attributes.addAttribute("user", userJson);
+        attributes.addAttribute("naverState", state);
+        return new RedirectView("http://localhost:3000/login/naverLogin");
+
     }
 
     @GetMapping("/remove") //token = access_token임
