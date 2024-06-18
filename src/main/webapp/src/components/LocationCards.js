@@ -16,6 +16,21 @@ const LocationCards = () => {
     const user_id = useSelector(state => state.Login.id)
     const [isHeartClicked, setIsHeartClicked] = useState([]);
 
+    const [searchData, setSearchData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [searchDTO, setSearchDTO] = useState({
+        startDate: '',
+        endDate: '',
+        startTime: '',
+        endTime: '',
+        jibunAddress: '',
+        roadAddress: '',
+        x: '',
+        y: '',
+        minPrice: '',
+        maxPrice: ''
+    });
+
     // useEffect(() => {
     //     const searchParams = new URLSearchParams(location.search);
     //     const searchDTO = {
@@ -52,13 +67,12 @@ const LocationCards = () => {
 
     //     fetchLocations();
     // }, []);
-
+    // "https://dongwoossltest.shop/api/searching/searchList"
     useEffect(() => {
         const fetchLocations = async () => {
             try {
-                // URL 파라미터에서 검색 조건 추출
                 const searchParams = new URLSearchParams(location.search);
-                const searchDTO = {
+                const updatedSearchDTO = {
                     startDate: searchParams.get('startDate') || '',
                     endDate: searchParams.get('endDate') || '',
                     startTime: searchParams.get('startTime') || '',
@@ -70,23 +84,31 @@ const LocationCards = () => {
                     minPrice: searchParams.get('minPrice') || '',
                     maxPrice: searchParams.get('maxPrice') || ''
                 };
+                setSearchDTO(updatedSearchDTO);
 
-                // 검색 조건이 있는 경우에만 서버에 POST 요청
-                if (searchDTO.startDate && searchDTO.endDate && searchDTO.startTime && searchDTO.endTime) {
-                    const response = await axios.get("https://dongwoossltest.shop/api/searching/searchList", null, { params: searchDTO });
+                if (updatedSearchDTO.startDate && updatedSearchDTO.endDate && updatedSearchDTO.startTime && updatedSearchDTO.endTime) {
+                    const response = await axios.get("http://localhost:8080/searching/searchList", { params: updatedSearchDTO });
                     setSearchData(response.data);
                 } else {
-                    setSearchData([]); // 검색 조건이 없으면 빈 배열 설정
+                    setSearchData([]);
                 }
             } catch (error) {
                 console.error('검색 오류', error);
+            } finally {
+                setLoading(false);
             }
         };
 
-        fetchLocations(); // 컴포넌트가 처음 마운트될 때 한 번 호출
-
-        // 검색 데이터가 변경될 때마다 다시 검색 요청
+        fetchLocations();
     }, [location.search]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (!searchData.length) {
+        return <div>자료가 없습니다.</div>;
+    }
 
     const handleHeartClick = async (carId,index) => {
         setLoading(true);
