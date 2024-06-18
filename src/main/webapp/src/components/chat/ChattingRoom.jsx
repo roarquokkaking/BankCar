@@ -50,9 +50,11 @@ const ChattingRoom = () => {
             })
             .catch(error => console.error("Error fetching user data:", error));
 
-        return () => {
-            stompClient.current.disconnect();
-        };
+            return () => {
+                if (stompClient.current) {
+                    stompClient.current.disconnect();
+                }
+            };
     }, [roomSeq]);
 
     useEffect(() => {
