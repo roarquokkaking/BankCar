@@ -51,6 +51,42 @@ const Home = () => {
         },
     }));
 
+    const location = useLocation();
+    const [searchData, setSearchData] = useState([]);
+
+    useEffect(() => {
+        const fetchLocations = async () => {
+            try {
+                // URL 파라미터에서 검색 조건 추출
+                const searchParams = new URLSearchParams(location.search);
+                const searchDTO = {
+                    startDate: searchParams.get('startDate') || '',
+                    endDate: searchParams.get('endDate') || '',
+                    startTime: searchParams.get('startTime') || '',
+                    endTime: searchParams.get('endTime') || '',
+                    jibunAddress: searchParams.get('jibunAddress') || '',
+                    roadAddress: searchParams.get('roadAddress') || '',
+                    x: searchParams.get('x') || '',
+                    y: searchParams.get('y') || '',
+                    minPrice: searchParams.get('minPrice') || '',
+                    maxPrice: searchParams.get('maxPrice') || ''
+                };
+
+                // 검색 조건이 있는 경우에만 서버에 POST 요청
+                if (searchDTO.startDate && searchDTO.endDate && searchDTO.startTime && searchDTO.endTime) {
+                    const response = await axios.post("http://localhost:8080/searching/searchList", searchDTO);
+                    setSearchData(response.data);
+                } else {
+                    setSearchData([]); // 검색 조건이 없으면 빈 배열 설정
+                }
+            } catch (error) {
+                console.error('검색 오류', error);
+            }
+        };
+
+        fetchLocations(); // 컴포넌트가 처음 마운트될 때 한 번 호출
+    }, [location.search]);
+
 
     return (
         <>

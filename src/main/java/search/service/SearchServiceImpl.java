@@ -6,12 +6,11 @@ import org.springframework.stereotype.Service;
 import search.repo.SearchRepoCar;
 import search.repo.SearchRepoService;
 
-import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-@Transactional
+//@Transactional
 @Service
 public class SearchServiceImpl implements SearchService {
     // @Autowired
