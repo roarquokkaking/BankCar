@@ -16,7 +16,7 @@ import java.util.Map;
 @Getter
 @Setter
 //@CrossOrigin(origins = "http://localhost:3000")
-//@CrossOrigin(origins = "*")
+@CrossOrigin(origins="https://dongwoossltest.shop")
 @RestController
 @RequestMapping("/api/messagesroom")
 public class ChatListController {
