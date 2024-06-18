@@ -31,8 +31,7 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public List<Long> searchId(LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime, int minPrice, int maxPrice) {
         // JPA를 사용하여 엔티티 검색
-        List<Long> carIds = searchRepoService.findCarIdsByServiceDatesAndTimes(startDate, endDate, startTime, endTime);
-        carIds = searchRepoCar.findCarIdsByPrice(minPrice,maxPrice, carIds);
+        List<Long> carIds = searchRepoService.findCarIdsByServiceDatesAndTimesPrices(startDate, endDate, startTime, endTime, minPrice, maxPrice);
         return carIds;
     }
 

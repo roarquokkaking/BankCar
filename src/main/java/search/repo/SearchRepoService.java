@@ -12,13 +12,15 @@ import java.util.List;
 
 @Repository
 public interface SearchRepoService extends JpaRepository<ServiceCar, Long> {
-    @Query("SELECT cs.car FROM ServiceCar cs " +
-           "WHERE cs.startDate <= :endDate AND cs.endDate >= :startDate " +
-           "AND cs.startTime <= :endTime AND cs.endTime >= :startTime")
-    List<Long> findCarIdsByServiceDatesAndTimes(
-        @Param("startDate") LocalDate startDate,
-        @Param("endDate") LocalDate endDate,
-        @Param("startTime") LocalTime startTime,
-        @Param("endTime") LocalTime endTime
-        );
+    @Query("SELECT cs.car.carId FROM ServiceCar cs " +
+            "WHERE cs.startDate <= :endDate AND cs.endDate >= :startDate " +
+            "AND cs.startTime <= :endTime AND cs.endTime >= :startTime " +
+            "AND cs.car.price <= :maxPrice AND cs.car.price >= :minPrice")
+    List<Long> findCarIdsByServiceDatesAndTimesPrices(
+            @Param("startDate") LocalDate startDate,
+            @Param("endDate") LocalDate endDate,
+            @Param("startTime") LocalTime startTime,
+            @Param("endTime") LocalTime endTime,
+            @Param("minPrice") int minPrice,
+            @Param("maxPrice") int maxPrice);
 }
