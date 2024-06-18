@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import { useMediaQuery } from "react-responsive";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { GoArrowLeft } from "react-icons/go";
+import axios from "axios"
 
 import "./LoginBtn.css";
-import {onNaverLogin} from "../register/api/NaverLogin";
 
 const Login_main = () => {
   const navigate = useNavigate();
@@ -34,6 +34,22 @@ const Login_main = () => {
   const loginHandler=() => {
     window.location.href = kakaolink;
   };
+
+  // 네이버 로그인
+
+  const naverLogin = () => {
+    axios.get(`http://localhost:8080/api/user/naverLogin`,{
+      withCredentials:true
+    })
+        .then(res => {
+          const data = res.data;
+          localStorage.setItem('naverState', data.state); // `state` 값을 저장
+          console.log("응답: ",data.url)
+          window.location.href = ""+data.url;
+        })
+        .catch(error=> console.log(error))
+  }
+
 
   return (
     <div>
@@ -72,8 +88,8 @@ const Login_main = () => {
             카카오로 로그인하기
           </button>
 
-          <button className="naver-login-button" type="button">
-            <img src="./image/naverBtn.png" alt="네이버 아이콘" onClick={onNaverLogin}/>
+          <button className="naver-login-button" type="button" onClick={naverLogin}>
+            <img src="./image/naverBtn.png" alt="네이버 아이콘"/>
             네이버로 로그인하기
           </button>
 

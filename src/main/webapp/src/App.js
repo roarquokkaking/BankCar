@@ -40,6 +40,7 @@ import Bookingbefore from "./components/profile/CSS/bookingbefore";
 import CheckUseBeforeCard from "./components/profile/checkUseBefore/CheckUseBeforeCard";
 import CheckUseBefore from "./components/profile/checkUseBefore/CheckUseBefore";
 import UseNow from "./components/profile/UseNow";
+import NaverLogin from "./components/login/NaverLogin";
 
 function Detail() {
   return null;
@@ -79,6 +80,7 @@ function App() {
               <Route index element={<Login_main />}/>
               <Route path="kakao" element={<KakaoLogin/>}/>
               <Route path="/login/Google" element={<GoogleLogin/>}/>
+              <Route path="naverLogin" element={<NaverLogin/>}/>
             </Route>
             <Route path="/profile">
               <Route index element={<ProfileMain />} />

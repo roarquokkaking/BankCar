@@ -14,14 +14,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(origins="http://localhost:3000")
 @RestController
 @RequestMapping(path = "/api")
 public class CarServiceController {
     @Autowired
     private CarService carService;
-    @Autowired
-    private ServiceCarRepository serviceCarRepository;
 
     // 자동차 서비스 등록 api
     @PostMapping(path = "/cars/{carId}/service")

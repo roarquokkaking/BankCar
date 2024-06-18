@@ -39,30 +39,30 @@ const ProfileMain = () => {
                 <header>
                     <h1>프로필</h1>
                 </header>
-                <Link  to={`https://dongwoossltest.shop/api/profile/myprofile/${user_id}`} className="user-profile">
-                <section className="user-info">
-                    <div className="user-img-name">
-                        {
-                            profileImage ?
-                                <img
-                                    src={profileImage}
-                                    alt="유저 이미지"
-                                    className="user-image"
-                                /> :
-                                <img
-                                    src={`${process.env.PUBLIC_URL}/image/nullImage2.png`}
-                                    alt="유저 이미지"
-                                    className="user-image"
-                                />
-                        }
+                <Link  to={`/profile/myprofile/${user_id}`} className="user-profile">
+                    <section className="user-info">
+                        <div className="user-img-name">
+                            {
+                                profileImage ?
+                                    <img
+                                        src={profileImage}
+                                        alt="유저 이미지"
+                                        className="user-image"
+                                    /> :
+                                    <img
+                                        src={`${process.env.PUBLIC_URL}/image/nullImage2.png`}
+                                        alt="유저 이미지"
+                                        className="user-image"
+                                    />
+                            }
 
 
-                        <div className="text-info">
-                            <h4>{userName}</h4>
-                            <p>{userEmail}</p>
+                            <div className="text-info">
+                                <h4>{userName}</h4>
+                                <p>{userEmail}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div style={{marginRight: "10px"}}>
+                        <div style={{marginRight: "10px"}}>
                         <ArrowForwardIosIcon/>
                     </div>
                 </section>
