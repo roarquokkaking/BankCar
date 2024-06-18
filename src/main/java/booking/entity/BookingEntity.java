@@ -39,6 +39,13 @@ public class BookingEntity {
     @Column(name="end_time")
     private LocalTime end_time;
 
+    @Column(name="host_name")
+    private String host_name;
+
+    @Column(name="guest_name")
+    private String guest_name;
+
+
     @Enumerated(EnumType.STRING)
     @Column(name="review_status")
     private ReviewStatus review_status;
