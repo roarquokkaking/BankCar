@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { ko } from "date-fns/locale";
 import styles from './DateTimeSelector.module.css';
-import { insertCarServiceApi } from "../../register/api/CarApiService";
+import { insertCarServiceApi } from "../../api/CarApiService";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 

@@ -9,7 +9,7 @@ import RegisterCarCard from "./RegisterCarCard";
 import styles from "./CheckMyCar.module.css"
 import DateTimeSelector from "./DateTimeSelector";
 import {useSelector} from "react-redux";
-import {selectUserCarList} from "../../register/api/CarApiService";
+import {selectUserCarList} from "../../api/CarApiService";
 
 
 // const cars = [

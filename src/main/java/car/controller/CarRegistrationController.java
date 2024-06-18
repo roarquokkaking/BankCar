@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins="https://dongwoossltest.shop")
+@CrossOrigin(origins="http://localhost:3000") //https://dongwoossltest.shop
 @RequestMapping(path = "/api")
 public class CarRegistrationController {
     @Autowired
