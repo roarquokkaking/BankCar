@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {setEmail, setId, setName} from "../../store/loginSlice";
+import {setEmail, setId, setName, setProfile_image} from "../../store/loginSlice";
 
 
 const NaverLogin = () => {
@@ -26,11 +26,13 @@ const NaverLogin = () => {
                 const id = user.id;
                 const email = user.email;
                 const name = user.name;
+                const profileImage = user.profile_image;
 
                 if (id && email && name) {
                     dispatch(setId(id));
                     dispatch(setEmail(email));
                     dispatch(setName(name));
+                    dispatch(setProfile_image(profileImage))
                 }
             } catch (error) {
                 console.error("Failed to parse user data:", error);

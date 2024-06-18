@@ -79,6 +79,7 @@ public class NaverLoginController {
         user.setName(res_obj.get("name").toString().replaceAll("\"", ""));
         user.setEmail(res_obj.get("email").toString().replaceAll("\"", ""));
         user.setPhone_number(res_obj.get("mobile").toString().replaceAll("\"", ""));
+        user.setProfile_image(res_obj.get("profile_image").toString().replaceAll("\"", ""));
         System.out.println(user.toString());
 
         if(existId.equals("non_exist")){
