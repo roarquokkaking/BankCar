@@ -1,29 +1,14 @@
 package chat.service;
 
 import chat.entity.Message;
-import chat.repository.MessageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class MessageService {
+public interface MessageService {
 
-    private final MessageRepository messageRepository;
+    Message saveMessage(Message message);
 
-    @Autowired
-    public MessageService(MessageRepository messageRepository) {
-        this.messageRepository = messageRepository;
-    }
+    List<Message> getAllMessages();
 
-    // 메시지 저장
-    public Message saveMessage(Message message) {
-        return messageRepository.save(message);
-    }
-
-    // 모든 메시지 조회
-    public List<Message> getAllMessages() {
-        return messageRepository.findAll();
-    }
+    List<Message> findByMessageRoom_RoomSeq(Long roomseq);
 }

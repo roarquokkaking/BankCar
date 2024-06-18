@@ -1,12 +1,10 @@
 package wishList.entity;
 
-import booking.dto.BookingDTO;
 import car.entity.Car;
 import car.entity.CarImages;
 import jakarta.persistence.*;
 import login.dto.LoginDTO;
 import lombok.*;
-import org.springframework.context.annotation.Lazy;
 import wishList.dto.WishListDTO;
 
 @Entity
@@ -24,7 +22,7 @@ public class WishListEntity {
     private Long wishlistId;
 
     @Column(name="wish")
-    private int wish;
+    private boolean wish;
     
     @JoinColumn(name = "car_id")
     @ManyToOne(fetch = FetchType.LAZY)
@@ -49,7 +47,5 @@ public class WishListEntity {
 
         //보고 수정해서 이미지 갖고오기
     }
-
-
 
 }
