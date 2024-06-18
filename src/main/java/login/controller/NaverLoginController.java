@@ -26,7 +26,8 @@ import java.net.URLEncoder;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/api/user", produces = "application/json")
+@CrossOrigin
 public class NaverLoginController {
     @Autowired
     private NaverLoginService naverLoginService;
@@ -41,7 +42,7 @@ public class NaverLoginController {
         return ResponseEntity.ok(authorization);
     }
     @GetMapping("/oauth2/login")
-    public RedirectView Oauth2Login(RedirectAttributes attributes, @RequestParam String code, @RequestParam String state, HttpSession session, Model model) throws IOException, JsonParseException {
+    public RedirectView  Oauth2Login(RedirectAttributes attributes, @RequestParam(name = "code") String code, @RequestParam(name = "state") String state, HttpSession session, Model model) throws IOException, JsonParseException {
         OAuth2AccessToken oauthToken;
         oauthToken = naverLoginService.getAccessToken(session, code, state);
         System.out.println("oauthToken = " + oauthToken);
@@ -67,27 +68,27 @@ public class NaverLoginController {
         String access_token = oauthToken.getAccessToken();
         String str_result = access_token.replaceAll("\\\"","");
         System.out.println("str_access_token = " + str_result);
+        String userId = res_obj.get("id").toString().replaceAll("\"", "");
 
-        String existId = loginService.isExistId(oauthToken.getAccessToken());
+        String existId = loginService.isExistId(userId);
         System.out.println("existId = " + existId);
 
-        if(existId.equals("")){
-
-        }
-
         LoginDTO user = new LoginDTO();
-
-        user.setId(str_result);
+        user.setId(userId);
         user.setName(res_obj.get("name").toString().replaceAll("\"", ""));
         user.setEmail(res_obj.get("email").toString().replaceAll("\"", ""));
         user.setPhone_number(res_obj.get("mobile").toString().replaceAll("\"", ""));
+        System.out.println(user.toString());
+
+        if(existId.equals("non_exist")){
+            loginService.insertUser(user);
+        }
 
         // RedirectAttribute는 객체를 문자열로 변환하지 않고 그대로 전달하므로 JSON으로 파싱한 후 넣어주기
         String userJson = URLEncoder.encode(new ObjectMapper().writeValueAsString(user), "UTF-8");
         attributes.addAttribute("user", userJson);
         attributes.addAttribute("naverState", state);
         return new RedirectView("http://localhost:3000/login/naverLogin");
-
     }
 
     @GetMapping("/remove") //token = access_token임

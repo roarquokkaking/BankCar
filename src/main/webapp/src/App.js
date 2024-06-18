@@ -36,6 +36,7 @@ import KaKaoPay from './components/payment/KaKaoPay';
 import KaKaoPaySuccess from './components/payment/KaKaoPaySuccess';
 import NaverPay from './components/payment/NaverPay';
 import NaverPayCompletion from './components/payment/NaverPayCompletion';
+import NaverLogin from "./components/login/NaverLogin";
 
 function Detail() {
   return null;
@@ -73,6 +74,7 @@ function App() {
               <Route index element={<Login_main />}/>
               <Route path="kakao" element={<KakaoLogin/>}/>
               <Route path="/login/Google" element={<GoogleLogin/>}/>
+              <Route path="naverLogin" element={<NaverLogin/>}/>
             </Route>
             <Route path="/profile">
               <Route index element={<ProfileMain />} />
