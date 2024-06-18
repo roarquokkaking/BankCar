@@ -14,7 +14,7 @@ import FooterMenu from "../FooterMenu";
 
 const UseNow = () => {
     const [bookingUseDTO, setBookingUseDTO] = useState(null);
-
+    const bookingData =useState([])
     useEffect(() => {
         // 예시 데이터 가져오기
         axios.get('api/booking/details')

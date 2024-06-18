@@ -1,6 +1,7 @@
 package booking.contoller;
 
 import booking.dto.BookingDTO;
+import booking.dto.UserBeforeDTO;
 import booking.entity.BookingEntity;
 import booking.service.BookingService;
 import lombok.RequiredArgsConstructor;

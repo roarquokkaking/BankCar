@@ -5,6 +5,7 @@ import org.apache.kafka.common.security.auth.Login;
 import org.joda.time.DateTime;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Setter
