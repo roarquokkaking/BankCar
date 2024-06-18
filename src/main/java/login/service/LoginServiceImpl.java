@@ -31,13 +31,11 @@ public class LoginServiceImpl implements LoginService{
         String id = userResourceNode.get("id").asText();
         String email = userResourceNode.get("email").asText();
         String name = userResourceNode.get("name").asText();
-//        String picture = userResourceNode.get("picture").asText();
         String isExistId= isExistId(id);
         LoginDTO loginDTO = new LoginDTO();
         loginDTO.setId(id);
         loginDTO.setEmail(email);
         loginDTO.setName(name);
-//        loginDTO.setProfile_image(picture);
         if(isExistId.equals("exist")){
             loginDTO.setDriver(driverYN);
             System.out.println("이미 존재한 회원");
