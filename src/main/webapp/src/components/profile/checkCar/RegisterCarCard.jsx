@@ -15,12 +15,12 @@ export default function RegisterCarCard({ car, onAddService }) {
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        {car.car.model} - {car.car.color}
+                        {car.model} - {car.color}
                     </Typography>
-                    <Chip label={car.car.category} color="primary" sx={{ marginBottom: 2 }} />
-                    <h3 style={{margin : 0}}>{car.car.title}</h3>
+                    <Chip label={car.category} color="primary" sx={{ marginBottom: 2 }} />
+                    <h3 style={{margin : 0}}>{car.title}</h3>
                     <Typography variant="body2" color="text.secondary">
-                        {car.car.content}
+                        {car.content}
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing sx={{ justifyContent: 'flex-end' }}>
