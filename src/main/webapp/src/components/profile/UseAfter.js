@@ -2,35 +2,30 @@
 import React, { useEffect, useState } from 'react';
 import styles from './CSS/UseAfter.module.css';
 import { GoArrowLeft } from "react-icons/go";
-import {useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
 import FooterMenu from "../FooterMenu";
 import axios from "axios";
 
-
-
 const UseAfter = () => {
     const navigate = useNavigate();
-    const [pastReservations, setPastReservations] = useState([]);
-    const {user_id}=useParams()
+    const [BookingDTO, setBookingDTO] = useState([]);
+    const { user_id } = useParams();
 
-
-console.log(user_id)
-
-
+    console.log(user_id);
 
     const navigateToReviewPage = (reservationId) => {
         navigate(-1);
     };
 
 
-    const[BookingDTO, setBookingDTO]= useState([])
-
     useEffect(() => {
-        axios.get(`/Booking/after/${user_id}`)
-            .then(response=>
-                setBookingDTO(response.data))
-            .catch(error=>console.log(error))
+        axios.get(`https://dongwoossltest.shop/api/Booking/after/${user_id}`)
+            .then(response => {
+                const data = response.data;
+                setBookingDTO(data);
+            })
+            .catch(error => console.log(error));
     }, [user_id]);
 
     const ReservationItem = ({ reservation }) => (
@@ -89,19 +84,19 @@ console.log(user_id)
                     </header>
                 </div>
                 <div className={styles.selectContainer}>
-                        <select className={styles.searchDate} onChange={e => e.target.value}>
-                            <option value="all">기간별 검색</option>
-                            <option disabled>============</option>
-                            <option value="7">최근 7일</option>
-                            <option value="15">최근 15일</option>
-                            <option value="30">최근 30일</option>
-                        </select>
+                    <select className={styles.searchDate} onChange={e => e.target.value}>
+                        <option value="all">기간별 검색</option>
+                        <option disabled>============</option>
+                        <option value="7">최근 7일</option>
+                        <option value="15">최근 15일</option>
+                        <option value="30">최근 30일</option>
+                    </select>
                 </div>
-                {pastReservations.map((reservation) => (
-                    <ReservationItem reservation={reservation} key={reservation.id}/>
+                {BookingDTO.map((reservation) => (
+                    <ReservationItem reservation={reservation} key={reservation.id} />
                 ))}
             </Box>
-            <FooterMenu/>
+            <FooterMenu />
         </div>
     );
 };

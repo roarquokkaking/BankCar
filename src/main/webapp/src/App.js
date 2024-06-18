@@ -36,11 +36,17 @@ import KaKaoPay from './components/payment/KaKaoPay';
 import KaKaoPaySuccess from './components/payment/KaKaoPaySuccess';
 import NaverPay from './components/payment/NaverPay';
 import NaverPayCompletion from './components/payment/NaverPayCompletion';
+import Bookingbefore from "./components/profile/CSS/bookingbefore";
+import CheckUseBeforeCard from "./components/profile/checkUseBefore/CheckUseBeforeCard";
+import CheckUseBefore from "./components/profile/checkUseBefore/CheckUseBefore";
+import UseNow from "./components/profile/UseNow";
 
 function Detail() {
   return null;
 }
 const queryClient = new QueryClient();
+
+
 function App() {
   return (
 
@@ -76,6 +82,7 @@ function App() {
             </Route>
             <Route path="/profile">
               <Route index element={<ProfileMain />} />
+              <Route path="checkusebefore" element={<CheckUseBefore/>}/>
               <Route path="reservedCars" element={<ReservedCars />} />
               <Route path="usedCarReviews" element={<UsedCarReviews />} />
               <Route path="checkMyCar" element={<CheckMyCar/>} />
@@ -86,6 +93,7 @@ function App() {
               <Route path="myRating" element={<MyRating/>}/>
               <Route path="bookingDetails" element={<BookingDetails/>} />
               <Route path="Details" element={<Details/>} />
+              <Route path="useNow" element={<UseNow/>}/>
             </Route>
             <Route path='/car/new' element={<RegisterMain />} />
             <Route path='/car/driver' element={<DriverLicense />} />

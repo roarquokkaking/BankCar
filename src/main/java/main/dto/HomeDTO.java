@@ -1,20 +1,20 @@
 package main.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.apache.kafka.common.security.auth.Login;
 import org.joda.time.DateTime;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Setter
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class HomeDTO {
-    private Long booking_id;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private String days;
     private List<String> locationImages;
     private double rating;
@@ -24,5 +24,13 @@ public class HomeDTO {
 
     private DateTime start_date;
     private DateTime end_date;
+
+
+
+    private LocalTime startTime;
+    private LocalTime endTime ;
+
+    private Long serviceCarId;
+
 
 }

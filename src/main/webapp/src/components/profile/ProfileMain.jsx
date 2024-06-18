@@ -25,6 +25,9 @@ const ProfileMain = () => {
     const navigate = useNavigate();
     const driverYN = useSelector((state)=>state.Login.driver);
     const user_id = useSelector(state => state.Login.id)
+    const userName = useSelector(state => state.Login.name)
+    const profileImage = useSelector(state => state.Login.profile_image);
+    const userEmail  = useSelector(state => state.Login.email);
     const newDriverYN = driverYN==="true";
     const onToCarNew = () => {
         navigate('/car/new');
@@ -36,17 +39,27 @@ const ProfileMain = () => {
                 <header>
                     <h1>프로필</h1>
                 </header>
-                <Link  to={`/profile/myprofile/${user_id}`}>
+                <Link  to={`https://dongwoossltest.shop/api/profile/myprofile/${user_id}`} className="user-profile">
                 <section className="user-info">
                     <div className="user-img-name">
-                        <img
-                            src="https://wrtn-image-user-output.s3.ap-northeast-2.amazonaws.com/6631b6db962f730c6207b3c2/fd53f817-13a7-482c-9492-26a270549528.png"
-                            alt="유저 이미지"
-                            className="user-image"
-                        />
+                        {
+                            profileImage ?
+                                <img
+                                    src={profileImage}
+                                    alt="유저 이미지"
+                                    className="user-image"
+                                /> :
+                                <img
+                                    src={`${process.env.PUBLIC_URL}/image/nullImage2.png`}
+                                    alt="유저 이미지"
+                                    className="user-image"
+                                />
+                        }
+
+
                         <div className="text-info">
-                            <h4>사용자 이름</h4>
-                            <p>user@example.com</p>
+                            <h4>{userName}</h4>
+                            <p>{userEmail}</p>
                         </div>
                     </div>
                     <div style={{marginRight: "10px"}}>
@@ -92,7 +105,7 @@ const ProfileMain = () => {
                 </button>
                 <ul className="profile-actions">
                     <li>
-                        <Link to={`/profile/usebefore/${user_id}`}>
+                        <Link to={`/profile/checkUseBefore/${user_id}`}>
                             예약한 자동차 보기
                             <div style={{marginRight: "10px"}}>
                                 <ArrowForwardIosIcon/>
