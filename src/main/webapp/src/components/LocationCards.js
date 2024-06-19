@@ -85,7 +85,7 @@ const LocationCards = () => {
                 setSearchDTO(updatedSearchDTO);
 
                 if (updatedSearchDTO.startDate && updatedSearchDTO.endDate && updatedSearchDTO.startTime && updatedSearchDTO.endTime) {
-                    const response = await axios.get("http://localhost:8080/searching/searchList", { params: updatedSearchDTO });
+                    const response = await axios.get("https://dongwoossltest.shop/api/searching/searchList", { params: updatedSearchDTO });
                     setSearchData(response.data);
                 } else {
                     setSearchData([]);
@@ -100,19 +100,11 @@ const LocationCards = () => {
         fetchLocations();
     }, [location.search]);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (!searchData.length) {
-        return <div>자료가 없습니다.</div>;
-    }
-
     const handleHeartClick = async (carId,index) => {
         setLoading(true);
         try {
             const response =
-                await axios.post(`https://dongwoossltest.shop/api//WishList/wish/toggle/${user_id}/${carId}`);//${carId}
+                await axios.post(`https://dongwoossltest.shop/api/WishList/wish/toggle/${user_id}/${carId}`);//${carId}
             setCards(response.data);
 
             // 하트 클릭 상태 업데이트
@@ -142,13 +134,7 @@ const LocationCards = () => {
 
     // }, []);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
 
-    if (!newLocations.length) {
-        return <div>자료가 없습니다.</div>;
-    }
 
     return (
         <Box sx={{ mx: 2 }}>
