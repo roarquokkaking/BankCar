@@ -84,6 +84,9 @@ public class Car {
     //이와 관련된 모든 WishList 엔티티들도 함께 삭제
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
     private List<WishListEntity> wishLists;
+
+//    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
+//    private List<ReviewEntity> reviewLists;
 //
     //@PrePersist - 데이터베이스에 INSERT 쿼리가 실행되기 전에 호출되는 메서드를 정의할 때 사용
     @PrePersist

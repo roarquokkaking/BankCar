@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
 import axios from "axios";
 
-const ChoiceData = () => {
+const ChoiceData = ({ setChoicedata }) => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const [choiceDTO, setChoiceDTO] = useState({
@@ -22,7 +22,7 @@ const ChoiceData = () => {
         const fetchData = async () => {
             try {
                 console.log(choiceDTO);
-                const response = await axios.get("http://localhost:8080/choice/choicedata", {
+                const response = await axios.get("https://dongwoossltest.shop/api/choice/choicedata", {
                     params: {
                         carId: choiceDTO.carId
                     }
@@ -35,7 +35,7 @@ const ChoiceData = () => {
         };
 
         fetchData();
-    }, [choiceDTO]); // 의존성 배열에 choiceDTO 추가
+    }, [choiceDTO, setChoicedata]); // 의존성 배열에 choiceDTO 추가
 
     return (
         <>
