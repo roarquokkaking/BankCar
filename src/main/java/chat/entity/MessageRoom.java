@@ -1,14 +1,11 @@
 package chat.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
-import login.dto.LoginDTO;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashSet;
+import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 @Getter
 @Setter
 @Entity

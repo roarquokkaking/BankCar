@@ -1,15 +1,12 @@
 package chat.service;
 
 import chat.entity.Message;
-import chat.entity.MessageRoom;
 import chat.repository.MessageRepository;
 import chat.repository.MessageRoomRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MessageServiceImpl implements MessageService {

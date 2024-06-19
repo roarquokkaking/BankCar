@@ -2,10 +2,11 @@ package wishList.entity;
 
 import car.entity.Car;
 import car.entity.CarImages;
-import jakarta.persistence.*;
 import login.dto.LoginDTO;
 import lombok.*;
 import wishList.dto.WishListDTO;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "wishList")
