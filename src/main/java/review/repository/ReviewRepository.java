@@ -39,5 +39,5 @@
 //            "AND r.review_id =: reviewId" )
 //    Optional<ReviewEntity> findDeleteReview(@Param("user_id") String userId ,@Param("review_id")Long review_id);
 //
-//
+//    List<ReviewEntity> findByCar_CarId(Long carId);
 //}
