@@ -56,7 +56,7 @@ public class BookingServiceImpl implements BookingService {
                                 .rating(bookingEntity.getLoginDTO().getRating())
                                 .startTime(bookingEntity.getStart_time())
                                 .endTime(bookingEntity.getEnd_time())
-                                .imageUrl(bookingEntity.getCarImages().getMain_image())
+                                .imageUrl(bookingEntity.getCar().getCarImages().getMain_image())
                                 .build();
                         userBeforeDTOList.add(userBeforeDTO);
                     }

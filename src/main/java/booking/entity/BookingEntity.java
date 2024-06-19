@@ -67,9 +67,9 @@ public class BookingEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Car car;
 
-    @JoinColumn(name="carImage_id")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private CarImages carImages;
+//    @JoinColumn(name="carImage_id")
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private CarImages carImages;
 
 
     public void setBookingStatus(BookingEntity booking) {
