@@ -27,7 +27,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/user", produces = "application/json")
-@CrossOrigin(origins="https://dongwoossltest.shop")
+@CrossOrigin(origins="http://localhost:3000",allowCredentials = "true")  // https://dongwoossltest.shop
 public class NaverLoginController {
     @Autowired
     private NaverLoginService naverLoginService;

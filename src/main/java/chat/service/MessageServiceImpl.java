@@ -34,8 +34,8 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<Message> findByMessageRoom_RoomSeq(Long roomseq) {
-        return messageRepository.findByMessageRoom_RoomSeq(roomseq);
+    public List<Message> findByMessageRoom_RoomSeq(Long roomSeq) {
+        return messageRepository.findByMessageRoom_RoomSeq(roomSeq);
     }
 
 }

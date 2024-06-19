@@ -16,7 +16,7 @@ import java.util.*;
 
 
 //@CrossOrigin(origins = "http://localhost:3000")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://dongwoossltest.shop")
 @RestController
 @RequestMapping("/api/messages")
 public class ChatController {
@@ -79,10 +79,10 @@ public class ChatController {
         }
     }
 
-    @GetMapping("/roomseq/{roomseq}")
-    public ResponseEntity<List<Message>> getMessagesByRoomSeq(@PathVariable Long roomseq) {
+    @GetMapping("/roomseq/{roomSeq}")
+    public ResponseEntity<List<Message>> getMessagesByRoomSeq(@PathVariable Long roomSeq) {
         try {
-            List<Message> messages = messageService.findByMessageRoom_RoomSeq(roomseq);
+            List<Message> messages = messageService.findByMessageRoom_RoomSeq(roomSeq);
             return ResponseEntity.ok(messages);
         } catch (Exception e) {
             e.printStackTrace();

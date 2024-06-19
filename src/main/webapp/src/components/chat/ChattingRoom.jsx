@@ -45,14 +45,16 @@ const ChattingRoom = () => {
             .then(response => {
                 const userData = response.data;
                 setUserName(userData.name);
-                setProfileImage(userData.profile_image);
+                setProfileImage(userData.profile_image.replace('http://', 'https://')); // 이미지 URL을 HTTPS로 변경
                 console.log(response.data);
             })
             .catch(error => console.error("Error fetching user data:", error));
 
-        return () => {
-            stompClient.current.disconnect();
-        };
+            return () => {
+                if (stompClient.current) {
+                    stompClient.current.disconnect();
+                }
+            };
     }, [roomSeq]);
 
     useEffect(() => {

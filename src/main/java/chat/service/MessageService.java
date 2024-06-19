@@ -10,5 +10,6 @@ public interface MessageService {
 
     List<Message> getAllMessages();
 
-    List<Message> findByMessageRoom_RoomSeq(Long roomseq);
+    List<Message> findByMessageRoom_RoomSeq(Long roomSeq);
+
 }
