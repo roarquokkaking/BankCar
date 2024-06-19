@@ -25,10 +25,12 @@ public class CarRegistrationServiceImpl implements CarRegistrationService{
     @Override
     public void saveCarImages(CarImages carImages, List<String> carImagesUUID) {
 
-        if(carImagesUUID.size() > 0) carImages.setImage1(carImagesUUID.get(0));
-        else if(carImagesUUID.size() > 1) carImages.setImage2(carImagesUUID.get(1));
-        else if(carImagesUUID.size() > 2) carImages.setImage3(carImagesUUID.get(2));
-        else if(carImagesUUID.size() > 3) carImages.setImage4(carImagesUUID.get(3));
+        if(carImagesUUID.size() > 0) carImages.setMain_image(carImagesUUID.get(0));
+        if(carImagesUUID.size() > 1) carImages.setImage1(carImagesUUID.get(1));
+        if(carImagesUUID.size() > 2) carImages.setImage2(carImagesUUID.get(2));
+        if(carImagesUUID.size() > 3) carImages.setImage3(carImagesUUID.get(3));
+        if(carImagesUUID.size() > 4) carImages.setImage3(carImagesUUID.get(4));
+
 
         carImageRepository.save(carImages);
     }

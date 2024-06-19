@@ -1,17 +1,16 @@
 package car.entity;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
-@Table(name = "CAR_SERVICE")
+@Table(name = "SERVICE_CAR")
 @Data
 @Builder
 @AllArgsConstructor

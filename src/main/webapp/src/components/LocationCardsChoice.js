@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { locations as cardLocations } from '../data/mock-data';
 import { Box as MuiBox } from '@mui/material';
-import { carouselImage } from '../../themes/commonStyles';
+import { carouselImage } from '../themes/commonStyles';
 import SwipeableViews from "react-swipeable-views-react-18-fix";
 
 const LocationCardsChoice = () => {

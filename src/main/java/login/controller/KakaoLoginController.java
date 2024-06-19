@@ -1,7 +1,7 @@
 package login.controller;
 
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 import login.dto.LoginDTO;
 import login.service.KakaoLoginService;
 import org.springframework.beans.factory.annotation.Autowired;

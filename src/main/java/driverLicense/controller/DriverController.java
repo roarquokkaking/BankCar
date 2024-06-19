@@ -5,16 +5,15 @@ import driverLicense.entity.DriverEntity;
 import driverLicense.service.DriverService;
 import driverLicense.service.NCPObjectStorageService;
 import driverLicense.service.ObjectStorageService;
-import jakarta.servlet.http.HttpSession;
 import login.dto.LoginDTO;
 import login.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

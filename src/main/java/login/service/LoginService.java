@@ -1,6 +1,6 @@
 package login.service;
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 import login.dto.LoginDTO;
 
 import java.util.Optional;
