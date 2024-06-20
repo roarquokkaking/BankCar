@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'; 
 import { useNavigate} from 'react-router-dom';
+import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import '../../CSS/SearchCSS.css';
@@ -61,8 +62,6 @@ const Searching = () => {
         endtime:''
     });
 
-    const navigate = useNavigate();
-
     const onSearch = () => {
         let isValid = true;
         let newValidationMessages = { date: '', starttime: '', endtime: '' };
@@ -83,8 +82,11 @@ const Searching = () => {
         setValidationMessages(newValidationMessages);
 
         if (isValid) {
-            const params = new URLSearchParams(searchDTO).toString();
-            navigate(`/?${params}`);
+            axios.post("https://dongwoossltest.shop/api/searching/searchList", null, { params: searchDTO })
+                .then(res => {
+                    console.log(res.data);
+                })
+                .catch(error => console.log(error));
         }
     };
 

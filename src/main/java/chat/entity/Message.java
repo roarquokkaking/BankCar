@@ -1,9 +1,9 @@
 package chat.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import login.dto.LoginDTO;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity

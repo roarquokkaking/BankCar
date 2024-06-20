@@ -3,6 +3,7 @@ package user.controller;
 
 import driverLicense.service.NCPObjectStorageService;
 import driverLicense.service.ObjectStorageService;
+import jakarta.servlet.http.HttpSession;
 import login.dto.LoginDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,7 +16,6 @@ import org.springframework.web.server.ResponseStatusException;
 import user.dto.UserProfileDTO;
 import user.service.UserProfileService;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 

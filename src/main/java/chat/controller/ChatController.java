@@ -4,6 +4,7 @@ import chat.entity.Message;
 import chat.entity.MessageRoom;
 import chat.repository.MessageRoomRepository;
 import chat.service.MessageService;
+import jakarta.servlet.http.HttpSession;
 import login.dto.LoginDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
