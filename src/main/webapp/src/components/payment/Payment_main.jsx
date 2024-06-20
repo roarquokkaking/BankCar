@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState,useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate,useLocation } from 'react-router-dom';
 import { GoArrowLeft } from "react-icons/go";
 import { IoCard } from "react-icons/io5";
 import './Payment.css'
