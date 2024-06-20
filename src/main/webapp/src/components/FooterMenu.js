@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {FaRegHeart, FaRegUserCircle, FaHome} from "react-icons/fa";
+import { BsChatRightDots  } from "react-icons/bs";
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
@@ -27,10 +28,17 @@ const footerMenu = [
     },
     {
         id: 5,
+        text: "채팅목록",
+        icon: <BsChatRightDots  size={18}/>,
+        path: "/ChattingList",
+    },
+    {
+        id: 6,
         text: "프로필",
         icon: <FaRegUserCircle size={18}/>,
         path: "/profile",
     },
+   
 
 ];
 
@@ -38,7 +46,9 @@ const FooterMenu = () => {
     const [selected, setSelected] = useState(1);
     const id = useSelector((state) => state.Login.id);
 
-    const footerMenuFilter = id ? footerMenu.filter(item => item.id !== 2 && item.id!==4) : footerMenu.filter(item => item.id !== 3 &&item.id !==5);
+    const footerMenuFilter = id ?
+        footerMenu.filter(item => [1, 3, 5, 6].includes(item.id)) :
+        footerMenu.filter(item => [1, 2, 4].includes(item.id));
 
     return (
         <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0}} elevation={3}>
