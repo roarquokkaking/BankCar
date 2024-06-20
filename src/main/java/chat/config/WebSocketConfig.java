@@ -15,7 +15,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/api/chattingroom").setAllowedOrigins("https://dongwoossltest.shop").withSockJS();
+        registry.addEndpoint("/api/ChattingRoom/{roomSeq}") // WebSocket 엔드포인트 설정
+                .setAllowedOrigins("https://dongwoossltest.shop").withSockJS();
     }
 
 //    @Override
@@ -26,7 +27,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         registry.enableSimpleBroker("/topic");
-        registry.setApplicationDestinationPrefixes("/api/messages");
+        registry.setApplicationDestinationPrefixes("/app");
     }
 
 

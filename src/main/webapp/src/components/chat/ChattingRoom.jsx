@@ -38,15 +38,17 @@ const ChattingRoom = () => {
 
         fetchData();
     
-        socket.current = new SockJS('https://dongwoossltest.shop/api/chattingroom');
+        socket.current = new SockJS(`https://dongwoossltest.shop/api/ChattingRoom/${roomSeq}`);
         // socket.current = new SockJS('http://localhost:8080/ws');
         stompClient.current = Stomp.over(socket.current);
 
         stompClient.current.connect({}, () => {
-            stompClient.current.subscribe(`/topic/public/${roomSeq}`, (message) => {
+            stompClient.current.subscribe(`/topic/public`, (message) => {
                 const receivedMessage = JSON.parse(message.body);
-                console.log('받은 메세지:', receivedMessage);
-                setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+                if (receivedMessage.roomSeq === roomSeq) {
+                    console.log('받은 메세지:', receivedMessage);
+                    setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+                }
             });
         });
         return () => {
@@ -55,7 +57,7 @@ const ChattingRoom = () => {
                 console.log('WebSocket 연결 해제');
             }
         };
-    }, []);
+    }, [roomSeq]);
 
     useEffect(() => {
         scrollToBottom();
@@ -65,46 +67,46 @@ const ChattingRoom = () => {
         messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
-    // const handleSend = async () => {
-    //     try {
-    //         // 디버깅을 위해 변수 로그 추가
-    //         console.log('userName:', userName);
-    //         console.log('roomseq:', roomSeq);
+    const handleSend = async () => {
+        try {
+            // 디버깅을 위해 변수 로그 추가
+            console.log('userName:', userName);
+            console.log('roomseq:', roomSeq);
     
-    //         const messageObj = {
-    //             sender: userName,
-    //             content: message,
-    //             timestamp: new Date().toISOString(),
-    //             messageRoom: { roomSeq: roomSeq }
-    //         };
-    //         console.log('Sending message:', messageObj); // 디버깅을 위해 로그 추가
-    //         const response = await axios.post('https://dongwoossltest.shop/api/messages/send', messageObj, { withCredentials: true });
-    //         // const response = await axios.post('http://localhost:8080/api/messages/send', messageObj, { withCredentials: true });
-    //         console.log('Message sent successfully', response.data);
-
-    //         setMessages((prevMessages) => [...prevMessages, response.data]);
-    //         setMessage('');
-    //     } catch (error) {
-    //         console.error('Error handling send:', error);
-    //     }
-    // };
-
-    const handleSend = () => {
-        if (stompClient.current && stompClient.current.connected) {
             const messageObj = {
                 sender: userName,
                 content: message,
                 timestamp: new Date().toISOString(),
                 messageRoom: { roomSeq: roomSeq }
             };
-            console.log('보내는 메시지:', messageObj);
-            stompClient.current.send("/api/messages/send", {}, JSON.stringify(messageObj));
+            console.log('Sending message:', messageObj); // 디버깅을 위해 로그 추가
+            const response = await axios.post('https://dongwoossltest.shop/api/messages/send', messageObj, { withCredentials: true });
+            // const response = await axios.post('http://localhost:8080/api/messages/send', messageObj, { withCredentials: true });
+            console.log('Message sent successfully', response.data);
+
+            setMessages((prevMessages) => [...prevMessages, response.data]);
             setMessage('');
-            // setMessages((prevMessages) => [...prevMessages, response.data]);
-        } else {
-            console.error('WebSocket 클라이언트가 연결되지 않았습니다.');
+        } catch (error) {
+            console.error('Error handling send:', error);
         }
     };
+
+    // const handleSend = () => {
+    //     if (stompClient.current && stompClient.current.connected) {
+    //         const messageObj = {
+    //             sender: userName,
+    //             content: message,
+    //             timestamp: new Date().toISOString(),
+    //             messageRoom: { roomSeq: roomSeq }
+    //         };
+    //         console.log('보내는 메시지:', messageObj);
+    //         stompClient.current.send("/api/messages/send", {}, JSON.stringify(messageObj));
+    //         setMessage('');
+    //         // setMessages((prevMessages) => [...prevMessages, response.data]);
+    //     } else {
+    //         console.error('WebSocket 클라이언트가 연결되지 않았습니다.');
+    //     }
+    // };
 
     const formatTimestamp = (sentTime) => {
         const date = moment.utc(sentTime).toDate();
