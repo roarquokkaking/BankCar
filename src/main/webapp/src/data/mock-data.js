@@ -57,7 +57,7 @@ export const Locations =()=>{
         })
         //  .then(res=>console.log(res.data))
 
-        },[])
+        },[label])
 
 
         
