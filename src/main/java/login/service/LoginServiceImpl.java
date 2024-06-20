@@ -1,6 +1,7 @@
 package login.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import jakarta.servlet.http.HttpSession;
 import login.dao.LoginDAO;
 import login.dto.LoginDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpSession;
+import javax.swing.text.StyledEditorKit;
 import java.util.Optional;
 
 @Transactional

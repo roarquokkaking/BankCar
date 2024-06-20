@@ -1,5 +1,8 @@
 package user.dto;
 
+import booking.entity.BookingEntity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,10 +1,9 @@
 package car.entity;
 
 import booking.entity.BookingEntity;
+import jakarta.persistence.*;
 import lombok.Data;
 import wishList.entity.WishListEntity;
-
-import javax.persistence.*;
 
 @Entity
 @Data
