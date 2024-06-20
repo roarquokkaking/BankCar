@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './css/payment.module.css';
 
 const KaKaoPaySuccess = () => {
     const location=useLocation();
+    const navigate=useNavigate();
     const params=new URLSearchParams(location.search);
     const [pg_token,setPg_token]=useState('');
     const [payDetail,setPayDetail]=useState({});
@@ -77,8 +78,8 @@ const KaKaoPaySuccess = () => {
           <br></br>
         </div>
         <br></br>
-        <button className={styles["home-button"]} onClick={() => window.location.href = '/'}>
-          홈
+        <button className={styles["home-button"]} onClick={() => navigate('/')}>
+          확인
         </button>
       </div>
     </div>
