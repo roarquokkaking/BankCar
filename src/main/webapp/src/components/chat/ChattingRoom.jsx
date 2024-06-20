@@ -38,12 +38,12 @@ const ChattingRoom = () => {
 
         fetchData();
     
-        socket.current = new SockJS(`https://dongwoossltest.shop/api/ChattingRoom/${roomSeq}`);
+        socket.current = new SockJS('https://dongwoossltest.shop/api/ChattingRoom');
         // socket.current = new SockJS('http://localhost:8080/ws');
         stompClient.current = Stomp.over(socket.current);
 
         stompClient.current.connect({}, () => {
-            stompClient.current.subscribe(`/topic/public`, (message) => {
+            stompClient.current.subscribe('/topic/public', (message) => {
                 const receivedMessage = JSON.parse(message.body);
                 if (receivedMessage.roomSeq === roomSeq) {
                     console.log('받은 메세지:', receivedMessage);
