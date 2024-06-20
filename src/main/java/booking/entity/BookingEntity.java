@@ -72,6 +72,9 @@ public class BookingEntity {
 //    private CarImages carImages;
 
 
+
+    //===== 서비스 구현 =====//
+
     public void setBookingStatus(BookingEntity booking) {
         LocalDate now = LocalDate.now();
 

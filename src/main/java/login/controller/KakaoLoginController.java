@@ -15,7 +15,7 @@ import java.util.Map;
 
 @CrossOrigin(origins="https://dongwoossltest.shop")    // 다른 포트에서 넘오는 것을 받을 수 있다.
 @RestController
-@RequestMapping(produces = "application/json")
+@RequestMapping(path="/api/",produces = "application/json")
 public class KakaoLoginController {
 
     @Autowired
