@@ -1,12 +1,16 @@
 package choice.service;
 
-import choice.dto.CombineDTO;
+import car.entity.Car;
+import login.dto.LoginDTO;
+import review.entity.ReviewEntity;
+
+import java.util.List;
 
 public interface ChoiceService {
 
-    CombineDTO getCarInfo(Long carId);
+    Car getCarInfo(Long carId);
 
-//    List<CombineDTO> getReviewsByCarId(Long carId);
+    LoginDTO getHostInfo(String userId);
 
-    CombineDTO getUserInfo(String userId);
+    List<ReviewEntity> getReviewsByCarId(Long carId);
 }

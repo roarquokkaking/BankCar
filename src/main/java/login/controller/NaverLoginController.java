@@ -5,6 +5,8 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import login.dto.LoginDTO;
 import login.service.LoginService;
 import login.service.NaverLoginService;
@@ -15,8 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -27,7 +27,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/user", produces = "application/json")
-@CrossOrigin(origins="http://localhost:3000",allowCredentials = "true")  // https://dongwoossltest.shop
+@CrossOrigin(origins= {"http://localhost:3000", "https://dongwoossltest.shop"},allowCredentials = "true")  // https://dongwoossltest.shop
 public class NaverLoginController {
     @Autowired
     private NaverLoginService naverLoginService;

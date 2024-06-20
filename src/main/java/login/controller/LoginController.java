@@ -1,6 +1,6 @@
 package login.controller;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 import login.dto.LoginDTO;
 import login.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;

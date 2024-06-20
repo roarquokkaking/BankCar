@@ -73,6 +73,17 @@
     margin-bottom: 16px;
 }
 
+.car-description {
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: #000;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
 .usage-time {
     font-size: 16px;
     font-family: 'Inter', sans-serif;

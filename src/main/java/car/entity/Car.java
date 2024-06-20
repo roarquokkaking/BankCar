@@ -1,12 +1,12 @@
 package car.entity;
 
+import jakarta.persistence.*;
 import login.dto.LoginDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import wishList.entity.WishListEntity;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class Car {
     private Long carId;
 
     // fetch = FetchType.LAZY는 지연 로딩 전략을 사용하여 관련 엔티티를 필요할 때만 불러오도록 설정합니다.
-    @ManyToOne(fetch = FetchType.LAZY)  // user 테이블과 다대일(Many-to-One)
+    @ManyToOne // user 테이블과 다대일(Many-to-One)
     @JoinColumn(name = "id", nullable = false)
     private LoginDTO user;
 
@@ -84,9 +84,6 @@ public class Car {
     //이와 관련된 모든 WishList 엔티티들도 함께 삭제
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
     private List<WishListEntity> wishLists;
-
-//    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
-//    private List<ReviewEntity> reviewLists;
 //
     //@PrePersist - 데이터베이스에 INSERT 쿼리가 실행되기 전에 호출되는 메서드를 정의할 때 사용
     @PrePersist

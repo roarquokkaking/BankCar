@@ -14,7 +14,7 @@ import UsedCarReviews from './components/profile/UsedCarReviews';
 import CheckMyCar from './components/profile/checkCar/CheckMyCar';
 import RegisterMain from './components/register/RegisterMain';
 import {Provider} from 'react-redux';
-import store from './store/store';
+import {store,persistor} from './store/store';
 import Payment_main from './components/payment/Payment_main';
 import DriverLicense from './components/register/driverLicense/DriverLicense';
 import DriverCheck from './components/register/driverLicense/DriverCheck';
@@ -42,10 +42,10 @@ import CheckUseBefore from "./components/profile/checkUseBefore/CheckUseBefore";
 import UseNow from "./components/profile/UseNow";
 import NaverLogin from "./components/login/NaverLogin";
 import ChattingList from './components/chat/ChattingList';
+import UseReview from "./components/profile/UseReview";
+import UserReview from "./components/review/UserReview";
+import { PersistGate } from 'redux-persist/integration/react';
 
-function Detail() {
-  return null;
-}
 const queryClient = new QueryClient();
 
 
@@ -64,6 +64,7 @@ function App() {
           }}
         >
           <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/searching" element={<Searching />} />
@@ -85,7 +86,7 @@ function App() {
             </Route>
             <Route path="/profile">
               <Route index element={<ProfileMain />} />
-              <Route path="checkusebefore" element={<CheckUseBefore/>}/>
+              <Route path="checkusebefore/:user_id" element={<CheckUseBefore/>}/>
               <Route path="reservedCars" element={<ReservedCars />} />
               <Route path="usedCarReviews" element={<UsedCarReviews />} />
               <Route path="checkMyCar" element={<CheckMyCar/>} />
@@ -97,6 +98,8 @@ function App() {
               <Route path="bookingDetails" element={<BookingDetails/>} />
               <Route path="Details" element={<Details/>} />
               <Route path="useNow" element={<UseNow/>}/>
+              <Route path="useReview/:user_id" element={<UseReview/>}/>
+              <Route path="userReview" element={<UserReview/>}/>
             </Route>
             <Route path='/car/new' element={<RegisterMain />} />
             <Route path='/car/driver' element={<DriverLicense />} />
@@ -114,6 +117,7 @@ function App() {
             <Route path='/ChattingList' element={<ChattingList />} />
 
           </Routes>
+          </PersistGate>
           </Provider>
         </Box>
       </BrowserRouter>

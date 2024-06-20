@@ -16,6 +16,7 @@ import { FaCar, FaMotorcycle, FaTruck } from 'react-icons/fa';
 import { MdOutlineElectricalServices } from "react-icons/md";
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 
 
@@ -36,12 +37,13 @@ export const categoryTab = [
 
 export const Locations =()=>{ 
 
+  const label = useSelector((state)=>state.Option.id);
   const [carData,setCarData]=useState([]);
-    
-  
+  console.log("label="+label);
+
     useEffect(()=>{
 
-          // https://dongwoossltest.shop/api
+
           axios.get("http://localhost:8080/cars/getcardata")
           .then(res=>{
             setCarData(res.data);
@@ -50,42 +52,55 @@ export const Locations =()=>{
             // return axios.get("http://localhost:8080/api/cars/getcarservicedata")
         })
         //  .then(res=>console.log(res.data))
-        
+
         },[])
 
 
-
+        
  
-  return carData.map((item,index)=>(
+  return carData.map((item,index)=>{
+    const locationImages = [];
 
-    {
+    if (item[6]) {
+      locationImages.push({
+        id: 1,
+        url: `https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/${item[6]}`,
+      });
+    }
+  
+    if (item[7]) {
+      locationImages.push({
+        id: 2,
+        url: `https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/${item[7]}`,
+      });
+    }
+  
+    if (item[8]) {
+      locationImages.push({
+        id: 3,
+        url: `https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/${item[8]}`,
+      });
+    }
+  
+    if (item[9]) {
+      locationImages.push({
+        id: 4,
+        url: `https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/${item[9]}`,
+      });
+    }
+
+
+    return {
       id: index+1,
-      locationImages: [
-        {
-          id: 1,
-          url: 'https://images.unsplash.com/photo-1600240644455-3edc55c375fe?auto=format&fit=crop&w=400&h=250&q=60',
-        },
-        {
-          id: 2,
-          url: 'https://images.unsplash.com/photo-1653408400816-af6dba0c9432?auto=format&fit=crop&w=400&h=250&q=60',
-        },
-        {
-          id: 3,
-          url: 'https://images.unsplash.com/photo-1653312727964-736f11663ef6?auto=format&fit=crop&w=400&h=250&q=80',
-        },
-        {
-          id: 4,
-          url: 'https://images.unsplash.com/photo-1629447236132-22c57cd0f0bf?auto=format&fit=crop&w=400&h=250&q=60',
-        },
-      ],
-      location: item[0].doroAddress,
-      days: `${item[1].startDate} ~ ${item[1].endDate}`,
-      price: `${item[0].price}원/시간`,
+      locationImages:locationImages ,
+      location: item[4],
+      days: `${item[2]} ~ ${item[3]}`,
+      price: `${item[0]}원/시간`,
       isNew: false,
-      rating: item[0].rating===0?'0.0':item[0].rating,
-    
-
-  }));
+      rating: item[5]===0?'0.0':item[5],
+      car_id:item[1]
+  }
+});
     
       
     

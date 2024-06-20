@@ -3,7 +3,7 @@ import { Card, CardActions, CardContent, CardMedia, Button, Typography, Chip } f
 import styles from "./CheckMyCar.module.css"
 
 export default function RegisterCarCard({ car, onAddService }) {
-    const imageUrl = "https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/"+ car.carId +"/"+ car.image1;
+    const imageUrl = "https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/" + car.carImages.main_image;
     console.log(imageUrl)
     return (
         <div>

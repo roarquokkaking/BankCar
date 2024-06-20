@@ -1,12 +1,11 @@
 import {Box, Button, Container, createTheme, styled} from '@mui/material';
 import SearchIcon from "@mui/icons-material/Search";
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import OptionsTab from './OptionsTab';
-import LocationCards from './LocationCards';
+import LocationCards from './choice/LocationCards';
 import MobileFooter from './MobileFooter';
 import FooterMenu from "./FooterMenu";
-import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const Home = () => {

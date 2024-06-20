@@ -1,5 +1,5 @@
 import React from 'react';
-import './Payment.css';
+import './Payment.module.css';
 import axios from 'axios';
 
 const NaverPay = () => {

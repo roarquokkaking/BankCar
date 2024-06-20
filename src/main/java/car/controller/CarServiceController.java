@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins= {"http://localhost:3000", "https://dongwoossltest.shop"})
 @RestController
 @RequestMapping(path = "/api")
 public class CarServiceController {
@@ -23,7 +23,7 @@ public class CarServiceController {
 
     // 자동차 서비스 등록 api
     @PostMapping(path = "/cars/{carId}/service")
-    public ResponseEntity<ServiceCar> insertCarService(@PathVariable Long carId,
+    public ResponseEntity<ServiceCar> insertCarService(@PathVariable(value = "carId") Long carId,
                                                        @RequestBody ServiceCarDTO serviceCarDTO){
         System.out.println("CarServiceController start");
         Car car = carService.findCarById(carId);
@@ -40,10 +40,13 @@ public class CarServiceController {
     }
 
 
+
     @GetMapping(path = "/cars/getcardata")
     public List<Object[]> getcardata(){
         return carService.getCarData();
     }
+
+
 
 
 }

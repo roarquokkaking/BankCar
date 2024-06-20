@@ -6,10 +6,10 @@ import car.entity.ServiceCar;
 import car.repo.CarImageRepository;
 import car.repo.CarRepository;
 import car.repo.ServiceCarRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -51,7 +51,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<Car> getCarsByUserId(String userId) {
-        return carRepository.findByUserId(userId);
+       return carRepository.getCarsByUserId(userId);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<Object[]> getCarData() {
-        return carRepository.findAllOrderByIdDesc();
+        return serviceCarRepository.findAllOrderByIdDesc();
     }
 
 

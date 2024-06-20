@@ -1,34 +1,47 @@
 package choice.controller;
 
-import choice.dto.CombineDTO;
+import car.entity.Car;
 import choice.service.ChoiceService;
+import login.dto.LoginDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import review.entity.ReviewEntity;
 
-@CrossOrigin(origins="http://localhost:3000") //https://dongwoossltest.shop
+import java.util.List;
+
+@CrossOrigin
 @RestController
 @RequestMapping(path = "choice", produces = "application/json")
 public class ChoiceController {
     @Autowired
     private ChoiceService choiceService;
 
-    @GetMapping("/choicedata")
-    public CombineDTO choiceData(@RequestParam Long carId) {
+    @GetMapping("/carinfo")
+    public Car choiceData(@RequestParam(name = "carId") Long carId) {
         System.out.println("************carid************ = "+carId);
-        CombineDTO carInfo = choiceService.getCarInfo(carId);
+        Car carInfo = choiceService.getCarInfo(carId);
         System.out.println("************carinfo************ = "+carInfo);
-//        List<CombineDTO> reviews = choiceService.getReviewsByCarId(carId);
+        if (carInfo.getUser() == null) {
+            throw new IllegalArgumentException("User not found for car");
+        }
+        return carInfo;
+    }
+    @GetMapping("/hostinfo")
+    public LoginDTO hostInfo(@RequestParam(name = "userId") String userId) {
+        System.out.println("************userId************ = " + userId);
+        LoginDTO hostInfo = choiceService.getHostInfo(userId);
+        System.out.println("************hostinfo************ = " + hostInfo);
 
-        CombineDTO combineDTO = new CombineDTO();
-        combineDTO.setCarInfo(carInfo.getCarInfo());
-//        combineDTO.setReviews(reviews);
+        return hostInfo;
+    }
 
-        String userId = carInfo.getCarInfo().getUser().getUserId();
-        CombineDTO userInfo = choiceService.getUserInfo(userId);
-        combineDTO.setUserInfo(userInfo.getUserInfo());
+    @GetMapping("/reviewinfo")
+    public List<ReviewEntity> reviewInfo(@RequestParam(name = "carId") Long carId) {
+        System.out.println("************carid************ = " + carId);
+        List<ReviewEntity> reviews = choiceService.getReviewsByCarId(carId);
+        System.out.println("************reviews************ = " + reviews);
 
-        System.out.println("************확인용*********** = : " + combineDTO);
-        return combineDTO;
+        return reviews;
     }
     
 }

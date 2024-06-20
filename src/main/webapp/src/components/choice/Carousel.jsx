@@ -6,8 +6,17 @@ import "slick-carousel/slick/slick-theme.css";
 import { PiArrowFatLeftFill } from "react-icons/pi";
 import { useNavigate } from 'react-router-dom';
 
-const Carousel = () => {
+const Carousel = ({image}) => {
     const navigate = useNavigate();
+
+    const images = [
+        image.image1 && `https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/${image.image1}`,
+        image.image2 && `https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/${image.image2}`,
+        image.image3 && `https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/${image.image3}`,
+        image.image4 && `https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/${image.image4}`,
+        image.main_image && `https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/${image.main_image}`
+    ].filter(image => image !== null && image !== undefined); // null 또는 undefined인 이미지 제외
+
 
     const [cards] = useState(cardLocations);
     const locationImages = cards[0].locationImages;
@@ -22,12 +31,11 @@ const Carousel = () => {
     return (
         <div style={{ position: 'relative' }}> {/* 부모 요소에 position: relative; 추가 */}
             <Slider {...settings}>
-                {locationImages.map((step, index) => (
-                    <div key={step.id}>
+                {images.map((imageUrl, index) => (
+                    <div key={index}>
                         <img
-                            src={step.url}
-                            alt={step.id}
-                            style={{ maxWidth: '100%', height: 'auto' }}
+                            src={imageUrl} alt={`Car Image ${index}`}
+                            style={{ maxWidth: '170%', height: 'auto' }}
                         />
                     </div>
                 ))}

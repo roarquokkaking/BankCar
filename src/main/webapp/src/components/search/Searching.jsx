@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'; 
 import { useNavigate} from 'react-router-dom';
+import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import '../../CSS/SearchCSS.css';
@@ -62,6 +63,11 @@ const Searching = () => {
     });
 
     const navigate = useNavigate();
+    const createURLWithParams = (baseURL, params) => {
+        const url = new URL(baseURL, window.location.origin);
+        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+        return url.toString();
+    };
 
     const onSearch = () => {
         let isValid = true;
@@ -83,8 +89,8 @@ const Searching = () => {
         setValidationMessages(newValidationMessages);
 
         if (isValid) {
-            const params = new URLSearchParams(searchDTO).toString();
-            navigate(`/?${params}`);
+            const url = createURLWithParams('/', searchDTO);
+            navigate(url);
         }
     };
 
