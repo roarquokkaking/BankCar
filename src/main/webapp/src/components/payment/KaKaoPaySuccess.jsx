@@ -36,17 +36,45 @@ const KaKaoPaySuccess = () => {
 
     return (
         <div className="App">
-              <div className="confirmation-container">
-                <div className="icon">
-                  <img src="https://via.placeholder.com/100" alt="Success Icon" />
-                </div>
-                <h1>결제가 완료되었습니다!</h1>
-                <p>주문이 성공적으로 완료되었습니다. 주문 내역은 이메일로 발송되었습니다.</p>
-                <button className="home-button" onClick={() => window.location.href = '/'}>
-                  홈으로 돌아가기
-                </button>
-              </div>
-            </div>
+      <div className="confirmation-container">
+        <div className="icon">
+          <img src="https://via.placeholder.com/100" alt="Success Icon" />
+        </div>
+        <h1>결제가 완료되었습니다!</h1>
+        <p>주문이 성공적으로 완료되었습니다. .</p>
+        
+        <div className="order-details">
+          <div className="detail-item">
+            <span className="detail-title">예약 차량:</span>
+            <span className="detail-content">{payDetail.itemName}</span>
+          </div>
+          <div className="detail-item">
+            <span className="detail-title">결제 금액:</span>
+            <span className="detail-content">{payDetail.totalAmount}</span>
+          </div>
+          <div className="detail-item">
+            <span className="detail-title">결제 방법:</span>
+            <span className="detail-content">카카오 페이</span>
+          </div>
+          <div className="detail-item">
+            <span className="detail-title">대여 주소:</span>
+            <span className="detail-content"></span>
+          </div>
+          <div className="detail-item">
+            <span className="detail-title">대여 시작일:</span>
+            <span className="detail-content"></span>
+          </div>
+          <div className="detail-item">
+            <span className="detail-title">대여 반납일:</span>
+            <span className="detail-content"></span>
+          </div>
+        </div>
+
+        <button className="home-button" onClick={() => window.location.href = '/'}>
+          홈
+        </button>
+      </div>
+    </div>
     );
 };
 
