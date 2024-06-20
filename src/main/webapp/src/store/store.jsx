@@ -5,17 +5,19 @@ import loginReducer from './loginSlice';
 import optionReducer from './optionSlice';
 
 
-// persist 설정
-const persistConfig = {
-    key: 'root',
-    storage,
-    whitelist: ['loginReducer'],
-  };
+
   
 
   const rootReducer = {
     Login: persistReducer(persistConfig, loginReducer),
     Option: persistReducer(persistConfig, optionReducer),
+  };
+
+  // persist 설정
+const persistConfig = {
+    key: 'root',
+    storage,
+    whitelist: ['Login'],
   };
 
 const store = configureStore({
