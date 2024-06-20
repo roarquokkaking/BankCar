@@ -15,6 +15,8 @@ const OptionsTab = () => {
     setValue(newValue);
   };
 
+  console.log(value);
+
   return (
     <Container maxWidth="xl">
       <Box
