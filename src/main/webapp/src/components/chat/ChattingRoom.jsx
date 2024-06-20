@@ -42,14 +42,12 @@ const ChattingRoom = () => {
         // socket.current = new SockJS('http://localhost:8080/ws');
         stompClient.current = Stomp.over(socket.current);
 
-        const handleMessage = (message) => {
-            const receivedMessage = JSON.parse(message.body);
-            console.log('받은 메세지:', receivedMessage);
-            setMessages(prevMessages => [...prevMessages, receivedMessage]);
-        };
-
         stompClient.current.connect({}, () => {
-            stompClient.subscribe(`/topic/public/${roomSeq}`, handleMessage);
+            stompClient.current.subscribe(`/topic/public/${roomSeq}`, (message) => {
+                const receivedMessage = JSON.parse(message.body);
+                console.log('받은 메세지:', receivedMessage);
+                setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+            });
         });
             return () => {
                     stompClient.current.disconnect();
