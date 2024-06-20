@@ -9,17 +9,18 @@ import optionReducer from './optionSlice';
 const persistConfig = {
     key: 'root',
     storage,
+    whitelist: ['Login', 'Option'],
   };
   
-  // 개별 리듀서에 persist를 적용
-  const persistedLoginReducer = persistReducer(persistConfig, loginReducer);
-  const persistedOptionReducer = persistReducer(persistConfig, optionReducer);
+
+  const rootReducer = {
+    Login: persistReducer(persistConfig, loginReducer),
+    Option: persistReducer(persistConfig, optionReducer),
+  };
 
 const store = configureStore({
-    reducer:{
-        Login:persistedLoginReducer,
-        Option:persistedOptionReducer
-    },middleware: (getDefaultMiddleware) =>
+    reducer:rootReducer ,
+    middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
           serializableCheck: false,
         }),
