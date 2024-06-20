@@ -32,7 +32,7 @@ const CheckMyCar = () => {
         selectUserCarList(userId)
             .then(res => {
                 setCars(res.data);
-                console.log(cars);
+                console.log(res.data);
             })
             .catch(error => console.log(error))
     },[])

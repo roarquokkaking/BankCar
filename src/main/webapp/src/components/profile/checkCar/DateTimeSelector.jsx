@@ -75,7 +75,6 @@ const DateTimePicker = ({ carId }) => {
             return;
         }
 
-        // insertCarServiceApi(serviceDTO, carId)
         insertCarServiceApi(serviceDTO, carId)
             .then(response => alert("등록 되었습니다."))
             .catch(error => console.log(error));
@@ -142,11 +141,6 @@ const DateTimePicker = ({ carId }) => {
                     <div>{endTimeDiv}</div>
                     <button className={styles.serviceButton} onClick={onSubmitCar}>BankCar에 올리기</button>
                 </div>
-                carId: {carId},<br />
-                {startTime && formatTimeString(startTime)},<br />
-                {startDate && formatDateString(startDate)},<br />
-                {endTime && formatTimeString(endTime)},<br />
-                {endDate && formatDateString(endDate)}<br />
             </div>
         </div>
     );

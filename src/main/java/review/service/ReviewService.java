@@ -1,14 +1,14 @@
-//package review.service;
-//
-//
-//import review.dto.ReviewDTO;
-//import review.entity.ReviewEntity;
-//
-//import java.util.Map;
-//import java.util.Optional;
-//
-//public interface ReviewService {
-//
+package review.service;
+
+
+import review.dto.DetailDTO;
+
+import java.util.List;
+
+public interface ReviewService {
+    List<DetailDTO> getReviews(String userId);
+
+
 //    ReviewEntity writeReview(ReviewDTO reviewDTO, String user_id);
 //
 //    double getAverageRating();
@@ -29,8 +29,8 @@
 //    Optional<ReviewEntity> findDeleteReview(String user_id,Long review_id);
 //    void deleteReview(String user_id,Long review_id);
 //
-//
-//
-//
-////    List<ReviewEntity> writeReview(ReviewDTO reviewDTO);
-//}
+
+
+
+//    List<ReviewEntity> writeReview(ReviewDTO reviewDTO);
+}

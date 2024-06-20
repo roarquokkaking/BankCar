@@ -41,6 +41,10 @@ public interface BookingRepository extends JpaRepository<BookingEntity,Long> {
     /**
      * after 구하기
      * */
-    @Query("SELECT b FROM BookingEntity b WHERE b.booking_id = :userId AND b.end_date >= :date")
-    List<BookingEntity> getAfterLastNDays(@Param("userId") String userId, @Param("date") LocalDate date);
+    @Query("SELECT b FROM BookingEntity b" +
+            " WHERE b.loginDTO.id = :userId " +
+            "AND b.end_date " +
+            "BETWEEN :targetDate AND CURRENT_DATE")
+    List<BookingEntity> getAfterLastNDays(@Param("userId") String userId, @Param("targetDate") LocalDate targetDate);
+
 }

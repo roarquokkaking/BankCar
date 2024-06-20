@@ -1,8 +1,11 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
 import styles from "./css/CarLocation.module.css";
-import {Button} from '@mui/material';
 import RegisterHeader from "./RegisterHeader";
 import {RegisterContext} from "./RegisterContext";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import {TextField} from "@mui/material";
+import Button from "@mui/material/Button";
 
 const CarLocation = () => {
     const [value, setValue] = useState("");
@@ -75,11 +78,27 @@ const CarLocation = () => {
         <>
             <RegisterHeader text={"자동차 기본 위치 정보"} />
             <div className={styles.location}>
-                <div>
-                    주소 검색 :
-                    <input type="text" value={value} onChange={(e) => setValue(e.target.value)}/>
-                    <Button onClick={() => setSearch(value)}> 찾기</Button>
-                </div>
+                <Box
+                    display="flex"
+                    alignItems="center"
+                    gap={2}
+                    mb={3}
+                >
+                    <Typography variant="h6">검색</Typography>
+                    <TextField
+                        variant="outlined"
+                        value={value}
+                        onChange={(e) => setValue(e.target.value)}
+                        size="small"
+                    />
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => setSearch(value)}
+                    >
+                        찾기
+                    </Button>
+                </Box>
                 <div ref={mapContainer} style={{ width: '100%', height: '400px' }}></div>
                 <div id="clickLatlng">
                     <span>도로명 주소 : {data.doroAddress}</span><br />

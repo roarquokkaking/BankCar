@@ -2,19 +2,16 @@ package booking.service;
 
 import booking.contoller.BookingStatus;
 import booking.dto.BookingDTO;
-import booking.dto.BookingUseDTO;
 import booking.dto.UserBeforeDTO;
 import booking.entity.BookingEntity;
 import booking.repository.BookingRepository;
 import car.entity.Car;
-import car.entity.CarImages;
 import car.repo.CarRepository;
-import com.amazonaws.services.kms.model.NotFoundException;
 import login.dto.LoginDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import review.entity.ReviewEntity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -35,7 +32,9 @@ public class BookingServiceImpl implements BookingService {
      * 이미지 위치 저장하기 .
      */
     public List<UserBeforeDTO> findUserBookings(String userId) {
+
         List<BookingEntity> bookings = bookingRepository.findBookingsByUserId(userId);
+
         List<UserBeforeDTO> userBeforeDTOList = new ArrayList<>();
 
         if (bookings != null) {
@@ -53,10 +52,13 @@ public class BookingServiceImpl implements BookingService {
                                 .category(bookingEntity.getCar().getCategory())
                                 .title(bookingEntity.getCar().getTitle())
                                 .content(bookingEntity.getCar().getContent())
-                                .rating(bookingEntity.getLoginDTO().getRating())
+                                .rating(bookingEntity.getCar().getRating())
                                 .startTime(bookingEntity.getStart_time())
                                 .endTime(bookingEntity.getEnd_time())
-                                .imageUrl(bookingEntity.getCarImages().getMain_image())
+                                .pay(bookingEntity.getCar().getPrice())
+                                //host name
+                                //user
+//                                .imageUrl(bookingEntity.getCar().getCarImages().getMain_image())
                                 .build();
                         userBeforeDTOList.add(userBeforeDTO);
                     }
@@ -66,86 +68,43 @@ public class BookingServiceImpl implements BookingService {
         return userBeforeDTOList;
     }
 
-
     @Override
-    public List<BookingEntity> getAfter(String user_id) {
+    public List<BookingDTO> getAfter(String userId, Integer days) {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate targetDate = (days != null) ? currentDate.minusDays(days) : currentDate;
+        System.out.println(222222);
+        List<BookingEntity> bookings = bookingRepository.getAfterLastNDays(userId, targetDate);
+        List<BookingDTO> bookingDTOs = new ArrayList<>();
 
-        List<BookingEntity> bookings = bookingRepository.findById(user_id);
         for (BookingEntity booking : bookings) {
-            //상태 호출
+
             booking.setBookingStatus(booking);
 
-            String status = Optional.ofNullable(booking.getBooking_status())
-                    .map(BookingStatus::name)
-                    .orElse(null);
-            if ("after".equals(status)) {
+            if (booking. getBooking_status() == BookingStatus.AFTER) {
                 Car car = carRepository.findById(booking.getCar().getCarId()).orElse(null);
                 if (car != null) {
-
-                    BookingDTO bookingDTO = new BookingDTO();
-                    //CarEntity -> 에서 갖고 오는 정보
-                    bookingDTO.setTitle(car.getTitle());
-                    bookingDTO.setContent(car.getContent());
-                    //시간
                     String period = booking.getStart_date() + "~" + booking.getEnd_date();
-
-                    bookingDTO.setPeriod(period);
-                    //이미지
-                    booking.setImage(bookingDTO.getImageUrl());
-                }
-            }
-        }
-        return bookings;
-    }
-
-
- /*   public List<BookingEntity> findAllByUserId(String userId) {
-        // 정보를 뽑아온다.
-        List<BookingEntity> bookings = bookingRepository.findById(userId);
-
-        // booking 상태를 알아온다.
-        for (BookingEntity booking : bookings) {
-            // 상태 호출
-            booking.setBookingStatus(booking);
-            // 널로 나타낸다.
-            String status = Optional.ofNullable(booking.getBooking_status())
-                    .map(BookingStatus::name)
-                    .orElse(null);
-
-            // 상태가 "BEFORE"일 때 처리
-            if ("BEFORE".equals(status)) {
-                Car car = carRepository.findById(booking.getCar().getCarId()).orElse(null);
-                if (car != null) {
                     BookingDTO bookingDTO = BookingDTO.builder()
                             .carId(car.getCarId())
-                            .carModel(car.getModel())
-                            .rating(car.getRating())
+//                            .reviewId
                             .title(car.getTitle())
                             .content(car.getContent())
-//                            .imageUrl(car.getImageUrl()) // 필요한 경우 추가
+//                            .imageUrl(car.getCarImages().getMain_image())
+                            .period(period)
                             .build();
-
-                    booking.setImage(bookingDTO.getImageUrl());
+                    // 이미지 설정
+                    // booking.setImage(bookingDTO.getImageUrl()); // 필요 시 BookingEntity에 이미지 설정
+                    bookingDTOs.add(bookingDTO);
                 }
             }
         }
-        return bookings;
-    }*/
+        return bookingDTOs;
+    }
 
-
-/*
-* user_id 로
-* car_id 로 자동차 주인의 이름을 알아오고 그거를 출력해줘야함
-*
-*
-* */
 
     /**
      * 유저에 관한 before 정보 얻어오기
      */
-
-
-
 
     @Override
     public Optional<BookingEntity> findByUserIdAndCarId(String user_id, String car_id) {
@@ -159,9 +118,6 @@ public class BookingServiceImpl implements BookingService {
      * */
 
     public BookingDTO findByDetail(BookingEntity bookingEntity) {
-
-
-
         String period = bookingEntity.getStart_date() + " ~ " + bookingEntity.getEnd_date();
 
         BookingDTO bookingDTO = new BookingDTO();
@@ -199,8 +155,13 @@ public class BookingServiceImpl implements BookingService {
             throw new RuntimeException("메모 저장을 실패 하였습니다. ");
         }
 
-
     }
+
+    @Override
+    public List<BookingDTO> getBookings(String userId, String period) {
+        return List.of();
+    }
+
 
 //    @Override
 //    public void getUseNowService(String userId, Long carId) {
@@ -240,18 +201,5 @@ public class BookingServiceImpl implements BookingService {
 //        }
 //    }
 
-    /**
-     * 선택일수에 대한 after 구하기
-     * */
-    @Override
-    public List<BookingEntity> getAfterLastNDays(String userId, int i) {
-
-        LocalDate date = LocalDate.now().minusDays(i);
-        return bookingRepository.getAfterLastNDays(userId, date);
-
-    }
-
-
-//제목 , imgage
 
 }

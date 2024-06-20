@@ -22,7 +22,7 @@ public class Car {
     private Long carId;
 
     // fetch = FetchType.LAZY는 지연 로딩 전략을 사용하여 관련 엔티티를 필요할 때만 불러오도록 설정합니다.
-    @ManyToOne(fetch = FetchType.LAZY)  // user 테이블과 다대일(Many-to-One)
+    @ManyToOne // user 테이블과 다대일(Many-to-One)
     @JoinColumn(name = "id", nullable = false)
     private LoginDTO user;
 

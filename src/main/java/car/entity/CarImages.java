@@ -13,8 +13,6 @@ public class CarImages {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long carImageId;
 
-    @OneToOne(mappedBy = "carImages")
-    private Car car;
     @Column
     private String image1;
     @Column
@@ -25,16 +23,6 @@ public class CarImages {
     private String image4;
     @Column
     private String main_image;
-
-    @JoinColumn
-    @OneToOne(fetch = FetchType.LAZY)
-    private WishListEntity wishListEntity;
-
-
-    @JoinColumn(name="booking_id")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private BookingEntity bookingEntity;
-
 
 }
 
