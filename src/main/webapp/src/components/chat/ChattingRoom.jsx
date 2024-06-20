@@ -55,7 +55,7 @@ const ChattingRoom = () => {
                 console.log('WebSocket 연결 해제');
             }
         };
-    }, [roomSeq]);
+    }, []);
 
     useEffect(() => {
         scrollToBottom();
@@ -98,7 +98,7 @@ const ChattingRoom = () => {
                 messageRoom: { roomSeq: roomSeq }
             };
             console.log('보내는 메시지:', messageObj);
-            stompClient.current.send("/app/send", {}, JSON.stringify(messageObj));
+            stompClient.current.send("/api/messages/send", {}, JSON.stringify(messageObj));
             setMessage('');
             // setMessages((prevMessages) => [...prevMessages, response.data]);
         } else {
