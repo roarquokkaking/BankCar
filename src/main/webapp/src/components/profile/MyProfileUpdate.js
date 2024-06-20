@@ -43,7 +43,7 @@ const MyProfileUpdate = () => {
         const fetchUserProfile = async () => {
             try {
                 const response =
-                    await axios.get(`http://localhost:8080/profile/myprofileUpdate/${user_id}`);
+                    await axios.get(`https://dongwoossltest.shop/api/profile/myprofileUpdate/${user_id}`);
                 setUserProfileDTO(response.data);
             } catch (error) {
                 console.error("프로필 정보를 가져오는데 실패했습니다.", error);
@@ -71,7 +71,7 @@ const MyProfileUpdate = () => {
         formData.append('UserProfileDTO',new Blob([JSON.stringify(UserProfileDTO)],{type:'application/json'}))
         formData.append('image', image);
         try {
-            const response = await axios.post(`http://localhost:8080/profile/profileUpdate/${user_id}`, formData, {
+            const response = await axios.post(`https://dongwoossltest.shop/api/profile/profileUpdate/${user_id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -96,7 +96,7 @@ const MyProfileUpdate = () => {
     const handleSaveClick = async () => {
         try {
 
-            await axios.post(`http://localhost:8080/profile/updateProfile/${user_id}`,UserProfileDTO);
+            await axios.post(`https://dongwoossltest.shop/api/profile/updateProfile/${user_id}`,UserProfileDTO);
             alert('프로필이 성공적으로 저장되었습니다.');
             navigate('/profile'); // 프로필 페이지로 이동
         } catch (error) {
