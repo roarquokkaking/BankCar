@@ -1,5 +1,6 @@
 package car.controller;
 
+import car.bean.CarResponseDTO;
 import car.entity.Car;
 import car.entity.CarImages;
 import car.service.CarService;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins="http://localhost:3000") //https://dongwoossltest.shop
+@CrossOrigin(origins= {"http://localhost:3000", "https://dongwoossltest.shop"})
 @RequestMapping(path = "/api")
 public class CarRegistrationController {
     @Autowired
@@ -65,19 +66,41 @@ public class CarRegistrationController {
 
     // 해당 유저의 등록된 자동차 목록을 가져오는 api
     @GetMapping(path = "/users/{userId}/cars")
-    public ResponseEntity<List<CarImages>> getCarsByUserId(@PathVariable("userId") String userId){
+    public ResponseEntity<List<CarResponseDTO>> getCarsByUserId(@PathVariable("userId") String userId){
         List<Car> carList = carService.getCarsByUserId(userId);
-        if (carList.isEmpty()) {
+        List<CarResponseDTO> carResponseDTOS = convertToCarResponseDTO(carList);
+        if (carList.size() == 0) {
             return ResponseEntity.notFound().build(); // 찾을 수 없는 경우 404 응답
         }
+        System.out.println(carResponseDTOS.get(0).getCarId());
+        return ResponseEntity.ok(carResponseDTOS); // 찾은 경우 200 응답과 함께 자동차 및 이미지 정보 목록 반환
+    }
 
-        List<CarImages> carImagesList = new ArrayList<>();
+    private List<CarResponseDTO> convertToCarResponseDTO(List<Car> carList) {
+        List<CarResponseDTO> carResponseDTOS = new ArrayList<>();
         for(Car car : carList){
-            CarImages carImages = carService.getCarImagesByCarId(car.getCarId());   // 자동차 이미지 정보를 가져오는 로직
-            carImagesList.add(carImages);
+            CarResponseDTO carResponseDTO = CarResponseDTO.builder()
+                    .carId(car.getCarId())
+                    .carImages(car.getCarImages())
+                    .color(car.getColor())
+                    .content(car.getContent())
+                    .category(car.getCategory())
+                    .createdDate(car.getCreatedDate())
+                    .doroAddress(car.getDoroAddress())
+                    .jibunAddress(car.getJibunAddress())
+                    .latitude(car.getLatitude())
+                    .longitude(car.getLongitude())
+                    .model(car.getModel())
+                    .price(car.getPrice())
+                    .rating(car.getRating())
+                    .released(car.getReleased())
+                    .segment(car.getSegment())
+                    .title(car.getTitle())
+                    .user(car.getUser())
+                    .build();
+            carResponseDTOS.add(carResponseDTO);
         }
-        // CarImages 객체만 넘기면, 해당 객체에 Car 엔티티가 연관관계로 잡혀있기 때문에 Car정보와 CarImages의 정보 둘 다 넘어간다.
-        return ResponseEntity.ok(carImagesList); // 찾은 경우 200 응답과 함께 자동차 및 이미지 정보 목록 반환
+        return carResponseDTOS;
     }
 
     // 차 가격 추천을 위한 머신러닝

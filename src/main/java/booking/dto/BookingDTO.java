@@ -14,7 +14,10 @@ import java.time.LocalTime;
 @Builder
 public class BookingDTO {
 
+    private String userId;
     private Long booking_id;
+
+
     private LocalDate start_date;
     private LocalDate end_date;
     private LocalTime start_time;
@@ -32,7 +35,8 @@ public class BookingDTO {
     private LoginDTO loginDTO;
     private Float rating;
     private String driverName;
-
+    private boolean reviewWrite;
+    private Long reviewId;
 
 
 

@@ -38,10 +38,10 @@ export const Locations =()=>{
 
   const [carData,setCarData]=useState([]);
     
-  
+
     useEffect(()=>{
 
-      
+
           axios.get("https://dongwoossltest.shop/api/cars/getcardata")
           .then(res=>{
             setCarData(res.data);
@@ -50,7 +50,7 @@ export const Locations =()=>{
             // return axios.get("http://localhost:8080/api/cars/getcarservicedata")
         })
         //  .then(res=>console.log(res.data))
-        
+
         },[])
 
 

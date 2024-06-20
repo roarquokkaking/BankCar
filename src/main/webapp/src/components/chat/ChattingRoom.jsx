@@ -20,8 +20,7 @@ const ChattingRoom = () => {
     const messageEndRef = useRef(null);
 
     useEffect(() => {
-        if (!roomSeq) return; // roomSeq 값이 없으면 초기화 진행하지 않음
-
+    
         socket.current = new SockJS('https://dongwoossltest.shop/api/chattingroom');
         // socket.current = new SockJS('http://localhost:8080/ws');
         stompClient.current = Stomp.over(socket.current);
@@ -33,13 +32,6 @@ const ChattingRoom = () => {
             });
         });
 
-        axios.get(`https://dongwoossltest.shop/api/messages/roomseq/${roomSeq}`)
-        // axios.get(`http://localhost:8080/api/messages/roomseq/${roomSeq}`)
-            .then(response => {
-                setMessages(response.data);
-            })
-            .catch(error => console.error("Error fetching messages:", error));
-
             axios.get('https://dongwoossltest.shop/api/messages/userInfo', { withCredentials: true })
         // axios.get('http://localhost:8080/api/messages/userInfo', { withCredentials: true })
             .then(response => {
@@ -50,12 +42,18 @@ const ChattingRoom = () => {
             })
             .catch(error => console.error("Error fetching user data:", error));
 
+            axios.get(`https://dongwoossltest.shop/api/messages/roomseq/${roomSeq}`)
+            // axios.get(`http://localhost:8080/api/messages/roomseq/${roomSeq}`)
+                .then(response => {
+                    setMessages(response.data);
+                })
+                .catch(error => console.error("Error fetching messages:", error));
+
             return () => {
-                if (stompClient.current) {
                     stompClient.current.disconnect();
-                }
+                
             };
-    }, [roomSeq]);
+    }, []);
 
     useEffect(() => {
         scrollToBottom();
@@ -82,7 +80,7 @@ const ChattingRoom = () => {
             // const response = await axios.post('http://localhost:8080/api/messages/send', messageObj, { withCredentials: true });
             console.log('Message sent successfully', response.data);
 
-            setMessages((prevMessages) => [...prevMessages, response.data]);
+            // setMessages((prevMessages) => [...prevMessages, response.data]);
             setMessage('');
         } catch (error) {
             console.error('Error handling send:', error);

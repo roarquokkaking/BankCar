@@ -66,9 +66,9 @@ public class ChatController {
                 // 메시지 저장
                 Message savedMessage = messageService.saveMessage(message);
 
-                Long roomseq = savedMessage.getMessageRoom().getRoomSeq();
+                Long roomSeq = savedMessage.getMessageRoom().getRoomSeq();
                 // 메시지 전송
-                messagingTemplate.convertAndSend("/topic/public" + roomseq, savedMessage);
+                messagingTemplate.convertAndSend("/topic/public" + roomSeq, savedMessage);
 
                 return ResponseEntity.ok(savedMessage);
             } else {

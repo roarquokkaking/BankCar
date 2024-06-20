@@ -1,24 +1,67 @@
-//package review.service;
-//
-//import com.amazonaws.services.kms.model.NotFoundException;
-//import org.springframework.transaction.annotation.Transactional;
-//import review.dto.ReviewDTO;
-//import review.entity.ReviewEntity;
-//import review.repository.ReviewRepository;
-//
-//import java.time.LocalDateTime;
-//import java.util.HashMap;
-//import java.util.Map;
-//import java.util.Optional;
-//
-//@Transactional
-//public class ReviewServiceImpl implements ReviewService {
-//
-//    private final ReviewRepository reviewRepository;
-//
-//    public ReviewServiceImpl(ReviewRepository reviewRepository) {
-//        this.reviewRepository = reviewRepository;
-//    }
+package review.service;
+
+import booking.entity.BookingEntity;
+import booking.repository.BookingRepository;
+import com.amazonaws.services.kms.model.NotFoundException;
+import driverLicense.service.NCPObjectStorageService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import review.dto.DetailDTO;
+import review.entity.ReviewEntity;
+import review.repository.ReviewRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@RequiredArgsConstructor
+@Transactional
+@Service
+public class ReviewServiceImpl implements ReviewService {
+
+    private final ReviewRepository reviewRepository;
+    private final BookingRepository bookingRepository;
+    private final NCPObjectStorageService ncpObjectStorageService;
+
+
+    /**
+     * 리뷰 이미지 갖고 오기 .
+     * */
+    public List<DetailDTO> getReviews(String userId) {
+        List<ReviewEntity> reviewEntities = reviewRepository.findReviewsByUserId(userId);
+        if (reviewEntities.isEmpty()) {
+            throw new NotFoundException("아이디에 관한 정보가 없습니다. ");
+        }
+        List<DetailDTO> detailDTOList = new ArrayList<>();
+
+        for (ReviewEntity reviewEntity : reviewEntities) {
+            BookingEntity booking = reviewEntity.getBookingEntity();
+            System.out.println(11111);
+            if (booking == null) {
+                throw new NotFoundException("예약정보를 찾을 수 없습니다.");
+            }
+//            ncpObjectStorageService.getCarImages("/carImage")
+            List<String> images = ReviewEntity.setCarImage(booking);
+
+            DetailDTO detailDTO = DetailDTO.builder()
+                    .user_id(booking.getLoginDTO().getId())
+                    .car_id(booking.getCar().getCarId())
+                    .carModel(booking.getCar().getModel())
+//                    .rating(booking.getCar().getRating())
+                    .title(booking.getCar().getTitle())
+//                    .images(images) // 이미지 추가
+                    .build();
+            detailDTOList.add(detailDTO);
+        }
+
+        return detailDTOList;
+    }
+
+
+
+
+
 //
 //    /**
 //     * review save
@@ -27,11 +70,11 @@
 //    public ReviewEntity writeReview(ReviewDTO reviewDTO, String user_id) {
 //
 //        ReviewEntity reviewEntity = ReviewEntity.builder()
-//                .user_id(user_id)
+////                .user_id(user_id)
 //                .title(reviewDTO.getTitle())
 //                .comment(reviewDTO.getComment())
-//                .car_id(reviewDTO.getCar_id())
-//                .car_model(reviewDTO.getCar_model())
+////                .car_id(reviewDTO.getCar_id())
+////                .car_model(reviewDTO.getCar_model())
 //                .rating(reviewDTO.getRating())
 //                .dateTime(LocalDateTime.now())
 //                .build();
@@ -57,7 +100,7 @@
 //
 //        ReviewEntity review = reviewRepository.findById(reviewDTO.getReview_id())
 //                .orElseThrow(null);
-//        review.setRating(reviewDTO.getRating());
+////        review.setRating(reviewDTO.getRating());
 //        return reviewRepository.save(review);
 //    }
 //    /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
@@ -74,11 +117,11 @@
 //
 //            throw new NotFoundException("아이디를 찾지 못했습니다 .");
 //        }else {
-//            existingReviewEntity.setTitle(existingReviewEntity.getTitle());
-//            existingReviewEntity.setComment(existingReviewEntity.getComment());
-//            existingReviewEntity.setRating(existingReviewEntity.getRating());
-//            existingReviewEntity.setCar_model(existingReviewEntity.getCar_model());
-//            existingReviewEntity.setDateTime(existingReviewEntity.getDateTime());
+////            existingReviewEntity.setTitle(existingReviewEntity.getTitle());
+////            existingReviewEntity.setComment(existingReviewEntity.getComment());
+////            existingReviewEntity.setRating(existingReviewEntity.getRating());
+////            existingReviewEntity.setCar_model(existingReviewEntity.getCar_model());
+////            existingReviewEntity.setDateTime(existingReviewEntity.getDateTime());
 //        }
 //        return reviewRepository.save(existingReviewEntity);
 //    }
@@ -90,11 +133,11 @@
 //        if (existingReviewEntity == null) {
 //            throw new NotFoundException("리뷰 못찾음");
 //        }
-//        existingReviewEntity.setTitle(reviewDTO.getTitle());
-//        existingReviewEntity.setComment(reviewDTO.getComment());
-//        existingReviewEntity.setRating(reviewDTO.getRating());
-//        existingReviewEntity.setCar_model(reviewDTO.getCarModel());
-//        existingReviewEntity.setDateTime(reviewDTO.getDateTime());
+////        existingReviewEntity.setTitle(reviewDTO.getTitle());
+////        existingReviewEntity.setComment(reviewDTO.getComment());
+////        existingReviewEntity.setRating(reviewDTO.getRating());
+////        existingReviewEntity.setCar_model(reviewDTO.getCarModel());
+////        existingReviewEntity.setDateTime(reviewDTO.getDateTime());
 //        reviewRepository.save(existingReviewEntity);
 //    }
 //
@@ -112,4 +155,4 @@
 //    public void deleteReview(String user_id,Long review_id) {
 ////        reviewRepository.delete(user_id,review_id);
 //    }
-//}
+}
