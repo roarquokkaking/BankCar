@@ -76,7 +76,7 @@ public class CarRegistrationController {
         return ResponseEntity.ok(carResponseDTOS); // 찾은 경우 200 응답과 함께 자동차 및 이미지 정보 목록 반환
     }
 
-    @GetMapping(path = "/user/{userId}/cars/{carId}")
+    @GetMapping(path = "/users/{userId}/cars/{carId}")
     public ResponseEntity<CarResponseDTO> getCarByCarId(@PathVariable("userId") String userId,
                                                         @PathVariable("carId") Long carId){
         Car car = carRegistrationService.findCarById(carId);

@@ -7,7 +7,6 @@ import NaverPay from './NaverPay';
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import axios from "axios";
 import {getCarItemApi} from "../api/CarApiService";
 import {useSelector} from "react-redux";
 import axios from 'axios';
@@ -33,10 +32,11 @@ const [price, setPrice] = useState(119000);
   };
 
   // 결제 화면 정보 가져오기
-    const userId = useSelector(state => state.Login.Id)
+    const userId = useSelector(state => state.Login.id)
     // 파라미터로 넘어오는 변수
-    const {carId} = useParams();
-    //const carId = 1;
+    //const {carId} = useParams();
+    const carId = 1;
+
 
     const [car, setCar] = useState({
         model: '제네시스',
@@ -83,10 +83,10 @@ const [price, setPrice] = useState(119000);
   		"partner_order_id": "partner_order_id",
   		"partner_user_id": "partner_user_id",
   		"item_name": "초코파이",
-  		"quantity": "1",
   		"total_amount": "2200",
-  		"vat_amount": "200",
-  		"tax_free_amount": "0",
+  		"quantity": "1",        // 도로명
+  		"vat_amount": "200",    // 대여 시작 날짜
+  		"tax_free_amount": "0", // 반납 날짜
   		"approval_url": "https://dongwoossltest.shop/success",
   		"fail_url": "https://dongwoossltest.shop/fail",
   		"cancel_url": "https://dongwoossltest.shop/cancel"
@@ -164,10 +164,10 @@ return (
                     <Typography variant="h6" component="h3" gutterBottom>
                         결제 비용
                     </Typography>
-                    <Typography variant="body1"><strong style={strongStyle}>총 비용:</strong> {formatPrice(paymentDetails.totalAmount)} 원</Typography>
-                    <Typography variant="body1"><strong style={strongStyle}>세금:</strong> {formatPrice(paymentDetails.tax)} 원</Typography>
+                    <Typography variant="body1"><strong style={strongStyle}>총 비용:</strong> {formatPrice(payDetail.total_amount)} 원</Typography>
+                    <Typography variant="body1"><strong style={strongStyle}>세금:</strong> {formatPrice(payDetail.total_amount * 0.1)} 원</Typography>
                     {/*<Typography variant="body1"><strong style={strongStyle}>할인:</strong> {paymentDetails.discount}</Typography>*/}
-                    <Typography variant="body1"><strong style={strongStyle}>최종 금액:</strong> {formatPrice(paymentDetails.finalAmount)} 원</Typography>
+                    <Typography variant="body1"><strong style={strongStyle}>최종 금액:</strong> {formatPrice(payDetail.total_amount * 1.1)} 원</Typography>
                 </Box>
             </Box>
 
