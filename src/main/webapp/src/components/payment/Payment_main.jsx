@@ -10,7 +10,7 @@ import Grid from "@mui/material/Grid";
 import axios from "axios";
 import {getCarItemApi} from "../api/CarApiService";
 import {useSelector} from "react-redux";
-import axios from 'axios';
+
 
 
 //{carId, startDate, endDate, price}
