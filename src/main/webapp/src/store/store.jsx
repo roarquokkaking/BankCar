@@ -19,7 +19,10 @@ const store = configureStore({
     reducer:{
         Login:persistedLoginReducer,
         Option:persistedOptionReducer
-    }
+    },middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+          serializableCheck: false,
+        }),
 
 });
 const persistor = persistStore(store);
