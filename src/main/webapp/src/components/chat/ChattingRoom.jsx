@@ -42,12 +42,14 @@ const ChattingRoom = () => {
         // socket.current = new SockJS('http://localhost:8080/ws');
         stompClient.current = Stomp.over(socket.current);
 
+        const handleMessage = (message) => {
+            const receivedMessage = JSON.parse(message.body);
+            console.log('받은 메세지:', receivedMessage);
+            setMessages(prevMessages => [...prevMessages, receivedMessage]);
+        };
+
         stompClient.current.connect({}, () => {
-            stompClient.current.subscribe(`/topic/public/${roomSeq}`, (messages) => {
-                const receivedMessage = JSON.parse(messages.body);
-                console.log('받은 메세지:', receivedMessage);
-                setMessages(prevMessages => [...prevMessages, receivedMessage]);
-            });
+            stompClient.subscribe(`/topic/public/${roomSeq}`, handleMessage);
         });
             return () => {
                     stompClient.current.disconnect();
@@ -71,7 +73,7 @@ const ChattingRoom = () => {
     
             const messageObj = {
                 sender: userName,
-                content: messages,
+                content: message,
                 timestamp: new Date().toISOString(),
                 messageRoom: { roomSeq: roomSeq }
             };
@@ -110,7 +112,7 @@ const ChattingRoom = () => {
             </div>
             </header>
             <div className="message-container">
-                {messages.map((msg, index) => {
+                {message.map((msg, index) => {
                     if (msg.sender === userName) {
                         return (
                             <div key={index} className="message-box-send">
