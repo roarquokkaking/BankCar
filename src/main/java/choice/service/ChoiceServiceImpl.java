@@ -2,12 +2,16 @@ package choice.service;
 
 import car.entity.Car;
 import car.repo.CarRepository;
+import choice.dto.CarDTO;
 import choice.dto.CombineDTO;
+import choice.dto.UserDTO;
 import choice.repo.ChoiceRepo;
 import login.dao.LoginDAO;
 import login.dto.LoginDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class ChoiceServiceImpl implements ChoiceService{
@@ -20,7 +24,7 @@ public class ChoiceServiceImpl implements ChoiceService{
 //    private ReviewRepository reviewRepository;
 
     @Autowired
-    private LoginDAO userRepository;
+    private LoginDAO loginDAO;
 
     public ChoiceServiceImpl(ChoiceRepo choiceRepo) {
         this.choiceRepo = choiceRepo;
@@ -36,9 +40,12 @@ public class ChoiceServiceImpl implements ChoiceService{
     }
 
     private CombineDTO convertCarToCombineDTO(Car car) {
-        CombineDTO dto = new CombineDTO();
-        // Conversion logic from Car to CombineDTO
-        return dto;
+        CombineDTO combineDTO = new CombineDTO();
+        CarDTO carDTO = new CarDTO();
+        carDTO.setCarId(car.getCarId());
+        // Set other properties of carDTO
+        combineDTO.setCarInfo(carDTO);
+        return combineDTO;
     }
 
 //    @Override
@@ -50,15 +57,26 @@ public class ChoiceServiceImpl implements ChoiceService{
 
     @Override
     public CombineDTO getUserInfo(String userId) {
-        LoginDTO user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        // Convert User entity to CombineDTO
+        Optional<LoginDTO> userOptional = loginDAO.findById(userId);
+        LoginDTO user = userOptional.orElseThrow(() -> new RuntimeException("User not found"));
         return convertUserToCombineDTO(user);
     }
-
     private CombineDTO convertUserToCombineDTO(LoginDTO user) {
-        CombineDTO dto = new CombineDTO();
-        // Conversion logic from Car to CombineDTO
-        return dto;
+        CombineDTO combineDTO = new CombineDTO();
+        // Assuming you have a UserDTO class to map LoginDTO to DTO
+        combineDTO.setUserInfo(mapLoginDTOToUserDTO(user));
+        return combineDTO;
+    }
+
+    private UserDTO mapLoginDTOToUserDTO(LoginDTO loginDTO) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUserId(loginDTO.getId());
+        userDTO.setEmail(loginDTO.getEmail());
+        userDTO.setName(loginDTO.getName());
+        userDTO.setDriver(loginDTO.isDriver());
+        userDTO.setProfileImage(loginDTO.getProfile_image());
+        // Map other fields as needed
+        return userDTO;
     }
 
 }

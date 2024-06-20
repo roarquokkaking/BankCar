@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
 import axios from "axios";
+import {useSelector} from "react-redux";
 
 const ChoiceData = ({ setChoicedata }) => {
     const location = useLocation();
@@ -22,7 +23,7 @@ const ChoiceData = ({ setChoicedata }) => {
         const fetchData = async () => {
             try {
                 console.log(choiceDTO);
-                const response = await axios.get("https://dongwoossltest.shop/api/choice/choicedata", {
+                const response = await axios.get("http://localhost:8080/choice/choicedata", {
                     params: {
                         carId: choiceDTO.carId
                     }

@@ -14,5 +14,5 @@ public interface LoginDAO extends JpaRepository<LoginDTO,String> {
     void updateDriver(String id, boolean driverYN);
 
 
-
+    LoginDTO findById(Long userId);
 }

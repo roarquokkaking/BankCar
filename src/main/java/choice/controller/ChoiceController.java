@@ -16,16 +16,18 @@ public class ChoiceController {
     public CombineDTO choiceData(@RequestParam Long carId) {
         System.out.println("************carid************ = "+carId);
         CombineDTO carInfo = choiceService.getCarInfo(carId);
+        System.out.println("************carinfo************ = "+carInfo);
 //        List<CombineDTO> reviews = choiceService.getReviewsByCarId(carId);
 
         CombineDTO combineDTO = new CombineDTO();
         combineDTO.setCarInfo(carInfo.getCarInfo());
 //        combineDTO.setReviews(reviews);
 
-        String userId = combineDTO.getCarInfo().getUserId();
+        String userId = carInfo.getCarInfo().getUser().getUserId();
         CombineDTO userInfo = choiceService.getUserInfo(userId);
         combineDTO.setUserInfo(userInfo.getUserInfo());
-        System.out.println("************확인용*********** = : "+combineDTO);
+
+        System.out.println("************확인용*********** = : " + combineDTO);
         return combineDTO;
     }
     

@@ -85,7 +85,7 @@ const LocationCards = () => {
                 setSearchDTO(updatedSearchDTO);
 
                 if (updatedSearchDTO.startDate && updatedSearchDTO.endDate && updatedSearchDTO.startTime && updatedSearchDTO.endTime) {
-                    const response = await axios.get("https://dongwoossltest.shop/api/searching/searchList", { params: updatedSearchDTO });
+                    const response = await axios.get("http://localhost:8080/searching/searchList", { params: updatedSearchDTO });
                     setSearchData(response.data);
                 } else {
                     setSearchData([]);
@@ -104,7 +104,7 @@ const LocationCards = () => {
         setLoading(true);
         try {
             const response =
-                await axios.post(`https://dongwoossltest.shop/api/WishList/wish/toggle/${user_id}/${carId}`);//${carId}
+                await axios.post(`http://localhost:8080/WishList/wish/toggle/${user_id}/${carId}`);//${carId}
             setCards(response.data);
 
             // 하트 클릭 상태 업데이트

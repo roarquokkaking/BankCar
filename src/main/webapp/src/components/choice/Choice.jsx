@@ -9,6 +9,7 @@ import OwnerDescription from './OwnerDescription';
 import ChoiceFooter from './ChoiceFooter';
 import Map from './Map';
 import ChoiceData from './ChoiceData';
+import {useSelector} from "react-redux";
 
 const Choice = () => {
     const location = useLocation();
@@ -16,13 +17,17 @@ const Choice = () => {
     const carid = searchParams.get('carid');
     const startDate = searchParams.get('startdate');
     const endDate = searchParams.get('enddate');
-    const price = searchParams.get('price');
+    const startTime = searchParams.get('starttime');
+    const endTime = searchParams.get('endtime');
+
+    const userId = useSelector((state) => state.Login.id);
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [choicedata, setChoicedata] = useState({
         owner: {
             image: "",
+            // userid:"",
             name: "",
             email: ""
         },
@@ -35,8 +40,10 @@ const Choice = () => {
         },
         footer: {
             price: "",
-            startTime: "",
-            endTime: "",
+            startTime: startTime,
+            endTime: endTime,
+            startDate:startDate,
+            endDate:endDate,
             onReserve: () => {},
             loading: false,
             error: null
@@ -49,7 +56,7 @@ const Choice = () => {
         setLoading(true);
         setError(null);
         try {
-            const url = `/payment?carid=${carid}&startdate=${startDate}&enddate=${endDate}&price=${price}`;
+            const url = `/payment?userid=${userId}&carid=${carid}&startdate=${startDate}&enddate=${endDate}&price=${choicedata.footer.price}`;
             navigate(url);
         } catch (error) {
             console.error(error);
@@ -96,7 +103,7 @@ const Choice = () => {
             <div className="border-line"></div>
             <Review />
             <Map {...choicedata.map} />
-            <ChoiceFooter {...choicedata.footer} />
+            <ChoiceFooter {...choicedata.footer } onReserve={onReserve} />
         </div>
     );
 };
