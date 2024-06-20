@@ -55,10 +55,7 @@ dependencies {
     testImplementation 'org.springframework.kafka:spring-kafka-test' //채팅 관련 kafka
     implementation 'org.springframework.kafka:spring-kafka' //채팅 관련 kafka
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'//채팅관련 redis
-//    implementation 'jakarta.validation:jakarta.validation-api:2.1.1'
-    // https://mvnrepository.com/artifact/javax.annotation/javax.annotation-api
-    implementation 'javax.annotation:javax.annotation-api:1.3.2'
-
+    implementation 'jakarta.validation:jakarta.validation-api:2.1.1'
     implementation 'org.hibernate.validator:hibernate-validator:6.0.13.Final'
 
     // 머신러닝
@@ -72,10 +69,10 @@ dependencies {
     implementation('org.apache.spark:spark-core_2.13:3.5.0') {
         exclude group: 'org.apache.logging.log4j', module: 'log4j-slf4j-impl'
     }
-    implementation 'org.apache.logging.log4j:log4j-slf4j2-impl:2.20.0'
+    implementation 'org.apache.logging.log4j:log4j-slf4j2-impl:2.17.0'
     implementation 'javax.servlet:javax.servlet-api:4.0.1'
-    // https://mvnrepository.com/artifact/com.mysql/mysql-connector-j
-    implementation 'com.mysql:mysql-connector-j:8.4.0'
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    implementation 'mysql:mysql-connector-java:8.0.28'
 
 }
 

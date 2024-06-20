@@ -8,7 +8,6 @@ import Carousel from './Carousel';
 import OwnerDescription from './OwnerDescription';
 import ChoiceFooter from './ChoiceFooter';
 import Map from './Map';
-import ChoiceData from './ChoiceData';
 
 const Choice = () => {
     const location = useLocation();
@@ -20,28 +19,6 @@ const Choice = () => {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [choicedata, setChoicedata] = useState({
-        owner: {
-            image: "",
-            name: "",
-            email: ""
-        },
-        map: {
-            address: "",
-            coordinates: {
-                lat: 0,
-                lng: 0
-            }
-        },
-        footer: {
-            price: "",
-            startTime: "",
-            endTime: "",
-            onReserve: () => {},
-            loading: false,
-            error: null
-        }
-    });
 
 
     const navigate = useNavigate();
@@ -59,33 +36,32 @@ const Choice = () => {
         }
     }
 
-    // const choicedata = {
-    //     owner: {
-    //         image: "https://wrtn-image-user-output.s3.ap-northeast-2.amazonaws.com/6631b6db962f730c6207b3c2/fd53f817-13a7-482c-9492-26a270549528.png",
-    //         name: "사용자 이름",
-    //         email: "user@example.com"
-    //     },
-    //     map: {
-    //         address: "~~~",
-    //         coordinates: {
-    //             lat: 33.450701,
-    //             lng: 126.570667
-    //         }
-    //     },
-    //     footer: {
-    //         price: "50,000",
-    //         startTime: "2024.06.07  17:00",
-    //         endTime: "2024.06.09  10:00",
-    //         onReserve: onReserve,
-    //         loading: loading,
-    //         error: error
-    //     }
-    // };
+    const choicedata = {
+        owner: {
+            image: "https://wrtn-image-user-output.s3.ap-northeast-2.amazonaws.com/6631b6db962f730c6207b3c2/fd53f817-13a7-482c-9492-26a270549528.png",
+            name: "사용자 이름",
+            email: "user@example.com"
+        },
+        map: {
+            address: "~~~",
+            coordinates: {
+                lat: 33.450701,
+                lng: 126.570667
+            }
+        },
+        footer: {
+            price: "50,000",
+            startTime: "2024.06.07  17:00",
+            endTime: "2024.06.09  10:00",
+            onReserve: onReserve,
+            loading: loading,
+            error: error
+        }
+    };
 
     return (
         <div>
             <header></header>
-            <ChoiceData setChoicedata={setChoicedata} />
             <div className="description">
                 <Carousel />
             </div>

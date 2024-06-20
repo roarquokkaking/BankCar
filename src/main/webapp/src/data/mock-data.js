@@ -41,8 +41,8 @@ export const Locations =()=>{
   
     useEffect(()=>{
 
-          // https://dongwoossltest.shop/api
-          axios.get("http://localhost:8080/cars/getcardata")
+      
+          axios.get("https://dongwoossltest.shop/api/cars/getcardata")
           .then(res=>{
             setCarData(res.data);
             const car1=carData[0];

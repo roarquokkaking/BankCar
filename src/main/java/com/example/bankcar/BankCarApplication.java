@@ -15,9 +15,9 @@ import spark.SparkService;
 
 @SpringBootApplication
 @CrossOrigin(origins = "*")
-@ComponentScan(basePackages = {"login.*","driverLicense.*","user.*" ,"booking.*","chat.*","car.*","wishList.*","search.*","main.*","payment.*","spark","choice.*"})
+@ComponentScan(basePackages = {"login.*","driverLicense.*","user.*" ,"booking.*","chat.*","car.*","wishList.*","search.*","main.*","payment.*","spark"})
 @EntityScan(basePackages = {"login.dto","driverLicense.entity","booking.entity","car.entity","wishList.entity","search.bean","chat.entity","payment.entity"})
-@EnableJpaRepositories(basePackages = {"login.dao","driverLicense.repo","user.repository","booking.repository", "chat.repository","car.repo","wishList.repository","main.repository","payment.repo","search.repo","choice.repo"})
+@EnableJpaRepositories(basePackages = {"login.dao","driverLicense.repo","user.repository","booking.repository", "chat.repository","car.repo","wishList.repository","main.repository","payment.repo","search.repo"})
 @Import(SparkConfig.class)
 public class BankCarApplication implements CommandLineRunner{
 
