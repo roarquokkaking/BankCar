@@ -98,6 +98,7 @@ export const Locations =()=>{
       price: `${item[0]}원/시간`,
       isNew: false,
       rating: item[5]===0?'0.0':item[5],
+      car_id:item[1]
     
 
   }
