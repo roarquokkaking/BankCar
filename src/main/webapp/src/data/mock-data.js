@@ -16,6 +16,7 @@ import { FaCar, FaMotorcycle, FaTruck } from 'react-icons/fa';
 import { MdOutlineElectricalServices } from "react-icons/md";
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 
 
@@ -36,8 +37,9 @@ export const categoryTab = [
 
 export const Locations =()=>{ 
 
+  const label = useSelector((state)=>state.Option.id);
   const [carData,setCarData]=useState([]);
-    
+  console.log("label="+label);
 
     useEffect(()=>{
 

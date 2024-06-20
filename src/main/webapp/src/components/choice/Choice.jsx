@@ -27,7 +27,7 @@ const Choice = () => {
         setLoading(true);
         setError(null);
         try {
-            const url = `/payment?carid=${carid}&startdate=${startDate}&enddate=${endDate}&price=${price}`;
+            const url = `/payment?carId=${carid}&startDate=${startDate}&endDate=${endDate}&price=${price}`;
             navigate(url);
         } catch (error) {
             console.error(error);

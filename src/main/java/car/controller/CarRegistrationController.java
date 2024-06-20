@@ -76,28 +76,20 @@ public class CarRegistrationController {
         return ResponseEntity.ok(carResponseDTOS); // 찾은 경우 200 응답과 함께 자동차 및 이미지 정보 목록 반환
     }
 
+    @GetMapping(path = "/user/{userId}/cars/{carId}")
+    public ResponseEntity<CarResponseDTO> getCarByCarId(@PathVariable("userId") String userId,
+                                                        @PathVariable("carId") Long carId){
+        Car car = carRegistrationService.findCarById(carId);
+        CarResponseDTO carResponseDTO = new CarResponseDTO();
+        carResponseDTO.convertToCarDTO(car);
+        return ResponseEntity.ok(carResponseDTO);
+    }
+
     private List<CarResponseDTO> convertToCarResponseDTO(List<Car> carList) {
         List<CarResponseDTO> carResponseDTOS = new ArrayList<>();
         for(Car car : carList){
-            CarResponseDTO carResponseDTO = CarResponseDTO.builder()
-                    .carId(car.getCarId())
-                    .carImages(car.getCarImages())
-                    .color(car.getColor())
-                    .content(car.getContent())
-                    .category(car.getCategory())
-                    .createdDate(car.getCreatedDate())
-                    .doroAddress(car.getDoroAddress())
-                    .jibunAddress(car.getJibunAddress())
-                    .latitude(car.getLatitude())
-                    .longitude(car.getLongitude())
-                    .model(car.getModel())
-                    .price(car.getPrice())
-                    .rating(car.getRating())
-                    .released(car.getReleased())
-                    .segment(car.getSegment())
-                    .title(car.getTitle())
-                    .user(car.getUser())
-                    .build();
+            CarResponseDTO carResponseDTO = new CarResponseDTO();
+            carResponseDTO.convertToCarDTO(car);
             carResponseDTOS.add(carResponseDTO);
         }
         return carResponseDTOS;

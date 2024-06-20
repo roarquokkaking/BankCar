@@ -14,7 +14,7 @@ import UsedCarReviews from './components/profile/UsedCarReviews';
 import CheckMyCar from './components/profile/checkCar/CheckMyCar';
 import RegisterMain from './components/register/RegisterMain';
 import {Provider} from 'react-redux';
-import store from './store/store';
+import {store,persistor} from './store/store';
 import Payment_main from './components/payment/Payment_main';
 import DriverLicense from './components/register/driverLicense/DriverLicense';
 import DriverCheck from './components/register/driverLicense/DriverCheck';
@@ -44,6 +44,7 @@ import NaverLogin from "./components/login/NaverLogin";
 import ChattingList from './components/chat/ChattingList';
 import UseReview from "./components/profile/UseReview";
 import UserReview from "./components/review/UserReview";
+import { PersistGate } from 'redux-persist/integration/react';
 
 const queryClient = new QueryClient();
 
@@ -63,6 +64,7 @@ function App() {
           }}
         >
           <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/searching" element={<Searching />} />
@@ -115,6 +117,7 @@ function App() {
             <Route path='/ChattingList' element={<ChattingList />} />
 
           </Routes>
+          </PersistGate>
           </Provider>
         </Box>
       </BrowserRouter>
