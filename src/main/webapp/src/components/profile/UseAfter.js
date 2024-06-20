@@ -1,4 +1,3 @@
-// UseAfter.js
 import React, { useEffect, useState } from 'react';
 import styles from './CSS/UseAfter.module.css';
 import { GoArrowLeft } from "react-icons/go";
@@ -10,23 +9,33 @@ import axios from "axios";
 const UseAfter = () => {
     const navigate = useNavigate();
     const [BookingDTO, setBookingDTO] = useState([]);
+    const [serchdata, setSerchdata] = useState('all');
     const { user_id } = useParams();
+    const {car_id} = useState('')
 
     console.log(user_id);
 
-    const navigateToReviewPage = (reservationId) => {
-        navigate(-1);
-    };
 
+    const fetchData = (userId, period) => {
+        const url = period === 'all' ?
+            `http://localhost:8080/Booking/after/${userId}` :
+            `http://localhost:8080/Booking/after/${userId}?period=${period}`;
 
-    useEffect(() => {
-        axios.get(`https://dongwoossltest.shop/api/Booking/after/${user_id}`)
+        axios.get(url)
             .then(response => {
                 const data = response.data;
                 setBookingDTO(data);
             })
             .catch(error => console.log(error));
-    }, [user_id]);
+    };
+
+    useEffect(() => {
+        fetchData(user_id, serchdata);
+    }, [user_id, serchdata]);
+
+    const handlePeriodChange = (e) => {
+        setSerchdata(e.target.value);
+    };
 
     const ReservationItem = ({ reservation }) => (
         <div className={styles.reservationItem}>
@@ -37,9 +46,9 @@ const UseAfter = () => {
             <div className={styles.actionContainer}>
                 <span>{reservation.period}</span>
                 <button
-                    onClick={() => navigateToReviewPage(reservation.id)}
+                    onClick={() =>navigate(`/profile/useReview/${user_id}`)}
                     style={{
-                        backgroundColor: reservation.reviewWritten ? 'grey' : '#008EDC',
+                        backgroundColor: reservation.reviewWrite ? 'grey' : '#008EDC',
                         color: 'white',
                         padding: '10px',
                         borderRadius: '5px',
@@ -49,7 +58,7 @@ const UseAfter = () => {
                         marginBottom: '2%'
                     }}
                 >
-                    {reservation.reviewWritten ? '후기 수정' : '후기 쓰기'}
+                    {reservation.reviewWrite =1 ? '후기 수정' : '후기 쓰기'}
                 </button>
             </div>
         </div>
@@ -70,7 +79,6 @@ const UseAfter = () => {
                                 }}
                                 onClick={() => navigate(-1)}
                             />
-                            제목
                             <h1
                                 style={{
                                     textAlign: "center",
@@ -84,9 +92,10 @@ const UseAfter = () => {
                     </header>
                 </div>
                 <div className={styles.selectContainer}>
-                    <select className={styles.searchDate} onChange={e => e.target.value}>
-                        <option value="all">기간별 검색</option>
+                    <select className={styles.searchDate} onChange={handlePeriodChange}>
+                        <option value="2000">기간별 검색</option>
                         <option disabled>============</option>
+                        <option value="2000">전체보기</option>
                         <option value="7">최근 7일</option>
                         <option value="15">최근 15일</option>
                         <option value="30">최근 30일</option>

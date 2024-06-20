@@ -21,7 +21,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping(path = "/api/profile", produces = "application/json")
+@RequestMapping(path = "/profile", produces = "application/json")
 public class UserProfileController {
 
     @Autowired

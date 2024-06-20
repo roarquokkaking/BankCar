@@ -21,7 +21,7 @@ const BookingDetails = () => {
     /*서버에 정보 보내기 */
     useEffect(() => {
 
-        axios.get(`https://dongwoossltest.shop/api/Booking/bookingDetail/${user_id}/${car_id}`)
+        axios.get(`http://localhost:8080/Booking/bookingDetail/${user_id}/${car_id}`)
             .then((response)=>response.data(setDetailsDTO()))
             .catch((error)=>console.log(error))
     }, [user_id]);

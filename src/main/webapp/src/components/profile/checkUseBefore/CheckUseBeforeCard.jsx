@@ -14,7 +14,7 @@ export default function CheckUseBeforeCard({ car }) {
         <Card sx={{ maxWidth: 345, mt: '10%', mb: '10px', mx: '10%', boxShadow: 5 }}>
             <CardMedia
                 sx={{ height: 280 }}
-                image={car.imageUrl}
+                image={  car.imageUrl}
                 title={car.model}
                 style={{alignItems : "center" }}
 

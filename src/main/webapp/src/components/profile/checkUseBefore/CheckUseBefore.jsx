@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { GoArrowLeft } from 'react-icons/go';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import ComponentHeader from '../ComponentsHeader';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -21,12 +21,13 @@ import useBefore from "../UseBefore";
 
 const CheckUseBefore = () => {
     const navigate = useNavigate();
-     const user_id = useSelector((state) => state.Login.id);
+     // const user_id = useSelector((state) => state.Login.id);
     const [useBeforeDTO  ,setUseBeforeDTO] =useState([])
     const [service, setService] = useState(0);
+    const {user_id}=useParams()
 
     useEffect(() => {
-        axios.get(`https://dongwoossltest.shop/api/before/{user_id}`)
+        axios.get(`http://localhost:8080/Booking/before/${user_id}`)
             .then(response=>{
                 setUseBeforeDTO(response.data)})
             .catch(error=>console.log(error))
