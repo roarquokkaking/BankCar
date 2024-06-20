@@ -4,6 +4,8 @@ import { GoArrowLeft } from "react-icons/go";
 import { IoCard } from "react-icons/io5";
 import './Payment.css'
 import NaverPay from './NaverPay';
+
+
 const Payment_main = () => {
 const navigate = useNavigate();
 const [date, setDate] = useState('05.24~05.25');
@@ -21,6 +23,33 @@ const scrollToTop = () => {
   const handleClick = () => {
     navigateToss('/TossModal');
   };
+
+  const [payDetail,setPayDetail]=useState({
+          "cid": "TC0ONETIME",
+  		"partner_order_id": "partner_order_id",
+  		"partner_user_id": "partner_user_id",
+  		"item_name": "초코파이",
+  		"quantity": "1",
+  		"total_amount": "2200",
+  		"vat_amount": "200",
+  		"tax_free_amount": "0",
+  		"approval_url": "https://dongwoossltest.shop/success",
+  		"fail_url": "https://dongwoossltest.shop/fail",
+  		"cancel_url": "https://dongwoossltest.shop/cancel"
+      })
+      const onPay=()=>{
+          axios.get("https://dongwoossltest.shop/api/payment/kakaoPay",{
+              params: payDetail,
+              headers:{
+                'Content-Type': 'application/json'
+              }
+            }).then(res=>{
+              window.location.href = res.data;
+            }
+              )
+      };
+
+
 return (
         <div>
             <header style={{marginBottom: 20}}>
@@ -42,7 +71,7 @@ return (
             <div className='paytitle'><h4>결제 수단</h4></div>
                     
                     <button className="kakao-payment-button"> 
-                        <img src="./image/kakaopay.png" alt="카카오페이 아이콘" />
+                        <img src="./image/kakaopay.png" alt="카카오페이 아이콘" onClick={onPay}/>
                     </button>
                     
 
