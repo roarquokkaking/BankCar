@@ -20,7 +20,6 @@ const ChattingRoom = () => {
     const messageEndRef = useRef(null);
 
     useEffect(() => {
-
         const fetchData = async () => {
             try {
                 const userResponse = await axios.get('https://dongwoossltest.shop/api/messages/userInfo', { withCredentials: true });
@@ -44,8 +43,9 @@ const ChattingRoom = () => {
         stompClient.current = Stomp.over(socket.current);
 
         stompClient.current.connect({}, () => {
-            stompClient.current.subscribe(`/topic/public/${roomSeq}`, (message) => {
-                const receivedMessage = JSON.parse(message.body);
+            stompClient.current.subscribe(`/topic/public/${roomSeq}`, (messages) => {
+                const receivedMessage = JSON.parse(messages.body);
+                console.log('받은 메세지:', receivedMessage);
                 setMessages(prevMessages => [...prevMessages, receivedMessage]);
             });
         });
@@ -71,7 +71,7 @@ const ChattingRoom = () => {
     
             const messageObj = {
                 sender: userName,
-                content: message,
+                content: messages,
                 timestamp: new Date().toISOString(),
                 messageRoom: { roomSeq: roomSeq }
             };
