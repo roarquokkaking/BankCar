@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import '../css/payment.module.css';
+import './css/payment.module.css';
 
 const KaKaoPaySuccess = () => {
     const location=useLocation();
