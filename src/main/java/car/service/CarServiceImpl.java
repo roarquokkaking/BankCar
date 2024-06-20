@@ -64,7 +64,7 @@ public class CarServiceImpl implements CarService {
     public List<Object[]> getCarData(String label) {
 
         String new_label="";
-        switch (new_label){
+        switch (label){
             case "1" : new_label="캠핑";
                         break;
             case "2" : new_label="비지니스";
@@ -84,6 +84,7 @@ public class CarServiceImpl implements CarService {
             default: new_label="";
                 break;
         }
+        System.out.println("new_label="+new_label);
 
         if(new_label.equals("")){
             return serviceCarRepository.findAllOrderByIdDesc();
