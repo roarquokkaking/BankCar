@@ -42,8 +42,8 @@ public class CarServiceController {
 
 
     @GetMapping(path = "/cars/getcardata")
-    public List<Object[]> getcardata(){
-        return carService.getCarData();
+    public List<Object[]> getcardata(@RequestParam String label){
+        return carService.getCarData(label);
     }
 
 

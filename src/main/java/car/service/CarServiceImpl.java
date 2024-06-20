@@ -61,8 +61,36 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Object[]> getCarData() {
-        return serviceCarRepository.findAllOrderByIdDesc();
+    public List<Object[]> getCarData(String label) {
+
+        String new_label="";
+        switch (new_label){
+            case "1" : new_label="캠핑";
+                        break;
+            case "2" : new_label="비지니스";
+                break;
+            case "3" : new_label="데이트";
+                break;
+            case "4" : new_label="여행";
+                break;
+            case "5" : new_label="스포츠카";
+                break;
+            case "6" : new_label="오토바이";
+                break;
+            case "7" : new_label="트럭";
+                break;
+            case "8" : new_label="전기차";
+                break;
+            default: new_label="";
+                break;
+        }
+
+        if(new_label.equals("")){
+            return serviceCarRepository.findAllOrderByIdDesc();
+        }else{
+            return serviceCarRepository.findAllOrderByIdDesc(new_label);
+        }
+
     }
 
 
