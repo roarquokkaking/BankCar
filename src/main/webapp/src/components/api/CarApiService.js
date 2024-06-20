@@ -23,6 +23,10 @@ export function selectUserCarList(userId){
     return apiClientPublish.get(`/users/${userId}/cars`)
 }
 
+export function getCarItemApi(userId, carId){
+    return apiClientPublish.get(`/users/${userId}/cars/${carId}`)
+}
+
 // 네이버 로그인 접근 url 가져오는 api
 export function getNaverLoginUrlApi(){
     return apiClientLocal.get(`/user/naverLogin`,{

@@ -34,4 +34,24 @@ public class CarResponseDTO {
     private LocalDateTime createdDate;
     private float rating;
 
+    public void convertToCarDTO(Car car) {
+        this.carId = car.getCarId();
+        this.carImages = car.getCarImages();
+        this.color = car.getColor();
+        this.content = car.getContent();
+        this.category = car.getCategory();
+        this.createdDate = car.getCreatedDate();
+        this.doroAddress = car.getDoroAddress();
+        this.jibunAddress = car.getJibunAddress();
+        this.latitude = car.getLatitude();
+        this.longitude = car.getLongitude();
+        this.model = car.getModel();
+        this.price = car.getPrice();
+        this.rating = car.getRating();
+        this.released = car.getReleased();
+        this.segment = car.getSegment();
+        this.title = car.getTitle();
+        this.user = car.getUser();
+    }
+
 }
