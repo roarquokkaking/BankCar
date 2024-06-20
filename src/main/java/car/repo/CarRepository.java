@@ -11,6 +11,5 @@ import java.util.List;
 public interface CarRepository extends JpaRepository<Car,Long> {
     List<Car> findByUserId(String userId);
 
-    @Query("select c,cs from Car c inner join ServiceCar cs on cs.car.carId=c.carId order by c.carId DESC")
-    List<Object[]> findAllOrderByIdDesc();
+
 }
