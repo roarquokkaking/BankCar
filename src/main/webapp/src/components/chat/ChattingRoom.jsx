@@ -55,7 +55,7 @@ const ChattingRoom = () => {
                     stompClient.current.disconnect();
                 }
             };
-    }, [roomSeq]);
+    }, []);
 
     useEffect(() => {
         scrollToBottom();
