@@ -9,7 +9,7 @@ import optionReducer from './optionSlice';
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['Login', 'Option'],
+    whitelist: ['loginReducer'],
   };
   
 
@@ -20,10 +20,10 @@ const persistConfig = {
 
 const store = configureStore({
     reducer:rootReducer ,
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-          serializableCheck: false,
-        }),
+    // middleware: (getDefaultMiddleware) =>
+    //     getDefaultMiddleware({
+    //       serializableCheck: false,
+    //     }),
 
 });
 const persistor = persistStore(store);
