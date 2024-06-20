@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './css/ChattingList.css';
 import { GoArrowLeft } from "react-icons/go";
 
 const ChattingList = () => {
+    const navigate = useNavigate();
     const [chatRooms, setChatRooms] = useState([]);
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -68,7 +69,7 @@ const ChattingList = () => {
             <div className="chat-headernav2" >
             <GoArrowLeft style={{width:'30px', height:'30px',
                 marginTop:'5%', marginLeft:'15px'
-            }}onClick={()=>{Navigate(-1)}}
+            }}onClick={()=>{navigate(-1)}}
             />
             <h1 style={{textAlign:'center', 
                             font:'apple SD Gothic Neo',
