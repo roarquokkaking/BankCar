@@ -100,7 +100,7 @@ const ChattingRoom = () => {
             console.log('보내는 메시지:', messageObj);
             stompClient.current.send("/app/send", {}, JSON.stringify(messageObj));
             setMessage('');
-            setMessages((prevMessages) => [...prevMessages, response.data]);
+            // setMessages((prevMessages) => [...prevMessages, response.data]);
         } else {
             console.error('WebSocket 클라이언트가 연결되지 않았습니다.');
         }
