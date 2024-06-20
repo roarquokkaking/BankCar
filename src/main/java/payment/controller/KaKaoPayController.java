@@ -46,10 +46,13 @@ public class KaKaoPayController {
         jsonBody.put("partner_order_id",kakaoPayEntity.getPartner_order_id());
         jsonBody.put("partner_user_id",kakaoPayEntity.getPartner_user_id());
         jsonBody.put("item_name",kakaoPayEntity.getItem_name());
-        jsonBody.put("quantity",kakaoPayEntity.getQuantity());
+//        jsonBody.put("quantity",kakaoPayEntity.getQuantity());
+        jsonBody.put("quantity","1");
         jsonBody.put("total_amount", kakaoPayEntity.getTotal_amount());
-        jsonBody.put("vat_amount",kakaoPayEntity.getVat_amount());
-        jsonBody.put("tax_free_amount",kakaoPayEntity.getTax_free_amount());
+//        jsonBody.put("vat_amount",kakaoPayEntity.getVat_amount());
+        jsonBody.put("vat_amount","0");
+//        jsonBody.put("tax_free_amount",kakaoPayEntity.getTax_free_amount());
+        jsonBody.put("tax_free_amount","0");
         jsonBody.put("approval_url",kakaoPayEntity.getApproval_url());
         jsonBody.put("fail_url",kakaoPayEntity.getFail_url());
         jsonBody.put("cancel_url",kakaoPayEntity.getCancel_url());
@@ -104,6 +107,9 @@ public class KaKaoPayController {
         Map<String,Object> map = new HashMap<>();
         map.put("item_name",item_name);
         map.put("total_amount",total_amount);
+        map.put("quantity",kakaoPayEntity.getQuantity());
+        map.put("vat_amount",kakaoPayEntity.getVat_amount());
+        map.put("tax_free_amount",kakaoPayEntity.getTax_free_amount());
 
         kakaoPayEntity.setStatus(1);
         kakaoPayService.setStatus(kakaoPayEntity);

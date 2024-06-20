@@ -63,17 +63,17 @@ const KaKaoPaySuccess = () => {
           <br></br>
           <div className={styles["detail-item"]}>
             <span className={styles["detail-title"]}>대여 주소:</span>
-            <span className={styles["detail-content"]}></span>
+            <span className={styles["detail-content"]}>{payDetail.quantity}</span>
           </div>
           <br></br>
           <div className={styles["detail-item"]}>
             <span className={styles["detail-title"]}>대여 시작일:</span>
-            <span className={styles["detail-content"]}></span>
+            <span className={styles["detail-content"]}>{payDetail.vat_amount}</span>
           </div>
           <br></br>
           <div className={styles["detail-item"]}>
             <span className={styles["detail-title"]}>대여 반납일:</span>
-            <span className={styles["detail-content"]}></span>
+            <span className={styles["detail-content"]}>{payDetail.tax_free_amount}</span>
           </div>
           <br></br>
         </div>
