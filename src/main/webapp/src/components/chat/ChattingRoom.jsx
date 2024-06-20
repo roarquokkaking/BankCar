@@ -20,6 +20,24 @@ const ChattingRoom = () => {
     const messageEndRef = useRef(null);
 
     useEffect(() => {
+
+        const fetchData = async () => {
+            try {
+                const userResponse = await axios.get('https://dongwoossltest.shop/api/messages/userInfo', { withCredentials: true });
+                // axios.get('http://localhost:8080/api/messages/userInfo', { withCredentials: true })
+                const userData = userResponse.data;
+                setUserName(userData.name);
+                setProfileImage(userData.profile_image.replace('http://', 'https://'));
+
+                const messagesResponse = await axios.get(`https://dongwoossltest.shop/api/messages/roomseq/${roomSeq}`);
+                // axios.get(`http://localhost:8080/api/messages/roomseq/${roomSeq}`)
+                setMessages(messagesResponse.data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
     
         socket.current = new SockJS('https://dongwoossltest.shop/api/chattingroom');
         // socket.current = new SockJS('http://localhost:8080/ws');
@@ -31,29 +49,11 @@ const ChattingRoom = () => {
                 setMessages(prevMessages => [...prevMessages, receivedMessage]);
             });
         });
-
-            axios.get('https://dongwoossltest.shop/api/messages/userInfo', { withCredentials: true })
-        // axios.get('http://localhost:8080/api/messages/userInfo', { withCredentials: true })
-            .then(response => {
-                const userData = response.data;
-                setUserName(userData.name);
-                setProfileImage(userData.profile_image.replace('http://', 'https://')); // 이미지 URL을 HTTPS로 변경
-                console.log(response.data);
-            })
-            .catch(error => console.error("Error fetching user data:", error));
-
-            axios.get(`https://dongwoossltest.shop/api/messages/roomseq/${roomSeq}`)
-            // axios.get(`http://localhost:8080/api/messages/roomseq/${roomSeq}`)
-                .then(response => {
-                    setMessages(response.data);
-                })
-                .catch(error => console.error("Error fetching messages:", error));
-
             return () => {
                     stompClient.current.disconnect();
                 
             };
-    }, []);
+    }, [roomSeq]);
 
     useEffect(() => {
         scrollToBottom();
@@ -80,7 +80,7 @@ const ChattingRoom = () => {
             // const response = await axios.post('http://localhost:8080/api/messages/send', messageObj, { withCredentials: true });
             console.log('Message sent successfully', response.data);
 
-            // setMessages((prevMessages) => [...prevMessages, response.data]);
+            setMessages((prevMessages) => [...prevMessages, response.data]);
             setMessage('');
         } catch (error) {
             console.error('Error handling send:', error);
