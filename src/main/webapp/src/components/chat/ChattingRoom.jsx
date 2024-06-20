@@ -110,7 +110,7 @@ const ChattingRoom = () => {
             </div>
             </header>
             <div className="message-container">
-                {message.map((msg, index) => {
+                {messages.map((msg, index) => {
                     if (msg.sender === userName) {
                         return (
                             <div key={index} className="message-box-send">
