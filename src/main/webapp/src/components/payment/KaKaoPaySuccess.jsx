@@ -38,7 +38,7 @@ const KaKaoPaySuccess = () => {
         <div className="App">
       <div className="confirmation-container">
         <div className="icon">
-          <img src="https://via.placeholder.com/100" alt="Success Icon" />
+          <img src={`${process.env.PUBLIC_URL}/image/paySuccess.png`} alt="Success Icon" />
         </div>
         <h1>결제가 완료되었습니다!</h1>
         <p>주문이 성공적으로 완료되었습니다. .</p>
@@ -46,11 +46,11 @@ const KaKaoPaySuccess = () => {
         <div className="order-details">
           <div className="detail-item">
             <span className="detail-title">예약 차량:</span>
-            <span className="detail-content">{payDetail.itemName}</span>
+            <span className="detail-content">{payDetail.item_name}</span>
           </div>
           <div className="detail-item">
             <span className="detail-title">결제 금액:</span>
-            <span className="detail-content">{payDetail.totalAmount}</span>
+            <span className="detail-content">{payDetail.total_amount}</span>
           </div>
           <div className="detail-item">
             <span className="detail-title">결제 방법:</span>
