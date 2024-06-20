@@ -25,5 +25,6 @@ public class UserBeforeDTO {
     private LocalTime endTime;
 //    private enum  Bookingstatus;
     private Float rating;
+    private int pay ;
     private String imageUrl;
 }
