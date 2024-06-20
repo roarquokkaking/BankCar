@@ -43,7 +43,7 @@ const MyProfileUpdate = () => {
         const fetchUserProfile = async () => {
             try {
                 const response =
-                    await axios.get(`https://dongwoossltest.shop/api/profile/myprofileUpdate/${user_id}`);
+                    await axios.get(`http://localhost:8080/profile/myprofileUpdate/${user_id}`);
                 setUserProfileDTO(response.data);
             } catch (error) {
                 console.error("프로필 정보를 가져오는데 실패했습니다.", error);

@@ -62,7 +62,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<Object[]> getCarData() {
-        return carRepository.findAllOrderByIdDesc();
+        return serviceCarRepository.findAllOrderByIdDesc();
     }
 
 

@@ -15,6 +15,5 @@ public interface CarRepository extends JpaRepository<Car,Long> {
     @Query("select c from Car c where c.user.id =:userId")
     List<Car> getCarsByUserId(@Param("userId") String userId);
 
-    @Query("select c,cs from Car c inner join ServiceCar cs on cs.car.carId=c.carId order by c.carId DESC")
-    List<Object[]> findAllOrderByIdDesc();
+
 }

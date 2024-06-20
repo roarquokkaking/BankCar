@@ -4,6 +4,7 @@ import booking.dto.BookingDTO;
 import booking.dto.UserBeforeDTO;
 import booking.entity.BookingEntity;
 import booking.service.BookingService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,63 +29,65 @@ public class BookingController {
     /**
      * 예약정보 확인 서비스
      * */
- /*   @GetMapping(path = "/before/{user_id}")
-    public List<BookingEntity> bookingForm(@PathVariable("user_id")
-                                               @Validated String user_id,
-                                           @ModelAttribute BookingEntity bookingEntity) {
-        List<BookingEntity> BookingDTO = bookingService.findAllByUserId(user_id);
-        System.out.println(BookingDTO);
-        System.out.println(user_id);
-
-        return BookingDTO;
-    }*/
 
     @GetMapping(path = "/before/{user_id}")
-    public List<UserBeforeDTO> getBookings(@PathVariable String user_id,
+    public List<UserBeforeDTO> getBookings(@PathVariable("user_id") String user_id,
+                                           @Valid
                                            @ModelAttribute UserBeforeDTO userBeforeDTO) {
+        System.out.println(user_id);
+        System.out.println(1111111);
         return bookingService.findUserBookings(user_id);
     }
 
 
-//
-//    @GetMapping(path = "/after/{user_id}")
-//    public List<BookingEntity> userAfter (@PathVariable("user_id")@Validated String user_id){
-//
-//        System.out.println(user_id);
-//
-//        List<BookingEntity> BookingDTO  = bookingService.getAfter(user_id);
-//
-//
-//        return BookingDTO;
-//    }
-//
-    @GetMapping(path = "/after/{user_id}")
-    public List<BookingEntity> userAfter (
-            @PathVariable("user_id") @Validated String user_id,
-            @RequestParam(value = "dateRange", defaultValue = "all") String dateRange) {
-
-        System.out.println("User ID: " + user_id);
-        System.out.println("Date Range: " + dateRange);
-
-        List<BookingEntity> bookingList;
-        switch (dateRange) {
-            case "7":
-                bookingList = bookingService.getAfterLastNDays(user_id, 7);
-                break;
-            case "15":
-                bookingList = bookingService.getAfterLastNDays(user_id, 15);
-                break;
-            case "30":
-                bookingList = bookingService.getAfterLastNDays(user_id, 30);
-                break;
-            case "all":
-            default:
-                bookingList = bookingService.getAfter(user_id);
-                break;
-        }
-
-        return bookingList;
+    @GetMapping("/after/{user_id}")
+    public ResponseEntity<List<BookingDTO>> getBookingsAfter(
+            @PathVariable("user_id") String user_id,
+            @RequestParam(value = "period", required = false,defaultValue = "2000") int period) {
+        System.out.println(period);
+        List<BookingDTO> bookings = bookingService.getAfter(user_id, period);
+        return ResponseEntity.ok(bookings);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
