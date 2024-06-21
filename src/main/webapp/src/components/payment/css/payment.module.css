@@ -47,10 +47,12 @@ p {
 
 .detail-title {
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .detail-content {
   font-size: 16px;
+  margin-left:9px;
 }
 
 .home-button {
