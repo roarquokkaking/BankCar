@@ -1,8 +1,10 @@
 package chat.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
@@ -27,7 +29,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.enableSimpleBroker("/topic");
+        registry.enableSimpleBroker("/topic", "/queue")
+        .setHeartbeatValue(new long[]{10000, 10000}) // Heartbeat 설정 (10초마다)
+        .setTaskScheduler(heartBeatScheduler());  // TaskScheduler 설정
         registry.setApplicationDestinationPrefixes("/app");
     }
 
@@ -38,5 +42,13 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 .setMessageSizeLimit(128 * 1024); // 최대 메시지 크기 (바이트)
     }
 
+    @Bean
+    public ThreadPoolTaskScheduler heartBeatScheduler() {
+        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+        scheduler.setPoolSize(1);
+        scheduler.setThreadNamePrefix("wss-heartbeat-thread-");
+        scheduler.initialize();
+        return scheduler;
+    }
 
 }
