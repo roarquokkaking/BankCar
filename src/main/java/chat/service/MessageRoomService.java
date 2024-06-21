@@ -1,9 +1,12 @@
 package chat.service;
 
 import chat.entity.MessageRoom;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 
+@Transactional
 public interface MessageRoomService {
 
     List<MessageRoom> getChatRoomsByUserName(String userName);

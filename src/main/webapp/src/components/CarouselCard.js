@@ -53,7 +53,10 @@ const CarouselCard = ({ location, isHeartClick, onHeartClick }) => {
   };
 
   const goChoice = () => {
-    const url = `/choice?carid=${location.id}&startdate=${location.days}&enddate=${location.days}&price=${location.price}`;
+    const priceValue = parseInt(location.price.replace(/[^\d]/g, ''), 10);
+
+    const url = `/choice?carid=${location.car_id}&startdate=${searchDTO.startDate}&`+
+        `enddate=${searchDTO.endDate}&starttime=${searchDTO.startTime}&endtime=${searchDTO.endTime}&price=${priceValue}`;
     navigate(url);
   };
 

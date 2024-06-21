@@ -45,7 +45,7 @@ public class BookingEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "booking_status")
-    private BookingStatus booking_status;
+    private BookingStatus booking_status=BookingStatus.BEFORE;
 
     @Column(name = "create_date")
     private LocalDateTime create_date;
@@ -58,9 +58,9 @@ public class BookingEntity {
     @JoinColumn(name = "car_id", nullable = false)
     private Car car;
 
-    @JoinColumn(name = "review_id")
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "bookingEntity")
-    private ReviewEntity reviewEntity;
+//    @JoinColumn(name = "review_id")
+//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "bookingEntity")
+//    private ReviewEntity reviewEntity;
 
     // setter와 기타 메서드들
 

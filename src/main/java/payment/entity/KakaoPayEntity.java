@@ -1,15 +1,16 @@
 package payment.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 
 @Entity
 @Table(name = "payment")
 public class KakaoPayEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="seq")
+    private Long seq;
+
     @Column(name="id")
     private String id;
 
@@ -40,6 +41,8 @@ public class KakaoPayEntity {
 
     @Column(name="status")
     private int status;
+    @Column(name="car_id")
+    private Long car_id;
 
 
     public String getCid() {
@@ -152,5 +155,13 @@ public class KakaoPayEntity {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public Long getCar_id() {
+        return car_id;
+    }
+
+    public void setCar_id(Long car_id) {
+        this.car_id = car_id;
     }
 }

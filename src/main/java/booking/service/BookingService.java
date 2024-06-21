@@ -26,6 +26,8 @@ public interface BookingService {
 
     List<BookingDTO> getBookings(String userId, String period);
 
+    void setBooking(BookingEntity booking);
+
 
     //after 에 관한 서비스 
 //    List<BookingDTO> getAllBookings(String userId);

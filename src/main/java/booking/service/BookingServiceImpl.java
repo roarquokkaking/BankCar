@@ -169,6 +169,11 @@ public class BookingServiceImpl implements BookingService {
         return List.of();
     }
 
+    @Override
+    public void setBooking(BookingEntity booking) {
+        bookingRepository.save(booking);
+    }
+
 
 //    @Override
 //    public void getUseNowService(String userId, Long carId) {
