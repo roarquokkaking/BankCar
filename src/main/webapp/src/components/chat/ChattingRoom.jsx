@@ -10,6 +10,7 @@ import './css/ChattingRoom.css';
 
 const ChattingRoom = () => {
     const { roomSeq } = useParams();
+    // const [messageRoom, setMessageRoom] = useState({ roomSeq: null });
     const navigate = useNavigate();
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
@@ -43,7 +44,7 @@ const ChattingRoom = () => {
         stompClient.current = Stomp.over(socket.current);
 
         stompClient.current.connect({}, () => {
-            stompClient.current.subscribe('/topic/public' + roomSeq, (message) => {
+            stompClient.current.subscribe(`/topic/public/${roomSeq}`, (message) => {
                 const receivedMessage = JSON.parse(message.body);
                 if (receivedMessage.roomSeq === roomSeq) {
                     console.log('받은 메세지:', receivedMessage);
@@ -73,7 +74,7 @@ const ChattingRoom = () => {
                 sender: userName,
                 content: message,
                 timestamp: new Date().toISOString(),
-                messageRoom: { roomSeq: roomSeq }
+                messageRoom: { roomSeq: Number(roomSeq) }
             };
             console.log('Sending message via WebSocket:', messageObj);
             stompClient.send("/app/sendMessage", {}, JSON.stringify(messageObj));
