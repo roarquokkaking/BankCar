@@ -14,7 +14,9 @@ import java.util.Optional;
 @Service
 public class MessageServiceImpl implements MessageService {
 
+    @Autowired
     private final MessageRepository messageRepository;
+    @Autowired
     private final MessageRoomRepository messageRoomRepository;
 
     @Autowired
@@ -26,7 +28,7 @@ public class MessageServiceImpl implements MessageService {
 
     // 메시지 저장
     public Message saveMessage(Message message) {
-
+        System.out.println("saveMessage="+message.getSender());
         // Message 저장
         return messageRepository.save(message);
     }

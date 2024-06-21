@@ -22,7 +22,8 @@ const ChattingRoom = () => {
 
     const connectStompClient = () => {
         const socket = new SockJS('https://dongwoossltest.shop/api/chat');
-        // socket.current = new SockJS('http://localhost:8080/ws');
+        // const socket = new SockJS('http://localhost:8080/ws');
+        
         stompClient.current = Stomp.over(socket);
 
         stompClient.current.heartbeat.outgoing = 10000; 
@@ -53,6 +54,7 @@ const ChattingRoom = () => {
                 const userResponse = await axios.get('https://dongwoossltest.shop/api/messages/userInfo', { withCredentials: true });
                 // const userResponse = await axios.get('http://localhost:8080/api/messages/userInfo', { withCredentials: true })
                 const userData = userResponse.data;
+                console.log('first='+userData.name);
                 setUserName(userData.name);
                 setProfileImage(userData.profile_image.replace('http://', 'https://'));
 
@@ -87,18 +89,21 @@ const ChattingRoom = () => {
 
     const handleSend = () => {
         try {
+            
             const messageObj = {
                 sender: userName,
                 content: message,
                 timestamp: new Date().toISOString(),
                 messageRoom: { roomSeq: Number(roomSeq) }
             };
-            console.log('Sending message via WebSocket:', messageObj);
+            
+            console.log('보내는 sender:', messageObj.sender);
     
             // Ensure stompClient is connected before sending message
             if (stompClient.current && isConnected) { // 연결 상태를 확인
                 stompClient.current.send("/app/sendMessage", {}, JSON.stringify(messageObj));
                 setMessages((prevMessages) => [...prevMessages, messageObj]);
+                console.log('웹소켓으로 보내는 정보:', messageObj);
                 setMessage('');
             } else {
                 console.error('WebSocket is not connected.');
