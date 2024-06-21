@@ -33,10 +33,10 @@ const ChattingRoom = () => {
             setIsConnected(true);
             stompClient.current.subscribe('/topic/public/' + roomSeq, (message) => {
                 const receivedMessage = JSON.parse(message.body);
-                if (receivedMessage.roomSeq === roomSeq) {
+               
                     console.log('받은 메시지:', receivedMessage);
                     setMessages((prevMessages) => [...prevMessages, receivedMessage]);
-                }
+                
             });
         }, (error) => {
             console.error('Connection error:', error);
