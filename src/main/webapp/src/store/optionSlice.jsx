@@ -5,7 +5,7 @@ export const optionSlice = createSlice({
     name:'option',
 
     initialState:{
-        id:''
+        id:'0'
     },
     reducers:{
         setId:(state,action)=>{

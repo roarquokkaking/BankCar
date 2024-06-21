@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import review.entity.ReviewEntity;
 
 import java.util.List;
-import java.util.Optional;
 
 @Transactional
 @Repository
@@ -22,12 +21,10 @@ public interface ReviewRepository extends JpaRepository<ReviewEntity, Long> {
                 "WHERE r.loginDTO.id = :userId")
         List<ReviewEntity> findReviewsByUserId(@Param("userId") String userId);
 
+        List<ReviewEntity> findByCar_CarId(Long carId);
 
 
-
-
-
-    //    @Query("SELECT r FROM ReviewEntity r " +
+        //    @Query("SELECT r FROM ReviewEntity r " +
 //            "WHERE r.loginDTO.id = :userId " +
 //            "AND r.review_id = :reviewId")
 //    ReviewEntity findByIdAndReviewId(String userId, Long reviewId);

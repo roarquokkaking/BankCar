@@ -62,6 +62,13 @@ const Searching = () => {
         endtime:''
     });
 
+    const navigate = useNavigate();
+    const createURLWithParams = (baseURL, params) => {
+        const url = new URL(baseURL, window.location.origin);
+        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+        return url.toString();
+    };
+
     const onSearch = () => {
         let isValid = true;
         let newValidationMessages = { date: '', starttime: '', endtime: '' };
@@ -82,11 +89,8 @@ const Searching = () => {
         setValidationMessages(newValidationMessages);
 
         if (isValid) {
-            axios.post("https://dongwoossltest.shop/api/searching/searchList", null, { params: searchDTO })
-                .then(res => {
-                    console.log(res.data);
-                })
-                .catch(error => console.log(error));
+            const url = createURLWithParams('/', searchDTO);
+            navigate(url);
         }
     };
 

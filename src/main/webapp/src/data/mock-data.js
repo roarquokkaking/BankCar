@@ -44,7 +44,11 @@ export const Locations =()=>{
     useEffect(()=>{
 
 
-          axios.get("https://dongwoossltest.shop/api/cars/getcardata")
+          axios.get("https://dongwoossltest.shop/api/cars/getcardata",{
+            params:{
+              label:label
+            }
+          })
           .then(res=>{
             setCarData(res.data);
             const car1=carData[0];
@@ -53,7 +57,7 @@ export const Locations =()=>{
         })
         //  .then(res=>console.log(res.data))
 
-        },[])
+        },[label])
 
 
         

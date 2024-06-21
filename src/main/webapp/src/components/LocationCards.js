@@ -16,6 +16,19 @@ const LocationCards = () => {
     const user_id = useSelector(state => state.Login.id)
     const [isHeartClicked, setIsHeartClicked] = useState([]);
 
+    const [searchDTO, setSearchDTO] = useState({
+        startDate: '',
+        endDate: '',
+        startTime: '',
+        endTime: '',
+        jibunAddress: '',
+        roadAddress: '',
+        x: '',
+        y: '',
+        minPrice: '',
+        maxPrice: ''
+    });
+
     // useEffect(() => {
     //     const searchParams = new URLSearchParams(location.search);
     //     const searchDTO = {
@@ -58,7 +71,7 @@ const LocationCards = () => {
             try {
                 // URL 파라미터에서 검색 조건 추출
                 const searchParams = new URLSearchParams(location.search);
-                const searchDTO = {
+                const updatedSearchDTO = {
                     startDate: searchParams.get('startDate') || '',
                     endDate: searchParams.get('endDate') || '',
                     startTime: searchParams.get('startTime') || '',
@@ -70,16 +83,18 @@ const LocationCards = () => {
                     minPrice: searchParams.get('minPrice') || '',
                     maxPrice: searchParams.get('maxPrice') || ''
                 };
+                setSearchDTO(updatedSearchDTO);
 
-                // 검색 조건이 있는 경우에만 서버에 POST 요청
-                if (searchDTO.startDate && searchDTO.endDate && searchDTO.startTime && searchDTO.endTime) {
-                    const response = await axios.get("https://dongwoossltest.shop/api/searching/searchList", null, { params: searchDTO });
+                if (updatedSearchDTO.startDate && updatedSearchDTO.endDate && updatedSearchDTO.startTime && updatedSearchDTO.endTime) {
+                    const response = await axios.get("https://dongwoossltest.shop/api/searching/searchList", { params: updatedSearchDTO });
                     setSearchData(response.data);
                 } else {
                     setSearchData([]); // 검색 조건이 없으면 빈 배열 설정
                 }
             } catch (error) {
                 console.error('검색 오류', error);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -92,7 +107,7 @@ const LocationCards = () => {
         setLoading(true);
         try {
             const response =
-                await axios.post(`http://localhost:8080/WishList/wish/toggle/${user_id}/${carId}`);//${carId}
+                await axios.post(`https://dongwoossltest.shop/api/WishList/wish/toggle/${user_id}/${carId}`);//${carId}
             setCards(response.data);
 
             // 하트 클릭 상태 업데이트
@@ -122,13 +137,7 @@ const LocationCards = () => {
 
     // }, []);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
 
-    if (!newLocations.length) {
-        return <div>자료가 없습니다.</div>;
-    }
 
     return (
         <Box sx={{ mx: 2 }}>

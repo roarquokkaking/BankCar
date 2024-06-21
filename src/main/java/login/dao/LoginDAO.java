@@ -13,6 +13,4 @@ public interface LoginDAO extends JpaRepository<LoginDTO,String> {
     @Query("update LoginDTO dto set dto.driver=:driverYN where dto.id=:id")
     void updateDriver(String id, boolean driverYN);
 
-
-
 }
