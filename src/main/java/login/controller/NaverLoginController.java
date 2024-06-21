@@ -80,7 +80,10 @@ public class NaverLoginController {
         user.setEmail(res_obj.get("email").toString().replaceAll("\"", ""));
         user.setPhone_number(res_obj.get("mobile").toString().replaceAll("\"", ""));
         user.setProfile_image(res_obj.get("profile_image").toString().replaceAll("\"", ""));
+        user.setDriver(false);
         System.out.println(user.toString());
+
+        session.setAttribute("loginDTO",user);
 
         if(existId.equals("non_exist")){
             loginService.insertUser(user);
