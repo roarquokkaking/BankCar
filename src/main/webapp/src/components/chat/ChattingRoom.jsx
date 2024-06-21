@@ -24,13 +24,13 @@ const ChattingRoom = () => {
         const fetchData = async () => {
             try {
                 const userResponse = await axios.get('https://dongwoossltest.shop/api/messages/userInfo', { withCredentials: true });
-                // axios.get('http://localhost:8080/api/messages/userInfo', { withCredentials: true })
+                // const userResponse = await axios.get('http://localhost:8080/api/messages/userInfo', { withCredentials: true })
                 const userData = userResponse.data;
                 setUserName(userData.name);
                 setProfileImage(userData.profile_image.replace('http://', 'https://'));
 
                 const messagesResponse = await axios.get(`https://dongwoossltest.shop/api/messages/roomseq/${roomSeq}`);
-                // axios.get(`http://localhost:8080/api/messages/roomseq/${roomSeq}`)
+                //    const messagesResponse = await axios.get(`http://localhost:8080/api/messages/roomseq/${roomSeq}`)
                 setMessages(messagesResponse.data);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -77,17 +77,19 @@ const ChattingRoom = () => {
                 messageRoom: { roomSeq: Number(roomSeq) }
             };
             console.log('Sending message via WebSocket:', messageObj);
-            stompClient.send("/app/sendMessage", {}, JSON.stringify(messageObj));
-            setMessages((prevMessages) => [...prevMessages, messageObj]);
-            setMessage('');
+    
+            // Ensure stompClient is connected before sending message
+            if (stompClient && stompClient.connected) {
+                stompClient.send("/app/sendMessage", {}, JSON.stringify(messageObj));
+                setMessages(prevMessages => [...prevMessages, messageObj]);
+                setMessage('');
+            } else {
+                console.error('WebSocket is not connected.');
+            }
         } catch (error) {
             console.error('Error handling send via WebSocket:', error);
         }
     };
-    
-
-   
-
     const formatTimestamp = (sentTime) => {
         const date = moment.utc(sentTime).toDate();
         const formattedDate = moment(date).local().format('Ahh:mm').replace('AM','오전').replace('PM','오후');
