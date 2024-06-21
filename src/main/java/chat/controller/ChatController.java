@@ -57,8 +57,8 @@ public class ChatController {
 
             if (loginDTO != null) {
                 String senderName = loginDTO.getName();
-                message.setSender(senderName);
-                message.setSentTime(LocalDateTime.now());
+                //message.setSender(senderName);
+                //message.setSentTime(LocalDateTime.now());
 
                 // 메시지 RoomSeq 값 검증
                 if (message.getMessageRoom() == null || message.getMessageRoom().getRoomSeq() == null) {
