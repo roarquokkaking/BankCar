@@ -7,7 +7,6 @@ import MobileFooter from './MobileFooter';
 import FooterMenu from "./FooterMenu";
 import { useNavigate } from 'react-router-dom';
 
-
 const Home = () => {
     const navigate = useNavigate();
     const goSearch = () => {
@@ -25,7 +24,6 @@ const Home = () => {
             backgroundColor: "#f0f0f0", // 호버 시 약간의 색 변화
         },
     }));
-
 
     return (
         <>
