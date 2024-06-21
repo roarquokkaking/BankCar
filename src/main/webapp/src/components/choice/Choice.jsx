@@ -66,7 +66,6 @@ const Choice = () => {
             endTime: endTime,
             startDate:startDate,
             endDate:endDate,
-            onReserve: onReserve,
             loading: loading,
             error: error
         }
@@ -85,7 +84,7 @@ const Choice = () => {
             <div className="border-line"></div>
             <Review />
             <Map {...choicedata.map} />
-            <ChoiceFooter {...choicedata.footer} />
+            <ChoiceFooter {...choicedata.footer} onReserve={onReserve} />
         </div>
     );
 };

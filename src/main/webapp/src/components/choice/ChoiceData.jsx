@@ -26,7 +26,7 @@ const ChoiceData = ({ setChoicedata }) => {
         const fetchData = async () => {
             try {
                 console.log(choiceDTO);
-                const responseCar = await axios.get("https://dongwoossltest.shop/api/choice/carinfo", {
+                const responseCar = await axios.get("http://localhost:8080/choice/carinfo", {
                     params: {
                         carId: choiceDTO.carId
                     }
@@ -36,7 +36,7 @@ const ChoiceData = ({ setChoicedata }) => {
                 setCarInfo(responseCar.data); // 차량 정보 설정
                 // console.log("carinfo : "+carInfo)
                 //호스트정보
-                const responseHost = await axios.get("https://dongwoossltest.shop/api/choice/hostinfo", {
+                const responseHost = await axios.get("http://localhost:8080/choice/hostinfo", {
                     params: {
                         userId: responseCar.data.user.id // 예시로 사용자 ID를 요청 파라미터로 설정
                     }
@@ -46,7 +46,7 @@ const ChoiceData = ({ setChoicedata }) => {
 
             //     리뷰정보
                 // reviewInfo 요청
-                const responseReview = await axios.get("https://dongwoossltest.shop/api/choice/reviewinfo", {
+                const responseReview = await axios.get("http://localhost:8080/choice/reviewinfo", {
                     params: {
                         carId: choiceDTO.carId // 예시로 차량 ID를 요청 파라미터로 설정
                     }
