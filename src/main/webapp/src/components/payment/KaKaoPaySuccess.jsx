@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './css/payment.module.css';
+import Swal from "sweetalert2";
 
 const KaKaoPaySuccess = () => {
     const location=useLocation();
@@ -10,6 +11,17 @@ const KaKaoPaySuccess = () => {
     const [pg_token,setPg_token]=useState('');
     const [payDetail,setPayDetail]=useState({});
 
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'center-center',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+  })
 
     useEffect(()=>{
         setPg_token(params.get('pg_token'));
@@ -28,6 +40,10 @@ const KaKaoPaySuccess = () => {
         }).then(res=>
             {
                 setPayDetail(res.data);
+                Toast.fire({
+                  icon: 'successs',
+                  title: '차량 예약 완료!!'
+              })
                 console.log(res.data);
             }
         ).catch(err=>console.log(err))
