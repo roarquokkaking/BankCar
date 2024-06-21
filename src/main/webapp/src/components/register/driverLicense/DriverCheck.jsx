@@ -26,9 +26,9 @@ const DriverCheck = () => {
 
     const Toast = Swal.mixin({
       toast: true,
-      position: 'center-center',
+      position: 'top',
       showConfirmButton: false,
-      timer: 3000,
+      timer: 1500,
       timerProgressBar: true,
       didOpen: (toast) => {
           toast.addEventListener('mouseenter', Swal.stopTimer)

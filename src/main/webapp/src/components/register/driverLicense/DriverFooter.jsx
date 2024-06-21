@@ -15,7 +15,7 @@ const DriverFooter = () => {
 
   const Toast = Swal.mixin({
     toast: true,
-    position: 'center-center',
+    position: 'top',
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
