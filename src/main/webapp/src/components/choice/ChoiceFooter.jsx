@@ -1,12 +1,12 @@
 import React from 'react';
 
-const ChoiceFooter = ({ price, startTime, endTime, onReserve, loading, error }) => {
+const ChoiceFooter = ({ price, startTime, endTime ,startDate, endDate, onReserve, loading, error }) => {
     return (
         <div className="choice-footer">
             <div className="price-time">
                 <span className="price">{price}원</span>
-                <span className="starttime">{startTime}</span>
-                <span className='endtime'>{endTime}</span>
+                <span className="starttime">{startDate} {startTime}</span>
+                <span className='endtime'>{endDate} {endTime}</span>
             </div>
             {error && <div className="error-message">{error}</div>}
             <div className="button-container">

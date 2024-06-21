@@ -7,13 +7,21 @@ import Container from '@mui/material/Container';
 // react icons
 import { FaFilter } from 'react-icons/fa';
 import { categoryTab } from "../data/mock-data";
+import { useDispatch } from 'react-redux';
+import { setId } from '../store/optionSlice';
 
 const OptionsTab = () => {
   const [value, setValue] = React.useState(0);
+  const dispatch=useDispatch();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    console.log("value="+newValue);
+    dispatch(setId(newValue));
   };
+
+  
+  
 
   return (
     <Container maxWidth="xl">

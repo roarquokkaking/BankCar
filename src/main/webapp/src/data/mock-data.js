@@ -16,6 +16,7 @@ import { FaCar, FaMotorcycle, FaTruck } from 'react-icons/fa';
 import { MdOutlineElectricalServices } from "react-icons/md";
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 
 
@@ -36,13 +37,18 @@ export const categoryTab = [
 
 export const Locations =()=>{ 
 
+  const label = useSelector((state)=>state.Option.id);
   const [carData,setCarData]=useState([]);
-    
+  console.log("label="+label);
 
     useEffect(()=>{
 
 
-          axios.get("https://dongwoossltest.shop/api/cars/getcardata")
+          axios.get("https://dongwoossltest.shop/api/cars/getcardata",{
+            params:{
+              label:label
+            }
+          })
           .then(res=>{
             setCarData(res.data);
             const car1=carData[0];
@@ -51,7 +57,7 @@ export const Locations =()=>{
         })
         //  .then(res=>console.log(res.data))
 
-        },[])
+        },[label])
 
 
         
@@ -96,6 +102,7 @@ export const Locations =()=>{
       price: `${item[0]}원/시간`,
       isNew: false,
       rating: item[5]===0?'0.0':item[5],
+      car_id:item[1]
     
 
   }
