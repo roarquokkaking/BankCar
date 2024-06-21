@@ -12,7 +12,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping(path="searching",produces="application/json")
+@RequestMapping(path="api/searching",produces="application/json")
 public class SearchController {
 
   @Autowired
