@@ -83,8 +83,12 @@ public class ChatController {
 //    }
 
     @MessageMapping("/sendMessage")
-    public void sendMessage(Message message, @SessionAttribute(name = "loginDTO", required = false) LoginDTO loginDTO) {
+    public void sendMessage(Message message, HttpSession session) {
         try {
+
+            LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginDTO");
+
+
             if (loginDTO != null) {
                 String senderName = loginDTO.getName();
                 message.setSender(senderName);
@@ -104,7 +108,7 @@ public class ChatController {
 
                 Long roomSeq = savedMessage.getMessageRoom().getRoomSeq();
                 // 메시지 전송
-                messagingTemplate.convertAndSend("/topic/public" + roomSeq, savedMessage);
+                messagingTemplate.convertAndSend("/topic/public/" + roomSeq, savedMessage);
             } else {
                 // UNAUTHORIZED(401) 응답 반환
                 messagingTemplate.convertAndSendToUser("anonymous", "/queue/errors", "Unauthorized.");
