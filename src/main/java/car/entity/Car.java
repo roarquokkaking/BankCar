@@ -3,6 +3,7 @@ package car.entity;
 import jakarta.persistence.*;
 import login.dto.LoginDTO;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import wishList.entity.WishListEntity;
@@ -15,6 +16,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

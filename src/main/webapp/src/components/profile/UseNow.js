@@ -17,7 +17,7 @@ const UseNow = () => {
     const bookingData =useState([])
     useEffect(() => {
         // 예시 데이터 가져오기
-        axios.get('api/booking/details')
+        axios.get('https://dongwoossltest.shop/api/booking/details')
             .then(response => {
                 setBookingUseDTO(response.data);
             })

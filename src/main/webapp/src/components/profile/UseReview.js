@@ -1,33 +1,33 @@
-import React, {useEffect, useState} from 'react';
-
+import React, { useEffect, useState } from 'react';
 import MyRating from "./MyRating";
 import Details from "./Details";
 import FooterMenu from "../FooterMenu";
 import axios from "axios";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const UseReview = (effect, deps) => {
-
+const UseReview = ({ userId, carId }) => {
     const [title, setTitle] = useState('');
     const [comment, setComment] = useState('');
-    // const [image, setImage] = useState(null);
-    const {user_id} = useParams()
+    const { user_id, car_id } = useParams();
+
+    const[reviewDTO,  setReviewDTO]=useState('')
+
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const [images, setImages] = useState([]);
     const [detailsDTO, setDetailsDTO] = useState({
-        car_model:"",
-        images:[],
-        title:"",
-        comment:"",
-        rating:null,
+        images: [],
+        car_model: "",
+        title: "",
+        comment: "",
+        rating: null,
+        car_id: car_id,
+        user_id: user_id
     });
-console.log(user_id)
-
-    // const handleImageChange = (e) => {
-    //     setImage(e.target.files[0]);
-    // };
-
-
+    console.log(detailsDTO)
+    const [rating, setRating] = useState(0);
+    const [hover, setHover] = useState(0);
+    const [total, setTotal] = useState(0);
+    const [count, setCount] = useState(0);
+    const [ratings, setRatings] = useState([0, 0, 0, 0, 0]);
 
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
@@ -37,33 +37,85 @@ console.log(user_id)
         setComment(e.target.value);
     };
 
+    const getAverage = (newRating) => {
+        const newTotal = total + newRating;
+        const newCount = count + 1;
+        setTotal(newTotal);
+        setCount(newCount);
+        return newTotal / newCount;
+    };
+
+    const handleRating = async (ratingValue) => {
+        const newRatings = [...ratings];
+        newRatings[ratingValue - 1] += 1;
+        setRatings(newRatings);
+        const newAverageRating = getAverage(ratingValue);
+        setRating(newAverageRating);
+
+        // 변경된 부분
+        try {
+            await axios.post('http://localhost:8080/review/saveRating', {
+                user_id: user_id,
+                title: title,
+                comment: comment,
+                rating: ratingValue
+            });
+        } catch (error) {
+            console.error('평점을 저장하는데 실패했습니다.', error);
+        }
+    };
+
     useEffect(() => {
         const fetchDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/review/getReviewBase/${user_id}`);
-                setDetailsDTO(response.data); // 응답 구조에 따라 조정이 필요할 수 있습니다.
-                console.log(response.data);
+                const response = await axios.get(`https://dongwoossltest.shop/api/review/getReviewBase/${user_id}`);
+                setDetailsDTO(response.data);
             } catch (error) {
                 console.error('상세 정보를 불러오는데 실패했습니다.', error);
             }
         };
-        // fetchImages();
+
         fetchDetails();
         const interval = setInterval(() => {
             setCurrentImageIndex((prevIndex) => (prevIndex + 1) % detailsDTO.images.length);
         }, 5000);
 
         return () => clearInterval(interval);
-    }, [user_id],[detailsDTO.images.length]);
+    }, [user_id, detailsDTO.images.length]);
 
     const handleSubmit = () => {
-
-    }
-
+        console.log('제목:', title);
+        console.log('내용:', comment);
+        console.log('평점:', rating);
+    };
+    const submitRating = (ratingValue) => {
+        axios.post('http://localhost:8080/review/memo', null, {
+            params: {
+                user_id: user_id,
+                car_id: car_id
+            }
+        }).catch((error) => {
+            console.error('평점을 저장하는데 실패했습니다.', error);
+        });
+    };
+console.log(rating)
     return (
         <div>
             <Details currentImageIndex={currentImageIndex} detailsDTO={detailsDTO} />
-            <MyRating title={title} comment={comment} handleTitleChange={handleTitleChange} handleContentChange={handleContentChange} handleSubmit={handleSubmit} />
+            <MyRating
+                title={title}
+                comment={comment}
+                rating={rating}
+                hover={hover}
+                ratings={ratings}
+                count={count}
+                handleTitleChange={handleTitleChange}
+                handleContentChange={handleContentChange}
+                handleRating={handleRating}
+                handleSubmit={handleSubmit}
+                setHover={setHover}
+                submitRating={submitRating}
+            />
             <FooterMenu />
         </div>
     );
