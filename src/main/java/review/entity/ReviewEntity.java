@@ -1,11 +1,14 @@
 package review.entity;
 
 import booking.entity.BookingEntity;
+import car.entity.Car;
 import jakarta.persistence.*;
 import login.dto.LoginDTO;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +27,8 @@ public class ReviewEntity {
     @Column(name = "review_write")
     private Boolean reviewWrite;
 
-//    @Column(name = "rating")
-//    private int rating;
+    @Column(name = "rating")
+    private int rating;
 
     @Column(name = "title")
     private String title;
@@ -43,6 +46,10 @@ public class ReviewEntity {
     @JoinColumn(name = "booking_id")
     @OneToOne(fetch = FetchType.LAZY)
     private BookingEntity bookingEntity;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "car_id")
+    private Car car;
 
     public static List<String> setCarImage(BookingEntity booking) {
         List<String> images = new ArrayList<>();
