@@ -103,15 +103,9 @@ export const Locations =()=>{
       isNew: false,
       rating: item[5]===0?'0.0':item[5],
       car_id:item[1]
-    
 
   }
 });
-    
-      
-    
-  
-
 };
 
 export const locationss =[

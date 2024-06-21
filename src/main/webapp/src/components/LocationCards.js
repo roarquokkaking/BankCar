@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import CarouselCard from '../CarouselCard';
+import CarouselCard from './CarouselCard';
 import axios from 'axios';
-import { Locations as cardLocations } from '../../data/mock-data';
+import { Locations as cardLocations } from '../data/mock-data';
 import { useLocation } from 'react-router-dom';
 import {useSelector} from "react-redux";
 
@@ -13,6 +13,7 @@ const LocationCards = () => {
     const [cards, setCards] = useState('');
     const [loading, setLoading] = useState(false);
     const newLocations = cardLocations();
+    const searchLocations = cardLocations(searchData);
     const user_id = useSelector(state => state.Login.id)
     const [isHeartClicked, setIsHeartClicked] = useState([]);
 
@@ -28,43 +29,6 @@ const LocationCards = () => {
         minPrice: '',
         maxPrice: ''
     });
-
-    // useEffect(() => {
-    //     const searchParams = new URLSearchParams(location.search);
-    //     const searchDTO = {
-    //         startDate: searchParams.get('startDate') || '',
-    //         endDate: searchParams.get('endDate') || '',
-    //         startTime: searchParams.get('startTime') || '',
-    //         endTime: searchParams.get('endTime') || '',
-    //         jibunAddress: searchParams.get('jibunAddress') || '',
-    //         roadAddress: searchParams.get('roadAddress') || '',
-    //         x: searchParams.get('x') || '',
-    //         y: searchParams.get('y') || '',
-    //         minPrice: searchParams.get('minPrice') || '',
-    //         maxPrice: searchParams.get('maxPrice') || ''
-    //     };
-
-    //     axios.post("http://localhost:8080/searching/searchList", null, { params: searchDTO })
-    //         .then(res => {
-    //             setSearchData(res.data);
-    //         })
-    //         .catch(error => console.log(error));
-    // }, [location.search, searchData]);
-
-    // useEffect(() => {
-    //     const fetchLocations = async () => {
-    //         try {
-    //             const response = await axios.get('http://localhost:8080/home');
-    //             setCards(response.data);
-    //         } catch (error) {
-    //             console.error('오류', error);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
-
-    //     fetchLocations();
-    // }, []);
 
     useEffect(() => {
         const fetchLocations = async () => {
@@ -87,7 +51,9 @@ const LocationCards = () => {
 
                 if (updatedSearchDTO.startDate && updatedSearchDTO.endDate && updatedSearchDTO.startTime && updatedSearchDTO.endTime) {
                     const response = await axios.get("https://dongwoossltest.shop/api/searching/searchList", { params: updatedSearchDTO });
+                    console.log(response.data);
                     setSearchData(response.data);
+                    console.log(searchData);
                 } else {
                     setSearchData([]); // 검색 조건이 없으면 빈 배열 설정
                 }
@@ -121,34 +87,25 @@ const LocationCards = () => {
         }
     };
 
-    // useEffect(() => {
-    //     const fetchLocations = async () => {
-    //         try {
-    //             const response = await axios.get('http://localhost:8080/home');
-    //             setCards(response.data);
-    //         } catch (error) {
-    //             console.error('오류', error);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
-
-    //     fetchLocations(); // 컴포넌트가 처음 마운트될 때 한 번 호출
-
-    // }, []);
-
-
-
     return (
         <Box sx={{ mx: 2 }}>
             <Grid container rowSpacing={3} columnSpacing={3}>
-                {newLocations.map((location, index) => (
-                    <Grid key={location.id} item xs={12} sm={4} md={4} lg={3}>
-                        <CarouselCard location={location}
-                                      isHeartClicked={isHeartClicked[index]}
-                                      onHeartClick={() => handleHeartClick(index)} />
-                    </Grid>
-                ))}
+                {newLocations.map((location, index) => {
+                    // 검색 결과 데이터가 있는 경우와 없는 경우를 확인하여 렌더링 여부 결정
+                    if (searchData.length > 0 && !searchData.some(data => data === location.car_id)) {
+                        return null; // searchData에 해당 car_id가 없으면 렌더링하지 않음
+                    }
+                    return (
+                        <Grid key={location.id} item xs={12} sm={4} md={4} lg={3}>
+                            <CarouselCard
+                                searchDTO={searchDTO}
+                                location={location}
+                                isHeartClicked={isHeartClicked[index]}
+                                onHeartClick={() => handleHeartClick(location.car_id, index)}
+                            />
+                        </Grid>
+                    );
+                })}
             </Grid>
         </Box>
     );
