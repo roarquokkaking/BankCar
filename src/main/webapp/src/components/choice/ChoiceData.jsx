@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
 import axios from "axios";
+import { baseURL } from '../../data/UrlTransform';
 
 const ChoiceData = ({ setChoicedata }) => {
     const location = useLocation();
@@ -26,7 +27,7 @@ const ChoiceData = ({ setChoicedata }) => {
         const fetchData = async () => {
             try {
                 console.log(choiceDTO);
-                const responseCar = await axios.get("http://localhost:8080/choice/carinfo", {
+                const responseCar = await axios.get(`${baseURL}/choice/carinfo`, {
                     params: {
                         carId: choiceDTO.carId
                     }
@@ -36,7 +37,7 @@ const ChoiceData = ({ setChoicedata }) => {
                 setCarInfo(responseCar.data); // 차량 정보 설정
                 // console.log("carinfo : "+carInfo)
                 //호스트정보
-                const responseHost = await axios.get("http://localhost:8080/choice/hostinfo", {
+                const responseHost = await axios.get(`${baseURL}/choice/hostinfo`, {
                     params: {
                         userId: responseCar.data.user.id // 예시로 사용자 ID를 요청 파라미터로 설정
                     }
@@ -46,7 +47,7 @@ const ChoiceData = ({ setChoicedata }) => {
 
             //     리뷰정보
                 // reviewInfo 요청
-                const responseReview = await axios.get("http://localhost:8080/choice/reviewinfo", {
+                const responseReview = await axios.get(`${baseURL}/choice/reviewinfo`, {
                     params: {
                         carId: choiceDTO.carId // 예시로 차량 ID를 요청 파라미터로 설정
                     }

@@ -51,6 +51,41 @@ public class ChatController {
         return userInfo;
     }
 
+    @MessageMapping("/sendMessage")
+    public void sendMessage(Message message, @SessionAttribute(name = "loginDTO", required = false) LoginDTO loginDTO) {
+        try {
+
+            if (loginDTO != null) {
+                String senderName = loginDTO.getName();
+                message.setSender(senderName);
+                message.setSentTime(LocalDateTime.now());
+
+                // 메시지 RoomSeq 값 검증
+                if (message.getMessageRoom() == null || message.getMessageRoom().getRoomSeq() == null) {
+                    // BAD_REQUEST(400) 응답 반환
+                    messagingTemplate.convertAndSendToUser(senderName, "/queue/errors", "Invalid room sequence.");
+                    return;
+                }
+
+                // 메시지 저장
+                Message savedMessage = messageService.saveMessage(message);
+                System.out.println("메세지 저장" + savedMessage);
+                // 로그 출력
+
+                Long roomSeq = savedMessage.getMessageRoom().getRoomSeq();
+                // 메시지 전송
+                messagingTemplate.convertAndSend("/topic/public/" + roomSeq, savedMessage);
+            } else {
+                // UNAUTHORIZED(401) 응답 반환
+                messagingTemplate.convertAndSendToUser("anonymous", "/queue/errors", "Unauthorized.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // INTERNAL_SERVER_ERROR(500) 응답 반환
+            messagingTemplate.convertAndSendToUser("anonymous", "/queue/errors", "Internal server error.");
+        }
+    }
+
 //    @PostMapping("/send")
 //    public ResponseEntity<Message> sendMessage(@RequestBody Message message,
 //                                               @SessionAttribute(name = "loginDTO", required = false) LoginDTO loginDTO) {
@@ -82,39 +117,7 @@ public class ChatController {
 //        }
 //    }
 
-    @MessageMapping("/sendMessage")
-    public void sendMessage(Message message, @SessionAttribute(name = "loginDTO", required = false) LoginDTO loginDTO) {
-        try {
-            if (loginDTO != null) {
-                String senderName = loginDTO.getName();
-                message.setSender(senderName);
-                message.setSentTime(LocalDateTime.now());
 
-                // 메시지 RoomSeq 값 검증
-                if (message.getMessageRoom() == null || message.getMessageRoom().getRoomSeq() == null) {
-                    // BAD_REQUEST(400) 응답 반환
-                    messagingTemplate.convertAndSendToUser(senderName, "/queue/errors", "Invalid room sequence.");
-                    return;
-                }
-
-                // 메시지 저장
-                Message savedMessage = messageService.saveMessage(message);
-                System.out.println("메세지 저장" + savedMessage);
-                // 로그 출력
-
-                Long roomSeq = savedMessage.getMessageRoom().getRoomSeq();
-                // 메시지 전송
-                messagingTemplate.convertAndSend("/topic/public" + roomSeq, savedMessage);
-            } else {
-                // UNAUTHORIZED(401) 응답 반환
-                messagingTemplate.convertAndSendToUser("anonymous", "/queue/errors", "Unauthorized.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            // INTERNAL_SERVER_ERROR(500) 응답 반환
-            messagingTemplate.convertAndSendToUser("anonymous", "/queue/errors", "Internal server error.");
-        }
-    }
     @GetMapping("/roomseq/{roomSeq}")
     public ResponseEntity<List<Message>> getMessagesByRoomSeq(@PathVariable Long roomSeq) {
         try {

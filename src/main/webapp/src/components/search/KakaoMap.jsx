@@ -20,8 +20,8 @@ const KakaoMap = ({ searchDTO, setSearchDTO }) => {
               ...searchDTO,
               roadAddress,
               jibunAddress,
-              x: latLng.getLng().toString(),
-              y: latLng.getLat().toString(),
+              y: latLng.getLng().toString(),
+              x: latLng.getLat().toString(),
             });
             console.log(searchDTO);
           }
@@ -54,8 +54,8 @@ const KakaoMap = ({ searchDTO, setSearchDTO }) => {
                 const place = data[0];
                 const newMarker = {
                 position: {
-                    lat: place.y,
-                    lng: place.x,
+                    lat: place.x,
+                    lng: place.y,
                 },
                 content: place.place_name,
                 };
