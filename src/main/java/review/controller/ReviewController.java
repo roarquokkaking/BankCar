@@ -4,13 +4,16 @@ import driverLicense.service.NCPObjectStorageService;
 import driverLicense.service.ObjectStorageService;
 import login.service.LoginService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import review.dto.DetailDTO;
+import review.entity.ReviewEntity;
 import review.service.ReviewService;
 import java.util.*;
 
 @RestController
-@RequestMapping(path = "/review")
+@RequestMapping(path = "/api/review")
 @CrossOrigin
 @RequiredArgsConstructor
 
@@ -21,16 +24,28 @@ public class ReviewController {
     ObjectStorageService objectStorageService = new NCPObjectStorageService();
 
 
-        @GetMapping(path="/getReviewBase/{user_id}")
-        public List<DetailDTO> getReviews(@PathVariable(value = "user_id") String user_id
-                                            ,@ModelAttribute DetailDTO detailDTO ) {
-            System.out.println(user_id);
-            return  reviewService.getReviews(user_id);
+    @GetMapping(path="/getReviewBase/{user_id}")
+    public List<DetailDTO> getReviews(@PathVariable(value = "user_id") String user_id
+                                        ,@ModelAttribute DetailDTO detailDTO ) {
+        System.out.println(user_id);
+        return  reviewService.getReviews(user_id);
     }
 
-//    @PostMapping(path = )
 
-
+    @PostMapping("/saveRating")
+    public ResponseEntity<ReviewEntity> saveRating(@RequestParam(value = "rating", defaultValue = "0") Float rating,
+                                                   @RequestParam(value = "user_id") String userId,
+                                                   @RequestParam(value = "car_id") Long carId) {
+        try {
+            System.out.println(11111);
+            System.out.println("최인환");
+            ReviewEntity reviewEntity = reviewService.saveRating(rating, userId, carId);
+            return new ResponseEntity<>(reviewEntity, HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 
 
@@ -53,6 +68,11 @@ public class ReviewController {
 //        ReviewEntity reviewEntity = reviewService.writeReview(reviewDTO, user_id);
 //        return Arrays.asList(reviewEntity);
 //    }
+
+
+
+
+
 //    /**
 //     * 리뷰 서비스 기능
 //     * */
@@ -61,24 +81,23 @@ public class ReviewController {
 //        return reviewService.getAverageRating();
 //    }
 //
+
+
+
+
+
 //    @GetMapping(path = "/scoreCounts")
 //    public Map<Integer, Integer> getScoreCounts() {`
 //        return reviewService.getScoreCounts();
 //    }
 //
-//    @PostMapping("/saveRating")
-//    public ResponseEntity<ReviewEntity> saveRating(@RequestParam int rating ,
-//                                                   @ModelAttribute ReviewDTO reviewDTO) {
-////        ReviewDTO reviewDTO = new ReviewDTO();
 //
-////        if (reviewDTO.getRating() == null) {
-////            return ResponseEntity.badRequest().build();
-////        }
-//
-//        ReviewEntity reviewEntity = reviewService.saveRating(rating,reviewDTO);
-//        return new ResponseEntity<>(reviewEntity, HttpStatus.CREATED);
-//    }
-//
+
+
+
+
+
+
 //    /**
 //     * review service(get)
 //     * 아이디를 이용한 user_id 리뷰 페이지 받아오기

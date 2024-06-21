@@ -20,21 +20,16 @@ public class WishListDTO {
     private String model;
     private String average;
     private String isFavorite;
+    private String wish;
 
 
     private String id;
     private Long carId;
 
 
-    private List<WishListDTO> wishList;
     private Object loginDTO;
 
-    public void addWish(WishListDTO wish) {
-        if (wishList == null) {
-            wishList = new ArrayList<>();
-        }
-        wishList.add(wish);
-    }
+
 
 
 

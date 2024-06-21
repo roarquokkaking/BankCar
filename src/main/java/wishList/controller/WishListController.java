@@ -2,35 +2,44 @@ package wishList.controller;
 
 
 
+import com.amazonaws.services.kms.model.NotFoundException;
 import login.service.LoginService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import wishList.dto.WishListDTO;
 import wishList.entity.WishListEntity;
 import wishList.service.WishListService;
 import wishList.service.WishListServiceImpl;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
-@RequestMapping(path="/WishList")
-public class WishListController {
+@RequestMapping(path="/api/WishList")
+public class  WishListController {
 
-    private final WishListService wishListService ;
+    private final WishListService wishListService;
     private final LoginService loginService;
 
 
-    @PostMapping("/wish/toggle/{userId}/{carId}")
+    @PostMapping("/wish/toggle/{userId}/{car_id}")
     public ResponseEntity<List<WishListEntity>> toggleWish(@PathVariable("userId") String userId,
-                                                           @PathVariable("carId") Long carId){
+                                                           @PathVariable("car_id") Long carId
+
+    ) {
+        System.out.println(carId + "carId");
         System.out.println(userId);
+        System.out.println(carId);
         try {
-            List<WishListEntity> updatedCards = wishListService.toggleWish(userId , carId);
+            System.out.println(123123);
+            List<WishListEntity> updatedCards = wishListService.toggleWish(userId, carId);
             System.out.println(userId);
             System.out.println(11111);
             return ResponseEntity.ok(updatedCards);
@@ -38,25 +47,6 @@ public class WishListController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     //    /**
 //     * 위시 리스트 등록
@@ -79,39 +69,27 @@ public class WishListController {
 
 
     /**
-    * 위시 리스트 뽑기 .
-    **/
+     * 위시 리스트 뽑기 .
+     **/
     @GetMapping(path = "/MyWishList/{user_id}")
-    public ResponseEntity<WishListDTO> getWishListById(@PathVariable String userId,
-//                                                       @PathVariable Long carId ,
-                                                       @RequestParam(defaultValue = "0",value = "page") int page,
-                                                       @RequestParam(defaultValue = "5",value = "size") int size) {
-
-        System.out.println(111111);
+    public ResponseEntity<List<WishListDTO>> getWishListByUserId(@PathVariable("user_id") String userId,
+                                                                 @RequestParam(name="page" , defaultValue = "0") int page,
+                                                                 @RequestParam(name = "size", defaultValue = "5") int size) {
 
         try {
-            WishListDTO wishListDTO = wishListService.getWishListById(userId, page, size);
-            return ResponseEntity.ok(wishListDTO);
-        } catch (WishListServiceImpl.WishlistNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new WishListDTO());
+            System.out.println(userId);
+            System.out.println(page);
+            System.out.println(size);
+            System.out.println("1111");
+            Pageable pageable = PageRequest.of(page , size); // 페이지는 0부터 시작하므로 -1을 해줍니다.
+            List<WishListDTO> wishList = wishListService.getWishListById(userId, pageable);
+            System.out.println(userId);
+            return ResponseEntity.ok(wishList);
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<>());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new WishListDTO());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ArrayList<>());
         }
     }
 
-
-/**
- * 위시 리스트 삭제
- */
-//@DeleteMapping(path = "/ToggleFavorite/{user_id}/{wishList_id}")
-//public ResponseEntity<Void> deleteWish(@PathVariable("user_id") @Valid String user_id,
-//                                       @PathVariable("wishList_id") @Valid long wishList_id) {
-//
-//    WishListEntity wish = wishListService.findByWishListIdAndId(user_id, wishList_id);
-//    if (wish == null) {
-//        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//    }else{
-//        wishListService.deleteWishList(user_id, wishList_id);
-//    }
-//    return ResponseEntity.noContent().build();}
 }

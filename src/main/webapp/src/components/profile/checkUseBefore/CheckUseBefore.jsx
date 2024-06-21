@@ -27,7 +27,7 @@ const CheckUseBefore = () => {
     const {user_id}=useParams()
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/Booking/before/${user_id}`)
+        axios.get(`https://dongwoossltest.shop/api/Booking/before/${user_id}`)
             .then(response=>{
                 setUseBeforeDTO(response.data)})
             .catch(error=>console.log(error))

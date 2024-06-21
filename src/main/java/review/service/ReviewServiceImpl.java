@@ -2,22 +2,27 @@ package review.service;
 
 import booking.entity.BookingEntity;
 import booking.repository.BookingRepository;
+import car.entity.Car;
 import com.amazonaws.services.kms.model.NotFoundException;
 import driverLicense.service.NCPObjectStorageService;
+import login.dto.LoginDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.web.bind.annotation.RequestMapping;
 import review.dto.DetailDTO;
 import review.entity.ReviewEntity;
 import review.repository.ReviewRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Transactional
 @Service
+
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
@@ -28,6 +33,7 @@ public class ReviewServiceImpl implements ReviewService {
     /**
      * 리뷰 이미지 갖고 오기 .
      * */
+
     public List<DetailDTO> getReviews(String userId) {
         List<ReviewEntity> reviewEntities = reviewRepository.findReviewsByUserId(userId);
         if (reviewEntities.isEmpty()) {
@@ -38,17 +44,19 @@ public class ReviewServiceImpl implements ReviewService {
         for (ReviewEntity reviewEntity : reviewEntities) {
             BookingEntity booking = reviewEntity.getBookingEntity();
             System.out.println(11111);
+            System.out.println("인환");
             if (booking == null) {
                 throw new NotFoundException("예약정보를 찾을 수 없습니다.");
             }
 //            ncpObjectStorageService.getCarImages("/carImage")
+
             List<String> images = ReviewEntity.setCarImage(booking);
 
             DetailDTO detailDTO = DetailDTO.builder()
                     .user_id(booking.getLoginDTO().getId())
                     .car_id(booking.getCar().getCarId())
                     .carModel(booking.getCar().getModel())
-//                    .rating(booking.getCar().getRating())
+                    .rating(booking.getCar().getRating())
                     .title(booking.getCar().getTitle())
 //                    .images(images) // 이미지 추가
                     .build();
@@ -59,8 +67,67 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
 
+    /**
+     * 점수 주기 설정
+     * */
+    @Override
+    public ReviewEntity saveRating(Float rating, String userId, Long carId) {
+        List<ReviewEntity> existingReviews = reviewRepository.findReviewByUserIdAndCarId(userId, carId);
+        ReviewEntity reviewEntity;
+
+        if (!existingReviews.isEmpty()) {
+            // 기존 리뷰가 존재하면 첫 번째 리뷰를 수정
+            reviewEntity = existingReviews.get(0);
+            reviewEntity.getBookingEntity().getCar().setRating(rating);
+        } else {
+            // 기존 리뷰가 존재하지 않으면 새로 생성
+            Car car = new Car();
+            car.setCarId(carId);
+            car.setRating(rating);
+
+            LoginDTO loginDTO = new LoginDTO();
+            loginDTO.setId(userId);
+
+            BookingEntity newBookingEntity = BookingEntity.builder()
+
+                    .car(car)
+                    .loginDTO(loginDTO)
+                    .build();
+
+            reviewEntity = ReviewEntity.builder()
+                    .bookingEntity(newBookingEntity)
+                    .build();
+        }
+
+        // 리뷰 엔티티를 저장
+        return reviewRepository.save(reviewEntity);
+    }
 
 
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+ //   public ReviewEntity saveRating(int rating, ReviewDTO reviewDTO) {
+//        // 별점만 저장하는 코드
+//
+//        ReviewEntity review = reviewRepository.findById(reviewDTO.getReview_id())
+//                .orElseThrow(null);
+////        review.setRating(reviewDTO.getRating());
+//        return reviewRepository.save(review);
+//    }
 
 //
 //    /**
@@ -95,14 +162,7 @@ public class ReviewServiceImpl implements ReviewService {
 //        }
 //        return scoreCounts;
 //    }
-//    public ReviewEntity saveRating(int rating, ReviewDTO reviewDTO) {
-//        // 별점만 저장하는 코드
 //
-//        ReviewEntity review = reviewRepository.findById(reviewDTO.getReview_id())
-//                .orElseThrow(null);
-////        review.setRating(reviewDTO.getRating());
-//        return reviewRepository.save(review);
-//    }
 //    /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 //
 //
@@ -155,4 +215,4 @@ public class ReviewServiceImpl implements ReviewService {
 //    public void deleteReview(String user_id,Long review_id) {
 ////        reviewRepository.delete(user_id,review_id);
 //    }
-}
+

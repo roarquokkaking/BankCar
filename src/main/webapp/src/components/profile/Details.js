@@ -24,7 +24,7 @@ const Details = ({detailsDTO,currentImageIndex}) => {
                 ))}
             </div>
             <div className={styles.details}>
-                <p><FaCar className={styles.FaCar}/> 차종: {detailsDTO.car_model}</p>
+                <p><FaCar className={styles.FaCar}/> 차종: {detailsDTO.model}</p>
                 <p><FaStar className={styles.FaStar}/> 평점: {detailsDTO.rating}</p>
                 <p><IoCalendarNumber className={styles.IoCalendarNumber}/> 이용기간: {detailsDTO.usagePeriod}</p>
             </div>

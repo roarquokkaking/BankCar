@@ -45,6 +45,8 @@ import ChattingList from './components/chat/ChattingList';
 import UseReview from "./components/profile/UseReview";
 import UserReview from "./components/review/UserReview";
 import { PersistGate } from 'redux-persist/integration/react';
+import UserReviewItem from "./components/review/UserReviewItem";
+import UserReviewInput from "./components/review/UserReviewInput";
 
 const queryClient = new QueryClient();
 
@@ -98,8 +100,8 @@ function App() {
               <Route path="bookingDetails" element={<BookingDetails/>} />
               <Route path="Details" element={<Details/>} />
               <Route path="useNow" element={<UseNow/>}/>
-              <Route path="useReview/:user_id" element={<UseReview/>}/>
-              <Route path="userReview" element={<UserReview/>}/>
+              <Route path="useReview/:user_id/:car_id" element={<UseReview/>}/>
+              <Route path="userReviewItem" element={<UserReviewItem/>}/>
             </Route>
             <Route path='/car/new' element={<RegisterMain />} />
             <Route path='/car/driver' element={<DriverLicense />} />

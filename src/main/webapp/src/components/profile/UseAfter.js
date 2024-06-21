@@ -14,30 +14,33 @@ const UseAfter = () => {
     const {car_id} = useState('')
 
     console.log(user_id);
+    console.log(car_id)
 
 
     const fetchData = (userId, period) => {
         const url = period === 'all' ?
-            `http://localhost:8080/Booking/after/${userId}` :
-            `http://localhost:8080/Booking/after/${userId}?period=${period}`;
+            `https://dongwoossltest.shop/api/Booking/after/${userId}` :
+            `https://dongwoossltest.shop/api/Booking/after/${userId}?period=${period}`;
 
         axios.get(url)
             .then(response => {
                 const data = response.data;
                 setBookingDTO(data);
+                console.log(data)
             })
             .catch(error => console.log(error));
     };
 
     useEffect(() => {
         fetchData(user_id, serchdata);
-    }, [user_id, serchdata]);
+    }, [user_id,car_id, serchdata]);
 
     const handlePeriodChange = (e) => {
         setSerchdata(e.target.value);
     };
 
     const ReservationItem = ({ reservation }) => (
+
         <div className={styles.reservationItem}>
             <div className={styles.reservationDetail}>
                 <img src={reservation.imageUrl} alt={reservation.title} className={styles.reservationImage}></img>
@@ -45,8 +48,9 @@ const UseAfter = () => {
             </div>
             <div className={styles.actionContainer}>
                 <span>{reservation.period}</span>
+
                 <button
-                    onClick={() =>navigate(`/profile/useReview/${user_id}`)}
+                    onClick={() =>navigate(`/profile/useReview/${reservation.userId}/${reservation.carId}`)}
                     style={{
                         backgroundColor: reservation.reviewWrite ? 'grey' : '#008EDC',
                         color: 'white',

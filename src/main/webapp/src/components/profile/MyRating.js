@@ -1,60 +1,95 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { Box } from "@mui/material";
-import styles from './CSS/MyRating.module.css'; // CSS 모듈 사용 방식 유지
-import Details from "./Details";
-import FooterMenu from "../FooterMenu";
+import React from 'react';
+import { FaStar } from 'react-icons/fa';
+import styles from './CSS/MyRating.module.css';
+import Box from "@mui/material/Box";
 
-const MyRating = ({title,comment,handleTitleChange,handleContentChange,handleSubmit}) => {
-
-
-
-    // 제출 함수
-    // const handleSubmit = () => {
-    //     // axios를 사용해 서버로 데이터를 전송
-    //     axios.put('', { title, comment })
-    //         .then(response => {
-    //             const { title, comment } = response.data;
-    //             console.log('Title:', title);
-    //             console.log('Comment:', comment);
-    //             // 상태 초기화
-    //             setTitle('');
-    //             setComment('');
-    //         })
-    //         .catch(error => {
-    //             console.error('Error:', error);
-    //         });
-    // };
-
-    // 이미지 파일 선택 핸들러
-
+const MyRating = ({
+                      title,
+                      comment,
+                      rating,
+                      hover,
+                      ratings,
+                      count,
+                      handleTitleChange,
+                      handleContentChange,
+                      handleRating,
+                      handleSubmit,
+                      setHover,
+                      submitRating
+                  }) => {
     return (
         <div>
+            <div className={styles.title}>
+                <div className={styles.container}>
+                    <div className={styles.left}>
+                        <div className={styles.average}>
+                            <p>{rating.toFixed(1)}</p>
+                        </div>
+                        <div className={styles.starContainer}>
+                            {[...Array(5)].map((star, index) => {
+                                const ratingValue = index + 1;
+
+                                return (
+                                    <label key={index}>
+                                        <input
+                                            type="radio"
+                                            name="rating"
+                                            value={ratingValue}
+                                            onClick={() => {
+                                                handleRating(ratingValue);
+                                                // 변경된 부분
+                                                submitRating(ratingValue);
+                                            }}
+                                            style={{ display: 'none' }}
+                                        />
+                                        <FaStar
+                                            className="star"
+                                            color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
+                                            size={25}
+                                            onMouseEnter={() => setHover(ratingValue)}
+                                            onMouseLeave={() => setHover(0)}
+                                        />
+                                    </label>
+                                );
+                            })}
+                        </div>
+                    </div>
+                    <div className={styles.right}>
+                        {[5, 4, 3, 2, 1].map((score, index) => {
+                            const percentage = (ratings[score - 1] / count) * 100 || 0;
+                            return (
+                                <div key={score} className={styles.gaugeContainer}>
+                                    <span className={styles.label}>{score}</span>
+                                    <div className={styles.gaugeBackground}>
+                                        <div
+                                            className={styles.gauge}
+                                            style={{ width: `${percentage}%` }}
+                                        />
+                                        <span className={styles.percentage}>{`${percentage.toFixed(1)}%`}</span>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
             <Box>
-                {/* 타이틀 입력 */}
                 <input
                     className={styles.inputTitle}
                     value={title}
                     onChange={handleTitleChange}
                     placeholder="제목을 입력하세요."
                 />
-                {/* 컨텐트 입력 */}
                 <textarea
                     className={styles.inputContext}
                     value={comment}
                     onChange={handleContentChange}
                     placeholder="내용을 입력하세요."
                 />
-                {/* 이미지 파일 선택 */}
-                {/*<input*/}
-                {/*    type="file"*/}
-                {/*    onChange={handleImageChange}*/}
-                {/*/>*/}
                 <div className={styles.buttonDiv}>
                     <button className={styles.button} onClick={handleSubmit}>저장하기</button>
                 </div>
             </Box>
-
         </div>
     );
 };

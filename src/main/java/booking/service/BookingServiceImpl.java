@@ -74,18 +74,25 @@ public class BookingServiceImpl implements BookingService {
         LocalDate targetDate = (days != null) ? currentDate.minusDays(days) : currentDate;
         System.out.println(222222);
         List<BookingEntity> bookings = bookingRepository.getAfterLastNDays(userId, targetDate);
+        System.out.println(bookings);
         List<BookingDTO> bookingDTOs = new ArrayList<>();
 
         for (BookingEntity booking : bookings) {
 
             booking.setBookingStatus(booking);
 
-            if (booking. getBooking_status() == BookingStatus.AFTER) {
+            System.out.println(booking.getCar().getCarId());
+
+            if (booking.getBooking_status() == BookingStatus.AFTER) {
+                System.out.println(111111);
                 Car car = carRepository.findById(booking.getCar().getCarId()).orElse(null);
+
+                System.out.println(car);
                 if (car != null) {
                     String period = booking.getStart_date() + "~" + booking.getEnd_date();
                     BookingDTO bookingDTO = BookingDTO.builder()
                             .carId(car.getCarId())
+                            .userId(booking.getLoginDTO().getId())
 //                            .reviewId
                             .title(car.getTitle())
                             .content(car.getContent())

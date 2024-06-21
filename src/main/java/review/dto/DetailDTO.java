@@ -12,14 +12,13 @@ import java.time.LocalDateTime;
 
 public class DetailDTO {
     private Long car_id;
-
+    private String car_model;
     private String user_id;
-    private int rating;
+
+    private Float rating;
 
     private String title;
-
     private String comment;
-    private String car_model;
     private LocalDateTime dateTime;
 
     private String carModel;

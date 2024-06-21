@@ -15,13 +15,28 @@ public interface ReviewRepository extends JpaRepository<ReviewEntity, Long> {
 
 
         @Query("SELECT r FROM ReviewEntity r " +
-//                "JOIN FETCH r.bookingEntity b " +
-//                "JOIN FETCH b.car c " +
-//                "LEFT JOIN FETCH c.carImages " +
+                "JOIN FETCH r.bookingEntity b " +
+                "JOIN FETCH b.car c " +
+                "LEFT JOIN FETCH c.carImages " +
                 "WHERE r.loginDTO.id = :userId")
         List<ReviewEntity> findReviewsByUserId(@Param("userId") String userId);
 
+        @Query("SELECT r FROM ReviewEntity r" +
+                " JOIN r.bookingEntity b " +
+                "JOIN b.loginDTO u " +
+                "JOIN b.car c" +
+                " WHERE u.id = :userId " +
+                "AND c.carId = :carId")
+        List<ReviewEntity> findReviewByUserIdAndCarId(@Param("userId") String userId, @Param("carId") Long carId);
+
         List<ReviewEntity> findByCar_CarId(Long carId);
+
+
+//        void findByUserIdAndCarId(String userId, Long carId, Long rating);
+
+
+//        @Query("select r Form ReviewEntity r + Join fetch r.bookingEntity b + ")
+//        void findByUserIdAndCarId(String userId, Long carId);
 
 
         //    @Query("SELECT r FROM ReviewEntity r " +

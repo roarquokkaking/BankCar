@@ -4,11 +4,9 @@ import booking.entity.BookingEntity;
 import car.entity.Car;
 import jakarta.persistence.*;
 import login.dto.LoginDTO;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +26,7 @@ public class ReviewEntity {
     private Boolean reviewWrite;
 
     @Column(name = "rating")
-    private int rating;
+    private Float rating;
 
     @Column(name = "title")
     private String title;
@@ -47,17 +45,25 @@ public class ReviewEntity {
     @OneToOne(fetch = FetchType.LAZY)
     private BookingEntity bookingEntity;
 
+    @JoinColumn(name=" car")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "car_id")
-    private Car car;
+    private Car car  ;
+
+
+
 
     public static List<String> setCarImage(BookingEntity booking) {
         List<String> images = new ArrayList<>();
-        images.add(booking.getCar().getCarImages().getMain_image());
-        images.add(booking.getCar().getCarImages().getImage1());
-        images.add(booking.getCar().getCarImages().getImage2());
-        images.add(booking.getCar().getCarImages().getImage3());
-        images.add(booking.getCar().getCarImages().getImage4());
+        if(booking.getCar().getCarImages().getMain_image()!=null)
+            images.add(booking.getCar().getCarImages().getMain_image());
+        if(booking.getCar().getCarImages().getImage1()!=null)
+            images.add(booking.getCar().getCarImages().getImage1());
+        if(booking.getCar().getCarImages().getImage2()!=null)
+            images.add(booking.getCar().getCarImages().getImage2());
+        if(booking.getCar().getCarImages().getImage3()!=null)
+            images.add(booking.getCar().getCarImages().getImage3());
+        if(booking.getCar().getCarImages().getImage4()!=null)
+            images.add(booking.getCar().getCarImages().getImage4());
         return images;
     }
 }
