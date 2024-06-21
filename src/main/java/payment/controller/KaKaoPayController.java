@@ -129,8 +129,8 @@ public class KaKaoPayController {
 
         booking.setStart_date(LocalDate.parse(kakaoPayEntity.getVat_amount()));
         booking.setEnd_date(LocalDate.parse(kakaoPayEntity.getTax_free_amount()));
-        booking.setStart_time(LocalTime.parse(kakaoPayEntity.getFail_url()));
-        booking.setEnd_time(LocalTime.parse(kakaoPayEntity.getCancel_url()));
+//        booking.setStart_time(LocalTime.parse(kakaoPayEntity.getFail_url()));
+//        booking.setEnd_time(LocalTime.parse(kakaoPayEntity.getCancel_url()));
         LocalDateTime time = LocalDateTime.now();
         booking.setCreate_date(time);
         Car car =carService.findCarById(kakaoPayEntity.getCar_id());
