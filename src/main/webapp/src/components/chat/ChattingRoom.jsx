@@ -44,6 +44,9 @@ const ChattingRoom = () => {
         // socket.current = new SockJS('http://localhost:8080/ws');
         const client = Stomp.over(socket.current);
 
+        client.heartbeat.outgoing = 10000; 
+        client.heartbeat.incoming = 10000; 
+
         client.connect({}, () => {
             setIsConnected(true);
             client.subscribe(`/topic/public/${roomSeq}`, (message) => {
