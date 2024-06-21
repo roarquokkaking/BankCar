@@ -24,7 +24,7 @@ import {
 import "./CarouselCard.css";
 import { useNavigate } from "react-router-dom";
 
-const CarouselCard = ({ location, isHeartClick, onHeartClick }) => {
+const CarouselCard = ({ searchDTO, location, isHeartClick, onHeartClick }) => {
   const navigate = useNavigate();
 
   const [activeStep, setActiveStep] = React.useState(0);
