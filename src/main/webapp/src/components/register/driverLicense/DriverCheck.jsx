@@ -67,7 +67,7 @@ const DriverCheck = () => {
             icon: 'success',
             title: '운전면허증 등록완료.'
         })
-        출처: https://inpa.tistory.com/entry/SweetAlert2-📚-설치-사용 [Inpa Dev 👨‍💻:티스토리]
+        
           navigate("/profile")
         }).catch(err=>{
           alert("운전면허증 등록 실패. 종류 또는 유형이 올바르지 않습니다.");
@@ -79,7 +79,9 @@ const DriverCheck = () => {
           <RegisterHeader text={"운전면허증 확인"} />
         <div className={styles["driver-info-container"]}>
       <div className={styles["license-card"]} style={{marginTop:'20%'}}>
-        <img src={imageUrl} alt="Driver License" />
+        <img src={imageUrl} alt="Driver License"  />
+        <div className={styles["blur-overlay"]}></div>
+        <div className={styles["blur-overlay1"]}></div>
       </div>
       <h2>등록한 정보를 확인해주세요</h2>
       {/* <pre>{JSON.stringify(jsonBody, null, 2)}</pre> */}
