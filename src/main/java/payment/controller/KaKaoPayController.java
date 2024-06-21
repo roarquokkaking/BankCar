@@ -6,6 +6,7 @@ import car.entity.Car;
 import car.service.CarService;
 import jakarta.servlet.http.HttpSession;
 import login.dto.LoginDTO;
+import org.apache.kafka.common.security.auth.Login;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,7 +86,7 @@ public class KaKaoPayController {
         LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginDTO");
 
         System.out.println("pg_token="+pg_token);
-        logger.info("pg_token:{}",pg_token);
+//        logger.info("pg_token:{}",pg_token);
         String url ="https://open-api.kakaopay.com/online/v1/payment/approve";
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
@@ -93,12 +94,15 @@ public class KaKaoPayController {
 
         Optional<KakaoPayEntity> optionalKakaoPayEntity = kakaoPayService.getData(loginDTO.getId());
 
+
         KakaoPayEntity kakaoPayEntity;
         if(optionalKakaoPayEntity.isPresent()){
             kakaoPayEntity=optionalKakaoPayEntity.get();
         }else{
             kakaoPayEntity=null;
         }
+
+        System.out.println("success="+kakaoPayEntity.getCid());
 
 
         Map<String, Object> jsonBody = new HashMap<>();
@@ -140,6 +144,8 @@ public class KaKaoPayController {
         booking.setCar(car);
 
         bookingService.setBooking(booking);
+
+
         return map;
 
     }
