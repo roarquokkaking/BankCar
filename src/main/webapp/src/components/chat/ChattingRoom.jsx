@@ -17,8 +17,9 @@ const ChattingRoom = () => {
     const [profileImage, setProfileImage] = useState('');
     const [userName, setUserName] = useState('');
     const socket = useRef(null);
-    const stompClient = useRef(null);
+    const [stompClient, setStompClient] = useState(null);
     const messageEndRef = useRef(null);
+    const [isConnected, setIsConnected] = useState(false); // 연결 상태를 추적하기 위한 state 추가
 
     useEffect(() => {
         const fetchData = async () => {
@@ -41,21 +42,29 @@ const ChattingRoom = () => {
     
         socket.current = new SockJS('https://dongwoossltest.shop/api/ChattingRoom');
         // socket.current = new SockJS('http://localhost:8080/ws');
-        stompClient.current = Stomp.over(socket.current);
+        const client = Stomp.over(socket.current);
 
-        stompClient.current.connect({}, () => {
-            stompClient.current.subscribe(`/topic/public/${roomSeq}`, (message) => {
+        client.connect({}, () => {
+            setIsConnected(true);
+            client.subscribe(`/topic/public/${roomSeq}`, (message) => {
                 const receivedMessage = JSON.parse(message.body);
                 if (receivedMessage.roomSeq === roomSeq) {
                     console.log('받은 메세지:', receivedMessage);
                     setMessages((prevMessages) => [...prevMessages, receivedMessage]);
                 }
             });
+
+            setStompClient(client);
+        }, (error) => {
+            console.error('Connection error:', error);
+            setIsConnected(false);
         });
+
         return () => {
-            if (stompClient.current) {
-                stompClient.current.disconnect();
-                console.log('WebSocket 연결 해제');
+            if (client) {
+                client.disconnect(() => {
+                    console.log('WebSocket 연결 해제');
+                });
             }
         };
     }, [roomSeq]);
@@ -79,7 +88,7 @@ const ChattingRoom = () => {
             console.log('Sending message via WebSocket:', messageObj);
     
             // Ensure stompClient is connected before sending message
-            if (stompClient && stompClient.connected) {
+            if (stompClient.current && isConnected) { // 연결 상태를 확인
                 stompClient.send("/app/sendMessage", {}, JSON.stringify(messageObj));
                 setMessages(prevMessages => [...prevMessages, messageObj]);
                 setMessage('');
