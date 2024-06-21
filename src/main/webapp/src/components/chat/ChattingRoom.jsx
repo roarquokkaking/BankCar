@@ -22,9 +22,9 @@ const ChattingRoom = () => {
     const [isConnected, setIsConnected] = useState(false);
 
     const connectStompClient = () => {
-        socket.current = new SockJS('https://dongwoossltest.shop/api/ChattingRoom');
+        socket = new SockJS('https://dongwoossltest.shop/api/ChattingRoom');
         // socket.current = new SockJS('http://localhost:8080/ws');
-        stompClient.current = Stomp.over(socket.current);
+        stompClient.current = Stomp.over(socket);
 
         stompClient.current.heartbeat.outgoing = 10000; 
         stompClient.current.heartbeat.incoming = 10000; 
