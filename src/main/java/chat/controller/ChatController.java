@@ -51,43 +51,9 @@ public class ChatController {
         return userInfo;
     }
 
-//    @PostMapping("/send")
-//    public ResponseEntity<Message> sendMessage(@RequestBody Message message,
-//                                               @SessionAttribute(name = "loginDTO", required = false) LoginDTO loginDTO) {
-//        try {
-//            if (loginDTO != null) {
-//                String senderName = loginDTO.getName();
-//                message.setSender(senderName);
-//                message.setSentTime(LocalDateTime.now());
-//
-//                // 메시지 RoomSeq 값 검증
-//                if (message.getMessageRoom() == null || message.getMessageRoom().getRoomSeq() == null) {
-//                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); // BAD_REQUEST(400) 응답 반환
-//                }
-//
-//                // 메시지 저장
-//                Message savedMessage = messageService.saveMessage(message);
-//
-//                Long roomSeq = savedMessage.getMessageRoom().getRoomSeq();
-//                // 메시지 전송
-//                messagingTemplate.convertAndSend("/topic/public" + roomSeq, savedMessage);
-//
-//                return ResponseEntity.ok(savedMessage);
-//            } else {
-//                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // UNAUTHORIZED(401) 응답 반환
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // INTERNAL_SERVER_ERROR(500) 응답 반환
-//        }
-//    }
-
     @MessageMapping("/sendMessage")
-    public void sendMessage(Message message, HttpSession session) {
+    public void sendMessage(Message message, @SessionAttribute(name = "loginDTO", required = false) LoginDTO loginDTO) {
         try {
-
-            LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginDTO");
-
 
             if (loginDTO != null) {
                 String senderName = loginDTO.getName();
@@ -119,6 +85,39 @@ public class ChatController {
             messagingTemplate.convertAndSendToUser("anonymous", "/queue/errors", "Internal server error.");
         }
     }
+
+//    @PostMapping("/send")
+//    public ResponseEntity<Message> sendMessage(@RequestBody Message message,
+//                                               @SessionAttribute(name = "loginDTO", required = false) LoginDTO loginDTO) {
+//        try {
+//            if (loginDTO != null) {
+//                String senderName = loginDTO.getName();
+//                message.setSender(senderName);
+//                message.setSentTime(LocalDateTime.now());
+//
+//                // 메시지 RoomSeq 값 검증
+//                if (message.getMessageRoom() == null || message.getMessageRoom().getRoomSeq() == null) {
+//                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); // BAD_REQUEST(400) 응답 반환
+//                }
+//
+//                // 메시지 저장
+//                Message savedMessage = messageService.saveMessage(message);
+//
+//                Long roomSeq = savedMessage.getMessageRoom().getRoomSeq();
+//                // 메시지 전송
+//                messagingTemplate.convertAndSend("/topic/public" + roomSeq, savedMessage);
+//
+//                return ResponseEntity.ok(savedMessage);
+//            } else {
+//                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // UNAUTHORIZED(401) 응답 반환
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // INTERNAL_SERVER_ERROR(500) 응답 반환
+//        }
+//    }
+
+
     @GetMapping("/roomseq/{roomSeq}")
     public ResponseEntity<List<Message>> getMessagesByRoomSeq(@PathVariable Long roomSeq) {
         try {
