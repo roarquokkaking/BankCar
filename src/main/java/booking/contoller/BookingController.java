@@ -19,7 +19,7 @@ import java.util.Optional;
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path="/Booking")
+@RequestMapping(path="/api/Booking")
 public class BookingController {
 
     @Autowired
@@ -44,20 +44,10 @@ public class BookingController {
     public ResponseEntity<List<BookingDTO>> getBookingsAfter(
             @PathVariable("user_id") String user_id,
             @RequestParam(value = "period", required = false,defaultValue = "2000") int period) {
-        System.out.println(period);
+        System.out.println(user_id);
         List<BookingDTO> bookings = bookingService.getAfter(user_id, period);
         return ResponseEntity.ok(bookings);
     }
-
-
-
-
-
-
-
-
-
-
 
 
 

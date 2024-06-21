@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import "./ProfilePage.css";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import {Link, useNavigate} from 'react-router-dom';
@@ -32,6 +32,7 @@ const ProfileMain = () => {
     const onToCarNew = () => {
         navigate('/car/new');
     }
+
     return (
         <>
             <Box sx={{ pb: 7 }}>
@@ -93,9 +94,9 @@ const ProfileMain = () => {
           <span>
             {
                 newDriverYN?<>이미 면허증 등록이 완료되었습니다.</>:<>BankCar에 <br/>
-                &emsp; 당신의 면허증을 등록해 주세요.</> 
+                &emsp; 당신의 면허증을 등록해 주세요.</>
             }
-            
+
             <small style={{color: "gray"}}>
               <br/>
               <br/> 지금 바로 등록하러가기

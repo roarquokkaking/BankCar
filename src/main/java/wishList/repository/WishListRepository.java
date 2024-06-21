@@ -18,9 +18,9 @@ import java.util.Optional;
 
 public interface WishListRepository extends JpaRepository<WishListEntity,Long> {
 
-
-    @Query("SELECT w FROM WishListEntity  w WHERE w.loginDTO.id = :userId ")
-    Page<WishListEntity> findByUserId(String userId, Pageable pageable);
+//
+//    @Query("SELECT w FROM WishListEntity  w WHERE w.loginDTO.id = :userId ")
+//    Page<WishListEntity> findByUserId(String userId, Pageable pageable);
 
 //    @Query("SELECT w FROM WishListEntity w WHERE w.loginDTO.id = :userId AND w.wishlistId = :id")
 //    WishListEntity findByUserIdAndId(@Param("userId") String userId, @Param("id") Long id);
@@ -40,4 +40,15 @@ public interface WishListRepository extends JpaRepository<WishListEntity,Long> {
     @Query("SELECT w FROM WishListEntity w " +
             "WHERE w.loginDTO.id = :userId")
     List<WishListEntity> findAllByUserId(@Param("userId") String userId);
+
+//    @Query("SELECT w FROM WishListEntity w " +
+//            "WHERE w.loginDTO.id = :userId")
+//    Page<WishListEntity> findWishListByUserId(@Param("userId") String userId, Pageable pageable);
+
+    @Query("SELECT w FROM WishListEntity w " +
+            "JOIN w.loginDTO u " +
+            "WHERE u.id = :userId " +
+            "AND w.wish = TRUE")
+    Page<WishListEntity> findWishListByUserIdAndWishIsTrue(@Param("userId") String userId, Pageable pageable);
+
 }

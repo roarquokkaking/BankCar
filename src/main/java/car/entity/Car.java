@@ -3,6 +3,7 @@ package car.entity;
 import jakarta.persistence.*;
 import login.dto.LoginDTO;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import wishList.entity.WishListEntity;
@@ -15,6 +16,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -77,7 +79,7 @@ public class Car {
     private float rating;
 
     @Column(name = "wish")
-    private int wish;
+    private Integer wish;
 
 
     //cascade = CascadeType.ALL : 영속성 변경(생성, 수정, 삭제 등)이 연관된 WishList 엔티티들에게도 적용, ex)  Car 엔티티를 삭제하면,

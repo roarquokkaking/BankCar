@@ -2,8 +2,11 @@ package payment.controller;
 
 import booking.entity.BookingEntity;
 import booking.service.BookingService;
+import car.entity.Car;
+import car.service.CarService;
 import jakarta.servlet.http.HttpSession;
 import login.dto.LoginDTO;
+import org.apache.kafka.common.security.auth.Login;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +38,8 @@ public class KaKaoPayController {
     KakaoPayService kakaoPayService;
     @Autowired
     BookingService bookingService;
+    @Autowired
+    CarService carService;
 
 
     @GetMapping(path="/kakaoPay")
@@ -61,8 +66,8 @@ public class KaKaoPayController {
 //        jsonBody.put("tax_free_amount",kakaoPayEntity.getTax_free_amount());
         jsonBody.put("tax_free_amount","0");
         jsonBody.put("approval_url",kakaoPayEntity.getApproval_url());
-        jsonBody.put("fail_url",kakaoPayEntity.getFail_url());
-        jsonBody.put("cancel_url",kakaoPayEntity.getCancel_url());
+        jsonBody.put("fail_url","https://dongwoossltest.shop/fail");
+        jsonBody.put("cancel_url","https://dongwoossltest.shop/cancel");
 
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(jsonBody, headers);
 
@@ -81,7 +86,7 @@ public class KaKaoPayController {
         LoginDTO loginDTO = (LoginDTO) session.getAttribute("loginDTO");
 
         System.out.println("pg_token="+pg_token);
-        logger.info("pg_token:{}",pg_token);
+//        logger.info("pg_token:{}",pg_token);
         String url ="https://open-api.kakaopay.com/online/v1/payment/approve";
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
@@ -89,12 +94,15 @@ public class KaKaoPayController {
 
         Optional<KakaoPayEntity> optionalKakaoPayEntity = kakaoPayService.getData(loginDTO.getId());
 
+
         KakaoPayEntity kakaoPayEntity;
         if(optionalKakaoPayEntity.isPresent()){
             kakaoPayEntity=optionalKakaoPayEntity.get();
         }else{
             kakaoPayEntity=null;
         }
+
+        System.out.println("success="+kakaoPayEntity.getCid());
 
 
         Map<String, Object> jsonBody = new HashMap<>();
@@ -121,20 +129,23 @@ public class KaKaoPayController {
         kakaoPayEntity.setStatus(1);
         kakaoPayService.setStatus(kakaoPayEntity);
 
-//        BookingEntity booking = new BookingEntity();
-//
-//        booking.setStart_date(LocalDate.parse(kakaoPayEntity.getVat_amount()));
-//        booking.setEnd_date(LocalDate.parse(kakaoPayEntity.getTax_free_amount()));
+        BookingEntity booking = new BookingEntity();
+
+        booking.setStart_date(LocalDate.parse(kakaoPayEntity.getVat_amount()));
+        booking.setEnd_date(LocalDate.parse(kakaoPayEntity.getTax_free_amount()));
 //        booking.setStart_time(LocalTime.parse(kakaoPayEntity.getFail_url()));
 //        booking.setEnd_time(LocalTime.parse(kakaoPayEntity.getCancel_url()));
-//        LocalDateTime time = LocalDateTime.now();
-//        booking.setCreate_date(time);
-//        booking.setHost_name();
-//        booking.setGuest_name(loginDTO.getName());
-//        booking.setLoginDTO(loginDTO);
-//        booking.setCar();
-//
-//        bookingService.setBooking(booking);
+        LocalDateTime time = LocalDateTime.now();
+        booking.setCreate_date(time);
+        Car car =carService.findCarById(kakaoPayEntity.getCar_id());
+        booking.setHost_name(car.getUser().getName());
+        booking.setGuest_name(loginDTO.getName());
+        booking.setLoginDTO(loginDTO);
+        booking.setCar(car);
+
+        bookingService.setBooking(booking);
+
+
         return map;
 
     }
