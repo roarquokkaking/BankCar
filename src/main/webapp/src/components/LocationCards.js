@@ -7,6 +7,8 @@ import { Locations as cardLocations } from '../data/mock-data';
 import { useLocation } from 'react-router-dom';
 import {useSelector} from "react-redux";
 import { baseURL } from '../data/UrlTransform';
+import Swal from "sweetalert2";
+import "../CSS/LocationCards.css"
 
 const LocationCards = () => {
     const location = useLocation();
@@ -57,6 +59,18 @@ const LocationCards = () => {
                     console.log(searchData);
                 } else {
                     setSearchData([]); // 검색 조건이 없으면 빈 배열 설정
+                    Swal.fire({
+                        icon: "error",
+                        title: "찾으시는 조건이 없습니다",
+                        text: "다시 검색해 주세요!",
+                        customClass: {
+                            container: 'my-swal-container-class',
+                            title: 'my-swal-title-class',
+                            content: 'my-swal-content-class',
+                            confirmButton: 'my-swal-confirm-button-class',
+                            body: 'my-swal-body'
+                        }
+                    });
                 }
             } catch (error) {
                 console.error('검색 오류', error);
