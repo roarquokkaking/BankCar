@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { setDriver } from '../../../store/loginSlice';
 import RegisterHeader from "../RegisterHeader";
+import Swal from "sweetalert2";
 
 const DriverCheck = () => {
     const location = useLocation();
@@ -22,6 +23,21 @@ const DriverCheck = () => {
     const dispatch =useDispatch();
     const navigate = useNavigate();
     // console.log("name="+name+""+imageName);
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top',
+      showConfirmButton: false,
+      timer: 1500,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+  })
+  
+
+
     const [info, setInfo] = useState({
         id:id,
         imageName:imageName,
@@ -46,7 +62,12 @@ const DriverCheck = () => {
           }
         }).then(res=>{
           dispatch(setDriver("true"))
-          alert("운전면허증 등록완료.")
+          // alert("운전면허증 등록완료.")
+          Toast.fire({
+            icon: 'success',
+            title: '운전면허증 등록완료.'
+        })
+        출처: https://inpa.tistory.com/entry/SweetAlert2-📚-설치-사용 [Inpa Dev 👨‍💻:티스토리]
           navigate("/profile")
         }).catch(err=>{
           alert("운전면허증 등록 실패. 종류 또는 유형이 올바르지 않습니다.");
