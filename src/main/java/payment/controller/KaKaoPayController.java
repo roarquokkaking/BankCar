@@ -1,5 +1,7 @@
 package payment.controller;
 
+import booking.entity.BookingEntity;
+import booking.service.BookingService;
 import jakarta.servlet.http.HttpSession;
 import login.dto.LoginDTO;
 import org.slf4j.Logger;
@@ -15,6 +17,9 @@ import org.springframework.web.servlet.view.RedirectView;
 import payment.entity.KakaoPayEntity;
 import payment.service.KakaoPayService;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -28,6 +33,8 @@ public class KaKaoPayController {
 
     @Autowired
     KakaoPayService kakaoPayService;
+    @Autowired
+    BookingService bookingService;
 
 
     @GetMapping(path="/kakaoPay")
@@ -113,6 +120,21 @@ public class KaKaoPayController {
 
         kakaoPayEntity.setStatus(1);
         kakaoPayService.setStatus(kakaoPayEntity);
+
+//        BookingEntity booking = new BookingEntity();
+//
+//        booking.setStart_date(LocalDate.parse(kakaoPayEntity.getVat_amount()));
+//        booking.setEnd_date(LocalDate.parse(kakaoPayEntity.getTax_free_amount()));
+//        booking.setStart_time(LocalTime.parse(kakaoPayEntity.getFail_url()));
+//        booking.setEnd_time(LocalTime.parse(kakaoPayEntity.getCancel_url()));
+//        LocalDateTime time = LocalDateTime.now();
+//        booking.setCreate_date(time);
+//        booking.setHost_name();
+//        booking.setGuest_name(loginDTO.getName());
+//        booking.setLoginDTO(loginDTO);
+//        booking.setCar();
+//
+//        bookingService.setBooking(booking);
         return map;
 
     }

@@ -16,22 +16,22 @@ const ChattingRoom = () => {
     const [messages, setMessages] = useState([]);
     const [profileImage, setProfileImage] = useState('');
     const [userName, setUserName] = useState('');
-    const socket = useRef(null);
     const stompClient = useRef(null);
     const messageEndRef = useRef(null);
     const [isConnected, setIsConnected] = useState(false);
 
     const connectStompClient = () => {
-        socket.current = new SockJS('https://dongwoossltest.shop/api/ChattingRoom');
+        const socket = new SockJS('https://dongwoossltest.shop/api/chat');
         // socket.current = new SockJS('http://localhost:8080/ws');
-        stompClient.current = Stomp.over(socket.current);
+        stompClient.current = Stomp.over(socket);
 
         stompClient.current.heartbeat.outgoing = 10000; 
         stompClient.current.heartbeat.incoming = 10000; 
 
         stompClient.current.connect({}, () => {
+            console.log("stomp연결 완료");
             setIsConnected(true);
-            stompClient.current.subscribe(`/topic/public/${roomSeq}`, (message) => {
+            stompClient.current.subscribe('/topic/public/' + roomSeq, (message) => {
                 const receivedMessage = JSON.parse(message.body);
                 if (receivedMessage.roomSeq === roomSeq) {
                     console.log('받은 메시지:', receivedMessage);
