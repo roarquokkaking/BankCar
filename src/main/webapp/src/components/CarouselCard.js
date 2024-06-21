@@ -24,7 +24,7 @@ import {
 import "./CarouselCard.css";
 import { useNavigate } from "react-router-dom";
 
-const CarouselCard = ({ location,isHeartClick,onHeartClick }) => {
+const CarouselCard = ({ searchDTO, location,isHeartClick,onHeartClick }) => {
   const navigate = useNavigate();
 
   const [activeStep, setActiveStep] = React.useState(0);
@@ -47,7 +47,10 @@ const CarouselCard = ({ location,isHeartClick,onHeartClick }) => {
     onHeartClick();
   };
   const goChoice = () => {
-    const url = `/choice?carid=${location.id}&startdate=${location.days}&enddate=${location.days}&price=${location.price}`;
+    const priceValue = parseInt(location.price.replace(/[^\d]/g, ''), 10);
+
+    const url = `/choice?carid=${location.car_id}&startdate=${searchDTO.startDate}&`+
+        `enddate=${searchDTO.endDate}&starttime=${searchDTO.startTime}&endtime=${searchDTO.endTime}&price=${priceValue}`;
     navigate(url);
   };
 

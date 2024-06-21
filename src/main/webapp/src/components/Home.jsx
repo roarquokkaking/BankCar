@@ -2,7 +2,7 @@ import {Box, Button, Container, createTheme, styled} from '@mui/material';
 import SearchIcon from "@mui/icons-material/Search";
 import React from 'react';
 import OptionsTab from './OptionsTab';
-import LocationCards from './choice/LocationCards';
+import LocationCards from './LocationCards';
 import MobileFooter from './MobileFooter';
 import FooterMenu from "./FooterMenu";
 import { useNavigate } from 'react-router-dom';
@@ -10,31 +10,6 @@ import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const navigate = useNavigate();
-    // const location = useLocation();
-    // const [searchData, setSearchData] = useState([]);
-
-    // useEffect(() => {
-    //     const searchParams = new URLSearchParams(location.search);
-    //     const searchDTO = {
-    //         startDate: searchParams.get('startDate') || '',
-    //         endDate: searchParams.get('endDate') || '',
-    //         startTime: searchParams.get('startTime') || '',
-    //         endTime: searchParams.get('endTime') || '',
-    //         jibunAddress: searchParams.get('jibunAddress') || '',
-    //         roadAddress: searchParams.get('roadAddress') || '',
-    //         x: searchParams.get('x') || '',
-    //         y: searchParams.get('y') || '',
-    //         minPrice: searchParams.get('minPrice') || '',
-    //         maxPrice: searchParams.get('maxPrice') || ''
-    //     };
-
-    //     axios.post("http://localhost:8080/searching/searchList", null, { params: searchDTO })
-    //         .then(res => {
-    //             setSearchData(res.data);
-    //         })
-    //         .catch(error => console.log(error));
-    // }, [location.search]);
-
     const goSearch = () => {
         navigate('/searching');
       };
@@ -77,7 +52,6 @@ const Home = () => {
                     }}
                 >
                     <Container maxWidth="xl" sx={{mb: 3}}>
-                        
                         <LocationCards/>
                         <Box
                             sx={{
