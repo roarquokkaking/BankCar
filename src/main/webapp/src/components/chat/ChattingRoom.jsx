@@ -73,7 +73,7 @@ const ChattingRoom = () => {
                 });
             }
         };
-    }, [roomSeq]);
+    }, [roomSeq, connectStompClient]);
 
     useEffect(() => {
         scrollToBottom();
