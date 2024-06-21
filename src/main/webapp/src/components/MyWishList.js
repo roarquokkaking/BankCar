@@ -59,11 +59,11 @@ const MyWishList = () => {
 
 
 
-
+//
     const fetchWishList = (page) => {
         if (!user_id) return; // user_id가 없을 경우 요청하지 않음
         console.log("userId = ", user_id)
-        axios.get(`https://d/WishList/MyWishList/${user_id}?page=${page}&size=5`)
+        axios.get(`https://dongwoossltest.shop/api/WishList/MyWishList/${user_id}?page=${page}&size=5`)
             .then(response => {
                 console.log(response.data)
                 const data = response.data || []; // response.data.wishList가 배열인지 확인
