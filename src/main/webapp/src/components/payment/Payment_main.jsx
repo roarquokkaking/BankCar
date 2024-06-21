@@ -89,7 +89,8 @@ const navigate = useNavigate();
   		"tax_free_amount": "0", // 반납 날짜
   		"approval_url": "https://dongwoossltest.shop/success",
   		"fail_url": "https://dongwoossltest.shop/fail",
-  		"cancel_url": "https://dongwoossltest.shop/cancel"
+  		"cancel_url": "https://dongwoossltest.shop/cancel",
+        "car_id":carId
       })
       const onPay=()=>{
           axios.get("https://dongwoossltest.shop/api/payment/kakaoPay",{

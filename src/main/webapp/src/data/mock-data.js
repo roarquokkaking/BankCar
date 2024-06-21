@@ -39,7 +39,7 @@ export const Locations =()=>{
 
   const label = useSelector((state)=>state.Option.id);
   const [carData,setCarData]=useState([]);
-  console.log("label="+label);
+  // console.log("label="+label);
 
     useEffect(()=>{
 
