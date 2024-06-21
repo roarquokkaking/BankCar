@@ -11,7 +11,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping(path = "choice", produces = "application/json")
+@RequestMapping(path = "api/choice", produces = "application/json")
 public class ChoiceController {
     @Autowired
     private ChoiceService choiceService;
