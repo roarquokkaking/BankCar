@@ -58,9 +58,9 @@ public class BookingEntity {
     @JoinColumn(name = "car_id", nullable = false)
     private Car car;
 
-    @JoinColumn(name = "review_id")
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "bookingEntity")
-    private ReviewEntity reviewEntity;
+//    @JoinColumn(name = "review_id")
+//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "bookingEntity")
+//    private ReviewEntity reviewEntity;
 
     // setter와 기타 메서드들
 
