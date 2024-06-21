@@ -59,7 +59,7 @@ const MyWishList = () => {
 
 
 
-
+//
     const fetchWishList = (page) => {
         if (!user_id) return; // user_id가 없을 경우 요청하지 않음
         console.log("userId = ", user_id)
