@@ -83,7 +83,6 @@ public class ChatController {
 //    }
 
     @MessageMapping("/sendMessage")
-    @SendTo("/topic/public/{roomSeq}")
     public void sendMessage(Message message, @SessionAttribute(name = "loginDTO", required = false) LoginDTO loginDTO) {
         try {
             if (loginDTO != null) {
