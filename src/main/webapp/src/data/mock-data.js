@@ -18,11 +18,6 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-
-
-
-
-
 export const categoryTab = [
   { id: 1, label: "전체", icon: <GiFlamer size={24} /> },
   { id: 2, label: "캠핑", icon: <GiCampingTent size={24} /> },
@@ -39,7 +34,7 @@ export const Locations =()=>{
 
   const label = useSelector((state)=>state.Option.id);
   const [carData,setCarData]=useState([]);
-  console.log("label="+label);
+  // console.log("label="+label);
 
     useEffect(()=>{
 

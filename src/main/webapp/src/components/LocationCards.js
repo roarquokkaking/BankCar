@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Locations as cardLocations } from '../data/mock-data';
 import { useLocation } from 'react-router-dom';
 import {useSelector} from "react-redux";
+import { baseURL } from '../data/UrlTransform';
 
 const LocationCards = () => {
     const location = useLocation();
@@ -50,7 +51,7 @@ const LocationCards = () => {
                 setSearchDTO(updatedSearchDTO);
 
                 if (updatedSearchDTO.startDate && updatedSearchDTO.endDate && updatedSearchDTO.startTime && updatedSearchDTO.endTime) {
-                    const response = await axios.get("https://dongwoossltest.shop/api/searching/searchList", { params: updatedSearchDTO });
+                    const response = await axios.get(`${baseURL}/searching/searchList`, { params: updatedSearchDTO });
                     console.log(response.data);
                     setSearchData(response.data);
                     console.log(searchData);
