@@ -17,7 +17,7 @@ const ChattingRoom = () => {
     const [profileImage, setProfileImage] = useState('');
     const [userName, setUserName] = useState('');
     const socket = useRef(null);
-    const [stompClient, setStompClient] = useState(null);
+    const stompClient = useRef(null); // useRef로 변경
     const messageEndRef = useRef(null);
     const [isConnected, setIsConnected] = useState(false); // 연결 상태를 추적하기 위한 state 추가
 
@@ -56,8 +56,6 @@ const ChattingRoom = () => {
                     setMessages((prevMessages) => [...prevMessages, receivedMessage]);
                 }
             });
-
-            setStompClient(client);
         }, (error) => {
             console.error('Connection error:', error);
             setIsConnected(false);
