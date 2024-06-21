@@ -99,10 +99,11 @@ export const Locations =()=>{
       locationImages:locationImages ,
       location: item[4],
       days: `${item[2]} ~ ${item[3]}`,
-      price: `${item[0]}원/시간`,
+      price: `${item[0].toLocaleString()}원/시간`,
       isNew: false,
       rating: item[5]===0?'0.0':item[5],
-      car_id:item[1]
+      car_id:item[1],
+      wish:item[10]
     
 
   }

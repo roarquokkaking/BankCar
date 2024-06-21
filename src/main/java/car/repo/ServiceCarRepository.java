@@ -12,9 +12,9 @@ import java.util.List;
 @Repository
 public interface ServiceCarRepository extends JpaRepository<ServiceCar, Long> {
 
-    @Query("select cs.car.price, cs.car.carId,cs.startDate,cs.endDate,cs.car.doroAddress,cs.car.rating, cs.car.carImages.main_image, cs.car.carImages.image1, cs.car.carImages.image2, cs.car.carImages.image3, cs.car.carImages.image4 from ServiceCar cs where cs.car.category=:label order by startDate DESC")
+    @Query("select cs.car.price, cs.car.carId,cs.startDate,cs.endDate,cs.car.doroAddress,cs.car.rating, cs.car.carImages.main_image, cs.car.carImages.image1, cs.car.carImages.image2, cs.car.carImages.image3, cs.car.wish from ServiceCar cs where cs.car.category=:label order by startDate DESC")
     List<Object[]> findAllOrderByIdDesc(@Param("label") String label);
 
-    @Query("select cs.car.price, cs.car.carId,cs.startDate,cs.endDate,cs.car.doroAddress,cs.car.rating, cs.car.carImages.main_image, cs.car.carImages.image1, cs.car.carImages.image2, cs.car.carImages.image3, cs.car.carImages.image4 from ServiceCar cs order by startDate DESC")
+    @Query("select cs.car.price, cs.car.carId,cs.startDate,cs.endDate,cs.car.doroAddress,cs.car.rating, cs.car.carImages.main_image, cs.car.carImages.image1, cs.car.carImages.image2, cs.car.carImages.image3, cs.car.wish from ServiceCar cs order by startDate DESC")
     List<Object[]> findAllOrderByIdDesc();
 }
