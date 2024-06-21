@@ -35,7 +35,9 @@ const ChattingRoom = () => {
                 const receivedMessage = JSON.parse(message.body);
                
                     console.log('받은 메시지:', receivedMessage);
-                    setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+                    if (receivedMessage.sender !== null) {
+                        setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+                    }
                 
             });
         }, (error) => {
@@ -73,7 +75,7 @@ const ChattingRoom = () => {
                 });
             }
         };
-    }, [roomSeq, connectStompClient]);
+    }, [roomSeq]);
 
     useEffect(() => {
         scrollToBottom();
@@ -96,7 +98,7 @@ const ChattingRoom = () => {
             // Ensure stompClient is connected before sending message
             if (stompClient.current && isConnected) { // 연결 상태를 확인
                 stompClient.current.send("/app/sendMessage", {}, JSON.stringify(messageObj));
-                setMessages(prevMessages => [...prevMessages, messageObj]);
+                setMessages((prevMessages) => [...prevMessages, messageObj]);
                 setMessage('');
             } else {
                 console.error('WebSocket is not connected.');
