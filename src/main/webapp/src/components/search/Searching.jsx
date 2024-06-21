@@ -63,10 +63,9 @@ const Searching = () => {
     });
 
     const navigate = useNavigate();
-    const createURLWithParams = (baseURL, params) => {
-        const url = new URL(baseURL, window.location.origin);
-        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
-        return url.toString();
+    const createURLWithParams = (params) => {
+        const urlParams = new URLSearchParams(params).toString();
+        return `/?${urlParams}`;
     };
 
     const onSearch = () => {
@@ -89,7 +88,7 @@ const Searching = () => {
         setValidationMessages(newValidationMessages);
 
         if (isValid) {
-            const url = createURLWithParams('/', searchDTO);
+            const url = createURLWithParams(searchDTO);
             navigate(url);
         }
     };
