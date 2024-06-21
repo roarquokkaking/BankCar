@@ -16,13 +16,12 @@ const ChattingRoom = () => {
     const [messages, setMessages] = useState([]);
     const [profileImage, setProfileImage] = useState('');
     const [userName, setUserName] = useState('');
-    const socket = useRef(null);
     const stompClient = useRef(null);
     const messageEndRef = useRef(null);
     const [isConnected, setIsConnected] = useState(false);
 
     const connectStompClient = () => {
-        socket = new SockJS('https://dongwoossltest.shop/api/ChattingRoom');
+        const socket = new SockJS('https://dongwoossltest.shop/api/ChattingRoom');
         // socket.current = new SockJS('http://localhost:8080/ws');
         stompClient.current = Stomp.over(socket);
 
