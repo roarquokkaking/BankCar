@@ -16,10 +16,6 @@ import axios from "axios"
 //{carId, startDate, endDate, price}
 const Payment_main = () => {
 const navigate = useNavigate();
-//const [date, setDate] = useState('05.24~05.25');
-// const scrollToTop = () => {
-//     window.scrollTo({ top: 0, behavior: 'smooth' });
-//   };
   const navigateToss = useNavigate();
   const [showNaverPay, setShowNaverPay] = useState(false);
 
@@ -31,14 +27,41 @@ const navigate = useNavigate();
     navigateToss('/TossModal');
   };
 
-  // 결제 화면 정보 가져오기
+    // 결제 화면 정보 가져오기
     const userId = useSelector(state => state.Login.id)
     // 파라미터로 넘어오는 변수 : carId, startDate, startTime, endDate, endTime, price
-    //const {carId} = useParams();
-    const carId = 2;
-    const [price, setPrice] = useState(10000);
+    const location = useLocation();
 
+    const queryParams = new URLSearchParams(location.search);
+
+    const carId = queryParams.get('carid');
+    const startDate = queryParams.get('startdate');
+    const endDate = queryParams.get('enddate');
+    const startTime = queryParams.get('starttime');
+    const endTime = queryParams.get('endtime');
+    const price = queryParams.get('price');
     const [car, setCar] = useState({})
+
+    // const [rentalDetails, setRentalDetails] = useState({
+    //     startDate,
+    //     startTime,
+    //     endDate,
+    //     endTime
+    // })
+    const [payDetail,setPayDetail]=useState({
+        cid: "TC0ONETIME",
+        partner_order_id: "partner_order_id",
+        partner_user_id: "partner_user_id",
+        item_name: "초코파이",
+        total_amount: '',
+        quantity: "1",        // 도로명
+        vat_amount: "200",    // 대여 시작 날짜
+        tax_free_amount: "0", // 반납 날짜
+        approval_url: "https://dongwoossltest.shop/success",
+        fail_url: "",     //      ??
+        cancel_url: "",   //        ??
+        car_id:carId
+    })
 
   useEffect(() => {
       console.log(carId)
@@ -50,23 +73,24 @@ const navigate = useNavigate();
               .catch(error => console.log(error))
       },[carId])
 
+
     useEffect(() => {
-        if(car && rentalDetails){
+        if(car){
             setPayDetail({...payDetail,
-                "quantity": car.doroAddress,
-                "vat_amount": rentalDetails.startDate,
-                "tax_free_amount": rentalDetails.endDate })
+                item_name: car.model,
+                quantity: car.doroAddress,
+                vat_amount: startDate,
+                tax_free_amount: endDate ,
+                total_amount: price,
+                fail_url: startTime ,
+                cancel_url: endTime, })
             console.log(payDetail)
         }
     },[car])
 
-
-    const rentalDetails = {
-        startDate: '2024-06-01',
-        startTime: '12:00',
-        endDate: '2024-06-09',
-        endTime: '18:00'
-    };
+    useEffect(() => {
+        console.log(payDetail)
+    }, [payDetail])
 
     const strongStyle = {
         display: 'inline-block',
@@ -78,20 +102,7 @@ const navigate = useNavigate();
         return new Intl.NumberFormat("ko-KR").format(value);
     };
 
-  const [payDetail,setPayDetail]=useState({
-          "cid": "TC0ONETIME",
-  		"partner_order_id": "partner_order_id",
-  		"partner_user_id": "partner_user_id",
-  		"item_name": "초코파이",
-  		"total_amount": price,
-  		"quantity": "1",        // 도로명
-  		"vat_amount": "200",    // 대여 시작 날짜
-  		"tax_free_amount": "0", // 반납 날짜
-  		"approval_url": "https://dongwoossltest.shop/success",
-  		"fail_url": "https://dongwoossltest.shop/fail",
-  		"cancel_url": "https://dongwoossltest.shop/cancel",
-        "car_id":carId
-      })
+
       const onPay=()=>{
           axios.get("https://dongwoossltest.shop/api/payment/kakaoPay",{
               params: payDetail,
@@ -185,8 +196,8 @@ return (
                     <Typography variant="h6" component="h3" gutterBottom>
                         대여 기간
                     </Typography>
-                    <Typography variant="body1"><strong style={strongStyle}>시작일:</strong> {rentalDetails.startDate} / {rentalDetails.startTime}</Typography>
-                    <Typography variant="body1"><strong style={strongStyle}>반납일:</strong> {rentalDetails.endDate} / {rentalDetails.endTime}</Typography>
+                    <Typography variant="body1"><strong style={strongStyle}>시작일:</strong> {startDate} / {startTime}</Typography>
+                    <Typography variant="body1"><strong style={strongStyle}>반납일:</strong> {endDate} / {endTime}</Typography>
                 </Box>
                 <Box sx={{ padding: '10px', border: '1px solid #ddd', borderRadius: '10px' }}>
                     <Typography variant="h6" component="h3" gutterBottom>
