@@ -102,7 +102,7 @@ const ChattingRoom = () => {
             // Ensure stompClient is connected before sending message
             if (stompClient.current && isConnected) { // 연결 상태를 확인
                 stompClient.current.send("/app/sendMessage", {}, JSON.stringify(messageObj));
-                setMessages((prevMessages) => [...prevMessages, messageObj]);
+                
                 console.log('웹소켓으로 보내는 정보:', messageObj);
                 setMessage('');
             } else {
