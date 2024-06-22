@@ -19,4 +19,6 @@ public interface MessageRoomService {
 
     List<MessageRoom> getRoomsByUserName(String userName);
 
+    List<MessageRoom> getAllChatRooms(Long roomSeq);
+
 }

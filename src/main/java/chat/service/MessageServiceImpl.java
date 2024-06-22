@@ -43,4 +43,11 @@ public class MessageServiceImpl implements MessageService {
         return messageRepository.findByMessageRoom_RoomSeq(roomSeq);
     }
 
+    @Override
+    public Message getLastMessageForRoom(Long roomSeq) {
+        Optional<Message> lastMessage = messageRepository.findTopByMessageRoomRoomSeqOrderBySentTimeDesc(roomSeq);
+        return lastMessage.orElse(null);
+    }
+
+
 }

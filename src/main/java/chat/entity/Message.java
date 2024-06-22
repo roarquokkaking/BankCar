@@ -3,9 +3,13 @@ package chat.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import login.dto.LoginDTO;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.List;
 import java.time.LocalDateTime;
-
+@Getter
+@Setter
 @Entity
 @Table(name="message")
 public class Message {
@@ -24,9 +28,10 @@ public class Message {
     // 보낸 사용자의 이름을 저장할 필드
     @Column(name="sender")
     private String sender;
+//    @Column(name="profileImage")
+//    private String profileImage; // 사용자 프로필 사진 URL
 
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "roomSeq")
     @JsonBackReference
     private MessageRoom messageRoom;
@@ -78,6 +83,7 @@ public class Message {
         this.content = content;
         this.sentTime = sentTime;
         this.sender = sender;
+//        this.profileImage = profileImage;
     }
 
 

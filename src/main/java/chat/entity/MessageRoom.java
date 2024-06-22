@@ -26,10 +26,21 @@ public class MessageRoom {
     @Column( nullable = false)
     private String guestName;
 
+//    // 추가된 필드
+//    @Column(name = "host_profile_image")
+//    private String hostProfileImage;
+//
+//    @Column(name = "guest_profile_image")
+//    private String guestProfileImage;
 
-    @OneToMany(mappedBy = "messageRoom")
+
+    @OneToMany(mappedBy = "messageRoom", cascade = CascadeType.REMOVE)
     @JsonManagedReference
     private List<Message> messages;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "last_message_id")
+    private Message lastMessage;
 
     // 기본 생성자
     public MessageRoom() {
@@ -41,5 +52,7 @@ public class MessageRoom {
         this.hostName = hostName;
         this.guestName = guestName;
     }
+
+
 
 }

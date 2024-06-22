@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import {FaRegHeart, FaRegUserCircle, FaHome} from "react-icons/fa";
-import { BsChatRightDots  } from "react-icons/bs";
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
+import { BsFillChatDotsFill } from "react-icons/bs";
 import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
 
 
@@ -28,8 +28,8 @@ const footerMenu = [
     },
     {
         id: 5,
-        text: "채팅목록",
-        icon: <BsChatRightDots  size={18}/>,
+        text: "1:1채팅",
+        icon: <BsFillChatDotsFill  size={18}/>,
         path: "/ChattingList",
     },
     {
