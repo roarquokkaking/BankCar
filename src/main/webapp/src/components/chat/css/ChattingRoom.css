@@ -10,7 +10,7 @@
 }
 .chat-headernav{
     position: fixed;
-    background-color: rgb(252, 232, 232);
+    background-color: rgb(255, 251, 251);
     border-bottom:2px solid #dfdfdf;
     height: 60px;
     width: 400px;
@@ -45,7 +45,13 @@
     background-color: #ffffff;
     border-top: 1px solid #ffffff;
 }
-
+.headerprofile{
+    width: 44px;
+    height: 44px;
+    border-radius: 45%;
+    margin-top: 2%;
+    margin-left: 116px;
+}
 .input-area button {
     height: 53px;
     width: 100px;
@@ -66,13 +72,13 @@
     font-style: white;
 }
 /* 기본 스타일 */
-.image-clip, .image-emog, .image-setting {
+.image-clip, .image-emog, .image-setting{
     width: 25px; /* 기본 크기 */
     height: 25px; /* 기본 크기 */
     transition: all 0.3s ease; /* 전환 효과 */
     cursor: pointer; /* 포인터 커서 */
     position: fixed; /* 고정 위치 */
-    filter: contrast(8%); /* 대비 조절 */
+    filter: contrast(1%); /* 대비 조절 */
     bottom: 10px; /* 하단 위치 */
 }
 /* 개별 위치 조정 */
@@ -90,6 +96,14 @@
     margin-left: 78px;
     
 }
+.image-out{
+    width: 25px; /* 기본 크기 */
+    height: 25px; /* 기본 크기 */
+    position: fixed; /* 고정 위치 */
+    bottom: 10px; /* 하단 위치 */
+    margin-left: 330px;
+}
+
 
 .message-box-send {
     display: flex;
@@ -215,4 +229,103 @@
     font-size: 1.5rem;
 }
 
+/* 모달 오버레이 스타일 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75); /* 반투명 검정 배경 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* 다른 요소 위에 표시 */
+  }
+  
+  /* 모달 스타일 */
+  .chat-modal {
+    background: white;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 80%;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  /* 모달 내용 스타일 */
+  .modal-content {
+    text-align: center;
+  }
+  
+  /* 버튼 컨테이너 스타일 */
+  .chat-button-container {
+    display: flex;
+    justify-content: space-evenly; /* 버튼 사이를 균등하게 분배 */
+    margin-top: 20px;
+  }
+ 
+  
+  /* 취소 버튼 스타일 */
+  .cancel-button {
+    background-color: #ffffff;
+    color: #000000;
+    width: 55px;
+    height: 40px;
+    border: 2px solid #7f7f7f; /* 빨간색 외곽선 추가 */
+    border-radius: 20%;
+  }
 
+  
+  /* 확인 버튼 스타일 */
+  .confirm-button {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    width: 55px;
+    border: 2px solid #7f7f7f; /* 빨간색 외곽선 추가 */
+    border-radius: 20%;
+  }
+
+  .cancel-button span{
+    font-size: 1.1em;
+    font-weight: 500;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  
+  /* 확인 버튼 스타일 */
+  .confirm-button span{
+    font-size: 1.1em;
+    font-weight: 500;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  .real-out{
+    font-size: 1.3em;
+    font-weight: 500;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  .icon-container {
+    display: flex;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    height: 100px; /* 전체 화면 높이 */
+  }
+  
+  .FaExclamationCircle {
+    font-size: 60px; /* 아이콘 크기 조절 */
+    color: #ff0000; /* 아이콘 색상 (원하는 색상으로 변경 가능) */
+  }
+  /* 애니메이션 */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

@@ -6,6 +6,7 @@ import login.dto.LoginDTO;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +16,8 @@ import java.util.Map;
 
 @Getter
 @Setter
-//@CrossOrigin(origins = "http://localhost:3000")
-@CrossOrigin(origins="https://dongwoossltest.shop")
+@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins="https://dongwoossltest.shop")
 @RestController
 @RequestMapping("/api/messagesroom")
 public class ChatListController {
@@ -62,5 +63,22 @@ public class ChatListController {
         List<MessageRoom> userRooms = messageRoomService.getRoomsByUserName(userName);
         return ResponseEntity.ok(userRooms);
     }
+
+    @GetMapping("/{roomSeq}/lastmessage")
+    public List<MessageRoom> getChatRooms(@PathVariable Long roomSeq) {
+        return messageRoomService.getAllChatRooms(roomSeq);
+    }
+
+    @DeleteMapping("/delete/{roomSeq}")
+    public ResponseEntity<?> deleteChatRoom(@PathVariable Long roomSeq) {
+        try {
+            messageRoomService.deleteRoom(roomSeq);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete chat room");
+        }
+    }
+
+
 }
 

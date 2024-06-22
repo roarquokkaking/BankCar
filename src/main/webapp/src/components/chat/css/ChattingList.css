@@ -4,21 +4,25 @@
 
 /* ChattingList.css */
 
-.chat-headernav2{
+.chat-headernav2 {
     position: fixed;
-    background-color: rgb(252, 232, 232);
-    border-bottom:2px solid #dfdfdf;
+    top: 0;
+    left: 0; /* 좌측 정렬을 위해 left 속성 추가 */
+    background-color: rgb(255, 255, 255);
+    border-bottom: 3px solid #bcbcbc;
     height: 80px;
-    width: 400px;
-    z-index: 9999; 
+    width: 100%; /* 전체 너비로 설정하여 화면을 가득 채우도록 함 */
+    z-index: 1000; /* 다른 요소들보다 위에 오도록 z-index 설정 */
 }
 
 .currentName {
     font-family: 'Apple SD Gothic Neo', sans-serif;
-    font-size: 1.37em;
-    color: rgb(0, 0, 0);
+    /* font-family: 'Noto Sans KR', sans-serif; */
+    font-size: 1.17em;
+    color: rgb(38, 42, 53);
     font-weight: 600;
     margin-left: -8px;
+    margin-top: -27px;
 }
 
 .chatlist {
@@ -30,19 +34,59 @@
 .chatlistdetail {
     display: flex;
     align-items: center;
-    padding: 15px;
+    padding: 14px;
     border-bottom: 1px solid #ddd;
+    height: 80px;
 }
 
 .chatlistdetail:last-child {
     border-bottom: none;
 }
 
-.chatlistdetail img.profile-image {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+.chatlistdetail img.otherProfileImage {
+    width: 55px;
+    height: 55px;
+    border-radius: 40%;
     margin-right: 10px;
+}
+
+
+
+.chatlistdetail .chat-link:hover {
+    text-decoration: underline;
+}
+
+
+.no-chat-item {
+    padding: 10px;
+    text-align: center;
+    color: #888;
+}
+
+.last-senttime{
+    margin-left: auto; 
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.time {
+    /* margin-left: auto; 
+    margin-right: 50px; */
+    font-size: 0.95em;
+    color: #838383;
+    padding: 5px;
+
+}
+
+.last-message{
+    color:#888;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 35px;
+    margin-left: -100px;
+    /* width: auto; */
+    max-width: 170px; /* 원하는 최대 너비 지정 */
 }
 
 .chatlistdetail .chat-link {
@@ -51,31 +95,19 @@
     color: #333; /* 원하는 색상으로 변경 */
     font-weight: 700;
     font-size:1.2em;
+    margin-left: 5px;
+    margin-bottom: 15px;
+    height: 30px;
+    width: 100px;
+    /* margin-top: 1px; */
 }
 
-.chatlistdetail .chat-link:hover {
-    text-decoration: underline;
-}
-
-.chatlistdetail span{
-    color:rgb(127, 127, 127);
-    margin-left: 12px;
-    margin-top: 10px;
-}
-
-.no-chat-item {
-    padding: 10px;
-    text-align: center;
-    color: #888;
-}
-
-.profile-image{
-    width: 44px;
-    height: 44px;
+.notification-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 10px;
+    height: 10px;
+    background-color: red;
     border-radius: 50%;
-}
-.close-image{
-    width: 11px;
-    height: 11px;
-    margin-left: 140px;
 }

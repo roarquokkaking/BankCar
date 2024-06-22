@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-
+@Transactional
 @Service
 public class MessageRoomServiceImpl implements MessageRoomService {
 
@@ -52,5 +52,10 @@ public class MessageRoomServiceImpl implements MessageRoomService {
     public List<MessageRoom> getRoomsByUserName(String userName) {
         // 사용자 이름이 호스트 또는 게스트인 채팅방 목록을 반환
         return messageRoomRepository.findByHostNameOrGuestName(userName, userName);
+    }
+
+    @Override
+    public List<MessageRoom> getAllChatRooms(Long roomSeq) {
+        return messageRoomRepository.findAllWithLastMessage();
     }
 }
