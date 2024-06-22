@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import MobileStepper from "@mui/material/MobileStepper";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import Swal from "sweetalert2";
 
 // mui icons
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
@@ -53,11 +54,26 @@ const CarouselCard = ({ searchDTO, location, isHeartClick, onHeartClick }) => {
   };
 
   const goChoice = () => {
-    const priceValue = parseInt(location.price.replace(/[^\d]/g, ''), 10);
-
-    const url = `/choice?carid=${location.car_id}&startdate=${searchDTO.startDate}&`+
-        `enddate=${searchDTO.endDate}&starttime=${searchDTO.startTime}&endtime=${searchDTO.endTime}&price=${priceValue}`;
-    navigate(url);
+    if (searchDTO.startDate === '' || searchDTO.endDate === '' || searchDTO.startTime === '' || searchDTO.endTime === '' ){
+          Swal.fire({
+              icon: "error",
+              title: "검색이 안되어 있습니다.",
+              text: "검색을 먼저 해주세요!",
+              customClass: {
+                  container: 'my-swal-container-class',
+                  title: 'my-swal-title-class',
+                  content: 'my-swal-content-class',
+                  confirmButton: 'my-swal-confirm-button-class',
+                  body: 'my-swal-body'
+              }
+          });
+    }
+    else {
+      const priceValue = parseInt(location.price.replace(/[^\d]/g, ''), 10);
+      const url = `/choice?carid=${location.car_id}&startdate=${searchDTO.startDate}&`+
+          `enddate=${searchDTO.endDate}&starttime=${searchDTO.startTime}&endtime=${searchDTO.endTime}&price=${priceValue}`;
+      navigate(url);
+    }
   };
 
   return (

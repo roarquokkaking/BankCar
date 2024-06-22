@@ -33,8 +33,8 @@ const ChoiceData = ({ setChoicedata }) => {
                     }
                 });
                 // 서버에서 가져온 데이터로 필요한 작업 수행
-                console.log(responseCar.data.carImages);
-                setCarInfo(responseCar.data); // 차량 정보 설정
+                console.log(responseCar.data);
+                setCarInfo(responseCar.data); // 차량  정보 설정
                 // console.log("carinfo : "+carInfo)
                 //호스트정보
                 const responseHost = await axios.get(`${baseURL}/choice/hostinfo`, {
@@ -88,7 +88,6 @@ const ChoiceData = ({ setChoicedata }) => {
                 console.error('데이터 가져오기 오류', error);
             }
         };
-
         fetchData();
     }, [choiceDTO, setChoicedata]); // 의존성 배열에 choiceDTO 추가
 
