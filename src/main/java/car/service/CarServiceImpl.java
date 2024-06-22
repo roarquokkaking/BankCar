@@ -94,5 +94,9 @@ public class CarServiceImpl implements CarService {
 
     }
 
+    @Override
+    public List<Object[]> getCarData2(String label, double latitude, double longitude) {
+        return serviceCarRepository.findAllOrderByLatitudeLongitudeAndIdDesc(latitude, longitude);
+    }
 
 }

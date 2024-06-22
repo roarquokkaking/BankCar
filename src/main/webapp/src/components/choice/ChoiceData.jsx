@@ -21,7 +21,7 @@ const ChoiceData = ({ setChoicedata }) => {
     });
     const [carInfo, setCarInfo] = useState(null);
     const [hostInfo, setHostInfo] = useState(null);
-    const [reviewInfo, setReviewInfo] = useState(null);
+    const [reviewInfo, setReviewInfo] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -35,7 +35,7 @@ const ChoiceData = ({ setChoicedata }) => {
                 // 서버에서 가져온 데이터로 필요한 작업 수행
                 console.log(responseCar.data);
                 setCarInfo(responseCar.data); // 차량  정보 설정
-                // console.log("carinfo : "+carInfo)
+                console.log("carinfo : "+carInfo)
                 //호스트정보
                 const responseHost = await axios.get(`${baseURL}/choice/hostinfo`, {
                     params: {
@@ -54,6 +54,13 @@ const ChoiceData = ({ setChoicedata }) => {
                 });
                 console.log(responseReview.data);
                 setReviewInfo(responseReview.data); // 리뷰 정보 설정
+                const reviews = responseReview.data.map(review => ({
+                    rating: review.rating,
+                    title: review.title,
+                    comment: review.comment,
+                    id: review.loginDTO.id,
+                    name: review.loginDTO.name
+                }));
 
             //     데이터 삽입
                 setChoicedata({
@@ -73,6 +80,7 @@ const ChoiceData = ({ setChoicedata }) => {
                             lng: parseFloat(responseCar.data.longitude)
                         }
                     },
+                    review: reviews,
                     footer: {
                         price: responseCar.data.price,
                         startTime: choiceDTO.startTime,

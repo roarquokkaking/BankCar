@@ -24,9 +24,15 @@ public class ChoiceServiceImpl implements ChoiceService{
     @Autowired
     private ReviewRepository reviewRepository;
 
+    @Override
     public Car getCarInfo(Long carId) {
-        return carRepository.findById(carId).orElseThrow(() -> new IllegalArgumentException("Invalid car ID"));
+//        return carRepository.findCarWithoutWishLists(carId);
+        return carRepository.findById(carId).orElseThrow(() -> new IllegalArgumentException("Invalid host ID"));
+
     }
+//    public Optional<CarDTO> getCarInfo(Long carId) {
+//        return Optional.ofNullable(carRepository.findCarWithoutWishLists(carId).orElseThrow(() -> new IllegalArgumentException("Invalid car ID")));
+//    }
 
     @Override
     public LoginDTO getHostInfo(String userId) {

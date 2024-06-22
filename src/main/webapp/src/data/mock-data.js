@@ -17,6 +17,7 @@ import { MdOutlineElectricalServices } from "react-icons/md";
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 
 export const categoryTab = [
   { id: 1, label: "전체", icon: <GiFlamer size={24} /> },
@@ -30,32 +31,83 @@ export const categoryTab = [
   { id: 9, label: "전기차", icon: <MdOutlineElectricalServices size={24} /> },
 ];
 
-export const Locations =()=>{ 
+export const Locations =()=>{
+  const [state, setState] = useState({
+    center: {
+      lat: 33.450701,
+      lng: 126.570667,
+    },
+    errMsg: null,
+    isLoading: true,
+  })
+  useEffect(() => {
+    if (navigator.geolocation) {
+      // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+      navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setState((prev) => ({
+              ...prev,
+              center: {
+                lat: position.coords.latitude, // 위도
+                lng: position.coords.longitude, // 경도
+              },
+              isLoading: false,
+            }))
+          },
+          (err) => {
+            setState((prev) => ({
+              ...prev,
+              errMsg: err.message,
+              isLoading: false,
+            }))
+          }
+      )
+    } else {
+      // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+      setState((prev) => ({
+        ...prev,
+        errMsg: "geolocation을 사용할수 없어요..",
+        isLoading: false,
+      }))
+    }
+  }, [])
 
   const label = useSelector((state)=>state.Option.id);
   const [carData,setCarData]=useState([]);
   // console.log("label="+label);
 
     useEffect(()=>{
-
-
-          axios.get("https://dongwoossltest.shop/api/cars/getcardata",{
-            params:{
-              label:label
-            }
-          })
-          .then(res=>{
-            setCarData(res.data);
-            const car1=carData[0];
-            console.log(car1);
-            // return axios.get("http://localhost:8080/api/cars/getcarservicedata")
+    //   if (state.errMsg !== "geolocation을 사용할수 없어요.."){
+    //     axios.get("http://localhost:8080/cars/getcardata2",{
+    //       params:{
+    //         label: label,
+    //         lat: state.center.lat, // 위도
+    //         lng: state.center.lng// 경도
+    //       }
+    //     })
+    //         .then(res => {
+    //           setCarData(res.data);
+    //           const car1 = carData[0];
+    //           console.log(car1);
+    //         })
+    //   }
+    //   else {
+        axios.get("https://dongwoossltest.shop/api/cars/getcardata", {
+          params: {
+            label: label
+          }
         })
+            .then(res => {
+              setCarData(res.data);
+              const car1 = carData[0];
+              console.log(car1);
+              // return axios.get("http://localhost:8080/api/cars/getcarservicedata")
+            })
         //  .then(res=>console.log(res.data))
 
-        },[label])
+      // }
+      },[label])
 
-
-        
  
   return carData.map((item,index)=>{
     const locationImages = [];
@@ -109,6 +161,7 @@ export const Locations =()=>{
   
 
 };
+
 
 export const locationss =[
   {

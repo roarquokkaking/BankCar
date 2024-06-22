@@ -9,6 +9,7 @@ import java.util.List;
 public interface ChoiceService {
 
     Car getCarInfo(Long carId);
+//    Optional<CarDTO> getCarInfo(Long carId);
 
     LoginDTO getHostInfo(String userId);
 

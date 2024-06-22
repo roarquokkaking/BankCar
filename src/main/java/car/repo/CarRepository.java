@@ -15,5 +15,8 @@ public interface CarRepository extends JpaRepository<Car,Long> {
     List<Car> getCarsByUserId(@Param("userId") String userId);
 
 
-    Car findByCarId(@Param("carId") Long carId);
+    @Query(value = "SELECT c.car_id, c.id, c.car_image_id, c.title, c.content, c.latitude, c.longitude, c.doro_address, c.jibun_address, c.category, c.model, c.released, c.color, c.segment, c.price, c.created_date, c.rating, c.wish " +
+            "FROM car c " +
+            "WHERE c.car_id = :carId", nativeQuery = true)
+    Car findCarWithoutWishLists(@Param("carId") Long carId);
 }

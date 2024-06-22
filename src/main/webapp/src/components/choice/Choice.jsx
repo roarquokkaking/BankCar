@@ -11,6 +11,7 @@ import ChoiceFooter from './ChoiceFooter';
 import Map from './Map';
 import ChoiceData from './ChoiceData';
 import {useSelector} from "react-redux";
+import UserReview from "../review/UserReview";
 
 const Choice = () => {
     const location = useLocation();
@@ -61,8 +62,16 @@ const Choice = () => {
                 lng: 0
             }
         },
+        review: {
+            review_id:"",
+            rating: 0,
+            title: "",
+            comment: "",
+            id: "",
+            name: ""
+        },
         footer: {
-            price: "",
+            price: 0,
             startTime: startTime,
             endTime: endTime,
             startDate:startDate,
@@ -83,7 +92,7 @@ const Choice = () => {
             </div>
             <OwnerDescription owner={choicedata.owner} />
             <div className="border-line"></div>
-            <Review />
+            <UserReview {...choicedata.review} reviews={choicedata.review}/>
             <Map {...choicedata.map} />
             <ChoiceFooter {...choicedata.footer} onReserve={onReserve} />
         </div>
