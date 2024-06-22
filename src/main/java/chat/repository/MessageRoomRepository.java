@@ -2,6 +2,8 @@ package chat.repository;
 
 import chat.entity.MessageRoom;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,5 +19,13 @@ public interface MessageRoomRepository extends JpaRepository<MessageRoom, Long> 
 
     Optional<MessageRoom> findByRoomSeq(Long roomseq); // 메서드 추가
 
-    // 필요한 경우 추가적인 쿼리 메소드 정의 가능
+    @Query("SELECT mr FROM MessageRoom mr LEFT JOIN FETCH mr.lastMessage")
+    List<MessageRoom> findAllWithLastMessage();
+
+//    // MessageRoom 엔티티와 User 엔티티의 조인을 통해 필요한 데이터 조회
+//    @Query("SELECT mr FROM MessageRoom mr " +
+//            "JOIN FETCH mr.host h " +
+//            "JOIN FETCH mr.guest g " +
+//            "WHERE h.username = :username OR g.username = :username")
+//    List<MessageRoom> findMessageRoomsByUsername(@Param("username") String username);
 }

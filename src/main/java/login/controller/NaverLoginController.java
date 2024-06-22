@@ -83,6 +83,8 @@ public class NaverLoginController {
         user.setDriver(false);
         System.out.println(user.toString());
 
+
+
         session.setAttribute("loginDTO",user);
 
         if(existId.equals("non_exist")){

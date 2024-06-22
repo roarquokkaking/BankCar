@@ -7,11 +7,15 @@ import moment from 'moment';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GoArrowLeft } from "react-icons/go";
 import './css/ChattingRoom.css';
+import Modal from 'react-modal';
+import { FaExclamationCircle } from "react-icons/fa";
+
 
 const ChattingRoom = () => {
     const { roomSeq } = useParams();
     // const [messageRoom, setMessageRoom] = useState({ roomSeq: null });
     const navigate = useNavigate();
+    const deletenavigate = useNavigate();
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const [profileImage, setProfileImage] = useState('');
@@ -19,10 +23,11 @@ const ChattingRoom = () => {
     const stompClient = useRef(null);
     const messageEndRef = useRef(null);
     const [isConnected, setIsConnected] = useState(false);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const connectStompClient = () => {
-        const socket = new SockJS('https://dongwoossltest.shop/api/chat');
-        // const socket = new SockJS('http://localhost:8080/ws');
+        // const socket = new SockJS('https://dongwoossltest.shop/api/chat');
+        const socket = new SockJS('http://localhost:8080/ws');
         
         stompClient.current = Stomp.over(socket);
 
@@ -51,15 +56,15 @@ const ChattingRoom = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const userResponse = await axios.get('https://dongwoossltest.shop/api/messages/userInfo', { withCredentials: true });
-                // const userResponse = await axios.get('http://localhost:8080/api/messages/userInfo', { withCredentials: true })
+                // const userResponse = await axios.get('https://dongwoossltest.shop/api/messages/userInfo', { withCredentials: true });
+                const userResponse = await axios.get('http://localhost:8080/api/messages/userInfo', { withCredentials: true })
                 const userData = userResponse.data;
                 console.log('first='+userData.name);
                 setUserName(userData.name);
                 setProfileImage(userData.profile_image.replace('http://', 'https://'));
 
-                const messagesResponse = await axios.get(`https://dongwoossltest.shop/api/messages/roomseq/${roomSeq}`);
-                //    const messagesResponse = await axios.get(`http://localhost:8080/api/messages/roomseq/${roomSeq}`)
+                // const messagesResponse = await axios.get(`https://dongwoossltest.shop/api/messages/roomseq/${roomSeq}`);
+                   const messagesResponse = await axios.get(`http://localhost:8080/api/messages/roomseq/${roomSeq}`)
                 setMessages(messagesResponse.data);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -112,12 +117,33 @@ const ChattingRoom = () => {
             console.error('Error handling send via WebSocket:', error);
         }
     };
+
+    const handleChatRoomDelete = async () => {
+        setModalIsOpen(true);
+    };
+
+    const confirmDelete = () => {
+        try {
+            // 채팅방 삭제 요청을 서버로 보냅니다.
+            const response = axios.delete(`http://localhost:8080/api/messagesroom/delete/${roomSeq}`, { withCredentials: true });
+            console.log('채팅방 삭제 요청 성공:', response.data);
+            alert('채팅방 삭제가 완료되었습니다.');
+            window.location.replace('/ChattingList');
+        } catch (error) {
+            console.error('채팅방 삭제 요청 실패:', error);
+            // 에러 처리 로직을 추가할 수 있습니다
+        }
+      };
     const formatTimestamp = (sentTime) => {
         const date = moment.utc(sentTime).toDate();
         const formattedDate = moment(date).local().format('Ahh:mm').replace('AM','오전').replace('PM','오후');
         return formattedDate;
     };
 
+    
+      const closeModal = () => {
+        setModalIsOpen(false);
+      };
     return (
         <div className="chat-room">
             <header style={{marginBottom: -10, width: '200px'}}>
@@ -126,12 +152,13 @@ const ChattingRoom = () => {
                 marginTop:'4%', marginLeft:'20px'
             }}onClick={()=>{navigate(-1)}}
             />
-            <h1 style={{textAlign:'center', 
+            {/* <h1 style={{textAlign:'center', 
                             font:'apple SD Gothic Neo',
                             fontSize:'18px',
                             marginTop:'-6%'
                            }}>BankCarChat
-            </h1>
+            </h1> */}
+            <img src={`${process.env.PUBLIC_URL}/image/nullImage2.png`} alt="clip" className="headerprofile"/>
             </div>
             </header>
             <div className="message-container">
@@ -194,7 +221,29 @@ const ChattingRoom = () => {
                 <img className="image-clip"src={`${process.env.PUBLIC_URL}/image/clip.png`} alt="clip" />
                 <img className="image-emog"src={`${process.env.PUBLIC_URL}/image/emog.png`} alt="emog" />
                 <img className="image-setting"src={`${process.env.PUBLIC_URL}/image/setting.png`} alt="setting" />
-            </div>
+                <img className="image-out"src={`${process.env.PUBLIC_URL}/image/logout.png`} alt="out" 
+                onClick={handleChatRoomDelete}/>
+                 {/* 모달 */}
+       {/* Modal */}
+       <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Delete Confirmation Modal"
+        className="chat-modal"
+        overlayClassName="modal-overlay"
+      >
+        <div className="modal-content">
+        <div className="icon-container">
+      <FaExclamationCircle className="FaExclamationCircle" />
+    </div>
+          <p className='real-out'>정말로 채팅방을 나가시겠습니까?</p>
+          <div className="chat-button-container">
+            <button onClick={closeModal} className="cancel-button"><span>취소</span></button>
+            <button onClick={confirmDelete} className="confirm-button"><span>확인</span></button>
+          </div>
+        </div>
+      </Modal>
+            </div>  
         </div>
     );
 };
