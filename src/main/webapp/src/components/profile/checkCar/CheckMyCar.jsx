@@ -12,14 +12,6 @@ import {useSelector} from "react-redux";
 import {selectUserCarList} from "../../api/CarApiService";
 
 
-// const cars = [
-//     { carId: 1, category: '캠핑', model: '제네시스', released: '2023', color: '블랙', segment:"대형", doro_address:"테헤란로", title: "제목 입니다.", content: "내용 입니다." },
-//     { carId: 2, category: '캠핑', model: '제네시스', released: '2023', color: '블랙', segment:"대형", doro_address:"테헤란로", title: "제목 입니다.", content: "내용 입니다." },
-//     { carId: 3, category: '캠핑', model: '제네시스', released: '2023', color: '블랙', segment:"대형", doro_address:"테헤란로", title: "제목 입니다.", content: "내용 입니다." },
-//     { carId: 4, category: '캠핑', model: '제네시스', released: '2023', color: '블랙', segment:"대형", doro_address:"테헤란로", title: "제목 입니다.", content: "내용 입니다." },
-//     // 더 많은 자동차 데이터를 추가하세요
-// ];
-
 const CheckMyCar = () => {
     const navigate = useNavigate();
     const userId = useSelector((state) => state.Login.id);
@@ -56,13 +48,16 @@ const CheckMyCar = () => {
           {
               service === 0
                   ?
-                  <div className={styles.carouselContainer}>
+                  (cars.length > 0 ?  (cars.map(car => (
+                      <div className={styles.carouselContainer}>
                       <Slider {...settings}>
-                          {cars.map(car => (
-                              <RegisterCarCard key={car.carId} car={car} onAddService={onAddService}/>
-                          ))}
+                          <RegisterCarCard key={car.carId} car={car} onAddService={onAddService}/>
                       </Slider>
-                  </div>
+                      </div>))) :
+                      (<div style={{alignItems: "center"}}>
+                          <img src={`${process.env.PUBLIC_URL}/image/no_car.jpg`} width={"100%"}/>
+                          <span>등록된 자동차가 없습니다.</span>
+                      </div>))
                   :
                   <div>
                       <h1>서비스 등록</h1>

@@ -32,7 +32,8 @@ const Choice = () => {
         setLoading(true);
         setError(null);
         try {
-            const url = `/payment?userid=${userId}&carid=${carid}&startdate=${startDate}&enddate=${endDate}&price=${choicedata.footer.price}`;
+            //const url = `/payment?userid=${userId}&carid=${carid}&startdate=${startDate}&enddate=${endDate}&starttime=${startTime}&endtime=${endTime}&price=${choicedata.footer.price}`;
+            const url = `/payment?userid=${userId}&carid=${carid}&startdate=2024-06-25&enddate=2024-06-27&starttime=12:00&endtime=18:00&price=100000`;
             navigate(url);
         } catch (error) {
             console.error(error);

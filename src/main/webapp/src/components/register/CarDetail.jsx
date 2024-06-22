@@ -73,7 +73,7 @@ const CarDetail = () => {
         <RegisterHeader text={"자동차 정보 입력"} />
         <StyledContainer maxWidth="sm">
           <ImageContainer>
-            <img src="/image/car4.png" alt="Car Image" style={{ width: '100%' }} />
+            <img src={`${process.env.PUBLIC_URL}/image/car4.png`}alt="Car Image" style={{ width: '100%' }} />
           </ImageContainer>
           <StyledForm component="form">
             <TextField
