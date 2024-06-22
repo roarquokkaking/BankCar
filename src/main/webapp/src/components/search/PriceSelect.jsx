@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const PriceSelect = ({ searchDTO, setSearchDTO, fixedMinPrice, fixedMaxPrice, priceGap }) => {
+const PriceSelect = ({ searchDTO, setSearchDTO, fixedMinPrice, fixedMaxPrice, priceGap, reset, setReset }) => {
     const [rangeMinValue, setRangeMinValue] = useState(fixedMinPrice);
     const [rangeMaxValue, setRangeMaxValue] = useState(fixedMaxPrice);
     const [rangeMinPercent, setRangeMinPercent] = useState(0);
@@ -33,6 +33,14 @@ const PriceSelect = ({ searchDTO, setSearchDTO, fixedMinPrice, fixedMaxPrice, pr
             maxPrice: rangeMaxValue
         });
     }, [rangeMinValue, rangeMaxValue, setSearchDTO]);
+
+    useEffect(() => {
+        if (reset) {
+            setRangeMinValue(fixedMinPrice);
+            setRangeMaxValue(fixedMaxPrice);
+            setReset(false);
+        }
+    }, [reset, setReset]);
 
     return (
         <>

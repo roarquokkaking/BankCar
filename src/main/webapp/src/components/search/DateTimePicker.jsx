@@ -72,6 +72,7 @@ const DateTimePicker = ({ searchDTO, setSearchDTO, validationMessages, reset, se
                             setStartDate(update[0]);
                             setEndDate(update[1]);
                         }}
+                        onClickOutside={() => {}}
                         withPortal
                     />
                     <div>{validationMessages.date}</div>
@@ -89,6 +90,7 @@ const DateTimePicker = ({ searchDTO, setSearchDTO, validationMessages, reset, se
                         timeIntervals={60}
                         timeCaption="Time"
                         dateFormat="h:mm aa"
+                        onClickOutside={() => {}}
                         withPortal
                     />
                     <div>{validationMessages.starttime}</div>
@@ -105,6 +107,7 @@ const DateTimePicker = ({ searchDTO, setSearchDTO, validationMessages, reset, se
                         timeIntervals={60}
                         timeCaption="Time"
                         dateFormat="h:mm aa"
+                        onClickOutside={() => {}}
                         withPortal
                     />
                     <div>{validationMessages.endtime}</div>

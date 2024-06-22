@@ -54,23 +54,28 @@ const LocationCards = () => {
 
                 if (updatedSearchDTO.startDate && updatedSearchDTO.endDate && updatedSearchDTO.startTime && updatedSearchDTO.endTime) {
                     const response = await axios.get(`${baseURL}/searching/searchList`, { params: updatedSearchDTO });
-                    console.log(response.data);
                     setSearchData(response.data);
-                    console.log(searchData);
+                    if (response.data.length === 0){
+                        Swal.fire({
+                            icon: "info",
+                            title: "찾으시는 조건이 없습니다",
+                            text: "다시 검색해 주세요!",
+                            customClass: {
+                                container: 'my-swal-container-class',
+                                title: 'my-swal-title-class',
+                                content: 'my-swal-content-class',
+                                confirmButton: 'my-swal-confirm-button-class',
+                                body: 'my-swal-body'
+                            }
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // "/" 경로로 이동
+                                window.location.href = '/';
+                            }
+                        });
+                    }
                 } else {
                     setSearchData([]); // 검색 조건이 없으면 빈 배열 설정
-                    Swal.fire({
-                        icon: "error",
-                        title: "찾으시는 조건이 없습니다",
-                        text: "다시 검색해 주세요!",
-                        customClass: {
-                            container: 'my-swal-container-class',
-                            title: 'my-swal-title-class',
-                            content: 'my-swal-content-class',
-                            confirmButton: 'my-swal-confirm-button-class',
-                            body: 'my-swal-body'
-                        }
-                    });
                 }
             } catch (error) {
                 console.error('검색 오류', error);

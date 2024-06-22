@@ -14,7 +14,6 @@ body {
     width: 100%;
     max-width: 700px;
     margin: auto;
-    margin-bottom: 50px; /* footer와 충돌하지 않도록 여백 추가 */
 }
 
 .search-header {
