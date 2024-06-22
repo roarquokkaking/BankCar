@@ -58,8 +58,8 @@ const navigate = useNavigate();
         vat_amount: "200",    // 대여 시작 날짜
         tax_free_amount: "0", // 반납 날짜
         approval_url: "https://dongwoossltest.shop/success",
-        fail_url: "",     //      ??
-        cancel_url: "",   //        ??
+        fail_url: "",     //      대여 시작 시간
+        cancel_url: "",   //      대여 반납 시간
         car_id:carId
     })
 

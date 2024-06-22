@@ -1,9 +1,11 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {FaRegHeart, FaRegUserCircle, FaHome} from "react-icons/fa";
 import { BsChatRightDots  } from "react-icons/bs";
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
+import {apiClientLocal} from "./api/CarApiService";
+import Swal from "sweetalert2";
 
 
 const footerMenu = [
@@ -38,17 +40,68 @@ const footerMenu = [
         icon: <FaRegUserCircle size={18}/>,
         path: "/profile",
     },
-   
+
 
 ];
 
 const FooterMenu = () => {
     const [selected, setSelected] = useState(1);
     const id = useSelector((state) => state.Login.id);
+    const [noti, setNoti] = useState([])
 
     const footerMenuFilter = id ?
         footerMenu.filter(item => [1, 3, 5, 6].includes(item.id)) :
         footerMenu.filter(item => [1, 2, 4].includes(item.id));
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
+
+
+    useEffect(() => {
+        if(id){
+            let url = `http://localhost:8080/api/push-notifications/${id}`;
+            const sse = new EventSource(url);
+
+            sse.addEventListener("booking-event", (event) => {
+                const data = JSON.parse(event.data);
+                if(data.length > 0){
+                    setNoti(data)
+                }
+            });
+
+            sse.onerror = () => {
+                sse.close();
+            };
+            return () => {
+                sse.close();
+            };
+        }
+
+    }, []);
+
+    useEffect(() => {
+        if(noti.length > 0){
+            for(let i=0;i < noti.length;i++){
+                console.log(noti[i])
+                Toast.fire({
+                    icon: 'success',
+                    title: noti[i].content
+                })
+            }
+
+        }
+    }, [noti])
+
 
     return (
         <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0}} elevation={3}>

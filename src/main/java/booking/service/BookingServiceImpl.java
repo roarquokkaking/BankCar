@@ -7,11 +7,12 @@ import booking.entity.BookingEntity;
 import booking.repository.BookingRepository;
 import car.entity.Car;
 import car.repo.CarRepository;
+import notification.entity.Notification;
+import notification.service.NotificationStorageService;
 import login.dto.LoginDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import review.entity.ReviewEntity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class BookingServiceImpl implements BookingService {
 
     private final BookingRepository bookingRepository;
     private final CarRepository carRepository;
+    private final NotificationStorageService notificationStorageService;
 
     /**
      * 아이디만 찾아오기
@@ -172,6 +174,14 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public void setBooking(BookingEntity booking) {
         bookingRepository.save(booking);
+
+        // 예약 완료시 알림 보내기
+        notificationStorageService.createNotificationStorage(Notification.builder()
+                .delivered(false)
+                .content(booking.getGuest_name() + "님이 귀하의 차량을 예약하셨습니다.")
+                .userFrom(booking.getLoginDTO())
+                .userTo(booking.getCar().getUser()).build());
+
     }
 
 

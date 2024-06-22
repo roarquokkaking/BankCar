@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setId, setEmail, setName} from '../../store/loginSlice';
 import { Box} from "@mui/material";
 import FooterMenu from "../FooterMenu";
+import axios from "axios";
 
 // 구분선 컴포넌트
 const Divider = () => {
@@ -31,6 +32,12 @@ const ProfileMain = () => {
     const newDriverYN = driverYN==="true";
     const onToCarNew = () => {
         navigate('/car/new');
+    }
+
+    const onNotiTest = () => {
+        axios.get("http://localhost:8080/test")
+            .then(res => console.log(res.data))
+            .catch(error => console.log(error))
     }
 
     return (
@@ -140,6 +147,7 @@ const ProfileMain = () => {
                     </div>
                 </ul>
             </div>
+                <button onClick={onNotiTest}>알림 테스트</button>
 
             </Box>
             <Box sx={{display: {xs: "flex", md: "none"}, marginTop: "auto"}}>

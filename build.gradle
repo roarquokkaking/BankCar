@@ -48,8 +48,9 @@ dependencies {
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'   // swagger
     implementation 'com.google.code.gson:gson:2.8.9'    //json을 받을 수 있는 객체
     implementation 'com.github.scribejava:scribejava-core:2.8.1'
-
-
+    implementation 'ch.qos.logback:logback-classic:1.4.14'
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    implementation 'org.codehaus.janino:janino:3.1.6'
 
 
     implementation 'com.google.guava:guava:30.1-jre'// kafka Map 안전성
