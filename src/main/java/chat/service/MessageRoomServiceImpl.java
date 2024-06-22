@@ -12,6 +12,7 @@ import java.util.Optional;
 @Service
 public class MessageRoomServiceImpl implements MessageRoomService {
 
+    @Autowired
     private final MessageRoomRepository messageRoomRepository;
 
     @Autowired

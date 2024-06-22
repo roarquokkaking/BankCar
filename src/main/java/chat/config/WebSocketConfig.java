@@ -1,19 +1,33 @@
 package chat.config;
 
+import chat.controller.ChatController;
+import chat.handler.WebSocketEventHandler;
+import login.dto.LoginDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
+import org.springframework.web.socket.messaging.SessionConnectedEvent;
 
 @Configuration
 @EnableWebSocketMessageBroker
 @RequiredArgsConstructor
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+
+    @Autowired
+    private WebSocketEventHandler webSocketEventHandler;
+
+    @Autowired
+    public WebSocketConfig(WebSocketEventHandler webSocketEventHandler) {
+        this.webSocketEventHandler = webSocketEventHandler;
+    }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
@@ -49,6 +63,11 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         scheduler.setThreadNamePrefix("wss-heartbeat-thread-");
         scheduler.initialize();
         return scheduler;
+    }
+
+    @EventListener
+    public void handleSessionConnectedEvent(SessionConnectedEvent event) {
+        webSocketEventHandler.handleSessionConnectedEvent(event);
     }
 
 }
