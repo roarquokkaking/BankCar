@@ -30,8 +30,8 @@ const Searching = () => {
         roadAddress: '',
         x: '',
         y: '',
-        minPrice:'',
-        maxPrice:''
+        minPrice:10000,
+        maxPrice:1000000
     })
 
     const onReset = (e)=>{
@@ -46,8 +46,8 @@ const Searching = () => {
             roadAddress: '',
             x: '',
             y: '',
-            minPrice:'',
-            maxPrice:''
+            minPrice:10000,
+            maxPrice:1000000
         });
         setValidationMessages({
             dateRange: '',
@@ -97,12 +97,11 @@ const Searching = () => {
         <div>
             <div className="search-header"></div>
             <div className="search-container">
-                <h2>오데가노?</h2>
-                <KakaoMap searchDTO={searchDTO} setSearchDTO={setSearchDTO} />
+                <KakaoMap searchDTO={searchDTO} setSearchDTO={setSearchDTO} reset={reset} setReset={setReset} />
                 <br/>
                 <DateTimePicker searchDTO={searchDTO} setSearchDTO={setSearchDTO} validationMessages={validationMessages} reset={reset} setReset={setReset}/>
                 <br/>
-                <PriceSelect searchDTO={searchDTO} setSearchDTO={setSearchDTO} fixedMinPrice={10000} fixedMaxPrice={1000000} priceGap={100}/>
+                <PriceSelect searchDTO={searchDTO} setSearchDTO={setSearchDTO} fixedMinPrice={10000} fixedMaxPrice={1000000} priceGap={100} reset={reset} setReset={setReset}/>
             </div>
             <div className="search-footer">
                 <div className="clear-button" onClick={onReset}>Clear all</div>

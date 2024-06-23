@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FaSearchLocation } from 'react-icons/fa';
 import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 
-const KakaoMap = ({ searchDTO, setSearchDTO }) => {
+const KakaoMap = ({ searchDTO, setSearchDTO, reset, setReset }) => {
     useKakaoLoader();
 
     const [info, setInfo] = useState(null);
@@ -29,7 +29,7 @@ const KakaoMap = ({ searchDTO, setSearchDTO }) => {
       };
 
     useEffect(() => {
-        if (!map) return
+        if (!map || reset) return
         navigator.geolocation.getCurrentPosition((position) => {
             const { latitude, longitude } = position.coords;
             const currentLocation = {
@@ -43,7 +43,13 @@ const KakaoMap = ({ searchDTO, setSearchDTO }) => {
             map.setCenter(new window.kakao.maps.LatLng(latitude, longitude));
             updateAddressAndCoordinates(new window.kakao.maps.LatLng(latitude, longitude));
         });
-    }, [map]);
+    }, [map,reset]);
+
+    useEffect(() => {
+        if (reset) {
+            setReset(false);
+        }
+    }, [reset, setReset]);
     
     const handleSearchClick = () => {
         if (!map) return;
@@ -73,7 +79,7 @@ const KakaoMap = ({ searchDTO, setSearchDTO }) => {
                 <input 
                 type="text" 
                 id="address" 
-                placeholder="위치 찾기" 
+                placeholder={`현재 위치 : ${searchDTO.jibunAddress}`}
                 value={keyword} 
                 onChange={(e) => setKeyword(e.target.value)} 
                 />

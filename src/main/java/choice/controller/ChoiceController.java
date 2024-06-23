@@ -21,11 +21,23 @@ public class ChoiceController {
         System.out.println("************carid************ = "+carId);
         Car carInfo = choiceService.getCarInfo(carId);
         System.out.println("************carinfo************ = "+carInfo);
+        carInfo.setWishLists(null);
         if (carInfo.getUser() == null) {
             throw new IllegalArgumentException("User not found for car");
         }
         return carInfo;
     }
+
+//    @GetMapping("/carinfo")
+//    public Optional<CarDTO> choiceData(@RequestParam(name = "carId") Long carId) {
+//        System.out.println("************carid************ = "+carId);
+//        Optional<CarDTO> carInfo = choiceService.getCarInfo(carId);
+//        System.out.println("************carinfo************ = "+carInfo);
+//        if (carInfo.getUser() == null) {
+//            throw new IllegalArgumentException("User not found for car");
+//        }
+//        return carInfo;
+//    }
     @GetMapping("/hostinfo")
     public LoginDTO hostInfo(@RequestParam(name = "userId") String userId) {
         System.out.println("************userId************ = " + userId);

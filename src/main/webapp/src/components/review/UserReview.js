@@ -4,53 +4,7 @@ import './ReviewCSS.css'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
-const UserReview = () => {
-
-  const reviews = [
-    {
-      id: 1,
-      username: "User1",
-      rating: 5,
-      comment: "hi!",
-      date: "2024-05-16"
-    },
-    {
-      id: 2,
-      username: "User2",
-      rating: 4,
-      comment: "hi",
-      date: "2024-05-15"
-    },
-    {
-      id: 3,
-      username: "User3",
-      rating: 3,
-      comment: "hi",
-      date: "2024-05-14"
-    },
-    {
-      id: 4,
-      username: "User4",
-      rating: 5,
-      comment: "hi!",
-      date: "2024-05-16"
-    },
-    {
-      id: 5,
-      username: "User5",
-      rating: 4,
-      comment: "hi",
-      date: "2024-05-15"
-    },
-    {
-      id: 6,
-      username: "User6",
-      rating: 3,
-      comment: "hi",
-      date: "2024-05-14"
-    }
-  ];
-
+const UserReview = ({ reviews }) => {
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -74,11 +28,13 @@ const UserReview = () => {
   return (
     <div className='review-container'>
       <h2 style={{textAlign:"-webkit-left", paddingLeft: "20px" }}>User Reviews</h2>
-      <Carousel responsive={responsive}>
-        {reviews.map(review => (
-          <UserReviewItem key={review.id} review={review} />
-        ))}
-      </Carousel>
+      {reviews.review_id === '' ? (
+          <p style={{ textAlign: "center", color: "#999", padding: "20px" }}>아직 리뷰가 없습니다.</p>
+      ) : (
+          <Carousel responsive={responsive}>
+            <UserReviewItem key={reviews.review_id} review={reviews} />
+          </Carousel>
+      )}
     </div>
   );
 };

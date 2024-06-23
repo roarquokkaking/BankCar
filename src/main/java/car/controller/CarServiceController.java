@@ -1,17 +1,13 @@
 package car.controller;
 
-import car.bean.CarResponseDTO;
 import car.bean.ServiceCarDTO;
 import car.entity.Car;
-import car.entity.CarImages;
 import car.entity.ServiceCar;
-import car.repo.ServiceCarRepository;
 import car.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins= {"http://localhost:3000", "https://dongwoossltest.shop"})
@@ -46,7 +42,11 @@ public class CarServiceController {
         return carService.getCarData(label);
     }
 
-
-
+    @GetMapping(path = "/cars/getcardata2")
+    public List<Object[]> getcardata(@RequestParam(name="label") String label,
+                                     @RequestParam(name="lat") double latitude,
+                                     @RequestParam(name="lng") double longitude){
+        return carService.getCarData2(label, latitude, longitude);
+    }
 
 }
