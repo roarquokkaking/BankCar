@@ -43,28 +43,36 @@ const CheckMyCar = () => {
 
 
     return (
-      <div className={styles.checkMyCarContainer}>
-          <ComponentHeader text={"등록된 나의 자동차" } />
-          {
-              service === 0
-                  ?
-                  (cars.length > 0 ?  (cars.map(car => (
-                      <div className={styles.carouselContainer}>
-                      <Slider {...settings}>
-                          <RegisterCarCard key={car.carId} car={car} onAddService={onAddService}/>
-                      </Slider>
-                      </div>))) :
-                      (<div style={{alignItems: "center"}}>
-                          <img src={`${process.env.PUBLIC_URL}/image/no_car.jpg`} width={"100%"}/>
-                          <span>등록된 자동차가 없습니다.</span>
-                      </div>))
-                  :
-                  <div>
-                      <h1>서비스 등록</h1>
-                      <DateTimeSelector carId={service}/>
-                  </div>
-          }
-      </div>
+        <div className={styles.checkMyCarContainer}>
+            <ComponentHeader text={"등록된 나의 자동차" } />
+            {
+                service === 0
+                    ?
+                    (cars.length > 0 ?
+                        (<div className={styles.carouselContainer}>
+                                {cars.length === 1 ? (
+                                    <RegisterCarCard key={cars[0].carId} car={cars[0]} onAddService={onAddService} />
+                                ) : (
+                                    <Slider {...settings}>
+                                        {cars.map(car => (
+                                            <RegisterCarCard key={car.carId} car={car} onAddService={onAddService}/>
+                                        ))}
+                                    </Slider>
+                                )}
+                            </div>
+                    ) : (
+                        <div style={{alignItems: "center"}}>
+                            <img src={`${process.env.PUBLIC_URL}/image/no_car.jpg`} width={"100%"}/>
+                            <span>등록된 자동차가 없습니다.</span>
+                        </div>
+                    ))
+                :
+                <div>
+                    <h1>서비스 등록</h1>
+                    <DateTimeSelector carId={service}/>
+                </div>
+            }
+        </div>
     );
 };
 
