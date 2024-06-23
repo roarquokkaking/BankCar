@@ -68,7 +68,6 @@ const CheckMyCar = () => {
                     ))
                 :
                 <div>
-                    <h1>서비스 등록</h1>
                     <DateTimeSelector carId={service}/>
                 </div>
             }

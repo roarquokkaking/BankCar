@@ -2,6 +2,7 @@ import React, {createContext, useState} from 'react';
 import {insertCarDataApi} from "../api/CarApiService";
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
+import Swal from "sweetalert2";
 
 export const RegisterContext = createContext();
 
@@ -56,7 +57,10 @@ const RegisterProvider = ({children}) => {
         insertCarDataApi(formData, userId)
         .then(
             (response) => {
-                alert("자동차 정보 등록이 완료되었습니다.");
+                Swal.fire({
+                    icon: 'success',
+                    title:   "<div style='color:#000000;font-size:15px'>자동차 정보를 등록하였습니다.</div>",
+                });
                 navigate("/profile");
             }
         )
