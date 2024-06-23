@@ -1,23 +1,19 @@
 /* UserReviewItem.css */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    background-color: #fff;
 }
 
 .review-container {
     max-width: 800px;
-    margin: 5px auto;
     padding-left: 20px;
-    background-color: #fff;
     border: none;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 0%;
 }
 
 .review {
     margin-bottom: 20px;
     padding-bottom: 20px;
-    border-bottom: 1px solid #ccc;
 }
 
 .review:last-child {

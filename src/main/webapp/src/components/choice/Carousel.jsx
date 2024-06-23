@@ -35,7 +35,7 @@ const Carousel = ({image}) => {
                     <div key={index}>
                         <img
                             src={imageUrl} alt={`Car Image ${index}`}
-                            style={{ maxWidth: '170%', height: 'auto' }}
+                            style={{ width: '400px', height: '250px',  objectFit:'cover', display:'block' }}
                         />
                     </div>
                 ))}

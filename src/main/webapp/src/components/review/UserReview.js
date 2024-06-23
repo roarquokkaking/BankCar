@@ -27,8 +27,8 @@ const UserReview = ({ reviews }) => {
   
   return (
     <div className='review-container'>
-      <h2 style={{textAlign:"-webkit-left", paddingLeft: "20px" }}>User Reviews</h2>
-      {reviews.review_id === '' ? (
+      {/*<h2 style={{textAlign:"-webkit-left", paddingLeft: "20px" }}>User Reviews</h2>*/}
+      {reviews.length === 0 ? (
           <p style={{ textAlign: "center", color: "#999", padding: "20px" }}>아직 리뷰가 없습니다.</p>
       ) : (
           <Carousel responsive={responsive}>

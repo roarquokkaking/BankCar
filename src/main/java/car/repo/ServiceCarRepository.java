@@ -13,11 +13,19 @@ import java.util.List;
 @Repository
 public interface ServiceCarRepository extends JpaRepository<ServiceCar, Long> {
 
-    @Query("select cs.car.price, cs.car.carId,cs.startDate,cs.endDate,cs.car.doroAddress,cs.car.rating, cs.car.carImages.main_image, cs.car.carImages.image1, cs.car.carImages.image2, cs.car.carImages.image3, cs.car.wish from ServiceCar cs where cs.car.category=:label order by cs.startDate DESC")
-    List<Object[]> findAllOrderByIdDesc(@Param("label") String label);
+    @Query("select cs.car.price, cs.car.carId,cs.startDate,cs.endDate,cs.car.doroAddress,cs.car.rating, cs.car.carImages.main_image, cs.car.carImages.image1, cs.car.carImages.image2, cs.car.carImages.image3, cs.car.wish from ServiceCar cs "+
+            "where cs.car.category=:label and "+
+            "(6371 * acos(cos(radians(:latitude)) * cos(radians(CAST(cs.car.latitude AS double))) * " +
+            "cos(radians(CAST(cs.car.longitude AS double)) - radians(:longitude)) +" +
+            "sin(radians(:latitude)) * sin(radians(CAST(cs.car.latitude AS double))))) <= 8 " +
+            "order by cs.startDate DESC")
+    List<Object[]> findAllOrderByIdDesc(@Param("label") String label, @Param("latitude") double latitude, @Param("longitude") double longitude);
 
-    @Query("select cs.car.price, cs.car.carId,cs.startDate,cs.endDate,cs.car.doroAddress,cs.car.rating, cs.car.carImages.main_image, cs.car.carImages.image1, cs.car.carImages.image2, cs.car.carImages.image3, cs.car.wish from ServiceCar cs order by cs.startDate DESC")
-    List<Object[]> findAllOrderByIdDesc();
+    @Query(value = "select cs.car.price, cs.car.carId,cs.startDate,cs.endDate,cs.car.doroAddress,cs.car.rating, cs.car.carImages.main_image, cs.car.carImages.image1, cs.car.carImages.image2, cs.car.carImages.image3, cs.car.wish from ServiceCar cs " +
+            "where (6371 * acos(cos(radians(:latitude)) * cos(radians(CAST(cs.car.latitude AS double))) * " +
+            "cos(radians(CAST(cs.car.longitude AS double)) - radians(:longitude)) + " +
+            "sin(radians(:latitude)) * sin(radians(CAST(cs.car.latitude AS double))))) <= 8  order by cs.startDate DESC")
+    List<Object[]> findAllOrderByIdDesc(@Param("latitude") double latitude, @Param("longitude") double longitude);
 
     @Query(value = "SELECT sc.car.carId FROM ServiceCar sc WHERE " +
             "((sc.startDate < :startDate AND sc.endDate > :endDate AND sc.car.price >= :minPrice AND sc.car.price <= :maxPrice) OR " +

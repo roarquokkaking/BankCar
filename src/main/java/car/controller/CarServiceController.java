@@ -38,15 +38,17 @@ public class CarServiceController {
 
 
     @GetMapping(path = "/cars/getcardata")
-    public List<Object[]> getcardata(@RequestParam(name="label") String label){
-        return carService.getCarData(label);
-    }
-
-    @GetMapping(path = "/cars/getcardata2")
     public List<Object[]> getcardata(@RequestParam(name="label") String label,
                                      @RequestParam(name="lat") double latitude,
                                      @RequestParam(name="lng") double longitude){
-        return carService.getCarData2(label, latitude, longitude);
+        return carService.getCarData(label, latitude, longitude);
     }
+
+//    @GetMapping(path = "/cars/getcardata2")
+//    public List<Object[]> getcardata(@RequestParam(name="label") String label,
+//                                     @RequestParam(name="lat") double latitude,
+//                                     @RequestParam(name="lng") double longitude){
+//        return carService.getCarData2(label, latitude, longitude);
+//    }
 
 }

@@ -61,7 +61,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Object[]> getCarData(String label) {
+    public List<Object[]> getCarData(String label,double latitude, double longitude) {
 
         String new_label="";
         switch (label){
@@ -87,9 +87,9 @@ public class CarServiceImpl implements CarService {
         System.out.println("new_label="+new_label);
 
         if(new_label.equals("")){
-            return serviceCarRepository.findAllOrderByIdDesc();
+            return serviceCarRepository.findAllOrderByIdDesc(latitude,longitude);
         }else{
-            return serviceCarRepository.findAllOrderByIdDesc(new_label);
+            return serviceCarRepository.findAllOrderByIdDesc(new_label,latitude,longitude);
         }
 
     }

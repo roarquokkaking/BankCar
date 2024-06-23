@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import "../../CSS/SearchCSS.css";
 
 const PriceSelect = ({ searchDTO, setSearchDTO, fixedMinPrice, fixedMaxPrice, priceGap, reset, setReset }) => {
     const [rangeMinValue, setRangeMinValue] = useState(fixedMinPrice);
@@ -68,35 +69,42 @@ const PriceSelect = ({ searchDTO, setSearchDTO, fixedMinPrice, fixedMaxPrice, pr
                     onChange={priceRangeMaxValueHandler}
                 />
             </FilterPriceRangeWrap>
-            <div className="flex items-center space-x-2">
-                <label htmlFor="min-price" className="flex-shrink-0 font-bold">
-                    최소 금액
-                </label>
-                <input
-                    type="number"
-                    id="min-price"
-                    step="1000"
-                    min={fixedMinPrice}
-                    max={fixedMaxPrice - priceGap}
-                    value={rangeMinValue}
-                    onChange={priceRangeMinValueHandler}
-                    className="w-full rounded-lg border border-gray-300 px-2 py-1 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-slate-500"
-                />
-            </div>
-            <div className="flex items-center space-x-2">
-                <label htmlFor="max-price" className="flex-shrink-0 font-bold">
-                    최대 금액
-                </label>
-                <input
-                    type="number"
-                    id="max-price"
-                    step="1000"
-                    min={fixedMinPrice + priceGap}
-                    max={fixedMaxPrice}
-                    value={rangeMaxValue}
-                    onChange={priceRangeMaxValueHandler}
-                    className="w-full rounded-lg border border-gray-300 px-2 py-1 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-slate-500"
-                />
+            <div className="price-input-container">
+                <div className="price-input-group">
+                    <label htmlFor="min-price" className="price-input-label">
+                        최소 금액
+                    </label>
+                    <input
+                        type="number"
+                        id="min-price"
+                        step="1000"
+                        min={fixedMinPrice}
+                        max={fixedMaxPrice - priceGap}
+                        value={rangeMinValue}
+                        onChange={priceRangeMinValueHandler}
+                        className="price-input-field no-focus"
+                        tabIndex="-1"
+                    />
+                    {/*<label htmlFor="min-price" className="price-input-label">*/}
+                    {/*    원*/}
+                    {/*</label>*/}
+                </div>
+                <div className="price-input-group">
+                    <label htmlFor="max-price" className="price-input-label">
+                        최대 금액
+                    </label>
+                    <input
+                        type="number"
+                        id="max-price"
+                        step="1000"
+                        min={fixedMinPrice + priceGap}
+                        max={fixedMaxPrice}
+                        value={rangeMaxValue}
+                        onChange={priceRangeMaxValueHandler}
+                        className="price-input-field no-focus"
+                        tabIndex="-1"
+                    />
+                </div>
             </div>
         </>
     );
@@ -106,61 +114,61 @@ export default PriceSelect;
 
 // 스타일 컴포넌트 정의
 const FilterPriceSlide = styled.div`
-  position: relative;
-  height: 4px;
-  width: 650px;
-  border-radius: 10px;
-  background-color: #dddddd;
+    position: relative;
+    height: 4px;
+    width: 650px;
+    border-radius: 10px;
+    background-color: #dddddd;
 
-  @media (max-width: 1200px) {
-    width: 800px;
-  }
+    @media (max-width: 1200px) {
+        width: 800px;
+    }
 
-  @media (max-width: 768px) {
-    width: 500px;
-  }
+    @media (max-width: 768px) {
+        width: 500px;
+    }
 
-  @media (max-width: 480px) {
-    width: 350px;
-  }
+    @media (max-width: 480px) {
+        width: 350px;
+    }
 `;
 
 const FilterPriceSlideInner = styled.div`
-  position: absolute;
-  left: ${props => props.rangeMinPercent}%;
-  right: ${props => props.rangeMaxPercent}%;
-  height: 4px;
-  border-radius: 10px;
-  background-color: #b0b0b0;
+    position: absolute;
+    left: ${props => props.rangeMinPercent}%;
+    right: ${props => props.rangeMaxPercent}%;
+    height: 4px;
+    border-radius: 10px;
+    background-color: #b0b0b0;
 `;
 
 const FilterPriceRangeWrap = styled.div`
-  position: relative;
-  width: 650px;
+    position: relative;
+    width: 650px;
 
-  @media (max-width: 1200px) {
-    width: 800px;
-  }
+    @media (max-width: 1200px) {
+        width: 800px;
+    }
 
-  @media (max-width: 768px) {
-    width: 500px;
-  }
+    @media (max-width: 768px) {
+        width: 500px;
+    }
 
-  @media (max-width: 480px) {
-    width: 350px;
-  }
+    @media (max-width: 480px) {
+        width: 350px;
+    }
 `;
 
 const FilterPriceRangeMin = styled.input`
-  position: absolute;
-  top: -9px;
-  height: 7px;
-  width: 100%;
-  -webkit-appearance: none;
-  background: none;
-  pointer-events: none;
+    position: absolute;
+    top: -9px;
+    height: 7px;
+    width: 100%;
+    -webkit-appearance: none;
+    background: none;
+    pointer-events: none;
 
-  &::-webkit-slider-thumb {
+    &::-webkit-slider-thumb {
     pointer-events: auto;
     height: 30px;
     width: 30px;
