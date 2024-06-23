@@ -69,7 +69,7 @@ const FooterMenu = () => {
 
     useEffect(() => {
         if(id){
-            let url = `http://localhost:8080/api/push-notifications/${id}`;
+            let url = `https://dongwoossltest.shop/api/push-notifications/${id}`;
             const sse = new EventSource(url);
 
             sse.addEventListener("booking-event", (event) => {
