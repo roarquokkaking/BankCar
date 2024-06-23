@@ -65,13 +65,20 @@ const ChoiceData = ({ setChoicedata }) => {
             //     데이터 삽입
                 setChoicedata({
                     car:{
+                        title: responseCar.data.title,
                         content: responseCar.data.content,
-                        image: responseCar.data.carImages
+                        image: responseCar.data.carImages,
+                        category: responseCar.data.category,
+                        model:responseCar.data.model,
+                        released:responseCar.data.released,
+                        color:responseCar.data.color,
+                        segment:responseCar.data.segment,
                     },
                     owner: {
                         image: responseCar.data.user.profile_image,
                         name: responseCar.data.user.name,
-                        email: responseCar.data.user.email
+                        email: responseCar.data.user.email,
+                        rating: responseCar.data.rating
                     },
                     map: {
                         address: responseCar.data.jibunAddress,

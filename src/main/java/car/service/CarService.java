@@ -19,7 +19,7 @@ public interface CarService {
 
     CarImages getCarImagesByCarId(Long carId);
 
-    List<Object[]> getCarData(String label);
+    List<Object[]> getCarData(String label, double latitude, double longitude);
 
     List<Object[]> getCarData2(String label, double latitude, double longitude);
 }
