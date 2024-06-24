@@ -34,7 +34,7 @@ const Choice = () => {
     const navigate = useNavigate();
     const Toast = Swal.mixin({
           toast: true,
-          position: 'top',
+          position: 'center',
           showConfirmButton: false,
           timer: 1500,
           timerProgressBar: true,
