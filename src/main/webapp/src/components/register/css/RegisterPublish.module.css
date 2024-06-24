@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px;
+    height: 80vh;
 }
 
 .card {
@@ -58,12 +58,12 @@
 
 .imageSection h2 {
     color: #333;
-    margin-bottom: 15px;
 }
 
 .submit {
     width: 100%;
     padding: 15px;
+    margin-bottom: 30px;
     background-color: #3594ff;
     color: white;
     border: none;
