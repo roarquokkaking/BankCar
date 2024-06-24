@@ -1,9 +1,9 @@
 import React from 'react';
 
 const ChoiceFooter = ({ price, startTime, endTime ,startDate, endDate, onReserve, loading, error, choicedata }) => {
-    const parseDateTime = (date, time) => {
-        return new Date(`${date}T${time}`);
-    }
+    const formatPrice = (value) => {
+        return new Intl.NumberFormat("ko-KR").format(value);
+    };
 
     return (
         <div className="choice-footer">
