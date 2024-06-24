@@ -7,6 +7,7 @@ import {setId, setEmail, setName} from '../../store/loginSlice';
 import { Box} from "@mui/material";
 import FooterMenu from "../FooterMenu";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 // 구분선 컴포넌트
 const Divider = () => {
@@ -30,8 +31,26 @@ const ProfileMain = () => {
     const profileImage = useSelector(state => state.Login.profile_image);
     const userEmail  = useSelector(state => state.Login.email);
     const newDriverYN = driverYN==="true";
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'center',
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
     const onToCarNew = () => {
-        navigate('/car/new');
+        if(driverYN){
+            navigate('/car/new');
+        }else {
+            Toast.fire({
+                icon: 'error',
+                title: '운전면허증을 먼저 등록 후 서비스를 이용해주세요!!.'
+            })
+        }
     }
 
     const onNotiTest = () => {
