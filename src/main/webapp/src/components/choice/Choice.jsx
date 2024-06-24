@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import '../../CSS/ChoiceCSS.css';
 import "../profile/ProfilePage.css";
 import 'react-datepicker/dist/react-datepicker.css';
@@ -11,6 +11,7 @@ import ChoiceData from './ChoiceData';
 import {useSelector} from "react-redux";
 import UserReview from "../review/UserReview";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import {useChoice} from "./ChoiceProvider";
 
 const Choice = () => {
     const location = useLocation();
@@ -43,49 +44,65 @@ const Choice = () => {
         }
     }
 
-    const [choicedata, setChoicedata] = useState({
-        car: {
-            title:"",
-            content:"",
-            image: {},
-            category: "",
-            model:"",
-            released:"",
-            color:"",
-            segment:"",
-        },
-        owner: {
-            image: "",
-            // userid:"",
-            name: "",
-            email: "",
-            rating: 0,
-        },
-        map: {
-            address: "",
-            coordinates: {
-                lat: 0,
-                lng: 0
+    const { choicedata, setChoicedata } = useChoice();
+
+    useEffect(() => {
+        setChoicedata({
+            ...choicedata,
+            footer: {
+                price: 0,
+                startTime: startTime,
+                endTime: endTime,
+                startDate:startDate,
+                endDate:endDate,
+                loading: loading,
+                error: error
             }
-        },
-        review: {
-            review_id:"",
-            rating: 0,
-            title: "",
-            comment: "",
-            id: "",
-            name: ""
-        },
-        footer: {
-            price: 0,
-            startTime: startTime,
-            endTime: endTime,
-            startDate:startDate,
-            endDate:endDate,
-            loading: loading,
-            error: error
-        }
-    });
+        })
+    },  [startTime, endTime, startDate, endDate, loading, error, setChoicedata]);
+    // const [choicedata, setChoicedata] = useState({
+    //     car: {
+    //         title:"",
+    //         content:"",
+    //         image: {},
+    //         category: "",
+    //         model:"",
+    //         released:"",
+    //         color:"",
+    //         segment:"",
+    //     },
+    //     owner: {
+    //         image: "",
+    //         // userid:"",
+    //         name: "",
+    //         email: "",
+    //         rating: 0,
+    //     },
+    //     map: {
+    //         address: "",
+    //         coordinates: {
+    //             lat: 0,
+    //             lng: 0
+    //         }
+    //     },
+    //     review: {
+    //         review_id:"",
+    //         rating: 0,
+    //         title: "",
+    //         comment: "",
+    //         id: "",
+    //         name: ""
+    //     },
+    //     footer: {
+    //         price: 0,
+    //         startTime: startTime,
+    //         endTime: endTime,
+    //         startDate:startDate,
+    //         endDate:endDate,
+    //         loading: loading,
+    //         error: error
+    //     }
+    // });
     const toggleInfo = () => {
         setIsInfoExpanded(!isInfoExpanded);
     };
@@ -96,15 +113,6 @@ const Choice = () => {
             <div className="description">
                 <Carousel {...choicedata.car} />
             </div>
-            {/*<div className="choice-details">*/}
-            {/*    <div className="choice-rating">*/}
-            {/*        <p>Rating: {choicedata.car.rating}</p>*/}
-            {/*    </div>*/}
-            {/*    <div className="choice-amenities">*/}
-            {/*        <div className="choice-icon">🚗</div>*/}
-            {/*        <p>{choicedata.car.category}</p>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
             <div className="car-description">
                 <h1>{choicedata.car.title}</h1>
                 <p>{choicedata.car.content}</p>

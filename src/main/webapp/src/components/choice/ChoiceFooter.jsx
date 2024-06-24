@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ChoiceFooter = ({ price, startTime, endTime ,startDate, endDate, onReserve, loading, error }) => {
+const ChoiceFooter = ({ price, startTime, endTime ,startDate, endDate, onReserve, loading, error, choicedata }) => {
     return (
         <div className="choice-footer">
             <div className="price-time">

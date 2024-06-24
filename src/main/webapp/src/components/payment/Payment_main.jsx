@@ -10,15 +10,16 @@ import Grid from "@mui/material/Grid";
 import {getCarItemApi} from "../api/CarApiService";
 import {useSelector} from "react-redux";
 import axios from "axios"
+import {useChoice} from "../choice/ChoiceProvider";
 
 
 
 //{carId, startDate, endDate, price}
 const Payment_main = () => {
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const navigateToss = useNavigate();
   const [showNaverPay, setShowNaverPay] = useState(false);
-
+  const { choicedata } = useChoice();
   const goNaverPay = () => {
     navigate('/payment/naverpay');
   };
@@ -35,12 +36,14 @@ const navigate = useNavigate();
     const queryParams = new URLSearchParams(location.search);
 
     const carId = queryParams.get('carid');
-    const startDate = queryParams.get('startdate');
-    const endDate = queryParams.get('enddate');
-    const startTime = queryParams.get('starttime');
-    const endTime = queryParams.get('endtime');
-    const price = queryParams.get('price');
+    const startDate = choicedata.footer.startDate;
+    const endDate = choicedata.footer.endDate;
+    const startTime = choicedata.footer.startTime;
+    const endTime = choicedata.footer.endTime;
+    const price = choicedata.footer.price;
     const [car, setCar] = useState({})
+    const totalDate = choicedata.footer.endDate - choicedata.footer.startDate ;
+    const totalTime = choicedata.footer.endTime - choicedata.footer.startTime ;
 
     // const [rentalDetails, setRentalDetails] = useState({
     //     startDate,
@@ -77,13 +80,13 @@ const navigate = useNavigate();
     useEffect(() => {
         if(car){
             setPayDetail({...payDetail,
-                item_name: car.model,
-                quantity: car.doroAddress,
+                item_name: choicedata.car.model,
+                quantity: choicedata.car.doroAddress,
                 vat_amount: startDate,
                 tax_free_amount: endDate ,
                 total_amount: price,
                 fail_url: startTime ,
-                cancel_url: endTime, })
+                cancel_url: endTime,})
             console.log(payDetail)
         }
     },[car])
@@ -178,9 +181,9 @@ return (
                     </Typography>
                     <Grid container spacing={2}>
                         <Grid item xs={8}>
-                            <Typography variant="body1"><strong style={strongStyle}>모델명:</strong> {car.model}</Typography>
-                            <Typography variant="body1"><strong style={strongStyle}>색상:</strong> {car.color}</Typography>
-                            <Typography variant="body1"><strong style={strongStyle}>제목 </strong><br /> {car.title}</Typography>
+                            <Typography variant="body1"><strong style={strongStyle}>모델명:</strong> {choicedata.car.model}</Typography>
+                            <Typography variant="body1"><strong style={strongStyle}>색상:</strong> {choicedata.car.color}</Typography>
+                            <Typography variant="body1"><strong style={strongStyle}>제목 </strong><br /> {choicedata.car.title}</Typography>
                         </Grid>
                         <Grid item xs={4}>
                             {car && car.carImages && car.carImages.main_image &&
@@ -198,6 +201,7 @@ return (
                     </Typography>
                     <Typography variant="body1"><strong style={strongStyle}>시작일:</strong> {startDate} / {startTime}</Typography>
                     <Typography variant="body1"><strong style={strongStyle}>반납일:</strong> {endDate} / {endTime}</Typography>
+                    <Typography variant="body1"><strong style={strongStyle}>총 {totalDate}일 {totalTime < 0 ? 24 - totalTime : totalTime}시간</strong></Typography>
                 </Box>
                 <Box sx={{ padding: '10px', border: '1px solid #ddd', borderRadius: '10px' }}>
                     <Typography variant="h6" component="h3" gutterBottom>
