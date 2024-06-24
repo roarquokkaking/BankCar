@@ -35,7 +35,11 @@ public class CarServiceController {
         return ResponseEntity.ok(saveServiceCar);
     }
 
-
+    @GetMapping(path = "/cars/{carId}/service")
+    public ResponseEntity<List<ServiceCar>> getServiceCarsByCarId(@PathVariable(name = "carId")Long carId){
+        List<ServiceCar> serviceCars = carService.findCarsByCarId(carId);
+        return ResponseEntity.ok(serviceCars);
+    }
 
     @GetMapping(path = "/cars/getcardata")
     public List<Object[]> getcardata(@RequestParam(name="label") String label){

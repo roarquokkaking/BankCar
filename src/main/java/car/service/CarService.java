@@ -22,4 +22,9 @@ public interface CarService {
     List<Object[]> getCarData(String label);
 
     List<Object[]> getCarData2(String label, double latitude, double longitude);
+
+    void deleteCarByCarId(String userId, Long carId);
+
+    List<ServiceCar> findCarsByCarId(Long carId);
+
 }

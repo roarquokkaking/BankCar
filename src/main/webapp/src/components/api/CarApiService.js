@@ -23,10 +23,20 @@ export function selectUserCarList(userId){
     return apiClientPublish.get(`/users/${userId}/cars`)
 }
 
+// 자신의 자동차 정보 가져오기
 export function getCarItemApi(userId, carId){
     return apiClientPublish.get(`/users/${userId}/cars/${carId}`)
 }
 
+// 자신의 등록된 자동차 삭제
+export function deleteCarApi(userId, carId){
+    return apiClientPublish.delete(`/users/${userId}/cars/${carId}`)
+}
+
+//  등록된 서비스 자동차 리스트 가져오기
+export function getServiceCarList(carId){
+    return apiClientPublish.get(`/cars/${carId}/service`)
+}
 // 네이버 로그인 접근 url 가져오는 api
 export function getNaverLoginUrlApi(){
     return apiClientLocal.get(`/user/naverLogin`,{

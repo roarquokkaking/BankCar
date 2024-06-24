@@ -5,68 +5,74 @@
     margin: 20px;
 }
 
-.publish .infoTable {
+.card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.cardTitle {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.infoTable {
     width: 100%;
     border-collapse: collapse;
-    background-color: #f4f4f4;
+    background-color: #f9f9f9;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
     margin-bottom: 20px;
-    padding: 20px;
 }
 
-.publish .infoTable td {
-    padding: 8px;
-    height: 50px;
-    border-bottom: 1px solid #ddd;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    word-break: break-all;
+.infoTable th, .infoTable td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
 }
 
-.publish .infoTable tr:last-child td {
+.infoTable th {
+    background-color: #f1f1f1;
+    font-weight: 600;
+}
+
+.infoTable tr:last-child td {
     border-bottom: none;
 }
 
-.publish .infoItem {
-    margin: 10px 0;
-    font-size: 16px;
+.imageSection {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.publish .infoItem span {
-    font-weight: bold;
-}
-
-.publish .imageContainer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-}
-
-.publish .carImage {
-    max-width: 100px;
-    max-height: 100px;
-    border-radius: 8px;
-}
-
-.publish .submit:hover {
-    background-color: #0056b3;
-}
-
-.publish h2 {
+.imageSection h2 {
     color: #333;
     margin-bottom: 15px;
 }
 
-.publish .submit {
-    width: calc(100% - 20px);
-    margin: 0 10px 60px 10px;
-    padding: 10px 0;
+.submit {
+    width: 100%;
+    padding: 15px;
     background-color: #3594ff;
     color: white;
     border: none;
     border-radius: 10px;
-    height: 50px;
+    font-size: 18px;
     cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.submit:hover {
+    background-color: #007bff;
 }
