@@ -85,6 +85,14 @@ public class CarRegistrationController {
         return ResponseEntity.ok(carResponseDTO);
     }
 
+    @DeleteMapping(path = "/users/{userId}/cars/{carId}")
+    public ResponseEntity<String> deleteCarByCarId(@PathVariable("userId") String userId,
+                                                        @PathVariable("carId") Long carId){
+        carRegistrationService.deleteCarByCarId(userId, carId);
+        System.out.println("delete success");
+        return ResponseEntity.ok("success");
+    }
+
     private List<CarResponseDTO> convertToCarResponseDTO(List<Car> carList) {
         List<CarResponseDTO> carResponseDTOS = new ArrayList<>();
         for(Car car : carList){

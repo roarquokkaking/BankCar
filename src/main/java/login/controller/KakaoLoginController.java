@@ -13,11 +13,11 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-//@CrossOrigin(origins="https://dongwoossltest.shop")    // 다른 포트에서 넘오는 것을 받을 수 있다.
-@CrossOrigin(origins="http://localhost:3000")    // 다른 포트에서 넘오는 것을 받을 수 있다.
+@CrossOrigin(origins="https://dongwoossltest.shop")    // 다른 포트에서 넘오는 것을 받을 수 있다.
+//@CrossOrigin(origins="http://localhost:3000")    // 다른 포트에서 넘오는 것을 받을 수 있다.
 @RestController
-//@RequestMapping(path="/api/",produces = "application/json")
-@RequestMapping(produces = "application/json")
+@RequestMapping(path="/api/",produces = "application/json")
+//@RequestMapping(produces = "application/json")
 public class KakaoLoginController {
 
     @Autowired
@@ -39,9 +39,8 @@ public class KakaoLoginController {
             String email = URLEncoder.encode(loginDTO.getEmail(), StandardCharsets.UTF_8);
             String name = URLEncoder.encode(loginDTO.getName(), StandardCharsets.UTF_8);
             String profile_image = URLEncoder.encode(loginDTO.getProfile_image(), StandardCharsets.UTF_8);
-
             // 리다이렉트 URL 설정
-            String url = "http://localhost:3000/login/kakao?id=" + id + "&email=" + email + "&name=" + name + "&profile_image=" + profile_image;
+            String url = "https://dongwoossltest.shop/login/kakao?id=" + id + "&email=" + email + "&name=" + name + "&profile_image=" + profile_image;
             return new RedirectView(url);
         } else {
             // loginDTO가 null인 경우 에러 페이지로 리다이렉트

@@ -58,4 +58,9 @@ public class MessageRoomServiceImpl implements MessageRoomService {
     public List<MessageRoom> getAllChatRooms(Long roomSeq) {
         return messageRoomRepository.findAllWithLastMessage();
     }
+
+    @Override
+    public void createMessageRoom(MessageRoom messageRoom) {
+        messageRoomRepository.save(messageRoom);
+    }
 }

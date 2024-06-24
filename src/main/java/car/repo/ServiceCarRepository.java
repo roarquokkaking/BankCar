@@ -2,9 +2,11 @@ package car.repo;
 
 import car.entity.ServiceCar;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -57,4 +59,13 @@ public interface ServiceCarRepository extends JpaRepository<ServiceCar, Long> {
                 "cos(radians(CAST(cs.car.longitude AS double)) - radians(:longitude)) + "  +
                 "sin(radians(:latitude)) * sin(radians(CAST(cs.car.latitude AS double))))) <= 5 order by cs.startDate DESC")
         List<Object[]> findAllOrderByLatitudeLongitudeAndIdDesc(@Param("latitude") double latitude, @Param("longitude") double longitude);
+
+
+        @Query("delete from ServiceCar c where c.car.carId = :carId ")
+        @Transactional
+        @Modifying
+    void deleteAllByCarId(@Param("carId") Long carId);
+
+        @Query("select cs from ServiceCar cs where cs.car.carId=:carId")
+        List<ServiceCar> findAllByCarId(@Param("carId") Long carId);
 }

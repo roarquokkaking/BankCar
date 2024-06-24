@@ -74,6 +74,7 @@ const FooterMenu = () => {
 
             sse.addEventListener("booking-event", (event) => {
                 const data = JSON.parse(event.data);
+                console.log(data)
                 if(data.length > 0){
                     setNoti(data)
                 }

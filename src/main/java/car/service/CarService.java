@@ -21,5 +21,9 @@ public interface CarService {
 
     List<Object[]> getCarData(String label, double latitude, double longitude);
 
+    void deleteCarByCarId(String userId, Long carId);
+
+    List<ServiceCar> findCarsByCarId(Long carId);
+
     List<Object[]> getCarData(String label);
 }

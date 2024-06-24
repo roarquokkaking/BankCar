@@ -127,4 +127,16 @@ public class CarServiceImpl implements CarService {
     }
 
 
+    @Override
+    public void deleteCarByCarId(String userId, Long carId) {
+        System.out.println("userId = " + userId + ", carId = " + carId);
+        carRepository.deleteCarByUserIdAndCarId(userId, carId);
+        serviceCarRepository.deleteAllByCarId(carId);
+    }
+
+    @Override
+    public List<ServiceCar> findCarsByCarId(Long carId) {
+        return serviceCarRepository.findAllByCarId(carId);
+    }
+
 }

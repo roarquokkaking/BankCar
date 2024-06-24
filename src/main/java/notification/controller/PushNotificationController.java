@@ -24,7 +24,7 @@ public class PushNotificationController {
     // 회원이 로그인시 sse 구독 url -> 이후 이번트가 발생하면 List
     @GetMapping("/{userId}")
     public Flux<ServerSentEvent<List<Notification>>> streamLastMessage(@PathVariable(name = "userId") String userId) {
-        System.out.println("userId = " + userId);
+        log.info("Received SSE request for userId = {}", userId);
         return service.getNotificationsByUserToID(userId);
     }
 

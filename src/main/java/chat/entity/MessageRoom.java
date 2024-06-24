@@ -26,12 +26,12 @@ public class MessageRoom {
     @Column( nullable = false)
     private String guestName;
 
-//    // 추가된 필드
-//    @Column(name = "host_profile_image")
-//    private String hostProfileImage;
-//
-//    @Column(name = "guest_profile_image")
-//    private String guestProfileImage;
+    // 추가된 필드
+    @Column(name = "host_profile_image")
+    private String hostProfileImage;
+
+    @Column(name = "guest_profile_image")
+    private String guestProfileImage;
 
 
     @OneToMany(mappedBy = "messageRoom", cascade = CascadeType.REMOVE)
