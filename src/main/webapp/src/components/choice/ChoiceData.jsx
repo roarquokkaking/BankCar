@@ -28,6 +28,10 @@ const ChoiceData = ({ setChoicedata }) => {
     const startTime = choiceDTO.startTime;
     const endTime = choiceDTO.endTime;
 
+    const parseDateTime = (date, time) => {
+        return new Date(`${date}T${time}`);
+    }
+
     // Date 객체로 변환
     const startDateTime = parseDateTime(startDate, startTime);
     const endDateTime = parseDateTime(endDate, endTime);
@@ -39,8 +43,6 @@ const ChoiceData = ({ setChoicedata }) => {
     const startHour = new Date(`1970-01-01T${startTime}Z`);
     const endHour = new Date(`1970-01-01T${endTime}Z`);
     const totalTime = (endHour - startHour) / (1000 * 60 * 60);
-
-    const totalPayment = payDetail.total_amount * ((totalDate * 24) + totalTime);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -54,6 +56,7 @@ const ChoiceData = ({ setChoicedata }) => {
                 // 서버에서 가져온 데이터로 필요한 작업 수행
                 console.log(responseCar.data);
                 setCarInfo(responseCar.data); // 차량  정보 설정
+                const totalPayment = responseCar.data.price * ((totalDate * 24) + totalTime);
                 console.log("carinfo : "+carInfo)
                 //호스트정보
                 const responseHost = await axios.get(`${baseURL}/choice/hostinfo`, {
@@ -118,6 +121,7 @@ const ChoiceData = ({ setChoicedata }) => {
                         error: null // 에러 상태
                     }
                 });
+
             } catch (error) {
                 console.error('데이터 가져오기 오류', error);
             }
