@@ -43,7 +43,7 @@ const ProfileMain = () => {
         }
     })
     const onToCarNew = () => {
-        if(driverYN){
+        if(newDriverYN){
             navigate('/car/new');
         }else {
             Toast.fire({
