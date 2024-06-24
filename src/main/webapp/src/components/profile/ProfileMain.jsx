@@ -147,7 +147,7 @@ const ProfileMain = () => {
                     </div>
                 </ul>
             </div>
-                <button onClick={onNotiTest}>알림 테스트</button>
+                {/*<button onClick={onNotiTest}>알림 테스트</button>*/}
 
             </Box>
             <Box sx={{display: {xs: "flex", md: "none"}, marginTop: "auto"}}>
