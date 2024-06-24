@@ -2,9 +2,9 @@ import React, {useEffect, useState} from "react";
 import {FaRegHeart, FaRegUserCircle, FaHome} from "react-icons/fa";
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
-import { BsFillChatDotsFill } from "react-icons/bs";
+import { BsChatLeftDots    } from "react-icons/bs";
 import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
-import {apiClientLocal} from "./api/CarApiService";
+
 import Swal from "sweetalert2";
 
 
@@ -31,7 +31,7 @@ const footerMenu = [
     {
         id: 5,
         text: "1:1채팅",
-        icon: <BsFillChatDotsFill  size={18}/>,
+        icon: <BsChatLeftDots  size={18.8}/>,
         path: "/ChattingList",
     },
     {
