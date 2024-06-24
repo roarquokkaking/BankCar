@@ -12,6 +12,7 @@ import Map from './Map';
 import ChoiceData from './ChoiceData';
 import {useSelector} from "react-redux";
 import UserReview from "../review/UserReview";
+import Swal from "sweetalert2";
 
 const Choice = () => {
     const location = useLocation();
@@ -23,25 +24,49 @@ const Choice = () => {
     const endTime = searchParams.get('endtime');
 
     const userId = useSelector((state) => state.Login.id);
+    const driverYN =useSelector((state) => state.Login.driver);
+    const newDriverYN = driverYN==="true";
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [isInfoExpanded, setIsInfoExpanded] = useState(false);
 
     const navigate = useNavigate();
+    const Toast = Swal.mixin({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+      })
     const onReserve = async () => {
+
+        if(newDriverYN){
         setLoading(true);
-        setError(null);
-        try {
-            //const url = `/payment?userid=${userId}&carid=${carid}&startdate=${startDate}&enddate=${endDate}&starttime=${startTime}&endtime=${endTime}&price=${choicedata.footer.price}`;
-            const url = `/payment?userid=${userId}&carid=${carid}&startdate=2024-06-25&enddate=2024-06-27&starttime=12:00&endtime=18:00&price=100000`;
-            navigate(url);
-        } catch (error) {
-            console.error(error);
-            setError('결제 실패..');
-        } finally {
-            setLoading(false);
+                setError(null);
+                try {
+                    //const url = `/payment?userid=${userId}&carid=${carid}&startdate=${startDate}&enddate=${endDate}&starttime=${startTime}&endtime=${endTime}&price=${choicedata.footer.price}`;
+                    const url = `/payment?userid=${userId}&carid=${carid}&startdate=2024-06-25&enddate=2024-06-27&starttime=12:00&endtime=18:00&price=100000`;
+                    navigate(url);
+                } catch (error) {
+                    console.error(error);
+                    setError('결제 실패..');
+                } finally {
+                    setLoading(false);
+                }
+        }else{
+            Toast.fire({
+            icon: 'error',
+            title: '운전면허증을 먼저 등록 후 서비스를 이용해주세요!!.'
+            })
         }
+
+
+
     }
 
     const [choicedata, setChoicedata] = useState({
