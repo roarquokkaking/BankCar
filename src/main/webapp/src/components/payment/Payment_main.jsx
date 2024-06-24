@@ -33,6 +33,10 @@ const Payment_main = () => {
     // 파라미터로 넘어오는 변수 : carId, startDate, startTime, endDate, endTime, price
     const location = useLocation();
 
+    const parseDateTime = (date, time) => {
+        return new Date(`${date}T${time}`);
+    }
+
     const queryParams = new URLSearchParams(location.search);
 
     const carId = queryParams.get('carid');
@@ -42,8 +46,20 @@ const Payment_main = () => {
     const endTime = choicedata.footer.endTime;
     const price = choicedata.footer.price;
     const [car, setCar] = useState({})
-    const totalDate = choicedata.footer.endDate - choicedata.footer.startDate ;
-    const totalTime = choicedata.footer.endTime - choicedata.footer.startTime ;
+    // const totalDate = choicedata.footer.endDate - choicedata.footer.startDate ;
+    // const totalTime = choicedata.footer.endTime - choicedata.footer.startTime ;
+
+    // Date 객체로 변환
+    const startDateTime = parseDateTime(startDate, startTime);
+    const endDateTime = parseDateTime(endDate, endTime);
+
+// 날짜 차이 계산 (일 단위)
+    const totalDate = (endDateTime - startDateTime) / (1000 * 60 * 60 * 24);
+
+// 시간 차이 계산 (시간 단위)
+    const startHour = new Date(`1970-01-01T${startTime}Z`);
+    const endHour = new Date(`1970-01-01T${endTime}Z`);
+    const totalTime = (endHour - startHour) / (1000 * 60 * 60);
 
     // const [rentalDetails, setRentalDetails] = useState({
     //     startDate,
@@ -63,7 +79,8 @@ const Payment_main = () => {
         approval_url: "https://dongwoossltest.shop/success",
         fail_url: "",     //      대여 시작 시간
         cancel_url: "",   //      대여 반납 시간
-        car_id:carId
+        car_id:carId,
+        totalPayment:''
     })
 
   useEffect(() => {
@@ -81,12 +98,13 @@ const Payment_main = () => {
         if(car){
             setPayDetail({...payDetail,
                 item_name: choicedata.car.model,
-                quantity: choicedata.car.doroAddress,
+                quantity: choicedata.map.address,
                 vat_amount: startDate,
                 tax_free_amount: endDate ,
                 total_amount: price,
                 fail_url: startTime ,
-                cancel_url: endTime,})
+                cancel_url: endTime,
+                totalPayment: totalPayment})
             console.log(payDetail)
         }
     },[car])
@@ -117,7 +135,7 @@ const Payment_main = () => {
             }
               )
       };
-
+      const totalPayment = payDetail.total_amount * ((totalDate * 24) + totalTime);
 
     const onBtn = () => {
         Notification.requestPermission().then(param => {
@@ -201,15 +219,15 @@ return (
                     </Typography>
                     <Typography variant="body1"><strong style={strongStyle}>시작일:</strong> {startDate} / {startTime}</Typography>
                     <Typography variant="body1"><strong style={strongStyle}>반납일:</strong> {endDate} / {endTime}</Typography>
-                    <Typography variant="body1"><strong style={strongStyle}>총 {totalDate}일 {totalTime < 0 ? 24 - totalTime : totalTime}시간</strong></Typography>
+                    <Typography variant="body1"><strong style={strongStyle}>총 {totalDate}일 {totalTime }시간</strong></Typography>
                 </Box>
                 <Box sx={{ padding: '10px', border: '1px solid #ddd', borderRadius: '10px' }}>
                     <Typography variant="h6" component="h3" gutterBottom>
                         결제 비용
                     </Typography>
-                    <Typography variant="body1"><strong style={strongStyle}>총 비용:</strong> {formatPrice(payDetail.total_amount)} 원</Typography>
-                    <Typography variant="body1"><strong style={strongStyle}>세금:</strong> {formatPrice(payDetail.total_amount * 0.1)} 원</Typography>
-                    <Typography variant="body1"><strong style={strongStyle}>최종 금액:</strong> {formatPrice(payDetail.total_amount * 1.1)} 원</Typography>
+                    <Typography variant="body1"><strong style={strongStyle}>총 비용:</strong> {formatPrice(totalPayment)} 원</Typography>
+                    <Typography variant="body1"><strong style={strongStyle}>세금:</strong> {formatPrice(totalPayment * 0.1)} 원</Typography>
+                    <Typography variant="body1"><strong style={strongStyle}>최종 금액:</strong> {formatPrice(totalPayment * 1.1)} 원</Typography>
                 </Box>
             </Box>
 
