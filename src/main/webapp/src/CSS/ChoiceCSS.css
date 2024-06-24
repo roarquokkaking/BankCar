@@ -11,9 +11,9 @@
 }
 
 .car-description {
-    margin-bottom: 16px;
     padding-left: 16px;
     padding-right: 16px;
+    margin-bottom: 0;
     flex-direction: column; /* 수직 정렬로 변경 */
 }
 
@@ -89,7 +89,6 @@
     white-space: nowrap;
     display: flex;
     align-items: center;
-    margin-bottom: 16px;
 }
 
 .usage-time {
@@ -217,7 +216,7 @@ body {
     display: flex;
     flex-direction: column; /* 수직 정렬로 변경 */
     align-items: first;
-    margin-bottom: 20px;
+    color: rgb(153, 153, 153);
     padding-left: 16px;
     padding-right: 16px;
 }
@@ -253,4 +252,26 @@ body {
 .choice-details .choice-icon {
     margin-right: 5px;
     font-size: 16px;
+}
+
+:root {
+    --festie-gray-300: #DFDFDF;
+}
+
+.toggle-info-button {
+    width: 100%; /* 부모 컨테이너의 전체 너비 */
+    max-width: 910px; /* 최대 너비 설정 */
+    margin-bottom: 16px;
+    padding: 5px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    border: 0px solid var(--festie-gray-300);
+    background-color: #FFF;
+    cursor: pointer;
+    font-size: 14px;
+    color: rgb(153, 153, 153);
+    outline: none; /* 포커스 스타일 제거 */
+    transition: background-color 0.3s, border-color 0.3s; /* 배경색 및 테두리 색상 전환 추가 */
 }

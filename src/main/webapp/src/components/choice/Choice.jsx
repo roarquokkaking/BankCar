@@ -2,16 +2,15 @@ import React, { useState } from 'react';
 import '../../CSS/ChoiceCSS.css';
 import "../profile/ProfilePage.css";
 import 'react-datepicker/dist/react-datepicker.css';
-import Review from '../review/Review';
 import { useLocation, useNavigate} from "react-router-dom";
 import Carousel from './Carousel';
-import axios from 'axios';
 import OwnerDescription from './OwnerDescription';
 import ChoiceFooter from './ChoiceFooter';
 import Map from './Map';
 import ChoiceData from './ChoiceData';
 import {useSelector} from "react-redux";
 import UserReview from "../review/UserReview";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 const Choice = () => {
     const location = useLocation();
@@ -110,9 +109,6 @@ const Choice = () => {
                 <h1>{choicedata.car.title}</h1>
                 <p>{choicedata.car.content}</p>
             </div>
-            <button onClick={toggleInfo} className="toggle-info-button">
-                {isInfoExpanded ? '접기' : '펼치기'}
-            </button>
             {isInfoExpanded && (
                 <div className="choice-info">
                     <p className="choice-location">{choicedata.map.address}</p>
@@ -123,6 +119,17 @@ const Choice = () => {
                     <p className="choice-location">분류: {choicedata.car.segment}</p>
                 </div>
             )}
+            <button onClick={toggleInfo} className="toggle-info-button">
+                {isInfoExpanded ? (
+                    <>
+                        세부정보 접기 <IoIosArrowUp />
+                    </>
+                ) : (
+                    <>
+                        세부정보 보기 <IoIosArrowDown />
+                    </>
+                )}
+            </button>
             <OwnerDescription owner={choicedata.owner}/>
             <UserReview {...choicedata.review} reviews={choicedata.review}/>
             <Map {...choicedata.map} />
