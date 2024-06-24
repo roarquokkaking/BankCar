@@ -169,7 +169,7 @@ const ChattingRoom = () => {
                                 <div className="message-info">
                                     
                                     <strong>{msg.sender}</strong>
-                                    <img src={profileImage} alt="Profile Image" className="profile-image" />
+                                    <img src={`${process.env.PUBLIC_URL}/image/nullImage2.png`} alt="clip" className="profile-image" />
                                 </div>
                                 <div className="message-content">
                                     {msg.content}
