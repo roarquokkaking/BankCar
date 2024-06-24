@@ -2,8 +2,8 @@ import axios from "axios";
 
 // 기본 URL 설정 (로컬용 / 배포용)
 const apiClient = axios.create({
-    //baseURL: 'http://localhost:8080/api'
-    baseURL: 'https://dongwoossltest.shop/api'
+    baseURL: 'http://localhost:8080/api'
+    //baseURL: 'https://dongwoossltest.shop/api'
 });
 
 
@@ -38,7 +38,7 @@ export function getServiceCarList(carId){
 }
 // 네이버 로그인 접근 url 가져오는 api
 export function getNaverLoginUrlApi(){
-    return axios.get(`http://localhost:8080/api/user/naverLogin`,{
+    return apiClient.get(`/user/naverLogin`,{
         withCredentials:true
     })
 }
