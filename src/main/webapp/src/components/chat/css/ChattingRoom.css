@@ -263,7 +263,7 @@
   .chat-button-container {
     display: flex;
     justify-content: space-evenly; /* 버튼 사이를 균등하게 분배 */
-    margin-top: 20px;
+    margin-top: 10px;
   }
  
   
@@ -286,7 +286,6 @@
     border: 2px solid #7f7f7f; /* 빨간색 외곽선 추가 */
     border-radius: 20%;
   }
-
   .cancel-button span{
     font-size: 1.1em;
     font-weight: 500;
@@ -300,7 +299,6 @@
     font-weight: 500;
     font-family: 'Noto Sans KR', sans-serif;
   }
-
   .real-out{
     font-size: 1.3em;
     font-weight: 500;
@@ -316,7 +314,7 @@
   
   .FaExclamationCircle {
     font-size: 60px; /* 아이콘 크기 조절 */
-    color: #ff0000; /* 아이콘 색상 (원하는 색상으로 변경 가능) */
+    color: #f6dd00; /* 아이콘 색상 (원하는 색상으로 변경 가능) */
   }
   /* 애니메이션 */
   @keyframes fadeIn {
