@@ -1,6 +1,7 @@
 package chat.controller;
 
 import chat.entity.MessageRoom;
+import chat.repository.MessageRoomRepository;
 import chat.service.MessageRoomService;
 import login.dto.LoginDTO;
 import lombok.Getter;
@@ -16,17 +17,20 @@ import java.util.Map;
 
 @Getter
 @Setter
-@CrossOrigin(origins = "http://localhost:3000")
-//@CrossOrigin(origins="https://dongwoossltest.shop")
+//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins="https://dongwoossltest.shop")
 @RestController
 @RequestMapping("/api/messagesroom")
 public class ChatListController {
 
 
     private final MessageRoomService messageRoomService;
+    private final MessageRoomRepository messageRoomRepository;
+
     @Autowired
-    public ChatListController(MessageRoomService messageRoomService) {
+    public ChatListController(MessageRoomService messageRoomService,MessageRoomRepository messageRoomRepository) {
         this.messageRoomService = messageRoomService;
+        this.messageRoomRepository = messageRoomRepository;
     }
 
     @GetMapping("/roomuserInfo")

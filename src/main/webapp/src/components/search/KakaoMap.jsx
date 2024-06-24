@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { FaSearchLocation } from 'react-icons/fa';
 import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
 
 const KakaoMap = ({ searchDTO, setSearchDTO, reset, setReset }) => {
     useKakaoLoader();
@@ -74,16 +78,19 @@ const KakaoMap = ({ searchDTO, setSearchDTO, reset, setReset }) => {
 
     return (
         <>
-            <div className="search-bar">
-                <FaSearchLocation className='FaSearchLocation' size='25' />
+            <div className="search-bar" style={{width: "300px"}}>
+                {/*<FaSearchLocation className='FaSearchLocation' size='25' />*/}
                 <input 
                 type="text" 
-                id="address" 
-                placeholder={`현재 위치 : ${searchDTO.jibunAddress}`}
+                id="address"
+                placeholder={`${searchDTO.jibunAddress}`}
                 value={keyword} 
                 onChange={(e) => setKeyword(e.target.value)} 
                 />
-                <button id="submit" onClick={handleSearchClick}>Search</button>
+                <IconButton id="submit" onClick={handleSearchClick} endIcon={<SendIcon />}>
+                    <SearchIcon/>
+                </IconButton>
+                {/*<button id="submit" onClick={handleSearchClick}>Search</button>*/}
             </div>
             <Map
                 center={{ lat: 37.566826, lng: 126.9786567 }}

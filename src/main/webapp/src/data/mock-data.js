@@ -94,7 +94,9 @@ export const Locations =()=>{
     //   else {
         axios.get("https://dongwoossltest.shop/api/cars/getcardata", {
           params: {
-            label: label
+            label: label,
+            lat: state.center.lat, // 위도
+            lng: state.center.lng// 경도
           }
         })
             .then(res => {
@@ -155,10 +157,6 @@ export const Locations =()=>{
 
   }
 });
-    
-      
-    
-  
 
 };
 
