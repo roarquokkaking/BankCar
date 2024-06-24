@@ -2,8 +2,8 @@ import axios from "axios";
 
 // 기본 URL 설정 (로컬용 / 배포용)
 const apiClient = axios.create({
-    baseURL: 'http://localhost:8080/api'
-    //baseURL: 'https://dongwoossltest.shop/api'
+    //baseURL: 'http://localhost:8080/api'
+    baseURL: 'https://dongwoossltest.shop/api'
 });
 
 
