@@ -29,17 +29,17 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         this.webSocketEventHandler = webSocketEventHandler;
     }
 
-//    @Override
-//    public void registerStompEndpoints(StompEndpointRegistry registry) {
-//        registry.addEndpoint("/api/chat") // WebSocket 엔드포인트 설정
-//                .setAllowedOrigins("https://dongwoossltest.shop").withSockJS()
-//                .setHeartbeatTime(1000);
-//    }
-
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws").setAllowedOriginPatterns("*").withSockJS();
+        registry.addEndpoint("/api/chat") // WebSocket 엔드포인트 설정
+                .setAllowedOrigins("https://dongwoossltest.shop").withSockJS()
+                .setHeartbeatTime(1000);
     }
+//
+//    @Override
+//    public void registerStompEndpoints(StompEndpointRegistry registry) {
+//        registry.addEndpoint("/ws").setAllowedOriginPatterns("*").withSockJS();
+//    }
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {

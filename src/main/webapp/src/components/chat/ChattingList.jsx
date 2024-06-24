@@ -20,8 +20,8 @@ const ChattingList = () => {
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
-                // const response = await axios.get('https://dongwoossltest.shop/api/messagesroom/roomuserInfo', { withCredentials: true });
-                const response = await axios.get('http://localhost:8080/api/messagesroom/roomuserInfo', { withCredentials: true });
+                const response = await axios.get('https://dongwoossltest.shop/api/messagesroom/roomuserInfo', { withCredentials: true });
+                // const response = await axios.get('http://localhost:8080/api/messagesroom/roomuserInfo', { withCredentials: true });
                 const user = response.data;
                 setCurrentUser(user);
                 setOtherProfileImage(user.profile_image);
@@ -42,8 +42,8 @@ const ChattingList = () => {
 
     const fetchChatRooms = async (userName) => {
         try {
-            // const response = await axios.get(`https://dongwoossltest.shop/api/messagesroom/user/${userName}/rooms`);
-            const response = await axios.get(`http://localhost:8080/api/messagesroom/user/${userName}/rooms`);
+            const response = await axios.get(`https://dongwoossltest.shop/api/messagesroom/user/${userName}/rooms`);
+            // const response = await axios.get(`http://localhost:8080/api/messagesroom/user/${userName}/rooms`);
             console.log('서버로부터 받은 데이터:', response.data);
 
             // 데이터가 배열 형식인지 확인 후 처리
@@ -61,7 +61,9 @@ const ChattingList = () => {
 
     const fetchLastMessage = async (roomSeq) => {
         try {
-            const response = await axios.get(`http://localhost:8080/api/messages/rooms/${roomSeq}/lastmessage`);
+            // const response = await axios.get(`http://localhost:8080/api/messages/rooms/${roomSeq}/lastmessage`);
+            const response = await axios.get(`https://dongwoossltest.shop/api/messages/rooms/${roomSeq}/lastmessage`);
+
             const lastMessage = response.data;
             console.log('마지막 메시지:', lastMessage);
     
@@ -86,25 +88,7 @@ const ChattingList = () => {
             console.error('마지막 메시지를 가져오는 중 오류 발생:', error);
         }
     };
-    
-
-    // const fetchOtherUserProfileImage = async (otherUserName, roomSeq) => {
-    //     try {
-    //         const response = await axios.get(`http://localhost:8080/api/messagesroom/user/${otherUserName}/profileimage`);
-    //         const profileImage = response.data.profile_image.replace('http://', 'https://'); // 프로필 이미지 URL을 HTTPS로 변경
-    //         setChatRooms(prevRooms => prevRooms.map(room => {
-    //             if (room.roomSeq === roomSeq) {
-    //                 return {
-    //                     ...room,
-    //                     otherProfileImage: profileImage // 상대방 프로필 이미지 URL 업데이트
-    //                 };
-    //             }
-    //             return room;
-    //         }));
-    //     } catch (error) {
-    //         console.error(`사용자(${otherUserName})의 프로필 이미지를 가져오는 중 오류 발생:`, error); // 에러 발생 시 콘솔에 출력
-    //     }
-    // };
+  
     
     useEffect(() => {
         chatRooms.forEach(room => {
@@ -161,7 +145,8 @@ const ChattingList = () => {
             {chatRooms.length > 0 ? (
                     chatRooms.map((item) => (
                         <div key={item.roomSeq} className='chatlistdetail'> 
-                    <img src={otherProfileImage} alt="otherProfileImage" className="otherProfileImage" />
+                     <img src={`${process.env.PUBLIC_URL}/image/nullImage2.png`} alt="otherProfileImage" className="otherProfileImage" />
+                    {/* <img src={otherProfileImage} alt="otherProfileImage" className="otherProfileImage" /> */}
                     <Link to={`/ChattingRoom/${item.roomSeq}`} className="chat-link">
                         {item.hostName === currentUser.name ? item.guestName : item.hostName}
                     </Link>
