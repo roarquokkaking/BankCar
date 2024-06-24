@@ -23,6 +23,25 @@ const ChoiceData = ({ setChoicedata }) => {
     const [hostInfo, setHostInfo] = useState(null);
     const [reviewInfo, setReviewInfo] = useState([]);
 
+    const startDate = choiceDTO.startDate;
+    const endDate = choiceDTO.endDate;
+    const startTime = choiceDTO.startTime;
+    const endTime = choiceDTO.endTime;
+
+    // Date 객체로 변환
+    const startDateTime = parseDateTime(startDate, startTime);
+    const endDateTime = parseDateTime(endDate, endTime);
+
+// 날짜 차이 계산 (일 단위)
+    const totalDate = (endDateTime - startDateTime) / (1000 * 60 * 60 * 24);
+
+// 시간 차이 계산 (시간 단위)
+    const startHour = new Date(`1970-01-01T${startTime}Z`);
+    const endHour = new Date(`1970-01-01T${endTime}Z`);
+    const totalTime = (endHour - startHour) / (1000 * 60 * 60);
+
+    const totalPayment = payDetail.total_amount * ((totalDate * 24) + totalTime);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -89,11 +108,11 @@ const ChoiceData = ({ setChoicedata }) => {
                     },
                     review: reviews,
                     footer: {
-                        price: responseCar.data.price,
-                        startTime: choiceDTO.startTime,
-                        endTime: choiceDTO.endTime,
-                        startDate: choiceDTO.startDate,
-                        endDate: choiceDTO.endDate,
+                        price: totalPayment,
+                        startTime: startTime,
+                        endTime: endTime,
+                        startDate: startDate,
+                        endDate: endDate,
                         onReserve: () => {}, // 예약 함수 설정
                         loading: false, // 로딩 상태
                         error: null // 에러 상태

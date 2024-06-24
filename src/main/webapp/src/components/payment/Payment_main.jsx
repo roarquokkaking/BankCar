@@ -79,7 +79,8 @@ const Payment_main = () => {
         approval_url: "https://dongwoossltest.shop/success",
         fail_url: "",     //      대여 시작 시간
         cancel_url: "",   //      대여 반납 시간
-        car_id:carId
+        car_id:carId,
+        totalPayment:''
     })
 
   useEffect(() => {
@@ -97,12 +98,13 @@ const Payment_main = () => {
         if(car){
             setPayDetail({...payDetail,
                 item_name: choicedata.car.model,
-                quantity: choicedata.car.roadAddress,
+                quantity: choicedata.map.address,
                 vat_amount: startDate,
                 tax_free_amount: endDate ,
                 total_amount: price,
                 fail_url: startTime ,
-                cancel_url: endTime,})
+                cancel_url: endTime,
+                totalPayment: totalPayment})
             console.log(payDetail)
         }
     },[car])
