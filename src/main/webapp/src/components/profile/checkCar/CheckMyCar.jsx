@@ -32,12 +32,6 @@ const CheckMyCar = () => {
             .catch(error => console.log(error))
     },[change])
 
-    useEffect(() => {
-        getServiceCarList(carId)
-            .then(res => {
-
-            })
-    })
 
     const onAddService = (carId) => {
         setService(carId)
