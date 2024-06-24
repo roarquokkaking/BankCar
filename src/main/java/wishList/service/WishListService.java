@@ -23,5 +23,7 @@ public interface WishListService {
     List<WishListEntity> toggleWish(String userId, Long carId) ;
 
     List<WishListDTO> getWishListById(String userId, Pageable pageable);
+
+    List<Long> getWishListByUserId(String userId);
 }
 

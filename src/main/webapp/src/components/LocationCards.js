@@ -9,6 +9,7 @@ import {useSelector} from "react-redux";
 import { baseURL } from '../data/UrlTransform';
 import Swal from "sweetalert2";
 import "../CSS/LocationCards.css"
+import {getWishList} from "./api/CarApiService";
 
 const LocationCards = () => {
     const location = useLocation();
@@ -19,6 +20,8 @@ const LocationCards = () => {
     const searchLocations = cardLocations(searchData);
     const user_id = useSelector(state => state.Login.id)
     const [isHeartClicked, setIsHeartClicked] = useState([]);
+    const [like, setLike] = useState([]);
+    //const [changeLike, setChangLike] = useState(false)
 
     const [searchDTO, setSearchDTO] = useState({
         startDate: '',
@@ -32,6 +35,15 @@ const LocationCards = () => {
         minPrice: '',
         maxPrice: ''
     });
+
+    useEffect(() => {
+        getWishList(user_id)
+            .then(res => {
+                setLike(res.data);
+                console.log(res.data)
+                setChangLike(false);
+            })
+    },[])
 
     useEffect(() => {
         const fetchLocations = async () => {
@@ -100,6 +112,7 @@ const LocationCards = () => {
             const newIsHeartClicked = [...isHeartClicked];
             newIsHeartClicked[index] = !newIsHeartClicked[index];
             setIsHeartClicked(newIsHeartClicked);
+            // 좋아요
         } catch (error) {
             console.error('데이터 가져오기 오류', error);
         } finally {
@@ -122,6 +135,7 @@ const LocationCards = () => {
                                 location={location}
                                 isHeartClicked={isHeartClicked[index]}
                                 onHeartClick={() => handleHeartClick(location.car_id, index)}
+                                like={like}
                             />
                         </Grid>
                     );

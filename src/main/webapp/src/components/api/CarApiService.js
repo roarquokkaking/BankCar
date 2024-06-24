@@ -36,6 +36,12 @@ export function deleteCarApi(userId, carId){
 export function getServiceCarList(carId){
     return apiClient.get(`/cars/${carId}/service`)
 }
+
+// 좋아요 목록 가져오는 api
+export function getWishList(userId){
+    return apiClient.get(`/WishList/users/${userId}`)
+}
+
 // 네이버 로그인 접근 url 가져오는 api
 export function getNaverLoginUrlApi(){
     return apiClient.get(`/user/naverLogin`,{
