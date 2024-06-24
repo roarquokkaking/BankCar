@@ -21,7 +21,6 @@ const LocationCards = () => {
     const user_id = useSelector(state => state.Login.id)
     const [isHeartClicked, setIsHeartClicked] = useState([]);
     const [like, setLike] = useState([]);
-    //const [changeLike, setChangLike] = useState(false)
 
     const [searchDTO, setSearchDTO] = useState({
         startDate: '',
@@ -41,7 +40,6 @@ const LocationCards = () => {
             .then(res => {
                 setLike(res.data);
                 console.log(res.data)
-                setChangLike(false);
             })
     },[])
 
