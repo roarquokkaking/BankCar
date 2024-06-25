@@ -70,15 +70,15 @@ const MyProfile = () => {
                                     <img src={myprofileDTO.imageUrl} alt="Profile" className={styles.profileImage} />
                             }
                             </div>
-                            {/*{myprofileDTO.imageUrl ? (*/}
-                            {/*    <div style={{width:'30px', height:'30px'}}>*/}
-                            {/*    <img src={myprofileDTO.imageUrl} alt="Profile" className={styles.profileImage} />*/}
-                            {/*    </div>*/}
-                            {/*) : (*/}
-                            {/*     (*/}
-                            {/*        <CgProfile className={styles.icon} />*/}
-                            {/*    )*/}
-                            {/*)}*/}
+                            {myprofileDTO.imageUrl ? (
+                                <div style={{width:'30px', height:'30px'}}>
+                                <img src={myprofileDTO.imageUrl} alt="Profile" className={styles.profileImage} />
+                                </div>
+                            ) : (
+                                 (
+                                    <CgProfile className={styles.icon} />
+                                )
+                            )}
                         </label>
                         <input
                             type="file"

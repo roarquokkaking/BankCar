@@ -20,7 +20,7 @@ public class WishListDTO {
     private String model;
     private String average;
     private String isFavorite;
-    private String wish;
+    private boolean wish;
 
 
     private String id;

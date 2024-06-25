@@ -93,7 +93,7 @@ const LocationCards = () => {
         setLoading(true);
         try {
             const response =
-                await axios.post(`https://dongwoossltest.shop/api/WishList/wish/toggle/${user_id}/${carId}`);//${carId}
+                await axios.post(`http://localhost:8080/WishList/wish/toggle/${user_id}/${carId}`);//${carId}
             setCards(response.data);
 
             // 하트 클릭 상태 업데이트

@@ -45,7 +45,7 @@ public class BookingEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "booking_status")
-    private BookingStatus booking_status=BookingStatus.BEFORE;
+    private BookingStatus booking_status;
 
     @Column(name = "create_date")
     private LocalDateTime create_date;
@@ -58,9 +58,10 @@ public class BookingEntity {
     @JoinColumn(name = "car_id", nullable = false)
     private Car car;
 
-//    @JoinColumn(name = "review_id")
-//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "bookingEntity")
-//    private ReviewEntity reviewEntity;
+    @JoinColumn(name = "review_id")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "bookingEntity")
+    private ReviewEntity reviewEntity;
+
 
     // setter와 기타 메서드들
 
@@ -68,23 +69,29 @@ public class BookingEntity {
 
     //===== 서비스 구현 =====//
 
-public void setBookingStatus(BookingEntity booking) {
+    public void setBookingStatus(BookingEntity booking) {
         LocalDate now = LocalDate.now();
-        System.out.println("now = " + now);
 
-        if (booking.getStart_date() == null || booking.getEnd_date() == null) {
-            throw new IllegalArgumentException("정보가 없습니다.");
-        }
+        // 시작 날짜와 종료 날짜를 로그로 출력
+        System.out.println("예약 시작 날짜 (raw): " + booking.getStart_date());
+        System.out.println("예약 종료 날짜 (raw): " + booking.getEnd_date());
+
+
+        System.out.println("현재 날짜: " + now);
+        System.out.println("예약 시작 날짜: " + booking.getStart_date());
+        System.out.println("예약 종료 날짜: " + booking.getEnd_date());
 
         if (now.isAfter(booking.getEnd_date())) {
             booking.setBooking_status(BookingStatus.AFTER);
+            System.out.println("예약 상태: AFTER");
         } else if (now.isBefore(booking.getStart_date())) {
             booking.setBooking_status(BookingStatus.BEFORE);
+            System.out.println("예약 상태: BEFORE");
         } else {
             booking.setBooking_status(BookingStatus.NOW);
+            System.out.println("예약 상태: NOW");
         }
     }
-
 
 //    public LocalDate targetday(Integer days) {
 //        LocalDate currentDate = LocalDate.now();

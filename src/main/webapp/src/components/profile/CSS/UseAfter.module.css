@@ -1,13 +1,15 @@
+/*div 안에 사진 */
+
 .reservationItem {
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
+    margin-bottom: 22px;
     margin-top:2%;
     margin-left:5%;
     margin-right:5%;
-    border: 2px solid gray;
+    border: 2px solid #f8dee4;
     border-radius: 10px; /* 단위 추가 */
-    background: #E2E2E2;
+    background:white ;
 }
 
 .titlename {
@@ -16,14 +18,17 @@ text-align: center;
 }
 
 .title{
- margin-top: 0
+ margin-top: 0;
+    margin-left: 10%;
+    font-size: 18px;
+
 }
 .reservationDetail {
     display: flex;
     align-items: center;
     cursor: pointer;
     font-size: 12px;
-    margin-top: 1px;
+    margin-top: 1%;
     margin-right: 80px;
     margin-left: 12px;
     margin-bottom: 10px;
@@ -31,8 +36,8 @@ text-align: center;
 
 
 .reservationImage {
-    width: 65px;
-    height: 65px;
+    width: 70px;
+    height: 70px;
     border: 1px solid gray;
     margin-right: 10px;
     border-radius: 15px;
@@ -47,34 +52,34 @@ text-align: center;
     align-items: center;
     margin-left: 10px;
 }
-.button {
-    background-color: #007BFF;
-    color: #ffffff;
+.reservationItem .button {
+    background-color: #e17b92;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+
 }
 
 
 .selectContainer {
     text-align: right;
     margin: 18px;
-
     margin-bottom: 8.4%;
+    border: 1px solid white;
 
 }
-span {
+.span {
     margin-bottom: 1%;
 }
 
 .searchDate {
     font-family: 'Arial', sans-serif;
     font-size: 20px;
-    border: 1px solid gray;
+    border: 1px solid #FF000;
     border-radius: 15px;
     padding: 5px 10px;
-    background-color: #f8f8f8;
+    background-color: #f6d3d3;
     cursor: pointer;
     outline: none;
     appearance: none;
@@ -82,11 +87,12 @@ span {
 }
 
 .searchDate:hover {
-    background-color: #e8e8e8;
+    background-color: #f4dddd;
+    background: 1px solid #f8dee4;
 }
 
 .searchDate:focus {
-    border-color: #E2E2E2;
+    border-color: #f8e9e9;
 }
 .searchDate::after {
     content: '\25BC';

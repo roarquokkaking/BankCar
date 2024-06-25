@@ -22,15 +22,16 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
-@RequestMapping(path="/api/WishList")
+@RequestMapping(path="/WishList")
 public class  WishListController {
 
     private final WishListService wishListService;
     private final LoginService loginService;
 
 
+
     @PostMapping("/wish/toggle/{userId}/{car_id}")
-    public ResponseEntity<List<WishListEntity>> toggleWish(@PathVariable("userId") String userId,
+    public ResponseEntity<List<WishListDTO>> toggleWish(@PathVariable("userId") String userId,
                                                            @PathVariable("car_id") Long carId
 
     ) {
@@ -40,32 +41,27 @@ public class  WishListController {
         try {
             System.out.println(123123);
             List<WishListEntity> updatedCards = wishListService.toggleWish(userId, carId);
+            System.out.println("2222222");
+            List<WishListDTO> wishListDTOList = new ArrayList<>();
+            for(WishListEntity wishListEntity : updatedCards){
+                System.out.println("이미지 uuid"+ wishListEntity.getCar().getCarImages());
+                WishListDTO wishListDTO = WishListDTO.builder()
+                        .wish(true)
+                        .id(userId)
+                        .title(wishListEntity.getCar().getTitle())
+                        .carId(wishListEntity.getCar().getCarId())
+                        //.imageUrl(wishListEntity.getCar().getCarImages().getMain_image())
+                        .build();
+                wishListDTOList.add(wishListDTO);
+            }
             System.out.println(userId);
             System.out.println(11111);
-            return ResponseEntity.ok(updatedCards);
+            return ResponseEntity.ok(wishListDTOList);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    //    /**
-//     * 위시 리스트 등록
-//     * */
-//    @PostMapping(path = "/AddWishList")
-//    public void addWishList(@RequestBody WishListDTO wishListDTO) {
-//        wishListService.addWish(wishListDTO);
-//    }
-
-    /*like Toggle*/
-
-   /* @PostMapping("/wish/toggle/{user_id}")
-    public int toggleWish (@PathVariable("user_id")@Validated String user_id ){
-        int wish = wishListService.findByWishListIdAnduserId(user_id);
-        System.out.println(user_id);
-        System.out.println("여기 까지 됨 ");
-        return wish;
-
-    }*/
 
 
     /**
@@ -77,10 +73,7 @@ public class  WishListController {
                                                                  @RequestParam(name = "size", defaultValue = "5") int size) {
 
         try {
-            System.out.println(userId);
-            System.out.println(page);
-            System.out.println(size);
-            System.out.println("1111");
+
             Pageable pageable = PageRequest.of(page , size); // 페이지는 0부터 시작하므로 -1을 해줍니다.
             List<WishListDTO> wishList = wishListService.getWishListById(userId, pageable);
             System.out.println(userId);

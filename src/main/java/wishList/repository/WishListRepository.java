@@ -46,8 +46,7 @@ public interface WishListRepository extends JpaRepository<WishListEntity,Long> {
 //    Page<WishListEntity> findWishListByUserId(@Param("userId") String userId, Pageable pageable);
 
     @Query("SELECT w FROM WishListEntity w " +
-            "JOIN w.loginDTO u " +
-            "WHERE u.id = :userId " +
+            "WHERE w.loginDTO.id = :userId " +
             "AND w.wish = TRUE")
     Page<WishListEntity> findWishListByUserIdAndWishIsTrue(@Param("userId") String userId, Pageable pageable);
 

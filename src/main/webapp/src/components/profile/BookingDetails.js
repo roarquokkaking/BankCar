@@ -21,7 +21,7 @@ const BookingDetails = () => {
     /*서버에 정보 보내기 */
     useEffect(() => {
 
-        axios.get(`https://dongwoossltest.shop/api/Booking/bookingDetail/${user_id}/${car_id}`)
+        axios.get(`https://dongwoossltest.shop/Booking/bookingDetail/${user_id}/${car_id}`)
             .then((response)=>response.data(setDetailsDTO()))
             .catch((error)=>console.log(error))
     }, [user_id]);
@@ -38,7 +38,7 @@ const BookingDetails = () => {
 
     const updateMemo = async () => {
         try {
-            await axios.post('http://dongwoossltest.shop/api/Booking/bookingDetail/memo', {
+            await axios.post('https://dongwoossltest.shop/api/Booking/bookingDetail/memo', {
                 memo:memo,
                 user_id: user_id,
                 // booking_id : booking_id,
