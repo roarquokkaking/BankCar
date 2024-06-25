@@ -21,7 +21,7 @@ public class ChoiceController {
         System.out.println("************carid************ = "+carId);
         Car carInfo = choiceService.getCarInfo(carId);
         System.out.println("************carinfo************ = "+carInfo);
-        carInfo.setWishLists(null);
+        //carInfo.setWishLists(null);
         if (carInfo.getUser() == null) {
             throw new IllegalArgumentException("User not found for car");
         }
@@ -55,5 +55,5 @@ public class ChoiceController {
 
         return reviews;
     }
-    
+
 }
