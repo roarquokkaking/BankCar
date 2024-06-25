@@ -4,25 +4,32 @@ import Details from "./Details";
 import FooterMenu from "../FooterMenu";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import {getTableSortLabelUtilityClass} from "@mui/material";
+import ComponentHeader from "./ComponentsHeader";
 
-const UseReview = ({ userId, carId }) => {
+const UseReview = () => {
+    const { user_id, car_id,booking_id } = useParams();
+
+    console.log(booking_id + "bookingId - ")
     const [title, setTitle] = useState('');
     const [comment, setComment] = useState('');
-    const { user_id, car_id } = useParams();
-
-    const[reviewDTO,  setReviewDTO]=useState('')
-
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [detailsDTO, setDetailsDTO] = useState({
+        car_id: car_id,
+        user_id: user_id,
         images: [],
-        car_model: "",
+        ratingCount: [],
+        averRating: "",
+        carModel: "",
+        rating: 0,
         title: "",
         comment: "",
-        rating: null,
-        car_id: car_id,
-        user_id: user_id
+        startDate: "",
+        endDate: "",
     });
+console.log(car_id)
     console.log(detailsDTO)
+
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
     const [total, setTotal] = useState(0);
@@ -45,62 +52,86 @@ const UseReview = ({ userId, carId }) => {
         return newTotal / newCount;
     };
 
-    const handleRating = async (ratingValue) => {
-        const newRatings = [...ratings];
-        newRatings[ratingValue - 1] += 1;
-        setRatings(newRatings);
-        const newAverageRating = getAverage(ratingValue);
-        setRating(newAverageRating);
-
-        // 변경된 부분
-        try {
-            await axios.post('http://localhost:8080/review/saveRating', {
-                user_id: user_id,
-                title: title,
-                comment: comment,
-                rating: ratingValue
-            });
-        } catch (error) {
-            console.error('평점을 저장하는데 실패했습니다.', error);
-        }
-    };
 
     useEffect(() => {
-        const fetchDetails = async () => {
-            try {
-                const response = await axios.get(`https://dongwoossltest.shop/api/review/getReviewBase/${user_id}`);
-                setDetailsDTO(response.data);
-            } catch (error) {
-                console.error('상세 정보를 불러오는데 실패했습니다.', error);
-            }
-        };
+        console.log(user_id ,car_id,booking_id)
+        if (user_id && car_id) {
+            axios.get(`https://dongwoossltest.shop/api/review/getReviewBase/${booking_id}/${car_id}/${user_id}`)
+                .then((response) => {
+                    const data = response.data;
+                    const ratingCount = Array.isArray(data.ratingCount) ? data.ratingCount : [0, 0, 0, 0, 0];
 
-        fetchDetails();
-        const interval = setInterval(() => {
-            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % detailsDTO.images.length);
-        }, 5000);
+                    setDetailsDTO(data);
+                    setRating(data.averageRating);
+                    setRatings(ratingCount);
+                    setTotal(ratingCount.reduce((acc, count, idx) => acc + count * (idx + 1), 0));
+                    setCount(ratingCount.reduce((acc, count) => acc + count, 0));
+                })
+                .catch((error) => {
+                    console.error('상세 정보를 불러오는데 실패했습니다.', error);
+                });
+        } else {
+            console.error('user_id 또는 car_id가 정의되지 않았습니다.');
+        }
+    }, [user_id, car_id]);
 
-        return () => clearInterval(interval);
-    }, [user_id, detailsDTO.images.length]);
 
-    const handleSubmit = () => {
-        console.log('제목:', title);
-        console.log('내용:', comment);
-        console.log('평점:', rating);
+    const submitRating =  (ratingValue) => {
+        setRating(ratingValue);
+        // try {
+        //     console.log(rating)
+        //
+        //     const response = await axios.post('http://localhost:8080/review/saveRating', null, {
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         params: {
+        //             rating: ratingValue,
+        //             user_id: user_id,
+        //             car_id: car_id
+        //         }
+        //     });
+        //     console.log('평점을 저장하는데 성공했습니다.', response.data);
+        // } catch (error) {
+        //     console.error('평점을 저장하는데 실패했습니다.', error);
+        //     if (error.response) {
+        //         console.error('응답 데이터:', error.response.data);
+        //         console.error('응답 상태:', error.response.status);
+        //         console.error('응답 헤더:', error.response.headers);
+        //     } else if (error.request) {
+        //         console.error('요청 데이터:', error.request);
+        //     } else {
+        //         console.error('에러 메시지:', error.message);
+        //     }
+        // }
     };
-    const submitRating = (ratingValue) => {
-        axios.post('http://localhost:8080/review/memo', null, {
-            params: {
+
+    const handleSubmit = async () => {
+        try {
+            console.log(user_id+"ds,vdvnkad;vc")
+            const reviewDTO = {
                 user_id: user_id,
-                car_id: car_id
-            }
-        }).catch((error) => {
-            console.error('평점을 저장하는데 실패했습니다.', error);
-        });
+                car_id: car_id,
+                title: title,
+                comment: comment,
+                rating: rating
+            };
+
+            const response = await axios.post('https://dongwoossltest.shop/api/review/writeReview', reviewDTO, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            console.log('Review submitted:', response.data);
+        } catch (error) {
+            console.error('Error submitting review:', error);
+        }
     };
-console.log(rating)
+    console.log(rating)
     return (
         <div>
+            <ComponentHeader text={"리뷰 작성하기 "} />
             <Details currentImageIndex={currentImageIndex} detailsDTO={detailsDTO} />
             <MyRating
                 title={title}
@@ -111,10 +142,10 @@ console.log(rating)
                 count={count}
                 handleTitleChange={handleTitleChange}
                 handleContentChange={handleContentChange}
-                handleRating={handleRating}
                 handleSubmit={handleSubmit}
-                setHover={setHover}
                 submitRating={submitRating}
+                setRating={setRating}
+                setHover={setHover}
             />
             <FooterMenu />
         </div>

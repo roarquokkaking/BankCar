@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import review.entity.ReviewEntity;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -23,10 +24,17 @@ public interface BookingRepository extends JpaRepository<BookingEntity,Long> {
             "WHERE u.id = :user_id")
     List<BookingEntity> findById(@Param("user_id") String user_id);
 
+
+
+
     @Query("SELECT b FROM BookingEntity b" +
             " JOIN b.loginDTO u" +
-            " WHERE u.id = :user_id AND b.car = :car_id")
-    Optional<BookingEntity> findByUserIdAndCarId(@Param("user_id") String userId, @Param("car_id") String carId);
+            " WHERE u.id = :user_id" +
+            " AND b.car.carId = :car_id")
+    Optional<BookingEntity> findByUserIdAndCarId(@Param("user_id") String userId, @Param("car_id") Long carId);
+
+
+
 
     @Query("SELECT b FROM BookingEntity b" +
             " WHERE b.loginDTO.id = :userId")
@@ -46,5 +54,10 @@ public interface BookingRepository extends JpaRepository<BookingEntity,Long> {
             "AND b.end_date " +
             "BETWEEN :targetDate AND CURRENT_DATE")
     List<BookingEntity> getAfterLastNDays(@Param("userId") String userId, @Param("targetDate") LocalDate targetDate);
-
+//    @Query("SELECT b FROM BookingEntity b" +
+//            " WHERE b.loginDTO.id = :userId " )
+//    List<ReviewEntity> findReviewsByUserId(String userId);
+    @Query("SELECT b FROM BookingEntity b" +
+            " WHERE b.loginDTO.id = :userId " )
+    List<BookingEntity> findByUserId(String userId);
 }

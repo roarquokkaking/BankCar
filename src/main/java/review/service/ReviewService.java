@@ -2,14 +2,27 @@ package review.service;
 
 
 import review.dto.DetailDTO;
+import review.dto.ReviewDTO;
 import review.entity.ReviewEntity;
 
 import java.util.List;
 
 public interface ReviewService {
-    List<DetailDTO> getReviews(String userId);
 
-    ReviewEntity saveRating(Float rating, String userId, Long carId);
+
+    DetailDTO getReview(Long bookingId,String userId,Long carId);
+
+    ReviewEntity saveRating(int rating, String userId, Long carId);
+
+    void writeReview(ReviewDTO reviewDTO);
+
+//    ReviewEntity writeReview(String userId, Long carId, String title, String comment);
+
+
+
+//    ReviewEntity saveReview(String userId, Long carId, String title, String comment);
+
+//    ReviewEntity writeReview(String userId, Long carId, String title, String comment);
 
 
 //    ReviewEntity writeReview(ReviewDTO reviewDTO, String user_id);

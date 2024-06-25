@@ -1,5 +1,6 @@
 package wishList.entity;
 
+import booking.entity.BookingEntity;
 import car.entity.Car;
 import car.entity.CarImages;
 import jakarta.persistence.*;
@@ -32,15 +33,19 @@ public class WishListEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private LoginDTO loginDTO;
 
-    @JoinColumn
-    @OneToOne(fetch = FetchType.LAZY)
-    private CarImages carImages;
+//    @JoinColumn
+//    @OneToOne(fetch = FetchType.LAZY)
+//    private CarImages carImages;
+
+//    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    @JoinColumn(name = "booking_id")
+//    private BookingEntity bookingEntity;
 
     public void setCarImage (String wishlist){
 
         WishListDTO wishListDTO =new WishListDTO();
         String baseUrl = "https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/wishlist/";
-        String imageName = getCarImages().getMain_image();
+        String imageName = getCar().getCarImages().getMain_image();
         String imageUrl = baseUrl + imageName;
         wishListDTO.setImageUrl(imageUrl);
 

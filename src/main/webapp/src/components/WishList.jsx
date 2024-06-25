@@ -1,6 +1,7 @@
 import React from 'react';
 import {Box} from "@mui/material";
 import FooterMenu from "./FooterMenu";
+import {useNavigate} from "react-router-dom";
 
 const styles = {
     container: {
@@ -30,6 +31,7 @@ const styles = {
 };
 
 const Wishlist = () => {
+    const navigate = useNavigate();
     return (
         <>
 
@@ -42,7 +44,7 @@ const Wishlist = () => {
                     로그인한 후 위시리스트를 생성 및 조회, <br/>수정할 수 있습니다.
                 </span>
                 </div>
-                <button style={styles.button}>로그인</button>
+                <button style={styles.button} onClick={() => navigate('/login')}>로그인</button>
             </div>
             <Box sx={{display: {xs: "flex", md: "none"}, marginTop: "auto"}}>
                 <FooterMenu/>

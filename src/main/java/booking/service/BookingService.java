@@ -14,7 +14,7 @@ public interface BookingService {
     List<BookingDTO> getAfter(String user_id, Integer days);
 
 
-    Optional<BookingEntity> findByUserIdAndCarId(String userId, String carId);
+    Optional<BookingEntity> findByUserIdAndCarId(String userId, Long carId);
 
     BookingDTO findByDetail(BookingEntity bookingEntity);
 
