@@ -45,22 +45,23 @@ const CheckUseBefore = () => {
 
     return (
         <div className={styles.checkMyCarContainer}>
-            <ComponentHeader text={"예약 리스트 "} style={{marginTop:"3%"}} />
-            {
-                service === 0
-                    ?
+            <ComponentHeader text={"예약 리스트 "} style={{marginTop: "3%"}}/>
                     <div className={styles.carouselContainer}>
-                        <Slider {...settings}>
-                            {useBeforeDTO.map(car => (
-                                <CheckUseBeforeCard key={car.carId} car={car}/>
-                            ))}
-                        </Slider>
+                        {userBeforeDTO.length === 1 ? (
+                            <CheckUseBeforeCard key={userBeforeDTO[0].carId} car={userBeforeDTO[0]}/>
+                        ) : (
+                            <Slider {...settings}>
+                                {userBeforeDTO.map(car => (
+                                    <CheckUseBeforeCard key={car.carId} car={car}/>
+                                ))}
+                            </Slider>
+                        )}
                     </div>
                     :
-                    <div>asdasdasdsad
-                        <h1>서비스 등록</h1>aasdasdads
+                    <div>
+                        <h1>서비스 등록</h1>
                     </div>
-            }
+
         </div>
     );
 };
