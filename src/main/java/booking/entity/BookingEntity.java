@@ -45,7 +45,7 @@ public class BookingEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "booking_status")
-    private BookingStatus booking_status;
+    private BookingStatus booking_status=BookingStatus.BEFORE;
 
     @Column(name = "create_date")
     private LocalDateTime create_date;
