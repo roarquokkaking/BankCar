@@ -53,13 +53,13 @@ export default function CheckUseBeforeCard({ car }) {
                 </div>
                 <div className={styles.info_box}>
                     <Typography color="text.secondary" className={styles.input}>
-                        결제금액: {car.pay}
+                        시간당 금액 : {car.pay} 원
                     </Typography>
                 </div>
                 <div className={styles.info_box}>
                     <Typography variant="h5" component="div">
-                        이용기간:{car.startTime} <br/>
-                        ~ {car.endTime}
+                        이용기간:{car.startDate}.{car.startTime} <br/>
+                        ~ {car.endDate}.{car.endTime}
                     </Typography>
                 </div>
 
