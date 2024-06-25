@@ -43,7 +43,7 @@ const MyProfile = () => {
         };
         fetchUserProfile();
     }, [user_id]);
-    let image = 'https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/';
+    let image = 'https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/profile/';
     return (
         <div>
             <Box>
