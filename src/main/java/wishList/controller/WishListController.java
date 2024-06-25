@@ -22,7 +22,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
-@RequestMapping(path="/WishList")
+@RequestMapping(path="/api/WishList", produces = "application/json")
 public class  WishListController {
 
     private final WishListService wishListService;
