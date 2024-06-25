@@ -31,7 +31,7 @@ const Details = ({ detailsDTO, currentImageIndex}) => {
             </div>
             <div className={styles.imageSlider}>
                 {images.map((item, index) => (
-                    <img key={index} src={item} alt={item || 'Thumbnail'}
+                    <img key={index} src={image.item} alt={item || 'Thumbnail'}
                          className={styles.thumbnail}
                          style={{ width: '100px', opacity: currentImageIndex === index ? 1 : 0.5 }} />
                 ))}
