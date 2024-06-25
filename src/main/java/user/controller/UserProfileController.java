@@ -45,7 +45,7 @@ public class UserProfileController {
                                     @ModelAttribute UserProfileDTO userProfileDTO,
                                     HttpSession session) {
         System.out.println(user_id);
-        session.getAttribute(user_id);
+        //session.getAttribute(user_id);
 
         LoginDTO loginDTO = userProfileService.findById(user_id)
                 .orElseThrow(()

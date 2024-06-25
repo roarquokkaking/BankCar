@@ -25,16 +25,16 @@ import {
 import "./CarouselCard.css";
 import { useNavigate } from "react-router-dom";
 
-const CarouselCard = ({ searchDTO, location, isHeartClick, onHeartClick }) => {
+const CarouselCard = ({ searchDTO, location, isHeartClick, onHeartClick, like }) => {
   const navigate = useNavigate();
 
   const [activeStep, setActiveStep] = React.useState(0);
   const [isHeartClicked, setIsHeartClicked] = useState(isHeartClick); // 하트 상태 초기화
   const maxSteps = location.locationImages.length; // so that we know how many dots
 
-  useEffect(() => {
-    setIsHeartClicked(isHeartClick);
-  }, [isHeartClick]);
+  // useEffect(() => {
+  //   setIsHeartClicked(isHeartClick);
+  // }, [isHeartClick]);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1); // jumps when we click the next arrow
@@ -75,6 +75,14 @@ const CarouselCard = ({ searchDTO, location, isHeartClick, onHeartClick }) => {
       navigate(url);
     }
   };
+
+  useEffect(() => {
+    for(let i=0;i<like.length;i++){
+        if(like[i] === location.car_id){
+            setIsHeartClicked((prev) => !prev);
+        }
+    }
+  },[])
 
   return (
       <Box
