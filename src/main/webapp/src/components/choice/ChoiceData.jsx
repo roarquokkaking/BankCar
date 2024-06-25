@@ -37,7 +37,7 @@ const ChoiceData = ({ setChoicedata }) => {
     const endDateTime = parseDateTime(endDate, endTime);
 
 // 날짜 차이 계산 (일 단위)
-    const totalDate = (endDateTime - startDateTime) / (1000 * 60 * 60 * 24);
+    const totalDate = Math.floor((endDateTime - startDateTime) / (1000 * 60 * 60 * 24));
 
 // 시간 차이 계산 (시간 단위)
     const startHour = new Date(`1970-01-01T${startTime}Z`);

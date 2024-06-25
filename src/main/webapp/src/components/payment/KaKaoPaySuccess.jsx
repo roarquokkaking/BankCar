@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './css/payment.module.css';
 import Swal from "sweetalert2";
+import {useChoice} from "../choice/ChoiceProvider";
 
 const KaKaoPaySuccess = () => {
     const location=useLocation();
@@ -10,6 +11,7 @@ const KaKaoPaySuccess = () => {
     const params=new URLSearchParams(location.search);
     const [pg_token,setPg_token]=useState('');
     const [payDetail,setPayDetail]=useState({});
+    const { choicedata } = useChoice();
 
     const Toast = Swal.mixin({
       toast: true,
@@ -69,7 +71,7 @@ const KaKaoPaySuccess = () => {
           <br></br>
           <div className={styles["detail-item"]}>
             <span className={styles["detail-title"]}>결제 금액:</span>
-            <span className={styles["detail-content"]}>{payDetail.total_amount}</span>
+            <span className={styles["detail-content"]}>{payDetail.totalPayment}</span>
           </div>
           <br></br>
           <div className={styles["detail-item"]}>
@@ -79,7 +81,7 @@ const KaKaoPaySuccess = () => {
           <br></br>
           <div className={styles["detail-item"]}>
             <span className={styles["detail-title"]}>대여 주소:</span>
-            <span className={styles["detail-content"]}>{payDetail.quantity}</span>
+            <span className={styles["detail-content"]}>{choicedata.map.address}</span>
           </div>
           <br></br>
           <div className={styles["detail-item"]}>
