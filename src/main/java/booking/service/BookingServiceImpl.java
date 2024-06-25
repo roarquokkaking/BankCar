@@ -200,12 +200,12 @@ public class BookingServiceImpl implements BookingService {
     public void setBooking(BookingEntity booking) {
         bookingRepository.save(booking);
 
-        // 예약 완료시 알림 보내기
-        notificationStorageService.createNotificationStorage(Notification.builder()
-                .delivered(false)
-                .content(booking.getGuest_name() + "님이 귀하의 차량을 예약하셨습니다.")
-                .userFrom(booking.getLoginDTO())
-                .userTo(booking.getCar().getUser()).build());
+//        // 예약 완료시 알림 보내기
+//        notificationStorageService.createNotificationStorage(Notification.builder()
+//                .delivered(false)
+//                .content(booking.getGuest_name() + "님이 귀하의 차량을 예약하셨습니다.")
+//                .userFrom(booking.getLoginDTO())
+//                .userTo(booking.getCar().getUser()).build());
 
     }
 

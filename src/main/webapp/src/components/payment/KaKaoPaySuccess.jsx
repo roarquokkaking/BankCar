@@ -31,12 +31,12 @@ const KaKaoPaySuccess = () => {
 
     useEffect(()=>{
         setPg_token(params.get('pg_token'));
-        
+
     },[params])
 
-    
+
     useEffect(()=>{
-        
+
         if(pg_token){
             // alert(pg_token);
         axios.get("https://dongwoossltest.shop/api/payment/success",{
@@ -56,6 +56,12 @@ const KaKaoPaySuccess = () => {
     }
     },[pg_token])
 
+    // useEffect(() => {
+    //     if(payDetail.carId){
+    //         axios.get(`https://dongwoossltest.shop/api/notify/${payDetail.carId}`)
+    //     }
+    // },[])
+
 
     return (
         <div className={styles["App"]}>
@@ -66,7 +72,7 @@ const KaKaoPaySuccess = () => {
         <br></br>
         <h1>결제가 완료되었습니다!</h1>
         <p>대여가 성공적으로 완료되었습니다. </p>
-        
+
         <div className={styles["order-details"]}>
           <div className={styles["detail-item"]}>
             <span className={styles["detail-title"]}>예약 차량:</span>

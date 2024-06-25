@@ -8,6 +8,7 @@ import chat.entity.MessageRoom;
 import chat.service.MessageRoomService;
 import jakarta.servlet.http.HttpSession;
 import login.dto.LoginDTO;
+import notification.service.NotificationService;
 import org.apache.kafka.common.security.auth.Login;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +45,8 @@ public class KaKaoPayController {
     CarService carService;
     @Autowired
     MessageRoomService messageRoomService;
+    @Autowired
+    NotificationService notificationService;
 
 
     @GetMapping(path = "/kakaoPay")
@@ -129,6 +132,7 @@ public class KaKaoPayController {
         map.put("quantity", kakaoPayEntity.getQuantity());
         map.put("vat_amount", kakaoPayEntity.getVat_amount());
         map.put("tax_free_amount", kakaoPayEntity.getTax_free_amount());
+        map.put("carId", kakaoPayEntity.getCar_id());
 
         kakaoPayEntity.setStatus(1);
         kakaoPayService.setStatus(kakaoPayEntity);
@@ -156,6 +160,9 @@ public class KaKaoPayController {
         messageRoom.setHostName(car.getUser().getName());
         messageRoom.setGuestName(loginDTO.getName());
         messageRoomService.createMessageRoom(messageRoom);
+
+        //알림 보내기
+        notificationService.notifyUser(booking.getCar().getUser().getId());
 
         return map;
 

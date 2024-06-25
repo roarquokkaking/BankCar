@@ -6,6 +6,7 @@ import { BsChatLeftDots    } from "react-icons/bs";
 import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
 
 import Swal from "sweetalert2";
+import axios from "axios";
 
 
 const footerMenu = [
@@ -48,6 +49,7 @@ const FooterMenu = () => {
     const [selected, setSelected] = useState(1);
     const id = useSelector((state) => state.Login.id);
     const [noti, setNoti] = useState([])
+    const [notifications, setNotifications] = useState([]);
 
     const footerMenuFilter = id ?
         footerMenu.filter(item => [1, 3, 5, 6].includes(item.id)) :
@@ -65,30 +67,41 @@ const FooterMenu = () => {
         }
     })
 
-
-
     useEffect(() => {
-        if(id){
-            let url = `https://dongwoossltest.shop/api/push-notifications/${id}`;
-            const sse = new EventSource(url);
-
-            sse.addEventListener("booking-event", (event) => {
-                const data = JSON.parse(event.data);
-                console.log(data)
-                if(data.length > 0){
-                    setNoti(data)
-                }
-            });
-
-            sse.onerror = () => {
-                sse.close();
-            };
-            return () => {
-                sse.close();
-            };
-        }
-
+        const eventSource = new EventSource(`https://dongwoossltest.shop/api/subscribe/${id}`);
+        eventSource.addEventListener('notification', function(event) {
+            setNoti(prevNotifications => [...prevNotifications, event.data]);
+        });
+        return () => {
+            eventSource.close();
+        };
     }, []);
+
+    // useEffect(() => {
+    //     if(id){
+    //         let url = `https://dongwoossltest.shop/api/push-notifications/${id}`;
+    //         const sse = new EventSource(url);
+    //
+    //         sse.addEventListener("booking-event", (event) => {
+    //             const data = JSON.parse(event.data);
+    //             console.log(data)
+    //             if(data.length > 0){
+    //                 setNoti(data)
+    //             }
+    //         });
+    //
+    //         sse.onerror = () => {
+    //             sse.close();
+    //         };
+    //         return () => {
+    //             sse.close();
+    //         };
+    //     }
+    //
+    // }, []);
+    // const handleNotify = () => {
+    //     axios.get(`https://dongwoossltest.shop/api/notify/${id}`).then(res => {alert(res.data)})
+    // };
 
     useEffect(() => {
         if(noti.length > 0){
@@ -96,16 +109,16 @@ const FooterMenu = () => {
                 console.log(noti[i])
                 Toast.fire({
                     icon: 'success',
-                    title: noti[i].content
+                    title: noti[i]
                 })
             }
-
         }
     }, [noti])
 
 
     return (
         <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0}} elevation={3}>
+            <button onClick={handleNotify}>Send Notification</button>
             <BottomNavigation showLabels value={window.location.pathname} >
                 {
                     footerMenuFilter.map(item =>

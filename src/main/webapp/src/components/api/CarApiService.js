@@ -49,4 +49,9 @@ export function getNaverLoginUrlApi(){
     })
 }
 
+// 알림 보내는 api
+export function sendNotification(userId){
+    return apiClient.get(`/notify/${userId}`)
+}
+
 

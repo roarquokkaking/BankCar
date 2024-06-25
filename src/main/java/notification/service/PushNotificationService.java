@@ -33,7 +33,7 @@ public class PushNotificationService {
 
     public Flux<ServerSentEvent<List<Notification>>> getNotificationsByUserToID(String userID) {
         if (userID != null && !userID.isBlank()) {
-            return Flux.interval(Duration.ofSeconds(5))
+            return Flux.interval(Duration.ofSeconds(2))
                     .publishOn(Schedulers.boundedElastic())
                     .map(sequence -> ServerSentEvent.<List<Notification>>builder().id(String.valueOf(sequence))
                             .event("booking-event").data(getNotifs(userID))
