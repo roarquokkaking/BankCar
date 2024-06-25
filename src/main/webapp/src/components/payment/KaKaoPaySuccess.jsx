@@ -65,7 +65,7 @@ const KaKaoPaySuccess = () => {
         </div>
         <br></br>
         <h1>결제가 완료되었습니다!</h1>
-        <p>대여가 성공적으로 완료되었습니다. .</p>
+        <p>대여가 성공적으로 완료되었습니다. </p>
         
         <div className={styles["order-details"]}>
           <div className={styles["detail-item"]}>
@@ -75,7 +75,7 @@ const KaKaoPaySuccess = () => {
           <br></br>
           <div className={styles["detail-item"]}>
             <span className={styles["detail-title"]}>결제 금액:</span>
-            <span className={styles["detail-content"]}>{formatPrice(payDetail.total_amount * 1.1)} 원</span>
+            <span className={styles["detail-content"]}>{formatPrice(payDetail.total_amount)} 원</span>
           </div>
           <br></br>
           <div className={styles["detail-item"]}>
