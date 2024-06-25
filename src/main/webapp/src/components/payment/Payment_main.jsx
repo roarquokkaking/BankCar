@@ -101,7 +101,7 @@ const Payment_main = () => {
                 quantity: choicedata.map.address,
                 vat_amount: startDate,
                 tax_free_amount: endDate ,
-                total_amount: price,
+                total_amount: price * 1.1,
                 fail_url: startTime ,
                 cancel_url: endTime,
                 totalPayment: choicedata.footer.price})
@@ -226,7 +226,7 @@ return (
                         결제 비용
                     </Typography>
                     <Typography variant="body1"><strong style={strongStyle}>총 비용:</strong> {formatPrice(payDetail.totalPayment)} 원</Typography>
-                    <Typography variant="body1"><strong style={strongStyle}>세금:</strong> {formatPrice(payDetail.totalPayment * 0.1)} 원</Typography>
+                    <Typography variant="body1"><strong style={strongStyle}>부가세:</strong> {formatPrice(payDetail.totalPayment * 0.1)} 원</Typography>
                     <Typography variant="body1"><strong style={strongStyle}>최종 금액:</strong> {formatPrice(payDetail.totalPayment * 1.1)} 원</Typography>
                 </Box>
             </Box>
