@@ -60,7 +60,7 @@ const MyProfile = () => {
                             {
                                 myprofileDTO.image_file_name === null ?
                                     <img src={defaultProfileImage} alt="Profile" className={styles.profileImage} /> :
-                                    <img src={image+myprofileDTO.imageUrl} alt="Profile" className={styles.profileImage} />
+                                    <img src={myprofileDTO.imageUrl} alt="Profile" className={styles.profileImage} />
                             }
                         </div>
                     </label>

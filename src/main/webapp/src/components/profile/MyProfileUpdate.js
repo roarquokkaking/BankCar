@@ -125,7 +125,7 @@ const MyProfileUpdate = () => {
                 <div className={styles.buttonDiv}>
                     <button className={styles.button} onClick={handleIconClick}>
                         {UserProfileDTO.imageUrl ? (
-                            <img src={image+UserProfileDTO.imageUrl}
+                            <img src={UserProfileDTO.imageUrl}
                                  alt="Profile"
                                  className={styles.profileImage}/>
                         ) : (
