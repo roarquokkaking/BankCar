@@ -11,19 +11,18 @@ const UseAfter = ({ diTooData }) => {
     const { user_id, car_id,booking_id } = useParams();
     const [BookingDTO, setBookingDTO] = useState([]);
     const [serchdata, setSerchdata] = useState('all');
-
+console.log(user_id , car_id)
     useEffect(() => {
         console.log('User ID:', user_id);
         console.log('Car ID:', car_id);
         console.log('booking' , BookingDTO.booking_id)
     }, [user_id, car_id]);
-
+console.log(BookingDTO)
     const fetchData = (userId, period) => {
         if (!userId) {
             console.log('User ID is undefined');
             return;
         }
-
         const url = period === 'all' ?
             `https://dongwoossltest.shop/api/Booking/after/${userId}` :
             `https://dongwoossltest.shop/api/Booking/after/${userId}?period=${period}`;
@@ -46,7 +45,7 @@ const UseAfter = ({ diTooData }) => {
     const handlePeriodChange = (e) => {
         setSerchdata(e.target.value);
     };
-
+console.log(BookingDTO.user_id)
 
     let image = 'https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/';
 
@@ -60,9 +59,9 @@ const UseAfter = ({ diTooData }) => {
             <div className={styles.actionContainer}>
                 <span>{reservation.period}</span>
                 <button
-                    onClick={() => navigate(`/profile/useReview/${reservation.userId}/${reservation.carId}/${reservation.booking_id}`)}
+                    onClick={() => navigate(`/profile/useReview/${reservation.user_id}/${reservation.car_id}/${reservation.booking_id}`)}
                     style={{
-                        backgroundColor: reservation.reviewWrite ? 'grey' : '#ff5f84',
+                        backgroundColor: reservation.reviewWirte ? 'grey' : '#ff5f84',
                         padding: '10px',
                         color:'white',
                         borderRadius: '5px',

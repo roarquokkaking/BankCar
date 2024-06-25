@@ -57,10 +57,7 @@ const CheckUseBefore = () => {
                             </Slider>
                         )}
                     </div>
-                    :
-                    <div>
-                        <h1>서비스 등록</h1>
-                    </div>
+
 
         </div>
     );

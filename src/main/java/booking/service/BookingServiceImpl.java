@@ -68,14 +68,15 @@ public class BookingServiceImpl implements BookingService {
                                     .title(bookingEntity.getCar().getTitle())
                                     .content(bookingEntity.getCar().getContent())
                                     .rating(bookingEntity.getCar().getRating())
+                                    .endDate(bookingEntity.getEnd_date())
+                                    .startDate(bookingEntity.getStart_date())
                                     .startTime(bookingEntity.getStart_time())
                                     .endTime(bookingEntity.getEnd_time())
                                     .pay(bookingEntity.getCar().getPrice())
                                     .imageUrl(bookingEntity.getCar().getCarImages().getMain_image())
                                     .build();
-
-                            System.out.println("UserBeforeDTO 생성됨: " + userBeforeDTO);
                             userBeforeDTOList.add(userBeforeDTO);
+                            System.out.println("UserBeforeDTO 생성됨: " + userBeforeDTO);
                         } else {
                             System.out.println("LoginDTO 또는 Car 정보가 존재하지 않음");
                         }
@@ -123,7 +124,7 @@ public class BookingServiceImpl implements BookingService {
 //                           .reviewId
                             .title(car.getTitle())
                             .content(car.getContent())
-                            .imageUrl(car.getCarImages().getMain_image())
+                            .imageUrl(car.getCarImages().getMain_image() != null ? car.getCarImages().getMain_image() : null)
                             .period(period)
                             .build();
                     // 이미지 설정
