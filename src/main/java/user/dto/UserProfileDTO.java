@@ -3,10 +3,7 @@ package user.dto;
 import booking.entity.BookingEntity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import wishList.dto.WishListDTO;
 
 import java.util.ArrayList;
@@ -16,6 +13,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class UserProfileDTO {
 
 
@@ -26,6 +24,9 @@ public class UserProfileDTO {
     private String imageUrl;
     private String driver;
     private String phone_number;
+    private String phoneNumber;
+    private String profile_image;//프로필 이미지
+
 
     private String image_file_name; // 클라우등 이미지 uri
     private String image_original_name; //실제 이름

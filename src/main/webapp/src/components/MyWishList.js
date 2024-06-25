@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import { IoHeartSharp, IoHeartOutline } from "react-icons/io5";
 import {GoArrowLeft} from "react-icons/go";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Footer from "./Footer";
 import FooterMenu from "./FooterMenu";
 import Box from "@mui/material/Box";
 import {useSelector} from "react-redux";
 import axios from "axios";
+import { IoIosArrowDown } from "react-icons/io";
+import { FaRegHeart } from "react-icons/fa6";
 
 const styles = {
     listItem: {
@@ -14,39 +16,62 @@ const styles = {
         alignItems: 'center',
         marginBottom: '10px',
         marginRight: '40px',
-        marginTop:'20px',
+        marginTop:'30px',
         border: 'solid 1px black',
         borderRadius: '15px',
         position: 'relative',
+        height: '110p'
     },
+
     image: {
+        border: '1px solid ,#ffff',
         borderRadius: '10px',
         marginTop: '10px',
         marginLeft: '10px',
         marginBottom: '10px',
         marginRight: '10px',
     },
+
     title: {
         marginLeft: '10px',
         marginTop: '-30px',
         flex: 1,
     },
+
     favoriteIcon: {
         position: 'absolute',
         right: '20px',
         bottom: '40px',
-        color: '#DC143C', // 다홍색
-        fontSize: '24px', // 아이콘 크기 조정
+        color: '#f30404', // 다홍색
+        fontSize: '30px', // 아이콘 크기 조정
         cursor: 'pointer',
+
+    },
+    IoIosArrowDown:{
+        size:'10%',
+        marginBottom : '15%'
+
+    },
+    IoHeartSharp:{
+      marginRight:"5%"
+    },
+    isFavorite:{
+      size : '20px',
     },
     loadMoreButton: {
         display: 'block',
         margin: '20px auto',
         padding: '10px 20px',
-        fontSize: '16px',
+        fontSize: '14px',
         cursor: 'pointer',
-        borderRadius:'15px'
+        borderRadius:'15px',
+        width:'100px',
+        height:'45px'
     },
+    Box:{
+        marginTop: '10px',
+        fontSize:'lazy'
+    }
 };
 
 const MyWishList = () => {
@@ -59,7 +84,7 @@ const MyWishList = () => {
 
 
 
-//
+console.log(wishListDTO)
     const fetchWishList = (page) => {
         if (!user_id) return; // user_id가 없을 경우 요청하지 않음
         console.log("userId = ", user_id)
@@ -84,25 +109,20 @@ const MyWishList = () => {
         setPage(prevPage => prevPage + 1);
     };
 
-
-
-    const toggleFavorite = (id) => {
-        axios.post(`http://localhost:8080/wishlist/toggle/${user_id}/${id}`)
+    const toggleFavorite = (user_id, car_id) => {
+        axios.post(`https://dongwoossltest.shop/api/WishList/wish/toggle/${user_id}/${car_id}`)
             .then(response => {
-                const updatedWishList = wishListDTO.map(item => {
-                    if (item.id === id) {
-                        return { ...item, isFavorite: response.data === 1 };
-                    }
-                    return item;
-                });
-                setWishListDTO(updatedWishList);
+                console.log("click 후 : "+response.data)
+                setWishListDTO(response.data)
             })
             .catch(error => console.log(error));
     };
-    console.log(wishListDTO)
+
+
 
     return (
         <div>
+
             <Box sx={{ pb: 7 }}>
                 <header>
                     <div>
@@ -129,29 +149,29 @@ const MyWishList = () => {
                 <ul>
                     {wishListDTO.map((item) => (
                         <li key={item.id} style={styles.listItem}>
-                            <img src={item.imageUrl} alt={item.title} width="100" style={styles.image} />
+                            <img src={`https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/${item.imageUrl}`} alt={item.title} width="100" style={styles.image} />
                             <p style={styles.title}>{item.title}</p>
                             {item.isFavorite ? (
                                 <IoHeartSharp
                                     style={item.favoriteIcon}
-                                    onClick={() => toggleFavorite(item.id)}
+                                    onClick={() => toggleFavorite(item.id, item.carId)}
                                 />
                             ) : (
                                 <IoHeartOutline
                                     style={item.favoriteIcon}
-                                    onClick={() => toggleFavorite(item.id)}
+                                    onClick={() => toggleFavorite(item.id, item.carId)}
                                 />
                             )}
                         </li>
                     ))}
                 </ul>
+                {hasMore && (
+                    <IoIosArrowDown   onClick={loadMore} style={styles.loadMoreButton}더 보기/>
+                )}
             </Box>
-            {hasMore && (
-                <button onClick={loadMore} style={styles.loadMoreButton}>더 보기</button>
-            )}
+
             <FooterMenu />
         </div>
     );
 };
-
 export default MyWishList;

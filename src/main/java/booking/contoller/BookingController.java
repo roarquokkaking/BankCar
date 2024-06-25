@@ -19,7 +19,7 @@ import java.util.Optional;
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path="/api/Booking")
+@RequestMapping(path="/api/Booking", produces = "application/json")
 public class BookingController {
 
     @Autowired
@@ -36,11 +36,12 @@ public class BookingController {
                                            @ModelAttribute UserBeforeDTO userBeforeDTO) {
         System.out.println(user_id);
         System.out.println(1111111);
+        System.out.println(user_id);
         return bookingService.findUserBookings(user_id);
     }
 
 
-    @GetMapping("/after/{user_id}")
+    @GetMapping(path = "/after/{user_id}")
     public ResponseEntity<List<BookingDTO>> getBookingsAfter(
             @PathVariable("user_id") String user_id,
             @RequestParam(value = "period", required = false,defaultValue = "2000") int period) {
@@ -53,40 +54,12 @@ public class BookingController {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * booking detail page
      */
     @GetMapping(path = "/bookingDetail/{user_id}/{car_id}")
     public BookingDTO bookingDetail(@PathVariable("user_id") @Validated String user_id,
-                                    @PathVariable("car_id") @Validated String car_id,
+                                    @PathVariable("car_id") @Validated Long car_id,
                                     @ModelAttribute BookingDTO bookingDTO) {
         Optional<BookingEntity> detailBooking = bookingService.findByUserIdAndCarId(user_id, car_id);
 

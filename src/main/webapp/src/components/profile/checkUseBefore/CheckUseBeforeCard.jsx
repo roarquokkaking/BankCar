@@ -7,16 +7,16 @@ import axios from 'axios';
 
 export default function CheckUseBeforeCard({ car }) {
     const [info_box, setInfo_box] = useState()
-   const imageUrl = `https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/${car.carId}/${car.image1}`;
+   const imageUrl = `https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/${car.carId}/${car.imageUrl}`;
     //console.log(imageUrl);
- 
+
     return (
         <Card sx={{ maxWidth: 345, mt: '10%', mb: '10px', mx: '10%', boxShadow: 5 }}>
             <CardMedia
                 sx={{ height: 280 }}
-                image={ car.imageUrl}
+                image={imageUrl}
                 title={car.model}
-                style={{alignItems : "center" }} 
+                style={{alignItems : "center"  , borderRadius: "1px solid black"}}
 
             />
             <CardContent style={{alignItems: "center"}}>
@@ -64,12 +64,12 @@ export default function CheckUseBeforeCard({ car }) {
                 </div>
 
                 <Typography>
-                    {car.username}
+                    {/*{car.username}*/}
                 </Typography>
             </CardContent>
             {/* <CardActions disableSpacing sx={{justifyContent: 'flex-end'}}>
                 <Button size="small"onClick={createChatRoom}>채팅하기 </Button>
-                
+
             </CardActions> */}
         </Card>
     );

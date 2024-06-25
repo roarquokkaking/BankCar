@@ -17,6 +17,7 @@ import user.dto.UserProfileDTO;
 import user.service.UserProfileService;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @CrossOrigin
@@ -42,73 +43,75 @@ public class UserProfileController {
      * */
     @GetMapping(path="/myprofile/{user_id}")
     public UserProfileDTO myProfile(@PathVariable("user_id") String user_id,
-                                    @ModelAttribute UserProfileDTO userProfileDTO,
+                                    //@ModelAttribute UserProfileDTO userProfileDTO,
                                     HttpSession session) {
         System.out.println(user_id);
         //session.getAttribute(user_id);
 
         LoginDTO loginDTO = userProfileService.findById(user_id)
-                .orElseThrow(()
-                        -> new ResponseStatusException(HttpStatus.NOT_FOUND, "회원을 찾을 수 없습니다."));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "회원을 찾을 수 없습니다."));
 
-        // entity -> dto 변환
-        userProfileDTO.setId(loginDTO.getId());
-        userProfileDTO.setName(loginDTO.getName());
-        userProfileDTO.setPhone_number(loginDTO.getPhone_number());
-        userProfileDTO.setEmail(loginDTO.getEmail());
-        userProfileDTO.setImage_file_name(loginDTO.getImage_file_name());
-        userProfileDTO.setImage_original_name(loginDTO.getImage_original_name()); // 실제 파일명 설정
-        userProfileDTO.setDriver(loginDTO.isDriver() ? "드라이버 있음" : "라이센서 없음");
-        // 이미지 URL 생성
+// 이미지 URL 생성
         String baseUrl = "https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/profile/";
-        String imageName = loginDTO.getImage_file_name();
+        String imageName = loginDTO.getProfile_image();
         String imageUrl = baseUrl + imageName;
-        userProfileDTO.setImageUrl(imageUrl);
+
+        UserProfileDTO userProfileDTO = UserProfileDTO.builder()
+                .id(loginDTO.getId())
+                .name(loginDTO.getName())
+                .phoneNumber(loginDTO.getPhone_number())
+                .email(loginDTO.getEmail())
+                .image_file_name(loginDTO.getImage_file_name())
+                .image_original_name(loginDTO.getImage_original_name()) // 실제 파일명 설정
+                .driver(loginDTO.isDriver() ? "드라이버 있음" : "라이센서 없음")
+                .imageUrl(imageUrl)
+                .build();
+
         System.out.println(imageName);
         return userProfileDTO;
-    }
 
+    }
 /**
  *  프로필 업데이트
  * */
-    @GetMapping(path = "/myprofileUpdate/{user_id}")
-    public UserProfileDTO myprofileUpdate(@PathVariable("user_id")String user_id,
-                                          @ModelAttribute UserProfileDTO userProfileDTO,
-                                          HttpSession session){
-        System.out.println(user_id);
-        session.getAttribute(user_id);
+@GetMapping(path = "/myprofileUpdate/{user_id}")
+public UserProfileDTO myprofileUpdate(@PathVariable("user_id") String user_id,
+                                      @ModelAttribute UserProfileDTO userProfileDTO,
+                                      HttpSession session) {
+    System.out.println(user_id);
+    session.getAttribute(user_id);
 
-        LoginDTO loginDTO = userProfileService.findById(user_id)
-                .orElseThrow(()
-                        -> new ResponseStatusException(HttpStatus.NOT_FOUND, "회원을 찾을 수 없습니다."));
+    LoginDTO loginDTO = userProfileService.findById(user_id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "회원을 찾을 수 없습니다."));
 
-        // entity -> dto 변환
-        userProfileDTO.setId(loginDTO.getId());
-        userProfileDTO.setName(loginDTO.getName());
-        userProfileDTO.setPhone_number(loginDTO.getPhone_number());
-        userProfileDTO.setEmail(loginDTO.getEmail());
-        userProfileDTO.setImage_file_name(loginDTO.getImage_file_name());
-        userProfileDTO.setImage_original_name(loginDTO.getImage_original_name()); // 실제 파일명 설정
-        userProfileDTO.setDriver(loginDTO.isDriver() ? "드라이버 있음" : "라이센서 없음");
+    // 이미지 URL 생성
+    String baseUrl = "https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/profile/";
+    String imageName = loginDTO.getProfile_image();
+    String imageUrl = baseUrl + imageName;
 
-        // 이미지 URL 생성
-        String baseUrl = "https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/profile/";
-        String imageName = loginDTO.getImage_file_name();
-        String imageUrl = baseUrl + imageName;
-        userProfileDTO.setImageUrl(imageUrl);
-        System.out.println(imageName);
-        return userProfileDTO;
-    }
+    userProfileDTO = UserProfileDTO.builder()
+            .id(loginDTO.getId())
+            .name(loginDTO.getName())
+            .phoneNumber(loginDTO.getPhone_number())
+            .email(loginDTO.getEmail())
+            .image_file_name(loginDTO.getImage_file_name())
+            .image_original_name(loginDTO.getImage_original_name()) // 실제 파일명 설정
+            .driver(loginDTO.isDriver() ? "드라이버 있음" : "라이센서 없음")
+            .imageUrl(imageUrl)
+            .build();
 
+    System.out.println(imageName);
+    return userProfileDTO;
+}
 
     /**
      * 프로필 업데이트
      * 유저 프로필 사진 업데이트
      */
     @PostMapping(path = "/profileUpdate/{user_id}")
-    public ResponseEntity<UserProfileDTO> upload(@PathVariable String user_id,
+    public ResponseEntity<UserProfileDTO> upload(@PathVariable("user_id") String user_id,
                                                  @RequestPart("UserProfileDTO") UserProfileDTO userProfileDTO,
-                                                 @RequestPart("image") MultipartFile img)  {
+                                                 @RequestPart("image") MultipartFile img) {
 
         // user_id로 사용자 프로필 조회
         LoginDTO user = userProfileService.getUserProfileDTOById(user_id);
@@ -126,13 +129,20 @@ public class UserProfileController {
         String fileUrl = "https://kr.object.ncloudstorage.com/" + bucketName + "/profile/" + imageFileName;
 
         // UserProfileDTO 객체에 이미지 정보 설정
-        userProfileDTO.setImage_file_name(imageFileName); // 파일 이름
-        userProfileDTO.setImage_original_name(imageOriginalName); // 원본 파일 이름
-        userProfileDTO.setImageUrl(fileUrl); // 업로드된 파일 URL
+        userProfileDTO = UserProfileDTO.builder()
+                .id(userProfileDTO.getId())
+                .name(userProfileDTO.getName())
+                .phoneNumber(userProfileDTO.getPhoneNumber())
+                .email(userProfileDTO.getEmail())
+                .image_file_name(imageFileName) // 파일 이름
+                .image_original_name(imageOriginalName) // 원본 파일 이름
+                .imageUrl(fileUrl) // 업로드된 파일 URL
+                .build();
 
         // LoginDTO 객체에 UserProfileDTO의 정보 반영
         user.setImage_file_name(imageFileName);
         user.setImage_original_name(imageOriginalName);
+        user.setProfile_image(user.getProfile_image());
         user.setImageUrl(fileUrl);
         user.setEmail(userProfileDTO.getEmail());
         // userProfileDTO의 다른 필드를 user 객체에 반영
@@ -142,10 +152,7 @@ public class UserProfileController {
 
         // 결과 반환
         return ResponseEntity.ok(userProfileDTO);
-
-
-}
-
+    }
 
     /**
      * 정보 저장하기

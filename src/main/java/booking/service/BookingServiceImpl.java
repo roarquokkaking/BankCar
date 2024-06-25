@@ -34,41 +34,65 @@ public class BookingServiceImpl implements BookingService {
      * 이미지 위치 저장하기 .
      */
     public List<UserBeforeDTO> findUserBookings(String userId) {
+        System.out.println("findUserBookings 메서드 호출됨: userId = " + userId);
 
-        List<BookingEntity> bookings = bookingRepository.findBookingsByUserId(userId);
+        List<BookingEntity> bookings = null;
+        try {
+            bookings = bookingRepository.findBookingsByUserId(userId);
+            System.out.println("bookings 조회 결과: " + bookings);
+        } catch (Exception e) {
+            System.err.println("bookings 조회 중 오류 발생: " + e.getMessage());
+            e.printStackTrace();
+        }
 
         List<UserBeforeDTO> userBeforeDTOList = new ArrayList<>();
 
-        if (bookings != null) {
+        if (bookings != null && !bookings.isEmpty()) {
+            System.out.println("bookings가 null이 아님");
             for (BookingEntity bookingEntity : bookings) {
-                bookingEntity.setBookingStatus(bookingEntity);
-                if (bookingEntity.getBooking_status() == BookingStatus.BEFORE) {
-                    if (bookingEntity.getLoginDTO() != null
-                            && bookingEntity.getCar() != null) {
-                        UserBeforeDTO userBeforeDTO = UserBeforeDTO.builder()
-                                .userid(bookingEntity.getLoginDTO().getId())
-                                .carid(bookingEntity.getCar().getCarId())
-                                .model(bookingEntity.getCar().getModel())
-                                .color(bookingEntity.getCar().getColor())
-                                .doro(bookingEntity.getCar().getDoroAddress())
-                                .category(bookingEntity.getCar().getCategory())
-                                .title(bookingEntity.getCar().getTitle())
-                                .content(bookingEntity.getCar().getContent())
-                                .rating(bookingEntity.getCar().getRating())
-                                .startTime(bookingEntity.getStart_time())
-                                .endTime(bookingEntity.getEnd_time())
-                                .pay(bookingEntity.getCar().getPrice())
-                                //host name
-                                //user
-//                                .imageUrl(bookingEntity.getCar().getCarImages().getMain_image())
-                                .build();
-                        userBeforeDTOList.add(userBeforeDTO);
+                System.out.println("BookingEntity 상태: " + bookingEntity.getBooking_status());
+                System.out.println(123);
+                try {
+                    if (bookingEntity.getBooking_status() == BookingStatus.BEFORE) {
+                        System.out.println("dir;salwlsdu");
+                        if (bookingEntity.getLoginDTO() != null && bookingEntity.getCar() != null) {
+                            System.out.println("LoginDTO와 Car 정보가 모두 존재함");
+                            System.out.println("dir;salwlsdu");
+                            UserBeforeDTO userBeforeDTO = UserBeforeDTO.builder()
+                                    .userid(bookingEntity.getLoginDTO().getId())
+                                    .carid(bookingEntity.getCar().getCarId())
+                                    .model(bookingEntity.getCar().getModel())
+                                    .color(bookingEntity.getCar().getColor())
+                                    .doro(bookingEntity.getCar().getDoroAddress())
+                                    .category(bookingEntity.getCar().getCategory())
+                                    .title(bookingEntity.getCar().getTitle())
+                                    .content(bookingEntity.getCar().getContent())
+                                    .rating(bookingEntity.getCar().getRating())
+                                    .startTime(bookingEntity.getStart_time())
+                                    .endTime(bookingEntity.getEnd_time())
+                                    .pay(bookingEntity.getCar().getPrice())
+                                    .imageUrl(bookingEntity.getCar().getCarImages().getMain_image())
+                                    .build();
+
+                            System.out.println("UserBeforeDTO 생성됨: " + userBeforeDTO);
+                            userBeforeDTOList.add(userBeforeDTO);
+                        } else {
+                            System.out.println("LoginDTO 또는 Car 정보가 존재하지 않음");
+                        }
                     }
+                } catch (Exception e) {
+                    System.err.println("BookingEntity 처리 중 오류 발생: " + e.getMessage());
+                    e.printStackTrace();
                 }
             }
+        } else {
+            System.out.println("bookings가 null이거나 빈 리스트임");
         }
+
+        System.out.println("최종 userBeforeDTOList: " + userBeforeDTOList);
         return userBeforeDTOList;
     }
+
 
     @Override
     public List<BookingDTO> getAfter(String userId, Integer days) {
@@ -86,7 +110,7 @@ public class BookingServiceImpl implements BookingService {
             System.out.println(booking.getCar().getCarId());
 
             if (booking.getBooking_status() == BookingStatus.AFTER) {
-                System.out.println(111111);
+
                 Car car = carRepository.findById(booking.getCar().getCarId()).orElse(null);
 
                 System.out.println(car);
@@ -95,10 +119,11 @@ public class BookingServiceImpl implements BookingService {
                     BookingDTO bookingDTO = BookingDTO.builder()
                             .carId(car.getCarId())
                             .userId(booking.getLoginDTO().getId())
-//                            .reviewId
+                            .booking_id(booking.getBooking_id())
+//                           .reviewId
                             .title(car.getTitle())
                             .content(car.getContent())
-//                            .imageUrl(car.getCarImages().getMain_image())
+                            .imageUrl(car.getCarImages().getMain_image())
                             .period(period)
                             .build();
                     // 이미지 설정
@@ -110,13 +135,12 @@ public class BookingServiceImpl implements BookingService {
         return bookingDTOs;
     }
 
-
     /**
      * 유저에 관한 before 정보 얻어오기
      */
 
     @Override
-    public Optional<BookingEntity> findByUserIdAndCarId(String user_id, String car_id) {
+    public Optional<BookingEntity> findByUserIdAndCarId(String user_id, Long car_id) {
 
         return bookingRepository.findByUserIdAndCarId(user_id, car_id);
 
@@ -144,7 +168,7 @@ public class BookingServiceImpl implements BookingService {
 
 
         // 추가적인 필드 설정이 필요하다면 여기에 추가합니다.
-//         bookingDTO.setImage(bookingEntity.getImageUrl());
+        // bookingDTO.setImage(bookingEntity.getImageUrl());
 
         return bookingDTO;
     }

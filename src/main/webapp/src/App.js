@@ -80,34 +80,34 @@ function App() {
                   <Route path='naverpaycompletion' element={NaverPayCompletion}></Route>
                 </Route>
 
-                <Route path="/wishList" element={<WishList />} />
-                <Route path="/myWishList" element={<MyWishList />} />
-                <Route path="login"  >
-                  <Route index element={<Login_main />}/>
-                  <Route path="kakao" element={<KakaoLogin/>}/>
-                  <Route path="/login/Google" element={<GoogleLogin/>}/>
-                  <Route path="naverLogin" element={<NaverLogin/>}/>
-                </Route>
-                <Route path="/profile">
-                  <Route index element={<ProfileMain />} />
-                  <Route path="checkusebefore/:user_id" element={<CheckUseBefore/>}/>
-                  <Route path="reservedCars" element={<ReservedCars />} />
-                  <Route path="usedCarReviews" element={<UsedCarReviews />} />
-                  <Route path="checkMyCar" element={<CheckMyCar/>} />
-                  <Route path="myProfile/:user_id" element={<MyProfile/>} />
-                  <Route path="myProfileUpdate/:user_id" element={<MyProfileUpdate/>} />
-                  <Route path="useAfter/:user_id" element={<UseAfter/>} />
-                  <Route path="useBefore/:user_id" element={<UseBefore/>} />
-                  <Route path="myRating" element={<MyRating/>}/>
-                  <Route path="bookingDetails" element={<BookingDetails/>} />
-                  <Route path="Details" element={<Details/>} />
-                  <Route path="useNow" element={<UseNow/>}/>
-                  <Route path="useReview/:user_id/:car_id" element={<UseReview/>}/>
-                  <Route path="userReviewItem" element={<UserReviewItem/>}/>
-                </Route>
-                <Route path='/car/new' element={<RegisterMain />} />
-                <Route path='/car/driver' element={<DriverLicense />} />
-                <Route path='/car/driverCheck' element={<DriverCheck />} />
+            <Route path="/wishList" element={<WishList />} />
+            <Route path="/myWishList" element={<MyWishList />} />
+            <Route path="login"  >
+              <Route index element={<Login_main />}/>
+              <Route path="kakao" element={<KakaoLogin/>}/>
+              <Route path="/login/Google" element={<GoogleLogin/>}/>
+              <Route path="naverLogin" element={<NaverLogin/>}/>
+            </Route>
+            <Route path="/profile">
+              <Route index element={<ProfileMain />} />
+              <Route path="checkusebefore/:user_id" element={<CheckUseBefore/>}/>
+              <Route path="reservedCars" element={<ReservedCars />} />
+              <Route path="usedCarReviews" element={<UsedCarReviews />} />
+              <Route path="checkMyCar" element={<CheckMyCar/>} />
+              <Route path="myProfile/:user_id" element={<MyProfile/>} />
+              <Route path="myProfileUpdate/:user_id" element={<MyProfileUpdate/>} />
+              <Route path="useAfter/:user_id" element={<UseAfter/>} />
+              <Route path="useBefore/:user_id" element={<UseBefore/>} />
+              <Route path="myRating" element={<MyRating/>}/>
+              <Route path="bookingDetails" element={<BookingDetails/>} />
+              <Route path="Details" element={<Details/>} />
+              <Route path="useNow" element={<UseNow/>}/>
+              <Route path="useReview/:user_id/:car_id/:booking_id" element={<UseReview/>}/>
+              <Route path="userReviewItem" element={<UserReviewItem/>}/>
+            </Route>
+            <Route path='/car/new' element={<RegisterMain />} />
+            <Route path='/car/driver' element={<DriverLicense />} />
+            <Route path='/car/driverCheck' element={<DriverCheck />} />
 
                 <Route path='/kakaopay' element={<KaKaoPay />} />
                 <Route path='/success' element={<KaKaoPaySuccess />} />

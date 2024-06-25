@@ -11,6 +11,7 @@ import java.util.List;
 @Table(name="user")
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Getter
 @Data
 public class LoginDTO {
@@ -38,6 +39,8 @@ public class LoginDTO {
     private String image_file_name; // 클라우드 이미지 uuid
     @Column(name ="image_original_name",nullable = true)
     private String image_original_name ; //이미지 실제 이름
+
+
 
 //    @OneToMany(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "booking_id")

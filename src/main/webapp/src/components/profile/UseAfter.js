@@ -6,18 +6,24 @@ import Box from "@mui/material/Box";
 import FooterMenu from "../FooterMenu";
 import axios from "axios";
 
-const UseAfter = () => {
+const UseAfter = ({ diTooData }) => {
     const navigate = useNavigate();
+    const { user_id, car_id,booking_id } = useParams();
     const [BookingDTO, setBookingDTO] = useState([]);
     const [serchdata, setSerchdata] = useState('all');
-    const { user_id } = useParams();
-    const {car_id} = useState('')
 
-    console.log(user_id);
-    console.log(car_id)
-
+    useEffect(() => {
+        console.log('User ID:', user_id);
+        console.log('Car ID:', car_id);
+        console.log('booking' , BookingDTO.booking_id)
+    }, [user_id, car_id]);
 
     const fetchData = (userId, period) => {
+        if (!userId) {
+            console.log('User ID is undefined');
+            return;
+        }
+
         const url = period === 'all' ?
             `https://dongwoossltest.shop/api/Booking/after/${userId}` :
             `https://dongwoossltest.shop/api/Booking/after/${userId}?period=${period}`;
@@ -26,43 +32,43 @@ const UseAfter = () => {
             .then(response => {
                 const data = response.data;
                 setBookingDTO(data);
-                console.log(data)
+                console.log(data);
             })
             .catch(error => console.log(error));
     };
 
     useEffect(() => {
-        fetchData(user_id, serchdata);
-    }, [user_id,car_id, serchdata]);
+        if (user_id) {
+            fetchData(user_id, serchdata);
+        }
+    }, [user_id, serchdata]);
 
     const handlePeriodChange = (e) => {
         setSerchdata(e.target.value);
     };
-
+    let image = 'https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/';
     const ReservationItem = ({ reservation }) => (
-
         <div className={styles.reservationItem}>
             <div className={styles.reservationDetail}>
-                <img src={reservation.imageUrl} alt={reservation.title} className={styles.reservationImage}></img>
+                <img src={image+reservation.imageUrl} alt={reservation.title} className={styles.reservationImage}></img>
                 <h2 className={styles.title}>{reservation.title}</h2>
             </div>
             <div className={styles.actionContainer}>
                 <span>{reservation.period}</span>
-
                 <button
-                    onClick={() =>navigate(`/profile/useReview/${reservation.userId}/${reservation.carId}`)}
+                    onClick={() => navigate(`/profile/useReview/${reservation.userId}/${reservation.carId}/${reservation.booking_id}`)}
                     style={{
-                        backgroundColor: reservation.reviewWrite ? 'grey' : '#008EDC',
-                        color: 'white',
+                        backgroundColor: reservation.reviewWrite ? 'grey' : '#ff5f84',
                         padding: '10px',
+                        color:'white',
                         borderRadius: '5px',
                         border: 'none',
                         cursor: 'pointer',
-                        marginRight: '2%',
-                        marginBottom: '2%'
+                        marginRight: '3%',
+                        marginBottom: '3%'
                     }}
                 >
-                    {reservation.reviewWrite =1 ? '후기 수정' : '후기 쓰기'}
+                    {reservation.reviewWrite ? '후기 수정' : '후기 쓰기'}
                 </button>
             </div>
         </div>
@@ -78,7 +84,7 @@ const UseAfter = () => {
                                 style={{
                                     width: "30px",
                                     height: "30px",
-                                    marginTop: "4%",
+                                    marginTop: "7%",
                                     marginLeft: "20px",
                                 }}
                                 onClick={() => navigate(-1)}
@@ -105,9 +111,11 @@ const UseAfter = () => {
                         <option value="30">최근 30일</option>
                     </select>
                 </div>
-                {BookingDTO.map((reservation) => (
-                    <ReservationItem reservation={reservation} key={reservation.id} />
-                ))}
+                {BookingDTO.map((reservation) => {
+                    return (
+                        <ReservationItem reservation={reservation} key={reservation.id}/>
+                    );
+                })}
             </Box>
             <FooterMenu />
         </div>

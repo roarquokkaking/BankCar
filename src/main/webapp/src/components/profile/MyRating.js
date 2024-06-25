@@ -2,33 +2,33 @@ import React from 'react';
 import { FaStar } from 'react-icons/fa';
 import styles from './CSS/MyRating.module.css';
 import Box from "@mui/material/Box";
+import axios from 'axios';
 
 const MyRating = ({
                       title,
                       comment,
-                      rating,
+                      rating,  // 기본값 설정
                       hover,
-                      ratings,
-                      count,
+                      ratings,  // 기본값 설정
+                      count,  // 기본값 설정
                       handleTitleChange,
                       handleContentChange,
-                      handleRating,
                       handleSubmit,
                       setHover,
                       submitRating
                   }) => {
+
     return (
         <div>
             <div className={styles.title}>
                 <div className={styles.container}>
                     <div className={styles.left}>
                         <div className={styles.average}>
-                            <p>{rating.toFixed(1)}</p>
+                            <p>{rating}</p>
                         </div>
                         <div className={styles.starContainer}>
                             {[...Array(5)].map((star, index) => {
                                 const ratingValue = index + 1;
-
                                 return (
                                     <label key={index}>
                                         <input
@@ -36,8 +36,6 @@ const MyRating = ({
                                             name="rating"
                                             value={ratingValue}
                                             onClick={() => {
-                                                handleRating(ratingValue);
-                                                // 변경된 부분
                                                 submitRating(ratingValue);
                                             }}
                                             style={{ display: 'none' }}
@@ -73,6 +71,7 @@ const MyRating = ({
                     </div>
                 </div>
             </div>
+
             <Box>
                 <input
                     className={styles.inputTitle}

@@ -21,7 +21,7 @@ const BookingDetails = () => {
     /*서버에 정보 보내기 */
     useEffect(() => {
 
-        axios.get(`https://dongwoossltest.shop/api/Booking/bookingDetail/${user_id}/${car_id}`)
+        axios.get(`https://dongwoossltest.shop/Booking/bookingDetail/${user_id}/${car_id}`)
             .then((response)=>response.data(setDetailsDTO()))
             .catch((error)=>console.log(error))
     }, [user_id]);
@@ -38,7 +38,7 @@ const BookingDetails = () => {
 
     const updateMemo = async () => {
         try {
-            await axios.post('http://dongwoossltest.shop/api/Booking/bookingDetail/memo', {
+            await axios.post('https://dongwoossltest.shop/api/Booking/bookingDetail/memo', {
                 memo:memo,
                 user_id: user_id,
                 // booking_id : booking_id,
@@ -48,6 +48,8 @@ const BookingDetails = () => {
             console.error('Error sending memo:', error);
         }
     };
+    let imageList = 'https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/';
+
 
     return (
         <div className={styles.container}>
@@ -68,7 +70,7 @@ const BookingDetails = () => {
                 </header>
                 <div>
                     <div className={styles.imageSlider}>
-                        <img src={images[currentImageIndex]?.url}
+                        <img src={imageList+images[currentImageIndex]?.url}
                              alt={images[currentImageIndex]?.alt}
                              className={styles.bigSlider} />
                     </div>
