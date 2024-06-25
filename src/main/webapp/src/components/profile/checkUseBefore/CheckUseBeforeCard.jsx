@@ -47,19 +47,23 @@ export default function CheckUseBeforeCard({ car }) {
                     </Typography>
                 </div>
                 <div className={styles.info_box}>
+                    <Typography>
+                        시간당 금액 : {car.pay} 원
+                    </Typography>
+                </div>
+                <div className={styles.info_box}>
                     <Typography color="text.secondary" className={styles.input}>
                         컨텐트: {car.content}
                     </Typography>
                 </div>
                 <div className={styles.info_box}>
-                    <Typography color="text.secondary" className={styles.input}>
-                        시간당 금액 : {car.pay} 원
+                    <Typography variant="h5" component="div">
+                        빌린 일자 : {car.startDate}.{car.startTime}
                     </Typography>
                 </div>
                 <div className={styles.info_box}>
                     <Typography variant="h5" component="div">
-                        이용기간:{car.startDate}.{car.startTime} <br/>
-                        ~ {car.endDate}.{car.endTime}
+                        반납 일자 :{car.endDate} . {car.endTime}
                     </Typography>
                 </div>
 
@@ -67,10 +71,6 @@ export default function CheckUseBeforeCard({ car }) {
                     {/*{car.username}*/}
                 </Typography>
             </CardContent>
-            {/* <CardActions disableSpacing sx={{justifyContent: 'flex-end'}}>
-                <Button size="small"onClick={createChatRoom}>채팅하기 </Button>
-
-            </CardActions> */}
         </Card>
     );
 }
