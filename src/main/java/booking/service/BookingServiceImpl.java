@@ -68,6 +68,8 @@ public class BookingServiceImpl implements BookingService {
                                     .title(bookingEntity.getCar().getTitle())
                                     .content(bookingEntity.getCar().getContent())
                                     .rating(bookingEntity.getCar().getRating())
+                                    .endDate(bookingEntity.getEnd_date())
+                                    .startDate(bookingEntity.getStart_date())
                                     .startTime(bookingEntity.getStart_time())
                                     .endTime(bookingEntity.getEnd_time())
                                     .pay(bookingEntity.getCar().getPrice())

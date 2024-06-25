@@ -8,7 +8,7 @@ const Details = ({ detailsDTO, currentImageIndex}) => {
     const usagePeriod = `${detailsDTO.startDate || 'N/A'} ~ ${detailsDTO.endDate || 'N/A'}`;
     const images = Array.isArray(detailsDTO.images) ? detailsDTO.images : [];
     const carModel = detailsDTO.carModel || 'N/A';
-
+console.log("images="+images)
     // averRating이 유효한 숫자인지 확인하고 변환
     let averRating = 'N/A';
     if (detailsDTO.averRating != null && !isNaN(detailsDTO.averRating)) {
@@ -21,7 +21,7 @@ const Details = ({ detailsDTO, currentImageIndex}) => {
             <div className={styles.imageSlider}>
                 {images.length > 0 ? (
                     <img
-                        src={image+ images[currentImageIndex]}
+                        src={image+images[currentImageIndex]}
                         alt={images[currentImageIndex] || 'Image'}
                         style={{ opacity: 1, maxWidth: '500px', borderRadius: "15px" }}
                     />
@@ -31,7 +31,7 @@ const Details = ({ detailsDTO, currentImageIndex}) => {
             </div>
             <div className={styles.imageSlider}>
                 {images.map((item, index) => (
-                    <img key={index} src={image.item} alt={item || 'Thumbnail'}
+                    <img key={index} src={image+item} alt={item || 'Thumbnail'}
                          className={styles.thumbnail}
                          style={{ width: '100px', opacity: currentImageIndex === index ? 1 : 0.5 }} />
                 ))}
