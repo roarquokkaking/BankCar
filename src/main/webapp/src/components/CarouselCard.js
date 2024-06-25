@@ -52,7 +52,7 @@ const CarouselCard = ({ searchDTO, location, isHeartClick, onHeartClick, like })
     setIsHeartClicked((prev) => !prev);
     onHeartClick();
   };
-
+    let image = 'https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/';
   const goChoice = () => {
     if (searchDTO.startDate === '' || searchDTO.endDate === '' || searchDTO.startTime === '' || searchDTO.endTime === '' ){
           Swal.fire({
