@@ -19,7 +19,7 @@ import java.util.Optional;
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path="/Booking")
+@RequestMapping(path="/api/Booking")
 public class BookingController {
 
     @Autowired

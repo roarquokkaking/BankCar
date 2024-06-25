@@ -19,7 +19,7 @@ import review.service.ReviewService;
 import java.util.*;
 
 @RestController
-@RequestMapping(path = "/review")
+@RequestMapping(path = "/api/review")
 @CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
 
