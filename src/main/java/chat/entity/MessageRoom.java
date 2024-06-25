@@ -38,7 +38,7 @@ public class MessageRoom {
     @JsonManagedReference
     private List<Message> messages;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name = "last_message_id")
     private Message lastMessage;
 

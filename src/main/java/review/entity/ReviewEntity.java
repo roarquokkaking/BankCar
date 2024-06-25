@@ -41,11 +41,11 @@ public class ReviewEntity {
     @JoinColumn(name = "id")
     private LoginDTO loginDTO;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)//fetch = FetchType.LAZY,
     @JoinColumn(name = "booking_id")
     private BookingEntity bookingEntity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name = "car_id")
     private Car car;
 
