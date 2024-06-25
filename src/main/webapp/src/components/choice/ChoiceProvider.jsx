@@ -27,14 +27,8 @@ export const ChoiceProvider = ({ children }) => {
                 lng: 0
             }
         },
-        review: {
-            review_id: "",
-            rating: 0,
-            title: "",
-            comment: "",
-            id: "",
-            name: ""
-        },
+        review: []
+        ,
         footer: {
             price: 0,
             startTime: "",

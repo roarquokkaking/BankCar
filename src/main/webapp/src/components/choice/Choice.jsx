@@ -82,49 +82,7 @@ const Choice = () => {
             }
         })
     },  [startTime, endTime, startDate, endDate, loading, error, setChoicedata]);
-    // const [choicedata, setChoicedata] = useState({
-    //     car: {
-    //         title:"",
-    //         content:"",
-    //         image: {},
-    //         category: "",
-    //         model:"",
-    //         released:"",
-    //         color:"",
-    //         segment:"",
-    //     },
-    //     owner: {
-    //         image: "",
-    //         // userid:"",
-    //         name: "",
-    //         email: "",
-    //         rating: 0,
-    //     },
-    //     map: {
-    //         address: "",
-    //         coordinates: {
-    //             lat: 0,
-    //             lng: 0
-    //         }
-    //     },
-    //     review: {
-    //         review_id:"",
-    //         rating: 0,
-    //         title: "",
-    //         comment: "",
-    //         id: "",
-    //         name: ""
-    //     },
-    //     footer: {
-    //         price: 0,
-    //         startTime: startTime,
-    //         endTime: endTime,
-    //         startDate:startDate,
-    //         endDate:endDate,
-    //         loading: loading,
-    //         error: error
-    //     }
-    // });
+
     const toggleInfo = () => {
         setIsInfoExpanded(!isInfoExpanded);
     };
