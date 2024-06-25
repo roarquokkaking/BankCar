@@ -5,7 +5,7 @@ import {useState} from "react";
 import axios from 'axios';
 
 
-export default function CheckUseBeforeCard({ car }) {
+export default function     CheckUseBeforeCard({ car }) {
     const [info_box, setInfo_box] = useState()
    const imageUrl = `https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/${car.imageUrl}`;
     //console.log(imageUrl);
