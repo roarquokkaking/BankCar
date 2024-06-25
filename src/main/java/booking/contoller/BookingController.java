@@ -19,7 +19,7 @@ import java.util.Optional;
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path="/api/Booking")
+@RequestMapping(path="/api/Booking", produces = "application/json")
 public class BookingController {
 
     @Autowired
