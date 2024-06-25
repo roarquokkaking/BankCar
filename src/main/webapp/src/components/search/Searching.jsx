@@ -30,8 +30,8 @@ const Searching = () => {
         roadAddress: '',
         x: '',
         y: '',
-        minPrice:10000,
-        maxPrice:1000000
+        minPrice:1000,
+        maxPrice:100000
     })
 
     const onReset = (e)=>{
