@@ -14,13 +14,14 @@ const Details = ({ detailsDTO, currentImageIndex}) => {
     if (detailsDTO.averRating != null && !isNaN(detailsDTO.averRating)) {
         averRating = detailsDTO.averageRating;
     }
+    let image = 'https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/';
 
     return (
         <div className={styles.container}>
             <div className={styles.imageSlider}>
                 {images.length > 0 ? (
                     <img
-                        src={images[currentImageIndex]?.url}
+                        src={image+images[currentImageIndex]?.url}
                         alt={images[currentImageIndex]?.alt || 'Image'}
                         style={{ opacity: 1, maxWidth: '500px', borderRadius: "15px" }}
                     />

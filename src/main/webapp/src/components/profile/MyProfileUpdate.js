@@ -66,7 +66,7 @@ const MyProfileUpdate = () => {
     };
     console.log(setUserProfileDTO)
     console.log(user_id)
-
+    // let image = 'https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/';
     const [imageUrl, setImageUrl] = useState("");
     const uploadImageToNaverCloud = async (image) => {
         const formData = new FormData();

@@ -93,7 +93,7 @@ public List<WishListDTO> getWishListById(String userId, Pageable pageable) {
                     dto.setTitle(car.getCategory());
                     dto.setId(car.getUser().getId());
                     dto.setCarId(car.getCarId());
-
+                    dto.setImageUrl(car.getCarImages().getMain_image());
                     // CarImages 객체 생성 및 이미지 URL 설정
 //                     CarImages carImages = car.getCarImages();
 //                     String baseUrl = "https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/carImage/";

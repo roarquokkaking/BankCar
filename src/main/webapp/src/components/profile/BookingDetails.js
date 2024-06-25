@@ -48,6 +48,8 @@ const BookingDetails = () => {
             console.error('Error sending memo:', error);
         }
     };
+    let imageList = 'https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/';
+
 
     return (
         <div className={styles.container}>
@@ -68,7 +70,7 @@ const BookingDetails = () => {
                 </header>
                 <div>
                     <div className={styles.imageSlider}>
-                        <img src={images[currentImageIndex]?.url}
+                        <img src={imageList+images[currentImageIndex]?.url}
                              alt={images[currentImageIndex]?.alt}
                              className={styles.bigSlider} />
                     </div>

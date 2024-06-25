@@ -17,6 +17,7 @@ const MyRating = ({
                       setHover,
                       submitRating
                   }) => {
+
     return (
         <div>
             <div className={styles.title}>

@@ -46,11 +46,11 @@ const UseAfter = ({ diTooData }) => {
     const handlePeriodChange = (e) => {
         setSerchdata(e.target.value);
     };
-
+    let image = 'https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/';
     const ReservationItem = ({ reservation }) => (
         <div className={styles.reservationItem}>
             <div className={styles.reservationDetail}>
-                <img src={reservation.imageUrl} alt={reservation.title} className={styles.reservationImage}></img>
+                <img src={image+reservation.imageUrl} alt={reservation.title} className={styles.reservationImage}></img>
                 <h2 className={styles.title}>{reservation.title}</h2>
             </div>
             <div className={styles.actionContainer}>
