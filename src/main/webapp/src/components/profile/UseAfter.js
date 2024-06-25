@@ -51,6 +51,7 @@ console.log(BookingDTO.user_id)
 
 
     const ReservationItem = ({ reservation }) => (
+
         <div className={styles.reservationItem}>
             <div className={styles.reservationDetail}>
                 <img src={image+reservation.imageUrl} alt={reservation.title} className={styles.reservationImage}></img>
@@ -59,7 +60,7 @@ console.log(BookingDTO.user_id)
             <div className={styles.actionContainer}>
                 <span>{reservation.period}</span>
                 <button
-                    onClick={() => navigate(`/profile/useReview/${reservation.user_id}/${reservation.car_id}/${reservation.booking_id}`)}
+                    onClick={() => navigate(`/profile/useReview/${reservation.userId}/${reservation.carId}/${reservation.booking_id}`)}
                     style={{
                         backgroundColor: reservation.reviewWirte ? 'grey' : '#ff5f84',
                         padding: '10px',
