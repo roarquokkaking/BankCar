@@ -108,7 +108,7 @@ const MyProfileUpdate = () => {
     };
     console.log(profileImage)
 
-
+    let image = 'https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/';
     return (
         <div>
             {/*뒤로가기 버튼 */}
@@ -125,7 +125,7 @@ const MyProfileUpdate = () => {
                 <div className={styles.buttonDiv}>
                     <button className={styles.button} onClick={handleIconClick}>
                         {UserProfileDTO.imageUrl ? (
-                            <img src={UserProfileDTO.imageUrl}
+                            <img src={image+UserProfileDTO.imageUrl}
                                  alt="Profile"
                                  className={styles.profileImage}/>
                         ) : (

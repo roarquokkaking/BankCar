@@ -43,7 +43,7 @@ const MyProfile = () => {
         };
         fetchUserProfile();
     }, [user_id]);
-
+    let image = 'https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/cars/';
     return (
         <div>
             <Box>
@@ -60,7 +60,7 @@ const MyProfile = () => {
                             {
                                 myprofileDTO.image_file_name === null ?
                                     <img src={defaultProfileImage} alt="Profile" className={styles.profileImage} /> :
-                                    <img src={myprofileDTO.imageUrl} alt="Profile" className={styles.profileImage} />
+                                    <img src={image+myprofileDTO.imageUrl} alt="Profile" className={styles.profileImage} />
                             }
                         </div>
                     </label>
