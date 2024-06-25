@@ -1,5 +1,6 @@
 package notification.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
@@ -13,10 +14,17 @@ import java.util.concurrent.ConcurrentMap;
 public class SseController {
     private final ConcurrentMap<String, SseEmitter> emitters = new ConcurrentHashMap<>();
 
-    @GetMapping("/subscribe/{userId}")
+    @GetMapping( value = "/subscribe/{userId}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public SseEmitter subscribe(@PathVariable(value = "userId") String userId) {
         SseEmitter emitter = new SseEmitter();
         emitters.put(userId, emitter);
+        try {
+            emitter.send(SseEmitter.event()
+                    .name("notification")
+                    .data("connected!"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         emitter.onCompletion(() -> emitters.remove(userId));
         emitter.onTimeout(() -> emitters.remove(userId));
