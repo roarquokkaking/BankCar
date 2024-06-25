@@ -65,7 +65,7 @@ const KaKaoPaySuccess = () => {
         </div>
         <br></br>
         <h1>결제가 완료되었습니다!</h1>
-        <p>대여가 성공적으로 완료되었습니다. .</p>
+        <p>대여가 성공적으로 완료되었습니다. </p>
         
         <div className={styles["order-details"]}>
           <div className={styles["detail-item"]}>
