@@ -85,4 +85,9 @@ public class  WishListController {
         }
     }
 
+    @GetMapping(path = "/users/{userId}")
+    public ResponseEntity<List<Long>> getWishListByUserId(@PathVariable(value = "userId")String userId){
+        return ResponseEntity.ok(wishListService.getWishListByUserId(userId));
+    }
+
 }

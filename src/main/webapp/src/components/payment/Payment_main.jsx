@@ -10,15 +10,16 @@ import Grid from "@mui/material/Grid";
 import {getCarItemApi} from "../api/CarApiService";
 import {useSelector} from "react-redux";
 import axios from "axios"
+import {useChoice} from "../choice/ChoiceProvider";
 
 
 
 //{carId, startDate, endDate, price}
 const Payment_main = () => {
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const navigateToss = useNavigate();
   const [showNaverPay, setShowNaverPay] = useState(false);
-
+  const { choicedata } = useChoice();
   const goNaverPay = () => {
     navigate('/payment/naverpay');
   };
@@ -32,15 +33,33 @@ const navigate = useNavigate();
     // 파라미터로 넘어오는 변수 : carId, startDate, startTime, endDate, endTime, price
     const location = useLocation();
 
+    const parseDateTime = (date, time) => {
+        return new Date(`${date}T${time}`);
+    }
+
     const queryParams = new URLSearchParams(location.search);
 
     const carId = queryParams.get('carid');
-    const startDate = queryParams.get('startdate');
-    const endDate = queryParams.get('enddate');
-    const startTime = queryParams.get('starttime');
-    const endTime = queryParams.get('endtime');
-    const price = queryParams.get('price');
+    const startDate = choicedata.footer.startDate;
+    const endDate = choicedata.footer.endDate;
+    const startTime = choicedata.footer.startTime;
+    const endTime = choicedata.footer.endTime;
+    const price = choicedata.footer.price;
     const [car, setCar] = useState({})
+    // const totalDate = choicedata.footer.endDate - choicedata.footer.startDate ;
+    // const totalTime = choicedata.footer.endTime - choicedata.footer.startTime ;
+
+    // Date 객체로 변환
+    const startDateTime = parseDateTime(startDate, startTime);
+    const endDateTime = parseDateTime(endDate, endTime);
+
+// 날짜 차이 계산 (일 단위)
+    const totalDate = (endDateTime - startDateTime) / (1000 * 60 * 60 * 24);
+
+// 시간 차이 계산 (시간 단위)
+    const startHour = new Date(`1970-01-01T${startTime}Z`);
+    const endHour = new Date(`1970-01-01T${endTime}Z`);
+    const totalTime = (endHour - startHour) / (1000 * 60 * 60);
 
     // const [rentalDetails, setRentalDetails] = useState({
     //     startDate,
@@ -60,7 +79,8 @@ const navigate = useNavigate();
         approval_url: "https://dongwoossltest.shop/success",
         fail_url: "",     //      대여 시작 시간
         cancel_url: "",   //      대여 반납 시간
-        car_id:carId
+        car_id:carId,
+        totalPayment:''
     })
 
   useEffect(() => {
@@ -77,13 +97,14 @@ const navigate = useNavigate();
     useEffect(() => {
         if(car){
             setPayDetail({...payDetail,
-                item_name: car.model,
-                quantity: car.doroAddress,
+                item_name: choicedata.car.model,
+                quantity: choicedata.map.address,
                 vat_amount: startDate,
                 tax_free_amount: endDate ,
                 total_amount: price,
                 fail_url: startTime ,
-                cancel_url: endTime, })
+                cancel_url: endTime,
+                totalPayment: totalPayment})
             console.log(payDetail)
         }
     },[car])
@@ -114,7 +135,7 @@ const navigate = useNavigate();
             }
               )
       };
-
+      const totalPayment = payDetail.total_amount * ((totalDate * 24) + totalTime);
 
     const onBtn = () => {
         Notification.requestPermission().then(param => {
@@ -178,9 +199,9 @@ return (
                     </Typography>
                     <Grid container spacing={2}>
                         <Grid item xs={8}>
-                            <Typography variant="body1"><strong style={strongStyle}>모델명:</strong> {car.model}</Typography>
-                            <Typography variant="body1"><strong style={strongStyle}>색상:</strong> {car.color}</Typography>
-                            <Typography variant="body1"><strong style={strongStyle}>제목 </strong><br /> {car.title}</Typography>
+                            <Typography variant="body1"><strong style={strongStyle}>모델명:</strong> {choicedata.car.model}</Typography>
+                            <Typography variant="body1"><strong style={strongStyle}>색상:</strong> {choicedata.car.color}</Typography>
+                            <Typography variant="body1"><strong style={strongStyle}>제목 </strong><br /> {choicedata.car.title}</Typography>
                         </Grid>
                         <Grid item xs={4}>
                             {car && car.carImages && car.carImages.main_image &&
@@ -198,14 +219,15 @@ return (
                     </Typography>
                     <Typography variant="body1"><strong style={strongStyle}>시작일:</strong> {startDate} / {startTime}</Typography>
                     <Typography variant="body1"><strong style={strongStyle}>반납일:</strong> {endDate} / {endTime}</Typography>
+                    <Typography variant="body1"><strong style={strongStyle}>총 {totalDate}일 {totalTime }시간</strong></Typography>
                 </Box>
                 <Box sx={{ padding: '10px', border: '1px solid #ddd', borderRadius: '10px' }}>
                     <Typography variant="h6" component="h3" gutterBottom>
                         결제 비용
                     </Typography>
-                    <Typography variant="body1"><strong style={strongStyle}>총 비용:</strong> {formatPrice(payDetail.total_amount)} 원</Typography>
-                    <Typography variant="body1"><strong style={strongStyle}>세금:</strong> {formatPrice(payDetail.total_amount * 0.1)} 원</Typography>
-                    <Typography variant="body1"><strong style={strongStyle}>최종 금액:</strong> {formatPrice(payDetail.total_amount * 1.1)} 원</Typography>
+                    <Typography variant="body1"><strong style={strongStyle}>총 비용:</strong> {formatPrice(totalPayment)} 원</Typography>
+                    <Typography variant="body1"><strong style={strongStyle}>세금:</strong> {formatPrice(totalPayment * 0.1)} 원</Typography>
+                    <Typography variant="body1"><strong style={strongStyle}>최종 금액:</strong> {formatPrice(totalPayment * 1.1)} 원</Typography>
                 </Box>
             </Box>
 

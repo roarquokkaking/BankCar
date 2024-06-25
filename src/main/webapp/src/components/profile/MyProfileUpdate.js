@@ -141,6 +141,7 @@ const MyProfileUpdate = () => {
                     onChange={ImageChange}
                     className={styles.imageInput}
                     ref={fileInputRef}
+                    hidden={true}
                 />
 
 

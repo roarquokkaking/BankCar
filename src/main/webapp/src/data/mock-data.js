@@ -34,12 +34,48 @@ export const categoryTab = [
 export const Locations =()=>{
   const [state, setState] = useState({
     center: {
-      lat: 33.450701,
-      lng: 126.570667,
+      lat: '',
+      lng: '',
     },
     errMsg: null,
     isLoading: true,
   })
+  // useEffect(() => {
+  //   if (navigator.geolocation) {
+  //     // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+  //     navigator.geolocation.getCurrentPosition(
+  //         (position) => {
+  //           setState((prev) => ({
+  //             ...prev,
+  //             center: {
+  //               lat: position.coords.latitude, // 위도
+  //               lng: position.coords.longitude, // 경도
+  //             },
+  //             isLoading: false,
+  //           }))
+  //         },
+  //         (err) => {
+  //           setState((prev) => ({
+  //             ...prev,
+  //             errMsg: err.message,
+  //             isLoading: false,
+  //           }))
+  //         }
+  //     )
+  //   } else {
+  //     // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+  //     setState((prev) => ({
+  //       ...prev,
+  //       errMsg: "geolocation을 사용할수 없어요..",
+  //       isLoading: false,
+  //     }))
+  //   }
+  // }, [])
+
+  const label = useSelector((state)=>state.Option.id);
+  const [carData,setCarData]=useState([]);
+  // console.log("label="+label);
+
   useEffect(() => {
     if (navigator.geolocation) {
       // GeoLocation을 이용해서 접속 위치를 얻어옵니다
@@ -52,63 +88,46 @@ export const Locations =()=>{
                 lng: position.coords.longitude, // 경도
               },
               isLoading: false,
-            }))
+            }));
+
+            // 위치 정보를 가져온 후 axios를 이용해 데이터 요청
+            axios.get("https://dongwoossltest.shop/api/cars/getcardata", {
+              params: {
+                label: label,
+                lat: position.coords.latitude, // 위도
+                lng: position.coords.longitude // 경도
+              }
+            })
+                .then(res => {
+                  setCarData(res.data);
+                  const car1 = res.data[0]; // res.data에서 데이터 가져오기
+                  console.log(car1);
+                })
+                .catch(err => {
+                  console.error("Error fetching car data:", err);
+                });
+
           },
           (err) => {
             setState((prev) => ({
               ...prev,
               errMsg: err.message,
               isLoading: false,
-            }))
+            }));
           }
-      )
+      );
     } else {
-      // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+      // HTML5의 GeoLocation을 사용할 수 없을때 처리
       setState((prev) => ({
         ...prev,
         errMsg: "geolocation을 사용할수 없어요..",
         isLoading: false,
-      }))
+      }));
     }
-  }, [])
+  }, [label]); // label이 변경될 때마다 useEffect가 다시 실행됩니다.
 
-  const label = useSelector((state)=>state.Option.id);
-  const [carData,setCarData]=useState([]);
-  // console.log("label="+label);
 
-    useEffect(()=>{
-    //   if (state.errMsg !== "geolocation을 사용할수 없어요.."){
-    //     axios.get("http://localhost:8080/cars/getcardata2",{
-    //       params:{
-    //         label: label,
-    //         lat: state.center.lat, // 위도
-    //         lng: state.center.lng// 경도
-    //       }
-    //     })
-    //         .then(res => {
-    //           setCarData(res.data);
-    //           const car1 = carData[0];
-    //           console.log(car1);
-    //         })
-    //   }
-    //   else {
-        axios.get("https://dongwoossltest.shop/api/cars/getcardata", {
-          params: {
-            label: label
-          }
-        })
-            .then(res => {
-              setCarData(res.data);
-              const car1 = carData[0];
-              console.log(car1);
-              // return axios.get("http://localhost:8080/api/cars/getcarservicedata")
-            })
-        //  .then(res=>console.log(res.data))
 
-      // }
-      },[label])
-
- 
   return carData.map((item,index)=>{
     const locationImages = [];
 
@@ -155,10 +174,6 @@ export const Locations =()=>{
 
   }
 });
-    
-      
-    
-  
 
 };
 

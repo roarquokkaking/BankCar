@@ -19,7 +19,7 @@
     font-family: 'Apple SD Gothic Neo', sans-serif;
     /* font-family: 'Noto Sans KR', sans-serif; */
     font-size: 1.17em;
-    color: rgb(38, 42, 53);
+    color: rgb(255, 68, 108);
     font-weight: 600;
     margin-left: -8px;
     margin-top: -27px;
@@ -44,8 +44,8 @@
 }
 
 .chatlistdetail img.otherProfileImage {
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
     border-radius: 40%;
     margin-right: 10px;
 }
@@ -65,7 +65,7 @@
 
 .last-senttime{
     margin-left: auto; 
-    margin-right: 10px;
+    margin-right: 5px;
     margin-bottom: 5px;
 }
 

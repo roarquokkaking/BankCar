@@ -112,6 +112,13 @@ public List<WishListDTO> getWishListById(String userId, Pageable pageable) {
     return wishList;
 }
 
+    @Override
+    public List<Long> getWishListByUserId(String userId) {
+        List<Long> list = wishListRepository.getWishListByUserId(userId);
+        return list;
+
+    }
+
 
     public class WishlistNotFoundException extends RuntimeException {
         public WishlistNotFoundException(String message) {

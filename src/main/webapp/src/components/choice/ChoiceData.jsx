@@ -23,6 +23,27 @@ const ChoiceData = ({ setChoicedata }) => {
     const [hostInfo, setHostInfo] = useState(null);
     const [reviewInfo, setReviewInfo] = useState([]);
 
+    const startDate = choiceDTO.startDate;
+    const endDate = choiceDTO.endDate;
+    const startTime = choiceDTO.startTime;
+    const endTime = choiceDTO.endTime;
+
+    const parseDateTime = (date, time) => {
+        return new Date(`${date}T${time}`);
+    }
+
+    // Date 객체로 변환
+    const startDateTime = parseDateTime(startDate, startTime);
+    const endDateTime = parseDateTime(endDate, endTime);
+
+// 날짜 차이 계산 (일 단위)
+    const totalDate = Math.floor((endDateTime - startDateTime) / (1000 * 60 * 60 * 24));
+
+// 시간 차이 계산 (시간 단위)
+    const startHour = new Date(`1970-01-01T${startTime}Z`);
+    const endHour = new Date(`1970-01-01T${endTime}Z`);
+    const totalTime = (endHour - startHour) / (1000 * 60 * 60);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -35,6 +56,7 @@ const ChoiceData = ({ setChoicedata }) => {
                 // 서버에서 가져온 데이터로 필요한 작업 수행
                 console.log(responseCar.data);
                 setCarInfo(responseCar.data); // 차량  정보 설정
+                const totalPayment = responseCar.data.price * ((totalDate * 24) + totalTime);
                 console.log("carinfo : "+carInfo)
                 //호스트정보
                 const responseHost = await axios.get(`${baseURL}/choice/hostinfo`, {
@@ -65,13 +87,20 @@ const ChoiceData = ({ setChoicedata }) => {
             //     데이터 삽입
                 setChoicedata({
                     car:{
+                        title: responseCar.data.title,
                         content: responseCar.data.content,
-                        image: responseCar.data.carImages
+                        image: responseCar.data.carImages,
+                        category: responseCar.data.category,
+                        model:responseCar.data.model,
+                        released:responseCar.data.released,
+                        color:responseCar.data.color,
+                        segment:responseCar.data.segment,
                     },
                     owner: {
                         image: responseCar.data.user.profile_image,
                         name: responseCar.data.user.name,
-                        email: responseCar.data.user.email
+                        email: responseCar.data.user.email,
+                        rating: responseCar.data.rating
                     },
                     map: {
                         address: responseCar.data.jibunAddress,
@@ -82,16 +111,17 @@ const ChoiceData = ({ setChoicedata }) => {
                     },
                     review: reviews,
                     footer: {
-                        price: responseCar.data.price,
-                        startTime: choiceDTO.startTime,
-                        endTime: choiceDTO.endTime,
-                        startDate: choiceDTO.startDate,
-                        endDate: choiceDTO.endDate,
+                        price: totalPayment,
+                        startTime: startTime,
+                        endTime: endTime,
+                        startDate: startDate,
+                        endDate: endDate,
                         onReserve: () => {}, // 예약 함수 설정
                         loading: false, // 로딩 상태
                         error: null // 에러 상태
                     }
                 });
+
             } catch (error) {
                 console.error('데이터 가져오기 오류', error);
             }

@@ -1,10 +1,14 @@
 import React from 'react';
 
-const ChoiceFooter = ({ price, startTime, endTime ,startDate, endDate, onReserve, loading, error }) => {
+const ChoiceFooter = ({ price, startTime, endTime ,startDate, endDate, onReserve, loading, error, choicedata }) => {
+    const formatPrice = (value) => {
+        return new Intl.NumberFormat("ko-KR").format(value);
+    };
+
     return (
         <div className="choice-footer">
             <div className="price-time">
-                <span className="price">{price}원</span>
+                <span className="price">{formatPrice(price)}원</span>
                 <span className="starttime">{startDate} {startTime}</span>
                 <span className='endtime'>{endDate} {endTime}</span>
             </div>

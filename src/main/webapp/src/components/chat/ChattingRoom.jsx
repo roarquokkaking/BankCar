@@ -26,14 +26,12 @@ const ChattingRoom = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const connectStompClient = () => {
-        // const socket = new SockJS('https://dongwoossltest.shop/api/chat');
-        const socket = new SockJS('http://localhost:8080/ws');
+        const socket = new SockJS('https://dongwoossltest.shop/api/chat');
+        // const socket = new SockJS('http://localhost:8080/ws');
         
         stompClient.current = Stomp.over(socket);
-
         stompClient.current.heartbeat.outgoing = 10000; 
         stompClient.current.heartbeat.incoming = 10000; 
-
         stompClient.current.connect({}, () => {
             console.log("stomp연결 완료");
             setIsConnected(true);
@@ -56,15 +54,15 @@ const ChattingRoom = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // const userResponse = await axios.get('https://dongwoossltest.shop/api/messages/userInfo', { withCredentials: true });
-                const userResponse = await axios.get('http://localhost:8080/api/messages/userInfo', { withCredentials: true })
+                const userResponse = await axios.get('https://dongwoossltest.shop/api/messages/userInfo', { withCredentials: true });
+                // const userResponse = await axios.get('http://localhost:8080/api/messages/userInfo', { withCredentials: true })
                 const userData = userResponse.data;
-                console.log('first='+userData.name);
+                console.log('loginName='+userData.name);
                 setUserName(userData.name);
                 setProfileImage(userData.profile_image.replace('http://', 'https://'));
 
-                // const messagesResponse = await axios.get(`https://dongwoossltest.shop/api/messages/roomseq/${roomSeq}`);
-                   const messagesResponse = await axios.get(`http://localhost:8080/api/messages/roomseq/${roomSeq}`)
+                const messagesResponse = await axios.get(`https://dongwoossltest.shop/api/messages/roomseq/${roomSeq}`);
+                //    const messagesResponse = await axios.get(`http://localhost:8080/api/messages/roomseq/${roomSeq}`)
                 setMessages(messagesResponse.data);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -73,8 +71,6 @@ const ChattingRoom = () => {
 
         fetchData();
         connectStompClient();
-    
-
         return () => {
             if (stompClient.current) {
                 stompClient.current.disconnect(() => {
@@ -94,7 +90,10 @@ const ChattingRoom = () => {
 
     const handleSend = () => {
         try {
-            
+
+            if (!message.trim()) {
+                return;
+            }
             const messageObj = {
                 sender: userName,
                 content: message,
@@ -111,10 +110,10 @@ const ChattingRoom = () => {
                 console.log('웹소켓으로 보내는 정보:', messageObj);
                 setMessage('');
             } else {
-                console.error('WebSocket is not connected.');
+                console.error('웹소켓 연결 안됨');
             }
         } catch (error) {
-            console.error('Error handling send via WebSocket:', error);
+            console.error('웹소켓 전송 에러:', error);
         }
     };
 
@@ -125,7 +124,8 @@ const ChattingRoom = () => {
     const confirmDelete = () => {
         try {
             // 채팅방 삭제 요청을 서버로 보냅니다.
-            const response = axios.delete(`http://localhost:8080/api/messagesroom/delete/${roomSeq}`, { withCredentials: true });
+            const response = axios.delete(`https://dongwoossltest.shop/api/messagesroom/delete/${roomSeq}`, { withCredentials: true });
+            // const response = axios.delete(`http://localhost:8080/api/messagesroom/delete/${roomSeq}`, { withCredentials: true });
             console.log('채팅방 삭제 요청 성공:', response.data);
             alert('채팅방 삭제가 완료되었습니다.');
             window.location.replace('/ChattingList');
@@ -169,7 +169,7 @@ const ChattingRoom = () => {
                                 <div className="message-info">
                                     
                                     <strong>{msg.sender}</strong>
-                                    <img src={profileImage} alt="Profile Image" className="profile-image" />
+                                    <img src={`${process.env.PUBLIC_URL}/image/nullImage2.png`} alt="clip" className="profile-image" />
                                 </div>
                                 <div className="message-content">
                                     {msg.content}
@@ -184,7 +184,7 @@ const ChattingRoom = () => {
                             <div key={index} className="message-box-receive">
                                 <div className="message-info">
                                 {/* <img src={profileImage} alt="Profile Image" className="profile-image" /> */}
-                                <img src={profileImage} alt="Profile Image" className="profile-image" />
+                                <img src={`${process.env.PUBLIC_URL}/image/nullImage2.png`} alt="clip" className="profile-image" />
                                     <strong>{msg.sender}</strong> 
                                 </div>
                                 
@@ -212,7 +212,6 @@ const ChattingRoom = () => {
                 />
                 <button 
                     variant="contained"
-                   
                     onClick={handleSend}
                     disabled={!message}//값 없을때 못보냄 
                 >

@@ -35,18 +35,28 @@ public class CarServiceController {
         return ResponseEntity.ok(saveServiceCar);
     }
 
-
+    @GetMapping(path = "/cars/{carId}/service")
+    public ResponseEntity<List<ServiceCar>> getServiceCarsByCarId(@PathVariable(name = "carId")Long carId){
+        List<ServiceCar> serviceCars = carService.findCarsByCarId(carId);
+        return ResponseEntity.ok(serviceCars);
+    }
 
     @GetMapping(path = "/cars/getcardata")
-    public List<Object[]> getcardata(@RequestParam(name="label") String label){
-        return carService.getCarData(label);
+    public List<Object[]> getcardata(@RequestParam(name="label") String label,
+                                     @RequestParam(name = "lat", required = false) Double latitude,
+                                     @RequestParam(name = "lng", required = false) Double longitude) {
+        if (latitude == null && longitude == null) {
+            return carService.getCarData(label);
+        } else {
+            return carService.getCarData(label, latitude, longitude);
+        }
     }
 
-    @GetMapping(path = "/cars/getcardata2")
-    public List<Object[]> getcardata(@RequestParam(name="label") String label,
-                                     @RequestParam(name="lat") double latitude,
-                                     @RequestParam(name="lng") double longitude){
-        return carService.getCarData2(label, latitude, longitude);
-    }
+//    @GetMapping(path = "/cars/getcardata2")
+//    public List<Object[]> getcardata(@RequestParam(name="label") String label,
+//                                     @RequestParam(name="lat") double latitude,
+//                                     @RequestParam(name="lng") double longitude){
+//        return carService.getCarData2(label, latitude, longitude);
+//    }
 
 }

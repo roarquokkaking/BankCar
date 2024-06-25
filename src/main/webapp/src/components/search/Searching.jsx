@@ -46,8 +46,8 @@ const Searching = () => {
             roadAddress: '',
             x: '',
             y: '',
-            minPrice:10000,
-            maxPrice:1000000
+            minPrice:1000,
+            maxPrice:100000
         });
         setValidationMessages({
             dateRange: '',
@@ -101,7 +101,7 @@ const Searching = () => {
                 <br/>
                 <DateTimePicker searchDTO={searchDTO} setSearchDTO={setSearchDTO} validationMessages={validationMessages} reset={reset} setReset={setReset}/>
                 <br/>
-                <PriceSelect searchDTO={searchDTO} setSearchDTO={setSearchDTO} fixedMinPrice={10000} fixedMaxPrice={1000000} priceGap={100} reset={reset} setReset={setReset}/>
+                <PriceSelect searchDTO={searchDTO} setSearchDTO={setSearchDTO} fixedMinPrice={1000} fixedMaxPrice={100000} priceGap={10} reset={reset} setReset={setReset}/>
             </div>
             <div className="search-footer">
                 <div className="clear-button" onClick={onReset}>Clear all</div>

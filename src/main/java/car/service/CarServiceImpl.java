@@ -61,7 +61,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Object[]> getCarData(String label) {
+    public List<Object[]> getCarData(String label,double latitude, double longitude) {
 
         String new_label="";
         switch (label){
@@ -87,16 +87,56 @@ public class CarServiceImpl implements CarService {
         System.out.println("new_label="+new_label);
 
         if(new_label.equals("")){
-            return serviceCarRepository.findAllOrderByIdDesc();
+            return serviceCarRepository.findAllOrderByIdDesc(latitude,longitude);
         }else{
-            return serviceCarRepository.findAllOrderByIdDesc(new_label);
+            return serviceCarRepository.findAllOrderByIdDesc(new_label,latitude,longitude);
         }
 
     }
 
     @Override
-    public List<Object[]> getCarData2(String label, double latitude, double longitude) {
-        return serviceCarRepository.findAllOrderByLatitudeLongitudeAndIdDesc(latitude, longitude);
+    public List<Object[]> getCarData(String label) {
+        String new_label="";
+        switch (label){
+            case "1" : new_label="캠핑";
+                break;
+            case "2" : new_label="비지니스";
+                break;
+            case "3" : new_label="데이트";
+                break;
+            case "4" : new_label="여행";
+                break;
+            case "5" : new_label="스포츠카";
+                break;
+            case "6" : new_label="오토바이";
+                break;
+            case "7" : new_label="트럭";
+                break;
+            case "8" : new_label="전기차";
+                break;
+            default: new_label="";
+                break;
+        }
+        System.out.println("new_label="+new_label);
+
+        if(new_label.equals("")){
+            return serviceCarRepository.findAllOrderByIdDesc();
+        }else{
+            return serviceCarRepository.findAllOrderByIdDesc(new_label);
+        }
+    }
+
+
+    @Override
+    public void deleteCarByCarId(String userId, Long carId) {
+        System.out.println("userId = " + userId + ", carId = " + carId);
+        carRepository.deleteCarByUserIdAndCarId(userId, carId);
+        serviceCarRepository.deleteAllByCarId(carId);
+    }
+
+    @Override
+    public List<ServiceCar> findCarsByCarId(Long carId) {
+        return serviceCarRepository.findAllByCarId(carId);
     }
 
 }

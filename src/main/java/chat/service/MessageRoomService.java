@@ -11,8 +11,6 @@ public interface MessageRoomService {
 
     List<MessageRoom> getChatRoomsByUserName(String userName);
 
-    MessageRoom createRoom(MessageRoom messageRoom);
-
     MessageRoom updateRoom(Long roomseq, MessageRoom messageRoom);
 
     void deleteRoom(Long roomSeq);
@@ -21,4 +19,5 @@ public interface MessageRoomService {
 
     List<MessageRoom> getAllChatRooms(Long roomSeq);
 
+    void createMessageRoom(MessageRoom messageRoom);
 }

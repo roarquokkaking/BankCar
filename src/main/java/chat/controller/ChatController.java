@@ -18,8 +18,8 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-@CrossOrigin(origins = "http://localhost:3000")
-//@CrossOrigin(origins = "https://dongwoossltest.shop")
+//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://dongwoossltest.shop")
 @RestController
 @RequestMapping("/api/messages")
 public class ChatController {
