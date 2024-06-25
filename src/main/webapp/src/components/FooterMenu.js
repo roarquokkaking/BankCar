@@ -118,7 +118,6 @@ const FooterMenu = () => {
 
     return (
         <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0}} elevation={3}>
-            <button onClick={handleNotify}>Send Notification</button>
             <BottomNavigation showLabels value={window.location.pathname} >
                 {
                     footerMenuFilter.map(item =>
