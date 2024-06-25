@@ -132,7 +132,6 @@ public class KaKaoPayController {
         map.put("quantity", kakaoPayEntity.getQuantity());
         map.put("vat_amount", kakaoPayEntity.getVat_amount());
         map.put("tax_free_amount", kakaoPayEntity.getTax_free_amount());
-        map.put("carId", kakaoPayEntity.getCar_id());
 
         kakaoPayEntity.setStatus(1);
         kakaoPayService.setStatus(kakaoPayEntity);

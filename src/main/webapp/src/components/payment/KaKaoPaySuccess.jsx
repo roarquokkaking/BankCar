@@ -56,11 +56,6 @@ const KaKaoPaySuccess = () => {
     }
     },[pg_token])
 
-    // useEffect(() => {
-    //     if(payDetail.carId){
-    //         axios.get(`https://dongwoossltest.shop/api/notify/${payDetail.carId}`)
-    //     }
-    // },[])
 
 
     return (
