@@ -10,7 +10,7 @@ export default function RegisterCarCard({ car, onAddService, onDeleteCar }) {
     useEffect(() => {
         getServiceCarList(car.carId)
             .then(res => {
-                console.log(res.data)
+                //console.log(res.data)
                 if(res.data.length > 0){
                     setServiceCar(true);
                 }
