@@ -54,7 +54,7 @@ const Payment_main = () => {
     const endDateTime = parseDateTime(endDate, endTime);
 
 // 날짜 차이 계산 (일 단위)
-    const totalDate = (endDateTime - startDateTime) / (1000 * 60 * 60 * 24);
+    const totalDate = Math.floor((endDateTime - startDateTime) / (1000 * 60 * 60 * 24));
 
 // 시간 차이 계산 (시간 단위)
     const startHour = new Date(`1970-01-01T${startTime}Z`);
@@ -104,7 +104,7 @@ const Payment_main = () => {
                 total_amount: price,
                 fail_url: startTime ,
                 cancel_url: endTime,
-                totalPayment: totalPayment})
+                totalPayment: choicedata.footer.price})
             console.log(payDetail)
         }
     },[car])
@@ -135,7 +135,7 @@ const Payment_main = () => {
             }
               )
       };
-      const totalPayment = payDetail.total_amount * ((totalDate * 24) + totalTime);
+      // const totalPayment = payDetail.total_amount * ((totalDate * 24) + totalTime);
 
     const onBtn = () => {
         Notification.requestPermission().then(param => {
@@ -225,9 +225,9 @@ return (
                     <Typography variant="h6" component="h3" gutterBottom>
                         결제 비용
                     </Typography>
-                    <Typography variant="body1"><strong style={strongStyle}>총 비용:</strong> {formatPrice(totalPayment)} 원</Typography>
-                    <Typography variant="body1"><strong style={strongStyle}>세금:</strong> {formatPrice(totalPayment * 0.1)} 원</Typography>
-                    <Typography variant="body1"><strong style={strongStyle}>최종 금액:</strong> {formatPrice(totalPayment * 1.1)} 원</Typography>
+                    <Typography variant="body1"><strong style={strongStyle}>총 비용:</strong> {formatPrice(payDetail.totalPayment)} 원</Typography>
+                    <Typography variant="body1"><strong style={strongStyle}>세금:</strong> {formatPrice(payDetail.totalPayment * 0.1)} 원</Typography>
+                    <Typography variant="body1"><strong style={strongStyle}>최종 금액:</strong> {formatPrice(payDetail.totalPayment * 1.1)} 원</Typography>
                 </Box>
             </Box>
 
