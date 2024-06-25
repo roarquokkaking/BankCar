@@ -52,9 +52,9 @@ public class UserProfileController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "회원을 찾을 수 없습니다."));
 
 // 이미지 URL 생성
-        String baseUrl = "https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/profile/";
-        String imageName = loginDTO.getProfile_image();
-        String imageUrl = baseUrl + imageName;
+//        String baseUrl = "https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/profile/";
+//        String imageName = loginDTO.getProfile_image();
+//        String imageUrl = baseUrl + imageName;
 
         UserProfileDTO userProfileDTO = UserProfileDTO.builder()
                 .id(loginDTO.getId())
@@ -64,10 +64,10 @@ public class UserProfileController {
                 .image_file_name(loginDTO.getImage_file_name())
                 .image_original_name(loginDTO.getImage_original_name()) // 실제 파일명 설정
                 .driver(loginDTO.isDriver() ? "드라이버 있음" : "라이센서 없음")
-                .imageUrl(imageUrl)
+                .imageUrl(loginDTO.getProfile_image())
                 .build();
 
-        System.out.println(imageName);
+
         return userProfileDTO;
 
     }
@@ -85,9 +85,9 @@ public UserProfileDTO myprofileUpdate(@PathVariable("user_id") String user_id,
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "회원을 찾을 수 없습니다."));
 
     // 이미지 URL 생성
-    String baseUrl = "https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/profile/";
-    String imageName = loginDTO.getProfile_image();
-    String imageUrl = baseUrl + imageName;
+//    String baseUrl = "https://kr.object.ncloudstorage.com/bitcamp-6th-bucket-102/profile/";
+//    String imageName = loginDTO.getProfile_image();
+//    String imageUrl = baseUrl + imageName;
 
     userProfileDTO = UserProfileDTO.builder()
             .id(loginDTO.getId())
@@ -97,10 +97,10 @@ public UserProfileDTO myprofileUpdate(@PathVariable("user_id") String user_id,
             .image_file_name(loginDTO.getImage_file_name())
             .image_original_name(loginDTO.getImage_original_name()) // 실제 파일명 설정
             .driver(loginDTO.isDriver() ? "드라이버 있음" : "라이센서 없음")
-            .imageUrl(imageUrl)
+            .imageUrl(loginDTO.getImageUrl())
             .build();
 
-    System.out.println(imageName);
+//    System.out.println(imageName);
     return userProfileDTO;
 }
 
