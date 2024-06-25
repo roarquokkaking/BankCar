@@ -25,6 +25,10 @@ const KaKaoPaySuccess = () => {
       }
   })
 
+    const formatPrice = (value) => {
+        return new Intl.NumberFormat("ko-KR").format(value);
+    };
+
     useEffect(()=>{
         setPg_token(params.get('pg_token'));
         
@@ -71,7 +75,7 @@ const KaKaoPaySuccess = () => {
           <br></br>
           <div className={styles["detail-item"]}>
             <span className={styles["detail-title"]}>결제 금액:</span>
-            <span className={styles["detail-content"]}>{payDetail.totalPayment}</span>
+            <span className={styles["detail-content"]}>{formatPrice(payDetail.totalPayment * 1.1)} 원</span>
           </div>
           <br></br>
           <div className={styles["detail-item"]}>
@@ -81,17 +85,17 @@ const KaKaoPaySuccess = () => {
           <br></br>
           <div className={styles["detail-item"]}>
             <span className={styles["detail-title"]}>대여 주소:</span>
-            <span className={styles["detail-content"]}>{choicedata.map.address}</span>
+            <span className={styles["detail-content"]}>{payDetail.quantity}</span>
           </div>
           <br></br>
           <div className={styles["detail-item"]}>
             <span className={styles["detail-title"]}>대여 시작일:</span>
-            <span className={styles["detail-content"]}>{payDetail.vat_amount}</span>
+            <span className={styles["detail-content"]}>{payDetail.vat_amount} {payDetail.fail_url}</span>
           </div>
           <br></br>
           <div className={styles["detail-item"]}>
             <span className={styles["detail-title"]}>대여 반납일:</span>
-            <span className={styles["detail-content"]}>{payDetail.tax_free_amount}</span>
+            <span className={styles["detail-content"]}>{payDetail.tax_free_amount} {payDetail.cancel_url}</span>
           </div>
           <br></br>
         </div>
