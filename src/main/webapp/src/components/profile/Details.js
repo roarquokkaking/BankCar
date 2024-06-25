@@ -21,8 +21,8 @@ const Details = ({ detailsDTO, currentImageIndex}) => {
             <div className={styles.imageSlider}>
                 {images.length > 0 ? (
                     <img
-                        src={image+images[currentImageIndex]?.url}
-                        alt={images[currentImageIndex]?.alt || 'Image'}
+                        src={image+ images[currentImageIndex]}
+                        alt={images[currentImageIndex] || 'Image'}
                         style={{ opacity: 1, maxWidth: '500px', borderRadius: "15px" }}
                     />
                 ) : (
@@ -30,8 +30,8 @@ const Details = ({ detailsDTO, currentImageIndex}) => {
                 )}
             </div>
             <div className={styles.imageSlider}>
-                {images.map((image, index) => (
-                    <img key={index} src={image.url} alt={image.alt || 'Thumbnail'}
+                {images.map((item, index) => (
+                    <img key={index} src={item} alt={item || 'Thumbnail'}
                          className={styles.thumbnail}
                          style={{ width: '100px', opacity: currentImageIndex === index ? 1 : 0.5 }} />
                 ))}
