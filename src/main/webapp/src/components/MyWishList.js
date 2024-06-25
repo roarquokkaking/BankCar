@@ -20,7 +20,7 @@ const styles = {
         border: 'solid 1px black',
         borderRadius: '15px',
         position: 'relative',
-        height: '110p'
+        height: '150p'
     },
 
     image: {
@@ -117,7 +117,6 @@ console.log(wishListDTO)
             })
             .catch(error => console.log(error));
     };
-
 
 
     return (
