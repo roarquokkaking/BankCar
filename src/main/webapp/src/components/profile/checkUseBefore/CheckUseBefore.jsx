@@ -47,11 +47,11 @@ const CheckUseBefore = () => {
         <div className={styles.checkMyCarContainer}>
             <ComponentHeader text={"예약 리스트 "} style={{marginTop: "3%"}}/>
                     <div className={styles.carouselContainer}>
-                        {userBeforeDTO.length === 1 ? (
-                            <CheckUseBeforeCard key={userBeforeDTO[0].carId} car={userBeforeDTO[0]}/>
+                        {useBeforeDTO.length === 1 ? (
+                            <CheckUseBeforeCard key={useBeforeDTO[0].carId} car={useBeforeDTO[0]}/>
                         ) : (
                             <Slider {...settings}>
-                                {userBeforeDTO.map(car => (
+                                {useBeforeDTO.map(car => (
                                     <CheckUseBeforeCard key={car.carId} car={car}/>
                                 ))}
                             </Slider>
