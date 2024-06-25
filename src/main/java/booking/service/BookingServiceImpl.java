@@ -123,7 +123,7 @@ public class BookingServiceImpl implements BookingService {
 //                           .reviewId
                             .title(car.getTitle())
                             .content(car.getContent())
-//                            .imageUrl(car.getCarImages().getMain_image())
+                            .imageUrl(car.getCarImages().getMain_image())
                             .period(period)
                             .build();
                     // 이미지 설정
@@ -168,7 +168,7 @@ public class BookingServiceImpl implements BookingService {
 
 
         // 추가적인 필드 설정이 필요하다면 여기에 추가합니다.
-//         bookingDTO.setImage(bookingEntity.getImageUrl());
+        // bookingDTO.setImage(bookingEntity.getImageUrl());
 
         return bookingDTO;
     }

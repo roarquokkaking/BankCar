@@ -32,6 +32,8 @@ const styles = {
 
 const Wishlist = () => {
     const navigate = useNavigate();
+
+
     return (
         <>
 
