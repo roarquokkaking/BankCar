@@ -30,7 +30,7 @@
     transform: scale(1.05);
 }
 .info_box{
-    border: solid 0.1px gray;
+    border: solid 0.1px #e17b92;
     border-radius: 10px;
     display: flex;
     align-items: center;
