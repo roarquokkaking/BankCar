@@ -17,7 +17,7 @@ const UseReview = () => {
         carId: carId,
         userId: userId,
         images: [],
-        ratingCount: [],
+        ratingCount: {},
         averRating: "",
         carModel: "",
         rating: 0,

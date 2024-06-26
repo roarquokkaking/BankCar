@@ -102,7 +102,7 @@ function App() {
               <Route path="bookingDetails" element={<BookingDetails/>} />
               <Route path="Details" element={<Details/>} />
               <Route path="useNow" element={<UseNow/>}/>
-              <Route path="useReview/:user_id/:car_id/:booking_id" element={<UseReview/>}/>
+              <Route path="useReview/:userId/:carId/:booking_id" element={<UseReview/>}/>
               <Route path="userReviewItem" element={<UserReviewItem/>}/>
             </Route>
             <Route path='/car/new' element={<RegisterMain />} />

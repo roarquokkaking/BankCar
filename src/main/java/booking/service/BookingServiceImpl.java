@@ -36,7 +36,7 @@ public class BookingServiceImpl implements BookingService {
     public List<UserBeforeDTO> findUserBookings(String userId) {
         System.out.println("findUserBookings 메서드 호출됨: userId = " + userId);
 
-        List<BookingEntity> bookings = null;
+        List<BookingEntity> bookings = new ArrayList<>();
         try {
             bookings = bookingRepository.findBookingsByUserId(userId);
             System.out.println("bookings 조회 결과: " + bookings);

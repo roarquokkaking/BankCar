@@ -32,7 +32,6 @@ public class BookingController {
 
     @GetMapping(path = "/before/{user_id}")
     public List<UserBeforeDTO> getBookings(@PathVariable("user_id") String user_id,
-                                           @Valid
                                            @ModelAttribute UserBeforeDTO userBeforeDTO) {
         System.out.println(user_id);
         System.out.println(1111111);
