@@ -31,11 +31,13 @@ const CheckUseBefore = () => {
     useEffect(() => {
         axios.get(`https://dongwoossltest.shop/api/Booking/before/${user_id}`)
             .then(response=>{
-                setUseBeforeDTO(response.data)})
+                setUseBeforeDTO(response.data)
+                console.log(useBeforeDTO)
+            })
             .catch(error=>console.log(error))
     }, [user_id]);
 
-    console.log(useBeforeDTO)
+
     const settings = {
         dots: true,
         infinite: true,

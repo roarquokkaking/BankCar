@@ -10,8 +10,8 @@ import * as reservation from "date-fns/locale";
 
 const UseBefore = () => {
     const navigate = useNavigate();
-    // const user_id = useSelector(state => state.Login.id);
-    const { user_id } = useParams();
+     const user_id = useSelector(state => state.Login.id);
+    //const { user_id } = useParams();
     const [BookingDTO, setBookingDTO] = useState([]);
 
 
