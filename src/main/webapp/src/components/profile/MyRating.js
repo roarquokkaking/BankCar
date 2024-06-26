@@ -20,6 +20,7 @@ const MyRating = ({
 
     return (
         <div>
+            <Box>
             <div className={styles.title}>
                 <div className={styles.container}>
                     <div className={styles.left}>
@@ -72,8 +73,7 @@ const MyRating = ({
                 </div>
             </div>
 
-            <Box>
-                <div className={styles.superInput}>
+
                 <input
                     className={styles.inputTitle}
                     value={title}
@@ -88,8 +88,8 @@ const MyRating = ({
                 />
                 <div className={styles.buttonDiv}>
                     <button className={styles.button} onClick={handleSubmit}>저장하기</button>
+
                 </div>
-                    </div>
 .            </Box>
         </div>
     );
