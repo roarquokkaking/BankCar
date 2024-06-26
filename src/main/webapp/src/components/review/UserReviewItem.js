@@ -19,7 +19,7 @@ const UserReviewItem =  ({ review }) => {
           ))}
         </span>
             </div>
-            <p className="text-lg font-bold mt-2">{review.name}</p>
+            <p className="text-lg font-bold mt-2" style={{marginBottom:"8px"}}>{review.name}</p>
             <h3 className='review-title'>{review.title}</h3>
             <p className="text-gray-500 review-text">{review.comment}</p>
         </div>
