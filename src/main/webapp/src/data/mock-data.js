@@ -40,6 +40,28 @@ export const Locations =()=>{
     errMsg: null,
     isLoading: true,
   })
+  if (navigator.geolocation) {
+    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setState((prev) => ({
+            ...prev,
+            center: {
+              lat: position.coords.latitude, // 위도
+              lng: position.coords.longitude, // 경도
+            },
+            isLoading: false,
+          }));
+        }
+    );
+  }else {
+      // HTML5의 GeoLocation을 사용할 수 없을때 처리
+      setState((prev) => ({
+        ...prev,
+        errMsg: "geolocation을 사용할수 없어요..",
+        isLoading: false,
+      }));
+    }
   // useEffect(() => {
   //   if (navigator.geolocation) {
   //     // GeoLocation을 이용해서 접속 위치를 얻어옵니다
@@ -77,54 +99,22 @@ export const Locations =()=>{
   // console.log("label="+label);
 
   useEffect(() => {
-    if (navigator.geolocation) {
-      // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-      navigator.geolocation.getCurrentPosition(
-          (position) => {
-            setState((prev) => ({
-              ...prev,
-              center: {
-                lat: position.coords.latitude, // 위도
-                lng: position.coords.longitude, // 경도
-              },
-              isLoading: false,
-            }));
-
-            // 위치 정보를 가져온 후 axios를 이용해 데이터 요청
-            axios.get("https://dongwoossltest.shop/api/cars/getcardata", {
-              params: {
-                label: label,
-                lat: position.coords.latitude, // 위도
-                lng: position.coords.longitude // 경도
-              }
-            })
-                .then(res => {
-                  setCarData(res.data);
-                  const car1 = res.data[0]; // res.data에서 데이터 가져오기
-                  console.log(car1);
-                })
-                .catch(err => {
-                  console.error("Error fetching car data:", err);
-                });
-
-          },
-          (err) => {
-            setState((prev) => ({
-              ...prev,
-              errMsg: err.message,
-              isLoading: false,
-            }));
-          }
-      );
-    } else {
-      // HTML5의 GeoLocation을 사용할 수 없을때 처리
-      setState((prev) => ({
-        ...prev,
-        errMsg: "geolocation을 사용할수 없어요..",
-        isLoading: false,
-      }));
+    if (state.center.lng !== '' && state.center.lng !== '') {
+      axios.get("https://dongwoossltest.shop/api/cars/getcardata", {
+        params: {
+          label: label,
+          lat: state.center.lat,
+          lng: state.center.lng
+        }
+      })
+          .then(res => {
+            setCarData(res.data);
+          })
+          .catch(err => {
+            console.error("Error fetching car data:", err);
+          });
     }
-  }, [label]); // label이 변경될 때마다 useEffect가 다시 실행됩니다.
+  }, [label, state.center.lat, state.center.lng]);
 
 
 
