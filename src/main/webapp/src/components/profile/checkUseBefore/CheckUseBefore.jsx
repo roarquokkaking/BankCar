@@ -11,6 +11,7 @@ import {useSelector} from "react-redux";
 import axios from "axios";
 import useBefore from "../UseBefore";
 import data from "bootstrap/js/src/dom/data";
+import Footer from "../../Footer";
 // import {selectUserCarList} from "../../register/api/CarApiService"; // Axios 호출 주석 처리
 
 const dummy_cars = [
@@ -57,7 +58,7 @@ const CheckUseBefore = () => {
                             </Slider>
                         )}
                     </div>
-
+            <Footer/>
 
         </div>
     );

@@ -5,8 +5,10 @@ import choice.service.ChoiceService;
 import login.dto.LoginDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import review.dto.ReviewDTO;
 import review.entity.ReviewEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -48,12 +50,25 @@ public class ChoiceController {
     }
 
     @GetMapping("/reviewinfo")
-    public List<ReviewEntity> reviewInfo(@RequestParam(name = "carId") Long carId) {
+    public List<ReviewDTO> reviewInfo(@RequestParam(name = "carId") Long carId) {
         System.out.println("************carid************ = " + carId);
         List<ReviewEntity> reviews = choiceService.getReviewsByCarId(carId);
+        List<ReviewDTO> reviewDTOList = new ArrayList<>();
+        for (ReviewEntity reviewEntity : reviews){
+            ReviewDTO reviewDTO = ReviewDTO.builder()
+                    .title(reviewEntity.getTitle())
+                    .car_id(reviewEntity.getCar().getCarId())
+                    .user_id(reviewEntity.getLoginDTO().getId())
+                    .name(reviewEntity.getLoginDTO().getName())
+                    .comment(reviewEntity.getComment())
+                    .rating(reviewEntity.getRating())
+                    .build();
+            reviewDTOList.add(reviewDTO);
+        }
+
         System.out.println("************reviews************ = " + reviews);
 
-        return reviews;
+        return reviewDTOList;
     }
 
 }

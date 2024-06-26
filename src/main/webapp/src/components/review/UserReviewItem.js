@@ -5,19 +5,7 @@ import './ReviewCSS.css'
 
 const UserReviewItem =  ({ review }) => {
 
-  // const [currentIndex, setCurrentIndex] = useState(0);
 
-  // const handleNext = () =>{
-  //   setCurrentIndex((prevIndex) => (prevIndex + 1) % reviews.length);
-  // }
-
-  // const handlePrev = () => {
-  //   setCurrentIndex((prevIndex) => (prevIndex - 1 + reviews.length) % reviews.length);
-  // }
-  // if(currentIndex>reviews.length-3){
-  //   console.log(currentIndex)
-  //   setCurrentIndex(0)
-  // }
     return (
         <div className="flex-none w-1/3 p-4 bg-white rounded-lg shadow-md">
             <div className="flex items-center">
@@ -31,7 +19,7 @@ const UserReviewItem =  ({ review }) => {
           ))}
         </span>
             </div>
-            <p className="text-lg font-bold mt-2">{review.name}</p>
+            <p className="text-lg font-bold mt-2" style={{marginBottom:"8px"}}>{review.name}</p>
             <h3 className='review-title'>{review.title}</h3>
             <p className="text-gray-500 review-text">{review.comment}</p>
         </div>

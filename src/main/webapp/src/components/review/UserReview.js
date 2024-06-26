@@ -4,7 +4,7 @@ import './ReviewCSS.css'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
-const UserReview = ({ reviews }) => {
+const UserReview = ({ rating, title, comment, id, name, reviews }) => {
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -24,7 +24,6 @@ const UserReview = ({ reviews }) => {
       items: 1
     }
   };
-  
   return (
     <div className='review-container'>
       {/*<h2 style={{textAlign:"-webkit-left", paddingLeft: "20px" }}>User Reviews</h2>*/}
@@ -32,7 +31,9 @@ const UserReview = ({ reviews }) => {
           <p style={{ textAlign: "center", color: "#999", padding: "20px" }}>아직 리뷰가 없습니다.</p>
       ) : (
           <Carousel responsive={responsive}>
-            <UserReviewItem key={reviews.review_id} review={reviews} />
+            {reviews.map((review, index) => (
+                <UserReviewItem key={index} review={review} />
+            ))}
           </Carousel>
       )}
     </div>

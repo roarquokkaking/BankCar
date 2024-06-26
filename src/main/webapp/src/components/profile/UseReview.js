@@ -64,8 +64,8 @@ console.log(car_id)
                     setDetailsDTO(data);
                     setRating(data.averageRating);
                     setRatings(ratingCount);
-                    setTotal(ratingCount.reduce((acc, count, idx) => acc + count * (idx + 1), 0));
-                    setCount(ratingCount.reduce((acc, count) => acc + count, 0));
+                    setTotal(Array.from(ratingCount.entries()).reduce((acc, [key, value]) => acc + key * value, 0));
+                    setCount(Array.from(ratingCount.values()).reduce((acc, value) => acc + value, 0));
                 })
                 .catch((error) => {
                     console.error('상세 정보를 불러오는데 실패했습니다.', error);
@@ -74,6 +74,14 @@ console.log(car_id)
             console.error('user_id 또는 car_id가 정의되지 않았습니다.');
         }
     }, [user_id, car_id]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % detailsDTO.images.length);
+        }, 2000);
+
+        return () => clearInterval(interval);
+    }, [detailsDTO.images.length]);
 
 
     const submitRating =  (ratingValue) => {
