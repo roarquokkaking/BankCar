@@ -14,6 +14,7 @@ import java.util.Map;
 @Builder
 
 public class DetailDTO {
+
     private Long car_id;
     private String user_id;
 
