@@ -3,7 +3,7 @@ import "./ProfilePage.css";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import {Link, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {setId, setEmail, setName} from '../../store/loginSlice';
+import {setId, setEmail, setName, setDriver} from '../../store/loginSlice';
 import { Box} from "@mui/material";
 import FooterMenu from "../FooterMenu";
 import axios from "axios";
@@ -159,6 +159,7 @@ const ProfileMain = () => {
                         dispatch(setId(''));
                         dispatch(setEmail(''));
                         dispatch(setName(''));
+                        dispatch(setDriver(''));
 
                         navigate('/');
 
