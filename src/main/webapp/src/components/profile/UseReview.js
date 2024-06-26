@@ -8,14 +8,14 @@ import {getTableSortLabelUtilityClass} from "@mui/material";
 import ComponentHeader from "./ComponentsHeader";
 
 const UseReview = () => {
-    const { user_id, car_id,booking_id } = useParams();
+    const { userId, carId,booking_id } = useParams();
 
     console.log(booking_id + "bookingId - ")
     const [title, setTitle] = useState('');
     const [comment, setComment] = useState('');
     const [detailsDTO, setDetailsDTO] = useState({
-        car_id: car_id,
-        user_id: user_id,
+        carId: carId,
+        userId: userId,
         images: [],
         ratingCount: [],
         averRating: "",
@@ -26,7 +26,7 @@ const UseReview = () => {
         startDate: "",
         endDate: "",
     });
-console.log(car_id)
+console.log(carId)
     console.log(detailsDTO)
 
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -54,9 +54,9 @@ console.log(car_id)
 
 
     useEffect(() => {
-        console.log(user_id ,car_id,booking_id)
-        if (user_id && car_id) {
-            axios.get(`https://dongwoossltest.shop/api/review/getReviewBase/${booking_id}/${car_id}/${user_id}`)
+        console.log(userId ,carId,booking_id)
+        if (userId && carId) {
+            axios.get(`https://dongwoossltest.shop/api/review/getReviewBase/${booking_id}/${carId}/${userId}`)
                 .then((response) => {
                     const data = response.data;
                     const ratingCount = Array.isArray(data.ratingCount) ? data.ratingCount : [0, 0, 0, 0, 0];
@@ -73,7 +73,7 @@ console.log(car_id)
         } else {
             console.error('user_id 또는 car_id가 정의되지 않았습니다.');
         }
-    }, [user_id, car_id]);
+    }, [userId, carId]);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -115,11 +115,14 @@ console.log(car_id)
     };
 
     const handleSubmit = async () => {
+
+
+
         try {
-            console.log(user_id+"ds,vdvnkad;vc")
+            console.log(userId+"ds,vdvnkad;vc")
             const reviewDTO = {
-                user_id: user_id,
-                car_id: car_id,
+                userId: userId,
+                carId: carId,
                 title: title,
                 comment: comment,
                 rating: rating
