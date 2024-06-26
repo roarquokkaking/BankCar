@@ -7,10 +7,10 @@ import axios from 'axios';
 const MyRating = ({
                       title,
                       comment,
-                      rating,  // 기본값 설정
+                      rating,
                       hover,
-                      ratings,  // 기본값 설정
-                      count,  // 기본값 설정
+                      ratings,
+                      count,
                       handleTitleChange,
                       handleContentChange,
                       handleSubmit,
@@ -53,10 +53,10 @@ const MyRating = ({
                         </div>
                     </div>
                     <div className={styles.right}>
-                        {[5, 4, 3, 2, 1].map((score, index) => {
+                        {[5, 4, 3, 2, 1].map((score) => {
                             const percentage = (ratings[score - 1] / count) * 100 || 0;
                             return (
-                                <div key={score} className={styles.gaugeContainer}>
+                                <div key={score} className={styles.ratingContainer}>
                                     <span className={styles.label}>{score}</span>
                                     <div className={styles.gaugeBackground}>
                                         <div

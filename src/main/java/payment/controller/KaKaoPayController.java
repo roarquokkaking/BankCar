@@ -161,7 +161,7 @@ public class KaKaoPayController {
         messageRoomService.createMessageRoom(messageRoom);
 
         //알림 보내기
-        notificationService.notifyUser(booking.getCar().getUser().getId());
+        //notificationService.notifyUser(booking.getCar().getUser().getId());
 
         return map;
 

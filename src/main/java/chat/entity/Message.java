@@ -31,7 +31,7 @@ public class Message {
 //    @Column(name="profileImage")
 //    private String profileImage; // 사용자 프로필 사진 URL
 
-    @ManyToOne//(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)//
     @JoinColumn(name = "roomSeq")
     @JsonBackReference
     private MessageRoom messageRoom;

@@ -62,7 +62,7 @@ public class UserProfileController {
                 .phoneNumber(loginDTO.getPhone_number())
                 .email(loginDTO.getEmail())
                 .image_file_name(loginDTO.getImage_file_name())
-                .image_original_name(loginDTO.getImage_original_name()) // 실제 파일명 설정
+                .image_original_name(loginDTO.getProfile_image()) // 실제 파일명 설정
                 .driver(loginDTO.isDriver() ? "드라이버 있음" : "라이센서 없음")
                 .imageUrl(loginDTO.getProfile_image())
                 .build();
@@ -95,7 +95,7 @@ public UserProfileDTO myprofileUpdate(@PathVariable("user_id") String user_id,
             .phoneNumber(loginDTO.getPhone_number())
             .email(loginDTO.getEmail())
             .image_file_name(loginDTO.getImage_file_name())
-            .image_original_name(loginDTO.getImage_original_name()) // 실제 파일명 설정
+            .image_original_name(loginDTO.getProfile_image()) // 실제 파일명 설정
             .driver(loginDTO.isDriver() ? "드라이버 있음" : "라이센서 없음")
             .imageUrl(loginDTO.getImageUrl())
             .build();
@@ -135,13 +135,14 @@ public UserProfileDTO myprofileUpdate(@PathVariable("user_id") String user_id,
                 .phoneNumber(userProfileDTO.getPhoneNumber())
                 .email(userProfileDTO.getEmail())
                 .image_file_name(imageFileName) // 파일 이름
-                .image_original_name(imageOriginalName) // 원본 파일 이름
+                .image_original_name(user.getProfile_image()) // 원본 파일 이름
                 .imageUrl(fileUrl) // 업로드된 파일 URL
                 .build();
 
         // LoginDTO 객체에 UserProfileDTO의 정보 반영
         user.setImage_file_name(imageFileName);
-        user.setImage_original_name(imageOriginalName);
+        //변경된  부분
+//        user.setImage_original_name(user.getProfile_image());
         user.setProfile_image(user.getProfile_image());
         user.setImageUrl(fileUrl);
         user.setEmail(userProfileDTO.getEmail());
