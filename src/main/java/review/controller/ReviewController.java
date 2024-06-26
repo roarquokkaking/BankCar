@@ -34,10 +34,10 @@ public class ReviewController {
      * 정보 받아오는  메소드
      * */
 
-    @GetMapping(path = "/getReviewBase/{booking_id}/{car_id}/{user_id}")
+    @GetMapping(path = "/getReviewBase/{booking_id}/{carId}/{userId}")
     public DetailDTO getReview(@PathVariable(value = "booking_id") Long bookingId,
-                               @PathVariable(value = "car_id") Long carId,
-                               @PathVariable(value = "user_id") String userId) {
+                               @PathVariable(value = "carId") Long carId,
+                               @PathVariable(value = "userId") String userId) {
         System.out.println("getReview 호출됨, user_id: " + bookingId + ", car_id: " + carId);
 
             DetailDTO detailDTO =reviewService.getReview(bookingId,userId,carId);
