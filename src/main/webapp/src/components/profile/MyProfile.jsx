@@ -20,17 +20,7 @@ const MyProfile = () => {
     const [profileImage, setProfileImage] = useState(null);
     const [previewImage, setPreviewImage] = useState('');
 
-    const [myprofileDTO, setprofileDTO] = useState({
-        image_profile_name: "",
-        image_original_name: "",
-        imageUrl: '',
-        name: "",
-        phone_number: "",
-        email: '',
-        driver: "",
-        user_id: user_id,
-        image_file_name: ""
-    });
+    const [myprofileDTO, setprofileDTO] = useState({});
 
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -58,7 +48,7 @@ const MyProfile = () => {
                     <label htmlFor="profileImage" className={styles.button}>
                         <div style={{ width: '100px', height: '100px' }}>
                             {
-                                myprofileDTO.image_file_name === null ?
+                                myprofileDTO.imageUrl === null ?
                                     <img src={defaultProfileImage} alt="Profile" className={styles.profileImage} /> :
                                     <img src={myprofileDTO.imageUrl} alt="Profile" className={styles.profileImage} />
                             }
