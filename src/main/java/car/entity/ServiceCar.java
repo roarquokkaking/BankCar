@@ -22,7 +22,7 @@ public class ServiceCar {
     @Column(name = "service_id")
     private Long serviceId;
 
-    @ManyToOne//(fetch = FetchType.LAZY)  // user 테이블과 다대일(Many-to-One)
+    @ManyToOne(fetch = FetchType.LAZY)  // user 테이블과 다대일(Many-to-One)
     @JoinColumn(name = "car_id", nullable = false)
     private Car car;
 

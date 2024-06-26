@@ -67,15 +67,15 @@ const FooterMenu = () => {
         }
     })
 
-    useEffect(() => {
-        const eventSource = new EventSource(`https://dongwoossltest.shop/api/subscribe/${id}`);
-        eventSource.addEventListener('notification', function(event) {
-            setNoti(prevNotifications => [...prevNotifications, event.data]);
-        });
-        return () => {
-            eventSource.close();
-        };
-    }, []);
+    // useEffect(() => {
+    //     const eventSource = new EventSource(`https://dongwoossltest.shop/api/subscribe/${id}`);
+    //     eventSource.addEventListener('notification', function(event) {
+    //         setNoti(prevNotifications => [...prevNotifications, event.data]);
+    //     });
+    //     return () => {
+    //         eventSource.close();
+    //     };
+    // }, []);
 
     // useEffect(() => {
     //     if(id){
