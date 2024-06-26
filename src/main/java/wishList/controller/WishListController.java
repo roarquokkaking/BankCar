@@ -70,7 +70,7 @@ public class  WishListController {
     @GetMapping(path = "/MyWishList/{user_id}")
     public ResponseEntity<List<WishListDTO>> getWishListByUserId(@PathVariable("user_id") String userId,
                                                                  @RequestParam(name="page" , defaultValue = "0") int page,
-                                                                 @RequestParam(name = "size", defaultValue = "5") int size) {
+                                                                 @RequestParam(name = "size", defaultValue = "6") int size) {
 
         try {
 
