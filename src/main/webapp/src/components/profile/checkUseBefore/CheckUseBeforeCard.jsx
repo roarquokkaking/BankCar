@@ -42,15 +42,17 @@ export default function CheckUseBeforeCard({ car }) {
                 </div>
 
                 <div className={styles.info_box}>
-                    <Typography variant="h6">
-                        제목 : {car.title}
-                    </Typography>
-                </div>
-                <div className={styles.info_box}>
                     <Typography>
                         시간당 금액 : {car.pay} 원
                     </Typography>
                 </div>
+
+                <div className={styles.info_box}>
+                    <Typography variant="h6">
+                        제목 : {car.title}
+                    </Typography>
+                </div>
+
                 <div className={styles.info_box}>
                     <Typography color="text.secondary" className={styles.input}>
                         컨텐트: {car.content}
