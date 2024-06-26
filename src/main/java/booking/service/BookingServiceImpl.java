@@ -59,8 +59,8 @@ public class BookingServiceImpl implements BookingService {
                             System.out.println("LoginDTO와 Car 정보가 모두 존재함");
                             System.out.println("dir;salwlsdu");
                             UserBeforeDTO userBeforeDTO = UserBeforeDTO.builder()
-                                    .userid(bookingEntity.getLoginDTO().getId())
-                                    .carid(bookingEntity.getCar().getCarId())
+                                    .userId(bookingEntity.getLoginDTO().getId())
+                                    .carId(bookingEntity.getCar().getCarId())
                                     .model(bookingEntity.getCar().getModel())
                                     .color(bookingEntity.getCar().getColor())
                                     .doro(bookingEntity.getCar().getDoroAddress())
