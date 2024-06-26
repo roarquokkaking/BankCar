@@ -14,8 +14,8 @@ import java.time.LocalTime;
 public class UserBeforeDTO {
 
 
-    private String userid;
-    private Long carid;
+    private String userId;
+    private Long carId;
     private String model;
     private String color;
     private String category;
