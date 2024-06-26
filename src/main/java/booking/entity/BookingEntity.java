@@ -50,7 +50,7 @@ public class BookingEntity {
     @Column(name = "create_date")
     private LocalDateTime create_date;
 
-    @ManyToOne//(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id", referencedColumnName = "id", nullable = false)
     private LoginDTO loginDTO;
 
