@@ -76,13 +76,7 @@ const ChoiceData = ({ setChoicedata }) => {
                 });
                 console.log(responseReview.data);
                 setReviewInfo(responseReview.data); // 리뷰 정보 설정
-                const reviews = responseReview.data.map(review => ({
-                    rating: review.rating,
-                    title: review.title,
-                    comment: review.comment,
-                    id: review.loginDTO.id,
-                    name: review.loginDTO.name
-                }));
+                const reviews = responseReview.data;
 
             //     데이터 삽입
                 setChoicedata({

@@ -27,7 +27,7 @@ export const ChoiceProvider = ({ children }) => {
                 lng: 0
             }
         },
-        review: []
+        review:[]
         ,
         footer: {
             price: 0,
